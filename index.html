@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smabo — スマホが入る、工具不要のロボット</title>
+  <meta name="description" content="smabo（スマボ）は、お手持ちのスマートフォンをセンサ・コントローラ・顔として使える、完全工具不要で組み立てられるロボットです。初学者にもぴったり。" />
+  <meta property="og:title" content="smabo — スマホが入る、工具不要のロボット" />
+  <meta property="og:description" content="スマホをロボットのセンサ・コントローラ・顔に。完全工具不要のブロック式ロボット smabo。" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== header ===== -->
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand__mark">🤖</span> smabo
+      </a>
+      <button class="nav__toggle" aria-label="メニューを開閉" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links">
+        <a href="#features">特徴</a>
+        <a href="#system">システム構成</a>
+        <a href="#uses">できること</a>
+        <a href="#repos">リポジトリ</a>
+        <a href="components.html">コンポーネント詳細</a>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== hero ===== -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div>
+        <span class="eyebrow">Smartphone Robot</span>
+        <h1>スマホが入る、<br /><span class="accent">工具不要</span>のロボット。</h1>
+        <p class="hero__lead">
+          smabo（スマボ）は、各パーツをブロックのように完全工具不要でつけ外しできるロボット。
+          お手持ちのスマートフォンを、ロボットのセンサ・コントローラ・顔として使えます。
+          組み立てカンタンなので、初学者の方にもぴったりです。
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#uses">できることを見る</a>
+          <a class="btn btn--ghost" href="https://github.com/smabo-smartphone-robot">GitHub で見る</a>
+        </div>
+      </div>
+      <div class="hero__art">
+        <img class="robot" src="assets/robot.svg" alt="スマホが顔になったロボット smabo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== features ===== -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section__head">
+        <h2>smabo の特徴</h2>
+        <p>難しい工具も、特別な部品もいりません。手元のスマホがそのまま頭脳とセンサになります。</p>
+      </div>
+      <div class="grid grid--2">
+        <div class="card">
+          <div class="card__icon">🧩</div>
+          <h3>完全工具不要のブロック式</h3>
+          <p>各パーツをブロックのように、工具なしでつけ外し可能。組み替えるだけで、顔・移動ロボット・アームなど、さまざまな形に変身します。</p>
+        </div>
+        <div class="card">
+          <div class="card__icon">📱</div>
+          <h3>スマホをまるごと活用</h3>
+          <p>スマホのカメラ・マイク・IMU・GPS をセンサとして、画面をロボットの顔として、タッチ操作をコントローラとして利用できます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== system / architecture ===== -->
+  <section class="section section--tint" id="system">
+    <div class="container">
+      <div class="section__head">
+        <h2>システム構成</h2>
+        <p>「スマホ」「ESP32」「ブレイン用PC」を組み合わせて、シンプルにも高度にも。用途に合わせて拡張できます。</p>
+      </div>
+      <div class="arch">
+        <div class="arch__node">
+          <div class="emoji">📱</div>
+          <span class="tag">smabo-app</span>
+          <h3>スマートフォン</h3>
+          <p>顔の表示、ジョイスティック操作、各種センサ・カメラの送信、音声入出力を担当。</p>
+        </div>
+        <div class="arch__link"><span>↔</span><small>WebSocket</small></div>
+        <div class="arch__node">
+          <div class="emoji">🔌</div>
+          <span class="tag">smabo-esp32</span>
+          <h3>ESP32 マイコン</h3>
+          <p>モータ・サーボなどのアクチュエータを制御。走行やアームを物理的に動かす。</p>
+        </div>
+        <div class="arch__link"><span>↔</span><small>WebSocket</small></div>
+        <div class="arch__node arch__node--optional">
+          <div class="emoji">🧠</div>
+          <span class="tag">smabo-brain</span>
+          <h3>ブレイン用PC<small style="font-weight:700;color:var(--muted);font-size:.7rem;display:block">（任意 / ラズパイ可）</small></h3>
+          <p>画像処理など、スマホやESP32には重いタスクを担当。自律制御を実現。</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:28px">
+        <span class="emoji">💡</span>
+        <span>通信はすべて WebSocket JSON（rosbridge v2.0 互換）。ROS ランタイムは不要で、必要なら rosbridge 経由で ROS とも相互運用できます。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== what you can do ===== -->
+  <section class="section" id="uses">
+    <div class="container">
+      <div class="section__head">
+        <h2>smabo でできること</h2>
+        <p>機器の組み合わせ次第で、できることが広がります。以下はほんの一例です。</p>
+      </div>
+      <div class="grid grid--2">
+        <div class="use">
+          <div class="use__num">1</div>
+          <div>
+            <h3>ロボットの顔として使う</h3>
+            <p>face-mode で smabo を顔に。目の色や形状を自由にカスタマイズでき、外部からの通信で目の動きや表情も変えられます。</p>
+            <span class="combo">smabo-app</span>
+          </div>
+        </div>
+        <div class="use">
+          <div class="use__num">2</div>
+          <div>
+            <h3>移動ロボットを手動制御する</h3>
+            <p>画面上のジョイスティックで並進・回転速度を送信。ESP32 が受信した速度をもとにモータを制御します。</p>
+            <span class="combo">smabo-app + smabo-esp32</span>
+          </div>
+        </div>
+        <div class="use">
+          <div class="use__num">3</div>
+          <div>
+            <h3>ロボットアームを手動制御する</h3>
+            <p>画面上の操作で各関節の角度を送信。ESP32 がサーボモータを制御し、アームを動かします。</p>
+            <span class="combo">smabo-app + smabo-esp32</span>
+          </div>
+        </div>
+        <div class="use">
+          <div class="use__num">4</div>
+          <div>
+            <h3>物体認識で移動ロボットを制御する</h3>
+            <p>スマホのカメラ画像を brain で処理し、制御値を算出。ESP32 がそれをもとにロボットを自律的に動かします。</p>
+            <span class="combo">smabo-app + smabo-esp32 + smabo-brain</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== repositories ===== -->
+  <section class="section section--tint" id="repos">
+    <div class="container">
+      <div class="section__head">
+        <h2>リポジトリ</h2>
+        <p>smabo は複数のリポジトリで構成されています。詳しい使い方は各リポジトリをご覧ください。</p>
+      </div>
+      <div class="grid grid--3">
+        <a class="repo" href="https://github.com/smabo-smartphone-robot/smabo-app">
+          <div class="repo__top">
+            <span class="repo__emoji">📱</span>
+            <h3>smabo-app</h3>
+            <span class="badge">必須</span>
+          </div>
+          <p>スマートフォンアプリ（Flutter製）。スマホのセンサ利用や、ロボットのコントローラ・顔としての利用を担います。</p>
+          <span class="repo__link">リポジトリを見る →</span>
+        </a>
+        <a class="repo" href="https://github.com/smabo-smartphone-robot/smabo-esp32">
+          <div class="repo__top">
+            <span class="repo__emoji">🔌</span>
+            <h3>smabo-esp32</h3>
+            <span class="badge">必須</span>
+          </div>
+          <p>ESP32 マイコンのファームウェア（MicroPython製）。モータやサーボなど、ロボットのアクチュエータを制御します。</p>
+          <span class="repo__link">リポジトリを見る →</span>
+        </a>
+        <a class="repo" href="https://github.com/smabo-smartphone-robot/smabo-brain">
+          <div class="repo__top">
+            <span class="repo__emoji">🧠</span>
+            <h3>smabo-brain</h3>
+            <span class="badge badge--opt">任意</span>
+          </div>
+          <p>PC（ラズパイなどのSBCでも可）搭載ソフト。画像処理など、スマホや ESP32 では重いタスクを担当します。</p>
+          <span class="repo__link">リポジトリを見る →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="index.html"><span class="brand__mark">🤖</span> smabo</a>
+          <p>スマホが入る、工具不要で組み立てられるロボット。初学者から研究用途まで。</p>
+        </div>
+        <div class="footer__col">
+          <h4>サイト</h4>
+          <ul>
+            <li><a href="#features">特徴</a></li>
+            <li><a href="#system">システム構成</a></li>
+            <li><a href="#uses">できること</a></li>
+            <li><a href="components.html">コンポーネント詳細</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>リポジトリ</h4>
+          <ul>
+            <li><a href="https://github.com/smabo-smartphone-robot/smabo-app">smabo-app</a></li>
+            <li><a href="https://github.com/smabo-smartphone-robot/smabo-esp32">smabo-esp32</a></li>
+            <li><a href="https://github.com/smabo-smartphone-robot/smabo-brain">smabo-brain</a></li>
+            <li><a href="https://github.com/smabo-smartphone-robot">Organization</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        © <span id="year">2026</span> smabo-smartphone-robot
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
