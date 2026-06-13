@@ -106,8 +106,16 @@
 }
 .rmap-svg.has-tooltip { pointer-events: none; }
 .rmap-svg.has-tooltip .node { pointer-events: none; }
-.rmap-tooltip { cursor: move; }
+.rmap-tooltip { cursor: grab; }
 .rmap-tooltip.is-dragging { cursor: grabbing; user-select: none; }
+.rmap-tooltip__handle {
+  display: flex;
+  justify-content: center;
+  margin: -2px 0 8px;
+  color: var(--line);
+  transition: color 0.15s ease;
+}
+.rmap-tooltip:hover .rmap-tooltip__handle { color: var(--muted); }
 .rmap-tooltip__link { cursor: pointer; }
 .rmap-tooltip__label {
   font-size: 0.72rem;
