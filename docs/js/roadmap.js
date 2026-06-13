@@ -147,8 +147,6 @@
     var g = el("g", { class: "node", "data-id": n.id });
 
     var link = el("a", {});
-    link.setAttributeNS("http://www.w3.org/1999/xlink", "href", GUIDE_DIR + n.id + ".html");
-    link.setAttribute("href", GUIDE_DIR + n.id + ".html");
 
     link.appendChild(el("rect", { class: "node__box", x: n.x, y: n.y, width: n.w, height: n.h, rx: 11, ry: 11 }));
 
@@ -182,8 +180,20 @@
       g.appendChild(designA);
     }
 
-    g.addEventListener("mouseenter", function () { highlight(n.id); showTooltip(n, g); });
-    g.addEventListener("mouseleave", function () { clearHighlight(); hideTooltip(); });
+    g.addEventListener("mouseenter", function () { highlight(n.id); });
+    g.addEventListener("mouseleave", clearHighlight);
+    g.addEventListener("click", (function (node, gEl) {
+      return function (ev) {
+        ev.stopPropagation();
+        if (activeNode === node.id) {
+          activeNode = null;
+          hideTooltip();
+        } else {
+          activeNode = node.id;
+          showTooltip(node, gEl);
+        }
+      };
+    })(n, g));
 
     gNodes.appendChild(g);
     nodeEls[n.id] = g;
@@ -191,13 +201,25 @@
   svg.appendChild(gNodes);
 
   // ---- tooltip ---------------------------------------------------------
+  var activeNode  = null;
   var tooltip     = document.getElementById("rmap-tooltip");
-  var tipBody     = tooltip && tooltip.querySelector(".rmap-tooltip__body");
-  var tipImg      = tooltip && tooltip.querySelector(".rmap-tooltip__img");
+  var tipBody       = tooltip && tooltip.querySelector(".rmap-tooltip__body");
+  var tipImg        = tooltip && tooltip.querySelector(".rmap-tooltip__img");
+  var tipLink       = tooltip && tooltip.querySelector(".rmap-tooltip__link:not(.rmap-tooltip__link--design)");
+  var tipDesignLink = tooltip && tooltip.querySelector(".rmap-tooltip__link--design");
 
   function showTooltip(n, nodeEl) {
     if (!tooltip || !n.tip) return;
     tipBody.textContent = n.tip;
+    if (tipLink) tipLink.href = GUIDE_DIR + n.id + ".html";
+    if (tipDesignLink) {
+      if (n.design) {
+        tipDesignLink.href = DESIGN_DIR + n.id + ".html";
+        tipDesignLink.hidden = false;
+      } else {
+        tipDesignLink.hidden = true;
+      }
+    }
     if (n.tipImg && tipImg) {
       tipImg.src = n.tipImg;
       tipImg.hidden = false;
@@ -219,6 +241,11 @@
   function hideTooltip() {
     if (tooltip) tooltip.hidden = true;
   }
+
+  document.addEventListener("click", function () {
+    activeNode = null;
+    hideTooltip();
+  });
 
   // ---- interactions ----------------------------------------------------
   function highlight(id) {

@@ -101,16 +101,16 @@
   pointer-events: none;
 }
 .rmap-tooltip__label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: .06em;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--indigo);
+  color: var(--ink-soft);
   margin: 0 0 6px;
 }
 .rmap-tooltip__body {
   font-size: 0.84rem;
-  color: var(--ink-soft);
+  color: var(--ink);
   margin: 0;
   line-height: 1.5;
 }
@@ -121,4 +121,24 @@
   border-radius: 8px;
   margin-top: 10px;
 }
+.rmap-tooltip__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.rmap-tooltip__link {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--indigo);
+  text-decoration: none;
+  border: 1.5px solid var(--indigo);
+  border-radius: 999px;
+  padding: 4px 12px;
+  transition: background .15s ease, color .15s ease;
+}
+.rmap-tooltip__link:hover { background: var(--indigo); color: #fff; }
+.rmap-tooltip__link--design { color: var(--cyan); border-color: var(--cyan); }
+.rmap-tooltip__link--design:hover { background: var(--cyan); color: #fff; }
 
