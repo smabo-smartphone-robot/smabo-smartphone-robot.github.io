@@ -140,6 +140,17 @@
 /* back link */
 .doc-back { margin-top: 48px; }
 
+/* index page hero — full-bleed cover image with dark overlay for readability */
+.doc-hero--cover {
+  background: none;
+  padding-block: 0;
+}
+.doc-hero--cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* responsive: drop the TOC sidebar */
 @media (max-width: 860px) {
   .doc-wrap { grid-template-columns: 1fr; padding-block: 36px; }
