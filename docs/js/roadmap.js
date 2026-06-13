@@ -25,11 +25,11 @@
       tip: "（仮）スマホアプリでアームを手動操作できます。" },
     { id: "encmobile", icon: "⚙️", label: "エンコーダ付", sub: "移動ロボット",  x: 620, y: 470, w: 140, h: 70, phase: "esp32",
       tip: "（仮）エンコーダにより精度の高い直進・旋回ができます。" },
-    { id: "brain",     icon: "🧠", label: "brain", sub: "セットアップ・概要",   x: 920, y: 570, w: 140, h: 70, phase: "brain",
+    { id: "brain",     icon: "🧠", label: "brain", sub: "セットアップ・概要",   x: 920, y: 590, w: 140, h: 70, phase: "brain",
       tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
-    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 920, y: 680, w: 140, h: 70, phase: "brain",
+    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 920, y: 710, w: 140, h: 70, phase: "brain",
       tip: "（仮）カメラ映像をリアルタイムに解析・物体認識できます。" },
-    { id: "brainros",  icon: "🤖", label: "brain-ros", sub: "セットアップ・概要", x: 1090, y: 800, w: 140, h: 70, phase: "brainros",
+    { id: "brainros",  icon: "🤖", label: "brain-ros", sub: "セットアップ・概要", x: 1090, y: 820, w: 140, h: 70, phase: "brainros",
       tip: "（仮）ROSを使ってセンサーとアクチュエータを統合制御できます。" },
     { id: "nav",       icon: "🗺️", label: "ナビゲーション",           x: 620, y: 960, w: 140, h: 70, phase: "brainros",
       tip: "（仮）地図を生成して自律的に目的地へ移動できます。" },
@@ -45,25 +45,25 @@
   var EDGES = [
     { from: "baseparts", to: "app",       d: "M 690 70 L 690 108" },
     { from: "app",       to: "esp32",     d: "M 690 180 L 690 228" },
-    { from: "esp32",     to: "hand",      d: "M 690 300 L 690 330 Q 690 342 680 342 L 380 342 Q 370 342 370 352 L 370 358" },
-    { from: "esp32",     to: "neck",      d: "M 690 300 L 690 330 Q 690 342 680 342 L 540 342 Q 530 342 530 352 L 530 358" },
+    { from: "esp32",     to: "hand",      d: "M 690 300 L 690 315 Q 690 322 680 322 L 380 322 Q 370 322 370 340 L 370 358" },
+    { from: "esp32",     to: "neck",      d: "M 690 300 L 690 315 Q 690 322 680 322 L 540 322 Q 530 322 530 340 L 530 358" },
     { from: "esp32",     to: "mobile",    d: "M 690 300 L 690 358" },
-    { from: "esp32",     to: "arm",       d: "M 690 300 L 690 330 Q 690 342 700 342 L 840 342 Q 850 342 850 352 L 850 358" },
-    { from: "esp32",     to: "brain",     d: "M 690 300 L 690 330 Q 690 342 700 342 L 980 342 Q 990 342 990 352 L 990 568" },
+    { from: "esp32",     to: "arm",       d: "M 690 300 L 690 315 Q 690 322 700 322 L 840 322 Q 850 322 850 340 L 850 358" },
+    { from: "esp32",     to: "brain",     d: "M 690 300 L 690 315 Q 690 322 700 322 L 980 322 Q 990 322 990 338 L 990 588" },
     { from: "mobile",    to: "encmobile", d: "M 690 430 L 690 468" },
-    { from: "brain",     to: "imgproc",   d: "M 990 640 L 990 678" },
-    { from: "brain",     to: "brainros",  d: "M 990 640 L 990 652 Q 990 662 1000 662 L 1150 662 Q 1160 662 1160 672 L 1160 798" },
+    { from: "brain",     to: "imgproc",   d: "M 990 660 L 990 708" },
+    { from: "brain",     to: "brainros",  d: "M 990 660 L 990 672 Q 990 682 1000 682 L 1150 682 Q 1160 682 1160 692 L 1160 818" },
     { from: "encmobile", to: "nav",       d: "M 690 540 L 690 958" },
     { from: "arm",       to: "plan",      d: "M 850 430 L 850 958" },
-    { from: "brainros",  to: "plan",      d: "M 1160 870 L 1160 900 Q 1160 912 1150 912 L 860 912 Q 850 912 850 922 L 850 958" },
-    { from: "brainros",  to: "nav",       d: "M 1160 870 L 1160 900 Q 1160 912 1150 912 L 858 912 C 858 888 822 888 822 912 L 700 912 Q 690 912 690 922 L 690 958" }
+    { from: "brainros",  to: "plan",      d: "M 1160 890 L 1160 900 Q 1160 912 1150 912 L 860 912 Q 850 912 850 922 L 850 958" },
+    { from: "brainros",  to: "nav",       d: "M 1160 890 L 1160 900 Q 1160 912 1150 912 L 858 912 C 858 900 842 900 842 912 L 700 912 Q 690 912 690 922 L 690 958" }
   ];
 
   var BANDS = [
     { cls: "app",      top: -16, bot: 205,  label: "STEP 1",  req: "smabo-app" },
-    { cls: "esp32",    top: 205, bot: 555,  label: "STEP 2",  req: "+ smabo-esp32" },
-    { cls: "brain",    top: 555, bot: 775,  label: "STEP 3",  req: "+ smabo-brain" },
-    { cls: "brainros", top: 775, bot: 1045, label: "STEP 4",  req: "+ smabo-brain-ros" }
+    { cls: "esp32",    top: 205, bot: 565,  label: "STEP 2",  req: "+ smabo-esp32" },
+    { cls: "brain",    top: 565, bot: 792,  label: "STEP 3",  req: "+ smabo-brain" },
+    { cls: "brainros", top: 792, bot: 1045, label: "STEP 4",  req: "+ smabo-brain-ros" }
   ];
 
   // ---- derived graph ---------------------------------------------------
@@ -163,6 +163,13 @@
       sub.textContent = n.sub;
       link.appendChild(sub);
     }
+
+    var hintX = n.x + n.w - 13, hintY = n.y + n.h - 11;
+    link.appendChild(el("rect", { class: "node__hint-dot", x: hintX - 10, y: hintY - 7, width: 22, height: 13, rx: 6, ry: 6 }));
+    var ht = el("text", { class: "node__hint-text", x: hintX, y: hintY, "text-anchor": "middle", "dominant-baseline": "central" });
+    ht.textContent = "···";
+    link.appendChild(ht);
+
     g.appendChild(link);
 
     // design-doc button (top-left corner) — shown only when n.design is truthy
@@ -180,17 +187,23 @@
       g.appendChild(designA);
     }
 
-    g.addEventListener("mouseenter", function () { highlight(n.id); });
-    g.addEventListener("mouseleave", clearHighlight);
-    g.addEventListener("click", (function (node, gEl) {
+    g.addEventListener("mouseenter", (function (node, gEl) {
+      return function () { highlight(node.id); showTooltip(node, gEl, false); };
+    })(n, g));
+    g.addEventListener("mouseleave", function () {
+      hideTooltip();
+    });
+    g.addEventListener("touchend", (function (node, gEl) {
       return function (ev) {
-        ev.stopPropagation();
+        ev.preventDefault();
         if (activeNode === node.id) {
           activeNode = null;
-          hideTooltip();
+          clearHighlight();
+          hideTooltipImmediate();
         } else {
           activeNode = node.id;
-          showTooltip(node, gEl);
+          highlight(node.id);
+          showTooltip(node, gEl, true);
         }
       };
     })(n, g));
@@ -208,11 +221,15 @@
   var tipLink       = tooltip && tooltip.querySelector(".rmap-tooltip__link:not(.rmap-tooltip__link--design)");
   var tipDesignLink = tooltip && tooltip.querySelector(".rmap-tooltip__link--design");
 
-  function showTooltip(n, nodeEl) {
+  var hideTimer = null;
+
+  function showTooltip(n, nodeEl, lock) {
+    clearTimeout(hideTimer);
     if (!tooltip || !n.tip) return;
     tipBody.textContent = n.tip;
     if (tipLink) tipLink.href = GUIDE_DIR + n.id + ".html";
-    svg.classList.add("has-tooltip");
+    if (lock) svg.classList.add("has-tooltip");
+    else svg.classList.remove("has-tooltip");
     if (tipDesignLink) {
       if (n.design) {
         tipDesignLink.href = DESIGN_DIR + n.id + ".html";
@@ -240,13 +257,28 @@
     tooltip.style.top  = top  + "px";
   }
   function hideTooltip() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function () {
+      if (tooltip) tooltip.hidden = true;
+      svg.classList.remove("has-tooltip");
+      clearHighlight();
+    }, 120);
+  }
+  function hideTooltipImmediate() {
+    clearTimeout(hideTimer);
     if (tooltip) tooltip.hidden = true;
     svg.classList.remove("has-tooltip");
+    clearHighlight();
+  }
+
+  if (tooltip) {
+    tooltip.addEventListener("mouseenter", function () { clearTimeout(hideTimer); });
+    tooltip.addEventListener("mouseleave", function () { hideTooltip(); });
   }
 
   document.addEventListener("click", function () {
     activeNode = null;
-    hideTooltip();
+    hideTooltipImmediate();
   });
 
   // ---- interactions ----------------------------------------------------

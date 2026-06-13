@@ -61,16 +61,22 @@
 @keyframes flow { to { stroke-dashoffset: -16; } }
 
 /* nodes */
-.node { cursor: pointer; }
+.node { cursor: pointer; transition: transform 0.15s ease; }
+.node:hover  { transform: translateY(-2px); }
+.node:active { transform: translateY(1px); }
 .node__box {
   fill: var(--card);
   stroke: var(--line);
   stroke-width: 2;
+  filter: drop-shadow(0 2px 6px rgba(40,42,90,.13));
   transition: fill 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease, filter 0.2s ease;
 }
 .node__label { fill: var(--ink); font-size: 14px; font-weight: 700; pointer-events: none; }
 .node__sub   { fill: var(--muted); font-size: 11px; font-weight: 600; pointer-events: none; }
 .node__icon  { font-size: 18px; pointer-events: none; }
+.node__hint-dot  { fill: var(--indigo); opacity: 0.35; transition: opacity 0.2s ease; }
+.node__hint-text { fill: #fff; font-size: 9px; font-weight: 800; letter-spacing: .5px; pointer-events: none; }
+.node:hover .node__hint-dot { opacity: 0.85; }
 
 /* design-doc button (「設計書」 pill, top-left corner) */
 .node__design { cursor: pointer; }
@@ -79,12 +85,12 @@
 .node__design:hover .node__design-box { fill: #e9fbff; }
 
 /* hover relationships */
-.rmap--hovering .node { opacity: 0.32; transition: opacity 0.18s ease; }
+.rmap--hovering .node { opacity: 0.32; transition: opacity 0.18s ease, transform 0.15s ease; }
 .rmap--hovering .node.is-hover,
 .rmap--hovering .node.is-prereq,
 .rmap--hovering .node.is-unlock { opacity: 1; }
 
-.node.is-hover .node__box  { stroke-width: 3.2; filter: drop-shadow(0 6px 14px rgba(40,42,90,.28)); }
+.node.is-hover .node__box  { stroke-width: 3.2; filter: drop-shadow(0 8px 18px rgba(40,42,90,.30)); }
 .node.is-prereq .node__box { stroke: var(--indigo); stroke-width: 3.2; fill: #eef0fb; }
 .node.is-unlock .node__box { stroke: var(--cyan);   stroke-width: 3; fill: #e9fbff; }
 
