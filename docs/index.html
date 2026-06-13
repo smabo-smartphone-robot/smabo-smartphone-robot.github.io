@@ -34,25 +34,23 @@
   </section>
 
   <section class="section" style="padding-block:0">
-    <div class="container">
-      <div class="doc-wrap" style="display:block">
-        <article class="doc-content">
+    <div class="container" style="padding-block:56px">
+        <article class="doc-content" style="max-width:none">
 
-<p>smaboは、「スマホ」が取り付けられる「工具不要」のロボットです。</p>
-<img src="images/smabo_usecase.drawio.svg" alt="" style="width:100%;height:auto;display:block;margin:24px 0;" />
+<p>smaboは、「スマホ」が取り付けられる「工具不要」で組み立て可能なロボットです。</p>
+<img src="images/smabo_usecase.drawio.svg" alt="" style="display:block;width:auto;max-width:100%;max-height:90vh;margin:24px auto;" />
 
 <h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
 
 <div class="rmap-wrap">
   <!-- data-guide-dir="guides/" : guide pages at /guides/{id}.html -->
   <!-- data-design-dir="architecture/" : design pages at /architecture/{id}.html -->
-  <svg id="rmap-svg" class="rmap-svg" viewBox="150 -16 1090 996" role="img"
+  <svg id="rmap-svg" class="rmap-svg" viewBox="100 -16 1200 1076" role="img"
        data-guide-dir="guides/" data-design-dir="architecture/"
        aria-label="smabo 製作ガイドのロードマップ図"></svg>
 </div>
 
         </article>
-      </div>
     </div>
   </section>
 
@@ -61,6 +59,12 @@
       <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
     </div>
   </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <p class="rmap-tooltip__label">できること</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
 
   <script src="js/main.js"></script>
   <script src="js/docs.js"></script>

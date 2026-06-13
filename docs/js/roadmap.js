@@ -3,59 +3,67 @@
   "use strict";
 
   var SVGNS = "http://www.w3.org/2000/svg";
-  var STORE_KEY = "smabo-roadmap-progress-v1";
-  // Path prefix to the guide pages, relative to the page hosting the roadmap.
-  // Defaults to the top-level location; pages in another directory override it
-  // via `data-guide-dir` on the #rmap-svg element (e.g. "" when the guides sit
-  // in the same folder as the roadmap page).
   var GUIDE_DIR = "docs/guides/";
-  // Path prefix to the design-doc pages. Override via `data-design-dir`.
   var DESIGN_DIR = "docs/architecture/";
 
   // ---- data ------------------------------------------------------------
-  // Coordinates are taken verbatim from docs/architecture/smabo_guides.drawio.svg
   // design: true  → show 設計書 button linking to DESIGN_DIR + id + ".html"
-  // design: false (default) → no button (design page not yet created)
   var NODES = [
-    { id: "baseparts", icon: "🧩", label: "ベースパーツの印刷",        x: 630, y: 0,   w: 120, h: 60, phase: "app" },
-    { id: "app",       icon: "📱", label: "スマホアプリ", sub: "インストール・概要", x: 630, y: 100, w: 120, h: 50, phase: "app" },
-    { id: "esp32",     icon: "🔌", label: "ESP32ソフト", sub: "書き込み・概要",   x: 630, y: 190, w: 120, h: 60, phase: "esp32" },
-    { id: "hand",      icon: "🤏", label: "ハンド",                  x: 290, y: 330, w: 120, h: 60, phase: "esp32" },
-    { id: "neck",      icon: "🔄", label: "首振り",                  x: 470, y: 330, w: 120, h: 60, phase: "esp32" },
-    { id: "mobile",    icon: "🚗", label: "移動ロボット",             x: 630, y: 330, w: 120, h: 60, phase: "esp32" },
-    { id: "arm",       icon: "🦾", label: "ロボットアーム",           x: 780, y: 330, w: 120, h: 60, phase: "esp32" },
-    { id: "encmobile", icon: "⚙️", label: "エンコーダ付", sub: "移動ロボット",  x: 630, y: 430, w: 120, h: 60, phase: "esp32" },
-    { id: "brain",     icon: "🧠", label: "brain", sub: "セットアップ・概要",   x: 930, y: 520, w: 120, h: 60, phase: "brain" },
-    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 930, y: 630, w: 120, h: 60, phase: "brain" },
-    { id: "brainros",  icon: "🤖", label: "brain-ros", sub: "セットアップ・概要", x: 1100, y: 740, w: 120, h: 60, phase: "brainros" },
-    { id: "nav",       icon: "🗺️", label: "ナビゲーション",           x: 630, y: 900, w: 120, h: 60, phase: "brainros" },
-    { id: "plan",      icon: "📐", label: "動作計画",                x: 780, y: 900, w: 120, h: 60, phase: "brainros" }
+    { id: "baseparts", icon: "🧩", label: "ベースパーツの印刷",        x: 620, y: 0,   w: 140, h: 70, phase: "app",
+      tip: "（仮）ロボットの土台となる3Dプリントパーツを用意できます。" },
+    { id: "app",       icon: "📱", label: "スマホアプリ", sub: "インストール・概要", x: 620, y: 110, w: 140, h: 70, phase: "app",
+      tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
+    { id: "esp32",     icon: "🔌", label: "ESP32ソフト", sub: "書き込み・概要",   x: 620, y: 210, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）ロボットの基本的な通信・制御ができるようになります。" },
+    { id: "hand",      icon: "🤏", label: "ハンド",                  x: 300, y: 360, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）スマホアプリからグリッパーを開閉操作できます。" },
+    { id: "neck",      icon: "🔄", label: "首振り",                  x: 460, y: 360, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）スマホのカメラをパン・チルトで向きを変えられます。" },
+    { id: "mobile",    icon: "🚗", label: "移動ロボット",             x: 620, y: 360, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）スマホアプリでロボットを前後左右に走行させられます。" },
+    { id: "arm",       icon: "🦾", label: "ロボットアーム",           x: 780, y: 360, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）スマホアプリでアームを手動操作できます。" },
+    { id: "encmobile", icon: "⚙️", label: "エンコーダ付", sub: "移動ロボット",  x: 620, y: 470, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）エンコーダにより精度の高い直進・旋回ができます。" },
+    { id: "brain",     icon: "🧠", label: "brain", sub: "セットアップ・概要",   x: 920, y: 570, w: 140, h: 70, phase: "brain",
+      tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
+    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 920, y: 680, w: 140, h: 70, phase: "brain",
+      tip: "（仮）カメラ映像をリアルタイムに解析・物体認識できます。" },
+    { id: "brainros",  icon: "🤖", label: "brain-ros", sub: "セットアップ・概要", x: 1090, y: 800, w: 140, h: 70, phase: "brainros",
+      tip: "（仮）ROSを使ってセンサーとアクチュエータを統合制御できます。" },
+    { id: "nav",       icon: "🗺️", label: "ナビゲーション",           x: 620, y: 960, w: 140, h: 70, phase: "brainros",
+      tip: "（仮）地図を生成して自律的に目的地へ移動できます。" },
+    { id: "plan",      icon: "📐", label: "動作計画",                x: 780, y: 960, w: 140, h: 70, phase: "brainros",
+      tip: "（仮）障害物を回避しながらアームや機体を自律動作させられます。" }
   ];
 
-  // edges: from = prerequisite, to = unlocked. d = path taken straight from drawio.
+  // node centers (cx = x + w/2):
+  //   baseparts/app/esp32/mobile/encmobile/nav = 690
+  //   hand = 370, neck = 530, arm = 850
+  //   brain/imgproc = 990, brainros = 1160, plan = 850
+
   var EDGES = [
-    { from: "baseparts", to: "app",       d: "M 690 60 L 690 98" },
-    { from: "app",       to: "esp32",     d: "M 690 150 L 690 188" },
-    { from: "esp32",     to: "hand",      d: "M 690.14 250 L 690.14 280 Q 690.14 290 680.14 290 L 359.86 290 Q 349.86 290 349.89 300 L 349.98 328" },
-    { from: "esp32",     to: "neck",      d: "M 690.14 250 L 690.14 280 Q 690.14 290 680.14 290 L 539.86 290 Q 529.86 290 529.86 300 L 529.86 328" },
-    { from: "esp32",     to: "mobile",    d: "M 690 250 L 690 328" },
-    { from: "esp32",     to: "arm",       d: "M 690.14 250 L 690.14 280 Q 690.14 290 700.14 290 L 830.14 290 Q 840.14 290 840.11 300 L 840.02 328" },
-    { from: "esp32",     to: "brain",     d: "M 690.14 250 L 690.14 280 Q 690.14 290 700.14 290 L 980.14 290 Q 990.14 290 990.14 300 L 990 518" },
-    { from: "mobile",    to: "encmobile", d: "M 690 390 L 690 428" },
-    { from: "brain",     to: "imgproc",   d: "M 990 580 L 990 628" },
-    { from: "brain",     to: "brainros",  d: "M 990.14 580 L 990.14 590 Q 990.14 600 1000.14 600 L 1150.14 600 Q 1160.14 600 1160.13 610 L 1160.01 738" },
-    { from: "encmobile", to: "nav",       d: "M 690 490 L 690 898" },
-    { from: "arm",       to: "plan",      d: "M 840 390 L 840 898" },
-    { from: "brainros",  to: "plan",      d: "M 1160 800 L 1160.11 830 Q 1160.14 840 1150.14 840 L 850.14 840 Q 840.14 840 840.12 850 L 840.02 898" },
-    { from: "brainros",  to: "nav",       d: "M 1160.14 800 L 1160.14 830 Q 1160.14 840 1150.14 840 L 858 840 C 858 816.6 822 816.6 822 840 L 700.14 840 Q 690.14 840 690.12 850 L 690.02 898" }
+    { from: "baseparts", to: "app",       d: "M 690 70 L 690 108" },
+    { from: "app",       to: "esp32",     d: "M 690 180 L 690 208" },
+    { from: "esp32",     to: "hand",      d: "M 690 280 L 690 315 Q 690 328 680 328 L 380 328 Q 370 328 370 338 L 370 358" },
+    { from: "esp32",     to: "neck",      d: "M 690 280 L 690 315 Q 690 328 680 328 L 540 328 Q 530 328 530 338 L 530 358" },
+    { from: "esp32",     to: "mobile",    d: "M 690 280 L 690 358" },
+    { from: "esp32",     to: "arm",       d: "M 690 280 L 690 315 Q 690 328 700 328 L 840 328 Q 850 328 850 338 L 850 358" },
+    { from: "esp32",     to: "brain",     d: "M 690 280 L 690 315 Q 690 328 700 328 L 980 328 Q 990 328 990 338 L 990 568" },
+    { from: "mobile",    to: "encmobile", d: "M 690 430 L 690 468" },
+    { from: "brain",     to: "imgproc",   d: "M 990 640 L 990 678" },
+    { from: "brain",     to: "brainros",  d: "M 990 640 L 990 652 Q 990 662 1000 662 L 1150 662 Q 1160 662 1160 672 L 1160 798" },
+    { from: "encmobile", to: "nav",       d: "M 690 540 L 690 958" },
+    { from: "arm",       to: "plan",      d: "M 850 430 L 850 958" },
+    { from: "brainros",  to: "plan",      d: "M 1160 870 L 1160 900 Q 1160 912 1150 912 L 860 912 Q 850 912 850 922 L 850 958" },
+    { from: "brainros",  to: "nav",       d: "M 1160 870 L 1160 900 Q 1160 912 1150 912 L 858 912 C 858 888 822 888 822 912 L 700 912 Q 690 912 690 922 L 690 958" }
   ];
 
-  // phase bands: [y-top, y-bottom, label, requirement]
   var BANDS = [
-    { cls: "app",      top: -16, bot: 169,  label: "STEP 1",  req: "smabo-app" },
-    { cls: "esp32",    top: 169, bot: 509,  label: "STEP 2",  req: "+ smabo-esp32" },
-    { cls: "brain",    top: 509, bot: 719,  label: "STEP 3",  req: "+ smabo-brain" },
-    { cls: "brainros", top: 719, bot: 980,  label: "STEP 4",  req: "+ smabo-brain-ros" }
+    { cls: "app",      top: -16, bot: 185,  label: "STEP 1",  req: "smabo-app" },
+    { cls: "esp32",    top: 185, bot: 555,  label: "STEP 2",  req: "+ smabo-esp32" },
+    { cls: "brain",    top: 555, bot: 775,  label: "STEP 3",  req: "+ smabo-brain" },
+    { cls: "brainros", top: 775, bot: 1045, label: "STEP 4",  req: "+ smabo-brain-ros" }
   ];
 
   // ---- derived graph ---------------------------------------------------
@@ -85,24 +93,6 @@
     descendantsOf[n.id] = collect(n.id, children);
   });
 
-  // ---- progress state --------------------------------------------------
-  var done = loadDone();
-  function loadDone() {
-    var s = {};
-    try {
-      var raw = JSON.parse(localStorage.getItem(STORE_KEY) || "[]");
-      raw.forEach(function (id) { if (byId[id]) s[id] = true; });
-    } catch (e) {}
-    return s;
-  }
-  function saveDone() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(Object.keys(done))); } catch (e) {}
-  }
-  function statusOf(id) {
-    if (done[id]) return "done";
-    return parents[id].every(function (p) { return done[p]; }) ? "available" : "locked";
-  }
-
   // ---- build the SVG ---------------------------------------------------
   var svg = document.getElementById("rmap-svg");
   if (!svg) return;
@@ -129,9 +119,9 @@
   // bands (background)
   var gBands = el("g", {});
   BANDS.forEach(function (b) {
-    gBands.appendChild(el("rect", { class: "band band--" + b.cls, x: -10, y: b.top, width: 1290, height: b.bot - b.top }));
-    if (b.top > 0) gBands.appendChild(el("line", { class: "band-sep", x1: -10, y1: b.top, x2: 1280, y2: b.top }));
-    var t = el("text", { class: "band-label", x: 175, y: b.top + 44 });
+    gBands.appendChild(el("rect", { class: "band band--" + b.cls, x: -10, y: b.top, width: 1450, height: b.bot - b.top }));
+    if (b.top > 0) gBands.appendChild(el("line", { class: "band-sep", x1: -10, y1: b.top, x2: 1440, y2: b.top }));
+    var t = el("text", { class: "band-label band-label--" + b.cls, x: 175, y: b.top + 44 });
     t.textContent = b.label;
     var req = el("tspan", { class: "req", x: 175, dy: 22 });
     req.textContent = b.req;
@@ -162,16 +152,16 @@
 
     link.appendChild(el("rect", { class: "node__box", x: n.x, y: n.y, width: n.w, height: n.h, rx: 11, ry: 11 }));
 
-    var icon = el("text", { class: "node__icon", x: cx, y: n.y + 21, "text-anchor": "middle" });
+    var icon = el("text", { class: "node__icon", x: cx, y: n.y + 24, "text-anchor": "middle" });
     icon.textContent = n.icon;
     link.appendChild(icon);
 
-    var labelY = n.sub ? n.y + 39 : n.y + 41;
+    var labelY = n.sub ? n.y + 44 : n.y + 46;
     var label = el("text", { class: "node__label", x: cx, y: labelY, "text-anchor": "middle" });
     label.textContent = n.label;
     link.appendChild(label);
     if (n.sub) {
-      var sub = el("text", { class: "node__sub", x: cx, y: n.y + 52, "text-anchor": "middle" });
+      var sub = el("text", { class: "node__sub", x: cx, y: n.y + 58, "text-anchor": "middle" });
       sub.textContent = n.sub;
       link.appendChild(sub);
     }
@@ -192,51 +182,42 @@
       g.appendChild(designA);
     }
 
-    // complete toggle (top-right corner) — 「未完了」 before / 「完了」 after
-    var chk = el("g", { class: "node__check" });
-    var bw = 44, bh = 18;
-    var bx = n.x + n.w - bw - 4, by = n.y + 4;
-    chk.appendChild(el("rect", { class: "node__check-box", x: bx, y: by, width: bw, height: bh, rx: 9, ry: 9 }));
-    var clabel = el("text", { class: "node__check-label", x: bx + bw / 2, y: by + bh / 2, "text-anchor": "middle", "dominant-baseline": "central" });
-    clabel.textContent = "未完了";
-    chk.appendChild(clabel);
-    chk.addEventListener("click", function (ev) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      toggleDone(n.id);
-    });
-    g.appendChild(chk);
-
-    // hover highlight of prerequisite chain + unlocked chain
-    g.addEventListener("mouseenter", function () { highlight(n.id); });
-    g.addEventListener("mouseleave", clearHighlight);
+    g.addEventListener("mouseenter", function () { highlight(n.id); showTooltip(n, g); });
+    g.addEventListener("mouseleave", function () { clearHighlight(); hideTooltip(); });
 
     gNodes.appendChild(g);
     nodeEls[n.id] = g;
   });
   svg.appendChild(gNodes);
 
-  // ---- rendering states ------------------------------------------------
-  function render() {
-    NODES.forEach(function (n) {
-      var g = nodeEls[n.id];
-      var st = statusOf(n.id);
-      g.classList.remove("is-done", "is-available", "is-locked");
-      g.classList.add("is-" + st);
-      var lbl = g.querySelector(".node__check-label");
-      if (lbl) lbl.textContent = (st === "done") ? "完了" : "未完了";
-    });
-    updateProgress();
-  }
+  // ---- tooltip ---------------------------------------------------------
+  var tooltip     = document.getElementById("rmap-tooltip");
+  var tipBody     = tooltip && tooltip.querySelector(".rmap-tooltip__body");
+  var tipImg      = tooltip && tooltip.querySelector(".rmap-tooltip__img");
 
-  function updateProgress() {
-    var total = NODES.length;
-    var count = Object.keys(done).length;
-    var pct = Math.round((count / total) * 100);
-    var fill = document.getElementById("rmap-fill");
-    var cnt = document.getElementById("rmap-count");
-    if (fill) fill.style.width = pct + "%";
-    if (cnt) cnt.textContent = count + " / " + total + " 記事クリア（" + pct + "%）";
+  function showTooltip(n, nodeEl) {
+    if (!tooltip || !n.tip) return;
+    tipBody.textContent = n.tip;
+    if (n.tipImg && tipImg) {
+      tipImg.src = n.tipImg;
+      tipImg.hidden = false;
+    } else if (tipImg) {
+      tipImg.hidden = true;
+    }
+    tooltip.hidden = false;
+    var r   = nodeEl.getBoundingClientRect();
+    var tw  = tooltip.offsetWidth;
+    var th  = tooltip.offsetHeight;
+    var gap = 14;
+    var left = r.right + gap;
+    if (left + tw > window.innerWidth - 8) left = r.left - tw - gap;
+    var top = r.top + (r.height - th) / 2;
+    top = Math.max(8, Math.min(top, window.innerHeight - th - 8));
+    tooltip.style.left = left + "px";
+    tooltip.style.top  = top  + "px";
+  }
+  function hideTooltip() {
+    if (tooltip) tooltip.hidden = true;
   }
 
   // ---- interactions ----------------------------------------------------
@@ -264,79 +245,4 @@
     NODES.forEach(function (n) { nodeEls[n.id].classList.remove("is-hover", "is-prereq", "is-unlock"); });
     edgeEls.forEach(function (p) { p.classList.remove("is-prereq", "is-unlock"); });
   }
-
-  function snapshotAvailable() {
-    var s = {};
-    NODES.forEach(function (n) { if (statusOf(n.id) === "available") s[n.id] = true; });
-    return s;
-  }
-
-  function toggleDone(id) {
-    if (!done[id] && statusOf(id) === "locked") {
-      flashLocked(id);
-      return;
-    }
-    var before = snapshotAvailable();
-    if (done[id]) delete done[id]; else done[id] = true;
-    saveDone();
-    render();
-
-    if (done[id]) {
-      // celebrate newly unlocked nodes
-      var after = snapshotAvailable();
-      var newly = Object.keys(after).filter(function (x) { return !before[x]; });
-      newly.forEach(function (x) { pulse(x); });
-
-      if (isPhaseComplete(byId[id].phase)) confetti();
-    }
-  }
-
-  function isPhaseComplete(phase) {
-    return NODES.filter(function (n) { return n.phase === phase; })
-                .every(function (n) { return done[n.id]; });
-  }
-
-  function pulse(id) {
-    var box = nodeEls[id];
-    box.classList.add("just-unlocked");
-    setTimeout(function () { box.classList.remove("just-unlocked"); }, 1900);
-  }
-
-  function flashLocked(id) {
-    // briefly highlight the missing prerequisites
-    highlight(id);
-    setTimeout(clearHighlight, 1100);
-  }
-
-  // ---- reset button ----------------------------------------------------
-  var resetBtn = document.getElementById("rmap-reset");
-  if (resetBtn) {
-    resetBtn.addEventListener("click", function () {
-      if (!confirm("クリア状況をすべてリセットしますか？")) return;
-      done = {};
-      saveDone();
-      render();
-    });
-  }
-
-  // ---- confetti --------------------------------------------------------
-  function confetti() {
-    var colors = ["#4f46e5", "#06b6d4", "#16a34a", "#f59e0b", "#ec4899"];
-    for (var i = 0; i < 70; i++) {
-      var p = document.createElement("div");
-      p.className = "confetti-piece";
-      p.style.left = Math.random() * 100 + "vw";
-      p.style.background = colors[i % colors.length];
-      var dx = (Math.random() * 2 - 1) * 220;
-      var dur = 1400 + Math.random() * 1200;
-      var rot = (Math.random() * 2 - 1) * 720;
-      document.body.appendChild(p);
-      p.animate([
-        { transform: "translate(0,0) rotate(0deg)", opacity: 1 },
-        { transform: "translate(" + dx + "px, 105vh) rotate(" + rot + "deg)", opacity: 0.9 }
-      ], { duration: dur, easing: "cubic-bezier(.2,.6,.4,1)" }).onfinish = function () { this.effect.target.remove(); };
-    }
-  }
-
-  render();
 })();
