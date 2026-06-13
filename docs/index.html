@@ -5,26 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ドキュメント — smabo</title>
   <meta name="description" content="smabo のドキュメント：3Dプリント・組み立て・配線・制御のガイドと、ファームウェア／システムの設計書。" />
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/docs.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/docs.css" />
+  <link rel="stylesheet" href="css/roadmap.css" />
 </head>
 <body>
 
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="../index.html"><span class="brand__mark">🤖</span> smabo</a>
+      <a class="brand" href="index.html"><span class="brand__mark">🤖</span> smabo</a>
       <button class="nav__toggle" aria-label="メニューを開閉" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <nav class="nav__links">
-        <a href="../index.html#features">特徴</a>
-        <a href="../index.html#system">システム構成</a>
-        <a href="../roadmap.html">ロードマップ</a>
-        <a href="../components.html">コンポーネント詳細</a>
+        <a href="index.html#smaboでできること">smaboでできること</a>
+        <a href="index.html#ロードマップ">ロードマップ</a>
+        <a href="components.html">コンポーネント詳細</a>
         <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
     </div>
@@ -41,38 +41,57 @@
   <section class="section" style="padding-block:0">
     <div class="container">
       <div class="doc-wrap">
-        <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
-<li><a href="#ガイド">ガイド</a>
-</li>
-<li><a href="#設計書">設計書</a>
-</li>
-</ul></nav>
+        <nav class="doc-toc">
+          <div class="doc-toc__title">目次</div>
+          <ul>
+            <li><a href="#smaboでできること">smaboでできること</a></li>
+            <li><a href="#ロードマップ">ロードマップ</a></li>
+          </ul>
+        </nav>
         <article class="doc-content">
-<p>サイトでは、スマートフォンが入るロボット「smabo」を紹介します。</p>
-<p>smaboには、以下のような特徴があります。
-- 各パーツをブロックのように、完全工具不要でつけ外し可能
-- お手持ちのスマホをロボットのセンサやコントローラとして使用可能</p>
+
+<p>本サイトでは、スマートフォンが入るロボット「smabo」を紹介します。</p>
+<p>smaboには、以下のような特徴があります。</p>
+<ul>
+<li>各パーツをブロックのように、完全工具不要でつけ外し可能</li>
+<li>お手持ちのスマホをロボットのセンサやコントローラとして使用可能</li>
+</ul>
 <p>工具不要で組み立て可能なので、初学者の方にもピッタリなロボットです！</p>
+<blockquote>
 <p>※ 現状は、Androidスマートフォンのみ対応です。</p>
-<h1 id="目次">目次<a class="headerlink" href="#目次" title="Permanent link">#</a></h1>
-<h2 id="ガイド">ガイド<a class="headerlink" href="#ガイド" title="Permanent link">#</a></h2>
-<p>「ガイド」では
-- 3Dプリンタによるsmaboの印刷
-- アプリ、ソフトのインストール手順
-- 各種パーツの組み立て手順
-- 各種アクチュエータの配線方法
-- ロボット制御方法</p>
-<p>について解説します。</p>
-<h2 id="設計書">設計書<a class="headerlink" href="#設計書" title="Permanent link">#</a></h2>
-<p>「設計書」では
-- 全体構成
-- シーケンス図
-- API仕様書
-- 設定ファイル</p>
-<p>について解説します。</p>
-          <p class="doc-back">
-            <a class="btn btn--ghost" href="../index.html">← トップに戻る</a>
-          </p>
+</blockquote>
+
+<h2 id="smaboでできること">smaboでできること<a class="headerlink" href="#smaboでできること" title="Permanent link">#</a></h2>
+
+<h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
+<p>以下は、smaboのロードマップになります。</p>
+
+<div class="rmap-bar">
+  <div class="rmap-progress">
+    <div class="rmap-progress__top">
+      <span>達成率</span>
+      <span class="rmap-progress__count" id="rmap-count">0 / 13 記事クリア（0%）</span>
+    </div>
+    <div class="rmap-progress__track"><div class="rmap-progress__fill" id="rmap-fill"></div></div>
+  </div>
+  <button class="rmap-btn" id="rmap-reset" type="button">進捗をリセット</button>
+</div>
+
+<div class="rmap-hint">
+  <ul>
+    <li>各ノードにマウスをホバーすると、「これまでに読んでおく必要がある記事」と「これから先に繋がる記事」がハイライトされます。</li>
+    <li>ノード本体をクリックすると各記事へ移動します。</li>
+  </ul>
+</div>
+
+<div class="rmap-wrap">
+  <!-- data-guide-dir="guides/" : guide pages at /guides/{id}.html -->
+  <!-- data-design-dir="architecture/" : design pages at /architecture/{id}.html -->
+  <svg id="rmap-svg" class="rmap-svg" viewBox="150 -16 1090 996" role="img"
+       data-guide-dir="guides/" data-design-dir="architecture/"
+       aria-label="smabo 製作ガイドのロードマップ図"></svg>
+</div>
+
         </article>
       </div>
     </div>
@@ -84,7 +103,8 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
-  <script src="../js/docs.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/docs.js"></script>
+  <script src="js/roadmap.js"></script>
 </body>
 </html>
