@@ -280,32 +280,52 @@
 
     var isDragging = false, justDragged = false, dragOffX = 0, dragOffY = 0;
 
-    tooltip.addEventListener("mousedown", function (ev) {
-      if (ev.target.closest("a")) return;
+    function startDrag(clientX, clientY) {
       isDragging = true;
       var rect = tooltip.getBoundingClientRect();
-      dragOffX = ev.clientX - rect.left;
-      dragOffY = ev.clientY - rect.top;
+      dragOffX = clientX - rect.left;
+      dragOffY = clientY - rect.top;
       tooltip.classList.add("is-dragging");
-      ev.preventDefault();
-    });
-
-    document.addEventListener("mousemove", function (ev) {
+    }
+    function moveDrag(clientX, clientY) {
       if (!isDragging) return;
-      var left = ev.clientX - dragOffX;
-      var top  = ev.clientY - dragOffY;
+      var left = clientX - dragOffX;
+      var top  = clientY - dragOffY;
       left = Math.max(8, Math.min(left, window.innerWidth  - tooltip.offsetWidth  - 8));
       top  = Math.max(8, Math.min(top,  window.innerHeight - tooltip.offsetHeight - 8));
       tooltip.style.left = left + "px";
       tooltip.style.top  = top  + "px";
-    });
-
-    document.addEventListener("mouseup", function () {
+    }
+    function endDrag() {
       if (!isDragging) return;
       isDragging = false;
       tooltip.classList.remove("is-dragging");
       justDragged = true;
       setTimeout(function () { justDragged = false; }, 0);
+    }
+
+    tooltip.addEventListener("mousedown", function (ev) {
+      if (ev.target.closest("a")) return;
+      startDrag(ev.clientX, ev.clientY);
+      ev.preventDefault();
+    });
+    document.addEventListener("mousemove", function (ev) { moveDrag(ev.clientX, ev.clientY); });
+    document.addEventListener("mouseup", endDrag);
+
+    tooltip.addEventListener("touchstart", function (ev) {
+      if (ev.target.closest("a")) return;
+      startDrag(ev.touches[0].clientX, ev.touches[0].clientY);
+      ev.stopPropagation();
+    }, { passive: true });
+    document.addEventListener("touchmove", function (ev) {
+      if (!isDragging) return;
+      ev.preventDefault();
+      moveDrag(ev.touches[0].clientX, ev.touches[0].clientY);
+    }, { passive: false });
+    document.addEventListener("touchend", function (ev) {
+      if (!isDragging) return;
+      endDrag();
+      ev.preventDefault();
     });
   }
 
