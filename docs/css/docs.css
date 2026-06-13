@@ -8,7 +8,7 @@
 /* layout: sticky TOC + content */
 .doc-wrap {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 240px;
   gap: 40px;
   align-items: start;
   padding-block: 56px;
@@ -22,6 +22,7 @@
   font-size: 0.86rem;
   border-left: 2px solid var(--line);
   padding-left: 16px;
+  order: 2;
 }
 .doc-toc__title {
   font-weight: 800;
