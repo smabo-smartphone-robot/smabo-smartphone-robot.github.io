@@ -125,6 +125,12 @@
 .node__check-label { fill: var(--indigo); font-size: 10px; font-weight: 800; pointer-events: none; transition: fill .2s ease; }
 .node__check:hover .node__check-box { fill: var(--bg-tint); }
 
+/* design-doc button (「設計書」 pill, top-left corner) */
+.node__design { cursor: pointer; }
+.node__design-box { fill: #fff; stroke: var(--cyan); stroke-width: 1.6; transition: fill .2s ease; }
+.node__design-label { fill: var(--cyan); font-size: 10px; font-weight: 800; pointer-events: none; }
+.node__design:hover .node__design-box { fill: #e9fbff; }
+
 /* ---- states ---- */
 .node.is-locked .node__box { stroke-dasharray: 5 5; }
 .node.is-locked .node__label,

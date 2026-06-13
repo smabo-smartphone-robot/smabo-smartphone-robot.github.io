@@ -9,9 +9,13 @@
   // via `data-guide-dir` on the #rmap-svg element (e.g. "" when the guides sit
   // in the same folder as the roadmap page).
   var GUIDE_DIR = "docs/guides/";
+  // Path prefix to the design-doc pages. Override via `data-design-dir`.
+  var DESIGN_DIR = "docs/architecture/";
 
   // ---- data ------------------------------------------------------------
   // Coordinates are taken verbatim from docs/architecture/smabo_guides.drawio.svg
+  // design: true  → show 設計書 button linking to DESIGN_DIR + id + ".html"
+  // design: false (default) → no button (design page not yet created)
   var NODES = [
     { id: "baseparts", icon: "🧩", label: "ベースパーツの印刷",        x: 630, y: 0,   w: 120, h: 60, phase: "app" },
     { id: "app",       icon: "📱", label: "スマホアプリ", sub: "インストール・概要", x: 630, y: 100, w: 120, h: 50, phase: "app" },
@@ -103,6 +107,7 @@
   var svg = document.getElementById("rmap-svg");
   if (!svg) return;
   if (svg.hasAttribute("data-guide-dir")) GUIDE_DIR = svg.getAttribute("data-guide-dir");
+  if (svg.hasAttribute("data-design-dir")) DESIGN_DIR = svg.getAttribute("data-design-dir");
   var nodeEls = {}, edgeEls = [];
 
   function el(tag, attrs) {
@@ -171,6 +176,21 @@
       link.appendChild(sub);
     }
     g.appendChild(link);
+
+    // design-doc button (top-left corner) — shown only when n.design is truthy
+    if (n.design) {
+      var dw = 40, dh = 18;
+      var dx = n.x + 4, dy = n.y + 4;
+      var designA = el("a", { class: "node__design" });
+      designA.setAttributeNS("http://www.w3.org/1999/xlink", "href", DESIGN_DIR + n.id + ".html");
+      designA.setAttribute("href", DESIGN_DIR + n.id + ".html");
+      designA.appendChild(el("rect", { class: "node__design-box", x: dx, y: dy, width: dw, height: dh, rx: 9, ry: 9 }));
+      var dlbl = el("text", { class: "node__design-label", x: dx + dw / 2, y: dy + dh / 2, "text-anchor": "middle", "dominant-baseline": "central" });
+      dlbl.textContent = "設計書";
+      designA.appendChild(dlbl);
+      designA.addEventListener("click", function (ev) { ev.stopPropagation(); });
+      g.appendChild(designA);
+    }
 
     // complete toggle (top-right corner) — 「未完了」 before / 「完了」 after
     var chk = el("g", { class: "node__check" });
