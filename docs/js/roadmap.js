@@ -276,10 +276,41 @@
 
   if (tooltip) {
     tooltip.addEventListener("mouseenter", function () { clearTimeout(hideTimer); });
-    tooltip.addEventListener("mouseleave", function () { hideTooltip(); });
+    tooltip.addEventListener("mouseleave", function () { if (!isDragging) hideTooltip(); });
+
+    var isDragging = false, justDragged = false, dragOffX = 0, dragOffY = 0;
+
+    tooltip.addEventListener("mousedown", function (ev) {
+      if (ev.target.closest("a")) return;
+      isDragging = true;
+      var rect = tooltip.getBoundingClientRect();
+      dragOffX = ev.clientX - rect.left;
+      dragOffY = ev.clientY - rect.top;
+      tooltip.classList.add("is-dragging");
+      ev.preventDefault();
+    });
+
+    document.addEventListener("mousemove", function (ev) {
+      if (!isDragging) return;
+      var left = ev.clientX - dragOffX;
+      var top  = ev.clientY - dragOffY;
+      left = Math.max(8, Math.min(left, window.innerWidth  - tooltip.offsetWidth  - 8));
+      top  = Math.max(8, Math.min(top,  window.innerHeight - tooltip.offsetHeight - 8));
+      tooltip.style.left = left + "px";
+      tooltip.style.top  = top  + "px";
+    });
+
+    document.addEventListener("mouseup", function () {
+      if (!isDragging) return;
+      isDragging = false;
+      tooltip.classList.remove("is-dragging");
+      justDragged = true;
+      setTimeout(function () { justDragged = false; }, 0);
+    });
   }
 
   document.addEventListener("click", function () {
+    if (justDragged) return;
     activeNode = null;
     hideTooltipImmediate();
   });

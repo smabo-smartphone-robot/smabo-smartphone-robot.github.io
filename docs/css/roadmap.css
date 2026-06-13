@@ -98,14 +98,17 @@
   background: #fff;
   border: 1.5px solid var(--line);
   border-radius: 12px;
-  box-shadow: 0 8px 28px rgba(40,42,90,.14);
-  padding: 14px 16px;
-  width: 200px;
+  box-shadow: 0 6px 20px rgba(40,42,90,.12);
+  padding: 10px 12px;
+  width: 168px;
   max-width: calc(100vw - 24px);
   box-sizing: border-box;
 }
 .rmap-svg.has-tooltip { pointer-events: none; }
 .rmap-svg.has-tooltip .node { pointer-events: none; }
+.rmap-tooltip { cursor: move; }
+.rmap-tooltip.is-dragging { cursor: grabbing; user-select: none; }
+.rmap-tooltip__link { cursor: pointer; }
 .rmap-tooltip__label {
   font-size: 0.72rem;
   font-weight: 800;
