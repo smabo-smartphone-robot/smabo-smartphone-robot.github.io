@@ -4,6 +4,10 @@
 
   var SVGNS = "http://www.w3.org/2000/svg";
   var STORE_KEY = "smabo-roadmap-progress-v1";
+  // Path prefix to the guide pages, relative to the page hosting the roadmap.
+  // Defaults to the top-level location; pages in another directory override it
+  // via `data-guide-dir` on the #rmap-svg element (e.g. "" when the guides sit
+  // in the same folder as the roadmap page).
   var GUIDE_DIR = "docs/guides/";
 
   // ---- data ------------------------------------------------------------
@@ -98,6 +102,7 @@
   // ---- build the SVG ---------------------------------------------------
   var svg = document.getElementById("rmap-svg");
   if (!svg) return;
+  if (svg.hasAttribute("data-guide-dir")) GUIDE_DIR = svg.getAttribute("data-guide-dir");
   var nodeEls = {}, edgeEls = [];
 
   function el(tag, attrs) {
@@ -121,9 +126,9 @@
   BANDS.forEach(function (b) {
     gBands.appendChild(el("rect", { class: "band band--" + b.cls, x: -10, y: b.top, width: 1290, height: b.bot - b.top }));
     if (b.top > 0) gBands.appendChild(el("line", { class: "band-sep", x1: -10, y1: b.top, x2: 1280, y2: b.top }));
-    var t = el("text", { class: "band-label", x: 24, y: b.top + 44 });
+    var t = el("text", { class: "band-label", x: 175, y: b.top + 44 });
     t.textContent = b.label;
-    var req = el("tspan", { class: "req", x: 24, dy: 22 });
+    var req = el("tspan", { class: "req", x: 175, dy: 22 });
     req.textContent = b.req;
     t.appendChild(req);
     gBands.appendChild(t);
@@ -167,11 +172,14 @@
     }
     g.appendChild(link);
 
-    // check toggle (top-right corner)
+    // complete toggle (top-right corner) — 「未完了」 before / 「完了」 after
     var chk = el("g", { class: "node__check" });
-    var ccx = n.x + n.w - 15, ccy = n.y + 15;
-    chk.appendChild(el("circle", { cx: ccx, cy: ccy, r: 10.5 }));
-    chk.appendChild(el("path", { d: "M " + (ccx - 4.5) + " " + ccy + " l 3 3.2 l 6 -7" }));
+    var bw = 44, bh = 18;
+    var bx = n.x + n.w - bw - 4, by = n.y + 4;
+    chk.appendChild(el("rect", { class: "node__check-box", x: bx, y: by, width: bw, height: bh, rx: 9, ry: 9 }));
+    var clabel = el("text", { class: "node__check-label", x: bx + bw / 2, y: by + bh / 2, "text-anchor": "middle", "dominant-baseline": "central" });
+    clabel.textContent = "未完了";
+    chk.appendChild(clabel);
     chk.addEventListener("click", function (ev) {
       ev.preventDefault();
       ev.stopPropagation();
@@ -192,8 +200,11 @@
   function render() {
     NODES.forEach(function (n) {
       var g = nodeEls[n.id];
+      var st = statusOf(n.id);
       g.classList.remove("is-done", "is-available", "is-locked");
-      g.classList.add("is-" + statusOf(n.id));
+      g.classList.add("is-" + st);
+      var lbl = g.querySelector(".node__check-label");
+      if (lbl) lbl.textContent = (st === "done") ? "完了" : "未完了";
     });
     updateProgress();
   }
