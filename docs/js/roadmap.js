@@ -13,7 +13,7 @@
       tip: "（仮）ロボットの土台となる3Dプリントパーツを用意できます。" },
     { id: "app",       icon: "📱", label: "スマホアプリ", sub: "インストール・概要", x: 620, y: 110, w: 140, h: 70, phase: "app",
       tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
-    { id: "esp32",     icon: "🔌", label: "ESP32ソフト", sub: "書き込み・概要",   x: 620, y: 210, w: 140, h: 70, phase: "esp32",
+    { id: "esp32",     icon: "🔌", label: "ESP32ソフト", sub: "書き込み・概要",   x: 620, y: 230, w: 140, h: 70, phase: "esp32",
       tip: "（仮）ロボットの基本的な通信・制御ができるようになります。" },
     { id: "hand",      icon: "🤏", label: "ハンド",                  x: 300, y: 360, w: 140, h: 70, phase: "esp32",
       tip: "（仮）スマホアプリからグリッパーを開閉操作できます。" },
@@ -44,12 +44,12 @@
 
   var EDGES = [
     { from: "baseparts", to: "app",       d: "M 690 70 L 690 108" },
-    { from: "app",       to: "esp32",     d: "M 690 180 L 690 208" },
-    { from: "esp32",     to: "hand",      d: "M 690 280 L 690 315 Q 690 328 680 328 L 380 328 Q 370 328 370 338 L 370 358" },
-    { from: "esp32",     to: "neck",      d: "M 690 280 L 690 315 Q 690 328 680 328 L 540 328 Q 530 328 530 338 L 530 358" },
-    { from: "esp32",     to: "mobile",    d: "M 690 280 L 690 358" },
-    { from: "esp32",     to: "arm",       d: "M 690 280 L 690 315 Q 690 328 700 328 L 840 328 Q 850 328 850 338 L 850 358" },
-    { from: "esp32",     to: "brain",     d: "M 690 280 L 690 315 Q 690 328 700 328 L 980 328 Q 990 328 990 338 L 990 568" },
+    { from: "app",       to: "esp32",     d: "M 690 180 L 690 228" },
+    { from: "esp32",     to: "hand",      d: "M 690 300 L 690 330 Q 690 342 680 342 L 380 342 Q 370 342 370 352 L 370 358" },
+    { from: "esp32",     to: "neck",      d: "M 690 300 L 690 330 Q 690 342 680 342 L 540 342 Q 530 342 530 352 L 530 358" },
+    { from: "esp32",     to: "mobile",    d: "M 690 300 L 690 358" },
+    { from: "esp32",     to: "arm",       d: "M 690 300 L 690 330 Q 690 342 700 342 L 840 342 Q 850 342 850 352 L 850 358" },
+    { from: "esp32",     to: "brain",     d: "M 690 300 L 690 330 Q 690 342 700 342 L 980 342 Q 990 342 990 352 L 990 568" },
     { from: "mobile",    to: "encmobile", d: "M 690 430 L 690 468" },
     { from: "brain",     to: "imgproc",   d: "M 990 640 L 990 678" },
     { from: "brain",     to: "brainros",  d: "M 990 640 L 990 652 Q 990 662 1000 662 L 1150 662 Q 1160 662 1160 672 L 1160 798" },
@@ -60,8 +60,8 @@
   ];
 
   var BANDS = [
-    { cls: "app",      top: -16, bot: 185,  label: "STEP 1",  req: "smabo-app" },
-    { cls: "esp32",    top: 185, bot: 555,  label: "STEP 2",  req: "+ smabo-esp32" },
+    { cls: "app",      top: -16, bot: 205,  label: "STEP 1",  req: "smabo-app" },
+    { cls: "esp32",    top: 205, bot: 555,  label: "STEP 2",  req: "+ smabo-esp32" },
     { cls: "brain",    top: 555, bot: 775,  label: "STEP 3",  req: "+ smabo-brain" },
     { cls: "brainros", top: 775, bot: 1045, label: "STEP 4",  req: "+ smabo-brain-ros" }
   ];
@@ -212,6 +212,7 @@
     if (!tooltip || !n.tip) return;
     tipBody.textContent = n.tip;
     if (tipLink) tipLink.href = GUIDE_DIR + n.id + ".html";
+    svg.classList.add("has-tooltip");
     if (tipDesignLink) {
       if (n.design) {
         tipDesignLink.href = DESIGN_DIR + n.id + ".html";
@@ -240,6 +241,7 @@
   }
   function hideTooltip() {
     if (tooltip) tooltip.hidden = true;
+    svg.classList.remove("has-tooltip");
   }
 
   document.addEventListener("click", function () {
