@@ -164,11 +164,6 @@
       link.appendChild(sub);
     }
 
-    var hintX = n.x + n.w - 13, hintY = n.y + n.h - 11;
-    link.appendChild(el("rect", { class: "node__hint-dot", x: hintX - 10, y: hintY - 7, width: 22, height: 13, rx: 6, ry: 6 }));
-    var ht = el("text", { class: "node__hint-text", x: hintX, y: hintY, "text-anchor": "middle", "dominant-baseline": "central" });
-    ht.textContent = "···";
-    link.appendChild(ht);
 
     g.appendChild(link);
 
@@ -249,10 +244,18 @@
     var tw  = tooltip.offsetWidth;
     var th  = tooltip.offsetHeight;
     var gap = 14;
-    var left = r.right + gap;
-    if (left + tw > window.innerWidth - 8) left = r.left - tw - gap;
-    var top = r.top + (r.height - th) / 2;
-    top = Math.max(8, Math.min(top, window.innerHeight - th - 8));
+    var vw  = window.innerWidth;
+    var vh  = window.innerHeight;
+    var left, top;
+    if (r.right + gap + tw <= vw - 8) {
+      left = r.right + gap;
+    } else if (r.left - gap - tw >= 8) {
+      left = r.left - tw - gap;
+    } else {
+      left = Math.max(8, (vw - tw) / 2);
+    }
+    top = r.top + (r.height - th) / 2;
+    top = Math.max(8, Math.min(top, vh - th - 8));
     tooltip.style.left = left + "px";
     tooltip.style.top  = top  + "px";
   }
