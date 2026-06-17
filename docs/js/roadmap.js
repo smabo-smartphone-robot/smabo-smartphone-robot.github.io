@@ -8,62 +8,66 @@
 
   // ---- data ------------------------------------------------------------
   // design: true  → show 設計書 button linking to DESIGN_DIR + id + ".html"
+  // ext: true → 別リポジトリの外部ツール（必須）。色を分けて区別する。
   var NODES = [
-    { id: "baseparts", icon: "🧩", label: "ベースパーツの印刷",        x: 620, y: 0,   w: 140, h: 70, phase: "app",
+    { id: "baseparts", icon: "🧩", label: "ベースパーツの印刷",        x: 600, y: 0,    w: 140, h: 70, phase: "app",
       tip: "（仮）ロボットの土台となる3Dプリントパーツを用意できます。" },
-    { id: "app",       icon: "📱", label: "スマホアプリ", sub: "インストール・概要", x: 620, y: 110, w: 140, h: 70, phase: "app",
-      tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
-    { id: "esp32",     icon: "🔌", label: "ESP32ソフト", sub: "書き込み・概要",   x: 620, y: 230, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）ロボットの基本的な通信・制御ができるようになります。" },
-    { id: "hand",      icon: "🤏", label: "ハンド",                  x: 300, y: 360, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）スマホアプリからグリッパーを開閉操作できます。" },
-    { id: "neck",      icon: "🔄", label: "首振り",                  x: 460, y: 360, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）スマホのカメラをパン・チルトで向きを変えられます。" },
-    { id: "mobile",    icon: "🚗", label: "移動ロボット",             x: 620, y: 360, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）スマホアプリでロボットを前後左右に走行させられます。" },
-    { id: "arm",       icon: "🦾", label: "ロボットアーム",           x: 780, y: 360, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）スマホアプリでアームを手動操作できます。" },
-    { id: "encmobile", icon: "⚙️", label: "エンコーダ付", sub: "移動ロボット",  x: 620, y: 470, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）エンコーダにより精度の高い直進・旋回ができます。" },
-    { id: "brain",     icon: "🧠", label: "brain", sub: "セットアップ・概要",   x: 920, y: 590, w: 140, h: 70, phase: "brain",
+    { id: "brain",     icon: "🧠", label: "brain", sub: "セットアップ・概要",   x: 600, y: 130, w: 140, h: 70, phase: "brain",
       tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
-    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 920, y: 710, w: 140, h: 70, phase: "brain",
+    { id: "web",       icon: "🖥️", label: "smabo-web", sub: "外部ツール",     x: 600, y: 250, w: 140, h: 70, phase: "brain", ext: true,
+      tip: "（仮）設定変更・手動制御・センサ可視化を行うブラウザUI。手動制御などに必要な外部ツールです。" },
+    { id: "app",       icon: "📱", label: "スマホアプリ", sub: "インストール・概要", x: 600, y: 380, w: 140, h: 70, phase: "brain",
+      tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
+    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 810, y: 510, w: 140, h: 70, phase: "brain",
       tip: "（仮）カメラ映像をリアルタイムに解析・物体認識できます。" },
-    { id: "brainros",  icon: "🤖", label: "brain-ros", sub: "セットアップ・概要", x: 1090, y: 820, w: 140, h: 70, phase: "brainros",
+    { id: "esp32",     icon: "🔌", label: "ESP32ソフト", sub: "書き込み・概要",   x: 600, y: 600, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）ロボットの基本的な通信・制御ができるようになります。" },
+    { id: "hand",      icon: "🤏", label: "ハンド",                  x: 355, y: 740, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）スマホアプリからグリッパーを開閉操作できます。" },
+    { id: "neck",      icon: "🔄", label: "首振り",                  x: 535, y: 740, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）スマホのカメラをパン（左右）方向に向けられます。" },
+    { id: "mobile",    icon: "🚗", label: "移動ロボット",             x: 695, y: 740, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）スマホアプリでロボットを前後左右に走行させられます。" },
+    { id: "arm",       icon: "🦾", label: "ロボットアーム",           x: 845, y: 740, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）スマホアプリでアームを手動操作できます。" },
+    { id: "encmobile", icon: "⚙️", label: "エンコーダ付", sub: "移動ロボット",  x: 695, y: 870, w: 140, h: 70, phase: "esp32",
+      tip: "（仮）エンコーダにより精度の高い直進・旋回ができます。" },
+    { id: "brainros",  icon: "🤖", label: "brain-ros", sub: "セットアップ・概要", x: 995, y: 740, w: 140, h: 70, phase: "brainros",
       tip: "（仮）ROSを使ってセンサーとアクチュエータを統合制御できます。" },
-    { id: "nav",       icon: "🗺️", label: "ナビゲーション",           x: 620, y: 960, w: 140, h: 70, phase: "brainros",
+    { id: "nav",       icon: "🗺️", label: "ナビゲーション",           x: 695, y: 1000, w: 140, h: 70, phase: "brainros",
       tip: "（仮）地図を生成して自律的に目的地へ移動できます。" },
-    { id: "plan",      icon: "📐", label: "動作計画",                x: 780, y: 960, w: 140, h: 70, phase: "brainros",
+    { id: "plan",      icon: "📐", label: "動作計画",                x: 845, y: 1000, w: 140, h: 70, phase: "brainros",
       tip: "（仮）障害物を回避しながらアームや機体を自律動作させられます。" }
   ];
 
   // node centers (cx = x + w/2):
-  //   baseparts/app/esp32/mobile/encmobile/nav = 690
-  //   hand = 370, neck = 530, arm = 850
-  //   brain/imgproc = 990, brainros = 1160, plan = 850
+  //   baseparts/app/brain/web/esp32 = 670
+  //   imgproc = 880, hand = 425, neck = 605, mobile/encmobile = 765, arm = 915, brainros = 1065
+  //   nav = 765, plan = 915
 
   var EDGES = [
-    { from: "baseparts", to: "app",       d: "M 690 70 L 690 108" },
-    { from: "app",       to: "esp32",     d: "M 690 180 L 690 228" },
-    { from: "esp32",     to: "hand",      d: "M 690 300 L 690 315 Q 690 322 680 322 L 380 322 Q 370 322 370 340 L 370 358" },
-    { from: "esp32",     to: "neck",      d: "M 690 300 L 690 315 Q 690 322 680 322 L 540 322 Q 530 322 530 340 L 530 358" },
-    { from: "esp32",     to: "mobile",    d: "M 690 300 L 690 358" },
-    { from: "esp32",     to: "arm",       d: "M 690 300 L 690 315 Q 690 322 700 322 L 840 322 Q 850 322 850 340 L 850 358" },
-    { from: "esp32",     to: "brain",     d: "M 690 300 L 690 315 Q 690 322 700 322 L 980 322 Q 990 322 990 338 L 990 588" },
-    { from: "mobile",    to: "encmobile", d: "M 690 430 L 690 468" },
-    { from: "brain",     to: "imgproc",   d: "M 990 660 L 990 708" },
-    { from: "brain",     to: "brainros",  d: "M 990 660 L 990 672 Q 990 682 1000 682 L 1150 682 Q 1160 682 1160 692 L 1160 818" },
-    { from: "encmobile", to: "nav",       d: "M 690 540 L 690 958" },
-    { from: "arm",       to: "plan",      d: "M 850 430 L 850 958" },
-    { from: "brainros",  to: "plan",      d: "M 1160 890 L 1160 900 Q 1160 912 1150 912 L 860 912 Q 850 912 850 922 L 850 958" },
-    { from: "brainros",  to: "nav",       d: "M 1160 890 L 1160 900 Q 1160 912 1150 912 L 858 912 C 858 900 842 900 842 912 L 700 912 Q 690 912 690 922 L 690 958" }
+    { from: "baseparts", to: "brain",     d: "M 670 70 L 670 128" },
+    { from: "brain",     to: "web",       d: "M 670 200 L 670 248" },
+    { from: "web",       to: "app",       d: "M 670 320 L 670 378" },
+    { from: "app",       to: "imgproc",   d: "M 670 450 L 670 468 Q 670 478 680 478 L 870 478 Q 880 478 880 508" },
+    { from: "app",       to: "esp32",     d: "M 670 450 L 670 598" },
+    { from: "esp32",     to: "hand",      d: "M 670 670 L 670 696 Q 670 706 660 706 L 435 706 Q 425 706 425 716 L 425 738" },
+    { from: "esp32",     to: "neck",      d: "M 670 670 L 670 696 Q 670 706 660 706 L 615 706 Q 605 706 605 716 L 605 738" },
+    { from: "esp32",     to: "mobile",    d: "M 670 670 L 670 696 Q 670 706 680 706 L 755 706 Q 765 706 765 716 L 765 738" },
+    { from: "esp32",     to: "arm",       d: "M 670 670 L 670 696 Q 670 706 680 706 L 905 706 Q 915 706 915 716 L 915 738" },
+    { from: "mobile",    to: "encmobile", d: "M 765 810 L 765 868" },
+    { from: "esp32",     to: "brainros",  d: "M 670 670 L 670 696 Q 670 706 680 706 L 1055 706 Q 1065 706 1065 716 L 1065 738" },
+    { from: "encmobile", to: "nav",       d: "M 765 940 L 765 998" },
+    { from: "arm",       to: "plan",      d: "M 915 810 L 915 998" },
+    { from: "brainros",  to: "nav",       d: "M 1065 810 L 1065 958 Q 1065 968 1055 968 L 925 968 M 905 968 L 775 968 Q 765 968 765 978 L 765 998", jumps: [{x: 915, y: 968}] },
+    { from: "brainros",  to: "plan",      d: "M 1065 810 L 1065 858 Q 1065 868 1055 868 L 925 868 Q 915 868 915 878 L 915 998" }
   ];
 
   var BANDS = [
-    { cls: "app",      top: -16, bot: 205,  label: "STEP 1",  req: "smabo-app" },
-    { cls: "esp32",    top: 205, bot: 565,  label: "STEP 2",  req: "+ smabo-esp32" },
-    { cls: "brain",    top: 565, bot: 792,  label: "STEP 3",  req: "+ smabo-brain" },
-    { cls: "brainros", top: 792, bot: 1045, label: "STEP 4",  req: "+ smabo-brain-ros" }
+    { cls: "app",      top: -24, bot: 110  },
+    { cls: "brain",    top: 110, bot: 580  },
+    { cls: "esp32",    top: 580, bot: 950  },
+    { cls: "brainros", top: 950, bot: 1095 }
   ];
 
   // ---- derived graph ---------------------------------------------------
@@ -120,19 +124,13 @@
   var gBands = el("g", {});
   BANDS.forEach(function (b) {
     gBands.appendChild(el("rect", { class: "band band--" + b.cls, x: -10, y: b.top, width: 1450, height: b.bot - b.top }));
-    if (b.top > 0) gBands.appendChild(el("line", { class: "band-sep", x1: -10, y1: b.top, x2: 1440, y2: b.top }));
-    var t = el("text", { class: "band-label band-label--" + b.cls, x: 175, y: b.top + 44 });
-    t.textContent = b.label;
-    var req = el("tspan", { class: "req", x: 175, dy: 22 });
-    req.textContent = b.req;
-    t.appendChild(req);
-    gBands.appendChild(t);
   });
   svg.appendChild(gBands);
 
   // edges
   var gEdges = el("g", {});
   EDGES.forEach(function (e) {
+    if (e.logical) return;
     var p = el("path", { class: "edge", d: e.d, "marker-end": "url(#rmap-arrow)" });
     p._edge = e;
     gEdges.appendChild(p);
@@ -140,11 +138,37 @@
   });
   svg.appendChild(gEdges);
 
+  // jump crossings – white gap then colored arc, rendered over all edges
+  var gJumps = el("g", {});
+  EDGES.forEach(function (e) {
+    if (!e.jumps) return;
+    e.jumps.forEach(function (j) {
+      var r = j.r || 10, mx = j.x, my = j.y;
+      // horizontal white mask: erases the "over" line gap so endpoints meet the arc cleanly
+      gJumps.appendChild(el("path", {
+        d: "M " + (mx + r) + " " + my + " L " + (mx - r) + " " + my,
+        fill: "none", stroke: "#fff", "stroke-width": 10,
+      }));
+      // vertical white mask: erases the "under" line(s) at the crossing
+      gJumps.appendChild(el("path", {
+        d: "M " + mx + " " + (my - r - 1) + " L " + mx + " " + (my + r + 1),
+        fill: "none", stroke: "#fff", "stroke-width": 10,
+      }));
+      // colored arc bridging the gap
+      var arc = el("path", { class: "edge",
+        d: "M " + (mx + r) + " " + my + " A " + r + " " + r + " 0 0 0 " + (mx - r) + " " + my });
+      arc._edge = e;
+      edgeEls.push(arc);
+      gJumps.appendChild(arc);
+    });
+  });
+  svg.appendChild(gJumps);
+
   // nodes
   var gNodes = el("g", {});
   NODES.forEach(function (n) {
     var cx = n.x + n.w / 2;
-    var g = el("g", { class: "node", "data-id": n.id });
+    var g = el("g", { class: n.ext ? "node is-ext" : "node", "data-id": n.id });
 
     var link = el("a", {});
 
