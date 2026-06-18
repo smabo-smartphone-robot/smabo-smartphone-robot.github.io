@@ -12,9 +12,8 @@
 ![](./images/hero_jp.png)
 
 
-smaboは、スマホが取り付けられる「工具不要」で組み立て可能なロボットです。
+smaboは工具不要で組み立て可能なスマホ搭載ロボットです。
 
-![](./images/smabo_usecase.drawio.svg)
 
 # ロードマップ
 
