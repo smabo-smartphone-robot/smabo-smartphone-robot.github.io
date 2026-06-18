@@ -34,7 +34,7 @@
 
 # ロードマップ
 
-本ページは、以下ロードマップの「oooo」になります。
+本ページは、以下ロードマップの「smabo-brain」になります。
 
 <!--
 htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.htmlに記載してあるロードマップを添付すること。ただし、本ページのノードをハイライトした状態にすること。また、roadmap.htmlに記載のロードマップの0.5倍のサイズとすること。
@@ -192,7 +192,11 @@ git clone https://github.com/smabo-smartphone-robot/smabo-brain
 各種プログラムの実行に必要なパッケージをインストールします。
 
 ```bash
-aaa
+cd ~/smabo-brain
+```
+
+```bash
+pip3 install -r requirements.txt
 ```
 
 
@@ -226,6 +230,19 @@ aaa
 # 動作手順
 
 以下手順で、動作の確認を行います。
+
+<br>
+
+smabo-brainを起動します。
+
+```bash
+cd ~/smabo-brain
+```
+```bash
+python3 -m brain
+```
+
+上記コマンド実行後、エラーが発生せずに、起動が完了すればOKです。
 
 # 組み立て手順
 
