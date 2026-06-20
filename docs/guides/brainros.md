@@ -12,7 +12,6 @@
 # 目次 <!-- omit in toc -->
 
 - [ロードマップ](#ロードマップ)
-- [前提](#前提)
 - [できること](#できること)
 - [smabo-brain-rosとは](#smabo-brain-rosとは)
   - [smabo-brain-rosのクローン](#smabo-brain-rosのクローン)
@@ -22,7 +21,9 @@
 
 # ロードマップ
 
-本ページは、以下ロードマップの「brain-ros」になります。
+本ページは、以下ロードマップ「brain-ros」のガイドページです。
+
+また、本ページは「[smabo-brain](./smabo-brain.md)」のガイドを実施している前提で話を進めます。
 
 <!--
 htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.htmlに記載してあるロードマップを添付すること。ただし、本ページのノードをハイライトした状態にすること。また、roadmap.htmlに記載のロードマップの0.5倍のサイズとすること。
@@ -30,16 +31,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 ![](../images/smabo_roadmap.drawio.svg)
 
-!!! note
-    本ページの内容の設計書は、以下ページにて閲覧できます。
-    - [ooo]()
 
-
-# 前提
-
-本ページは、以下ページの内容を実施している前提とします。
-
-- [smabo-brain](./smabo-brain.md)
 
 
 # できること
