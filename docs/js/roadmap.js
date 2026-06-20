@@ -10,7 +10,7 @@
   // design: true  → show 設計書 button linking to DESIGN_DIR + id + ".html"
   // ext: true → 別リポジトリの外部ツール（必須）。色を分けて区別する。
   var NODES = [
-    { id: "baseparts", icon: "🧩", label: "ベースパーツの印刷",        x: 600, y: 0,    w: 140, h: 70, phase: "app",
+    { id: "baseparts", file: "base", icon: "🧩", label: "ベースパーツの印刷",        x: 600, y: 0,    w: 140, h: 70, phase: "app",
       tip: "（仮）ロボットの土台となる3Dプリントパーツを用意できます。" },
     { id: "brain",     icon: "🧠", label: "brain", sub: "セットアップ・概要",   x: 600, y: 130, w: 140, h: 70, phase: "brain",
       tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
@@ -246,7 +246,7 @@
     clearTimeout(hideTimer);
     if (!tooltip || !n.tip) return;
     tipBody.textContent = n.tip;
-    if (tipLink) tipLink.href = GUIDE_DIR + n.id + ".html";
+    if (tipLink) tipLink.href = GUIDE_DIR + (n.file || n.id) + ".html";
     if (lock) svg.classList.add("has-tooltip");
     else svg.classList.remove("has-tooltip");
     if (tipDesignLink) {
