@@ -132,8 +132,15 @@ smabo-webの「Config」タブで`dc_drive`を有効にし、「two wheel mobile
 
 # 次回
 
-次回は
+次回は、以下ロードマップの
 
 - [エンコーダ付移動ロボット](./encmobile.md)
 
 について解説します。
+
+
+<!--
+htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.htmlに記載してあるロードマップを添付すること。ただし、次回につながるノードをハイライトした状態にすること。また、roadmap.htmlに記載のロードマップの0.5倍のサイズとすること。
+-->
+
+![](../images/smabo_roadmap.drawio.svg)

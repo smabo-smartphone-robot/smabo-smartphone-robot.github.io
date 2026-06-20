@@ -97,11 +97,12 @@
     descendantsOf[n.id] = collect(n.id, children);
   });
 
-  // ---- build the SVG ---------------------------------------------------
-  var svg = document.getElementById("rmap-svg");
-  if (!svg) return;
-  if (svg.hasAttribute("data-guide-dir")) GUIDE_DIR = svg.getAttribute("data-guide-dir");
-  if (svg.hasAttribute("data-design-dir")) DESIGN_DIR = svg.getAttribute("data-design-dir");
+  // ---- build the SVG (one instance per .rmap-svg element on the page) ---
+  function buildRoadmap(svg, idx) {
+  var guideDir = GUIDE_DIR, designDir = DESIGN_DIR;
+  if (svg.hasAttribute("data-guide-dir")) guideDir = svg.getAttribute("data-guide-dir");
+  if (svg.hasAttribute("data-design-dir")) designDir = svg.getAttribute("data-design-dir");
+  var markerId = "rmap-arrow-" + idx;
   var nodeEls = {}, edgeEls = [];
 
   function el(tag, attrs) {
@@ -113,7 +114,7 @@
   // arrow marker (uses context-stroke so head matches the line colour)
   var defs = el("defs", {});
   var marker = el("marker", {
-    id: "rmap-arrow", viewBox: "0 0 10 10", refX: "8", refY: "5",
+    id: markerId, viewBox: "0 0 10 10", refX: "8", refY: "5",
     markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse"
   });
   marker.appendChild(el("path", { d: "M 0 1 L 9 5 L 0 9 z", class: "edge-arrow" }));
@@ -131,7 +132,7 @@
   var gEdges = el("g", {});
   EDGES.forEach(function (e) {
     if (e.logical) return;
-    var p = el("path", { class: "edge", d: e.d, "marker-end": "url(#rmap-arrow)" });
+    var p = el("path", { class: "edge", d: e.d, "marker-end": "url(#" + markerId + ")" });
     p._edge = e;
     gEdges.appendChild(p);
     edgeEls.push(p);
@@ -196,8 +197,8 @@
       var dw = 40, dh = 18;
       var dx = n.x + 4, dy = n.y + 4;
       var designA = el("a", { class: "node__design" });
-      designA.setAttributeNS("http://www.w3.org/1999/xlink", "href", DESIGN_DIR + n.id + ".html");
-      designA.setAttribute("href", DESIGN_DIR + n.id + ".html");
+      designA.setAttributeNS("http://www.w3.org/1999/xlink", "href", designDir + n.id + ".html");
+      designA.setAttribute("href", designDir + n.id + ".html");
       designA.appendChild(el("rect", { class: "node__design-box", x: dx, y: dy, width: dw, height: dh, rx: 9, ry: 9 }));
       var dlbl = el("text", { class: "node__design-label", x: dx + dw / 2, y: dy + dh / 2, "text-anchor": "middle", "dominant-baseline": "central" });
       dlbl.textContent = "設計書";
@@ -246,12 +247,12 @@
     clearTimeout(hideTimer);
     if (!tooltip || !n.tip) return;
     tipBody.textContent = n.tip;
-    if (tipLink) tipLink.href = GUIDE_DIR + (n.file || n.id) + ".html";
+    if (tipLink) tipLink.href = guideDir + (n.file || n.id) + ".html";
     if (lock) svg.classList.add("has-tooltip");
     else svg.classList.remove("has-tooltip");
     if (tipDesignLink) {
       if (n.design) {
-        tipDesignLink.href = DESIGN_DIR + n.id + ".html";
+        tipDesignLink.href = designDir + n.id + ".html";
         tipDesignLink.hidden = false;
       } else {
         tipDesignLink.hidden = true;
@@ -289,6 +290,7 @@
       if (tooltip) tooltip.hidden = true;
       svg.classList.remove("has-tooltip");
       clearHighlight();
+      if (initialActive && byId[initialActive]) highlight(initialActive);
     }, 120);
   }
   function hideTooltipImmediate() {
@@ -296,6 +298,7 @@
     if (tooltip) tooltip.hidden = true;
     svg.classList.remove("has-tooltip");
     clearHighlight();
+    if (initialActive && byId[initialActive]) highlight(initialActive);
   }
 
   if (tooltip) {
@@ -353,8 +356,12 @@
     });
   }
 
-  document.addEventListener("click", function () {
+  document.addEventListener("click", function (ev) {
     if (justDragged) return;
+    // keep the popup when clicking a node (or the popup itself); only dismiss
+    // when clicking outside any node (empty space / elsewhere on the page).
+    if (ev.target && ev.target.closest &&
+        (ev.target.closest(".node") || ev.target.closest("#rmap-tooltip"))) return;
     activeNode = null;
     hideTooltipImmediate();
   });
@@ -391,4 +398,8 @@
     activeNode = initialActive;
     highlight(initialActive);
   }
+  } // ---- end buildRoadmap ----
+
+  var rmapSvgs = document.querySelectorAll(".rmap-svg");
+  for (var rmapI = 0; rmapI < rmapSvgs.length; rmapI++) buildRoadmap(rmapSvgs[rmapI], rmapI);
 })();
