@@ -18,10 +18,10 @@
 - [スマホ固定用パーツの修正](#スマホ固定用パーツの修正)
   - [スマホのサイズ計測](#スマホのサイズ計測)
   - [パーツの寸法修正](#パーツの寸法修正)
-    - [上下固定用パーツ](#上下固定用パーツ)
     - [左右固定用パーツ](#左右固定用パーツ)
+    - [上下固定用パーツ](#上下固定用パーツ)
   - [パーツのエクスポート](#パーツのエクスポート)
-- [モデルの印刷](#モデルの印刷)
+- [パーツの印刷](#パーツの印刷)
 - [組み立て手順](#組み立て手順)
   - [各種パーツの取り付け](#各種パーツの取り付け)
   - [スマホの取り付け](#スマホの取り付け)
@@ -70,7 +70,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 https://github.com/smabo-smartphone-robot/smabo-hardware
 
 !!! note
-    smabo-hardwareリポジトリは、全てのパーツが管理されており、今後も使用するので、管理しやすくて分かりやすい場所にDLしてください。
+    smabo-hardwareリポジトリは、全てのパーツが格納されており、今後も使用するので、管理しやすい場所にDLしてください。
 
 
 # スマホ固定用パーツの修正
@@ -110,32 +110,52 @@ smaboでは、スマートフォンを固定することができますが、ス
 !!! note CADソフト
     使用するCADソフトはなんでも良いですが、ここではfusion360を使用する場合の手順を補足欄に記載します。
 
-### 上下固定用パーツ
-
-「smabo-hardware/***/***.step」をインポートし、「パーツの先端〜内側面」までの長さが
-- 「スマホの短手方向/2」+ 0.5mm
-
-になるように調整します。
-
-!!! note fusion360の場合の具体的な手順
-
-<br>
-
-また、「固定部の上側面〜下側面」までの長さは
-- 「スマホの厚み」+ 1mm
-
-になるように調整します。
-
-!!! note fusion360の場合の具体的な手順
-
 ### 左右固定用パーツ
 
-「smabo-hardware/***/***.step」をインポートし、「パーツの先端〜内側面」までの長さが
-- 「スマホの長手方向/2」+ 0.5mm
+「smabo-hardware/step/smart_phone/smartphone_long_width_75_height_11.step」をインポートし、「パーツの先端〜内側面」までの長さが
+- 「スマホの長手方向/2」+ 1mm
 
 になるように調整します。
 
 !!! note fusion360の場合の具体的な手順
+    左側タブの「Upload」をクリックします。
+    ![alt text](../images/base_fusion_upload.png)
+
+    <br>
+
+    「Select Files」をクリックします。
+    ![alt text](../images/base_fusion_select_files.png)
+
+    <br>
+
+    「smartphone_long_width_75_height_11.step」を選択します。
+    ![alt text](../images/base_fusion_select_long_step.png)
+
+    <br>
+
+    インポートが完了したら、smartphone_long_width_75_height_11を開きます。
+
+    <br>
+
+    外側面を選択した状態で「Extrude」をクリックします。
+    ![alt text](../images/base_long_outer_extrude.png)
+
+    <br>
+
+    長さを「スマホの長手方向/2」 + 3 + 1 に設定します。
+    ![alt text](../images/base_long_outer_length.png)
+
+    <br>
+
+    同様に内側面を選択した状態で「Extrude」をクリックします。
+    ![alt text](../images/base_long_inner_extrude.png)
+
+    <br>
+
+    長さを「スマホの長手方向/2」 +  1 に設定します。
+    ![alt text](../images/base_long_inner_length.png)
+
+<br>
 
 <br>
 
@@ -145,59 +165,119 @@ smaboでは、スマートフォンを固定することができますが、ス
 になるように調整します。
 
 !!! note fusion360の場合の具体的な手順
+    上面を選択し、「Extrude」をクリックします。
+    ![alt text](../images/base_long_top_extrude.png)
+
+    <br>
+
+    長さを「スマホの厚さ」+ 1 + 3 に設定します。
+    ![alt text](../images/base_long_top_length.png)
+
+    <br>
+
+    下面を選択し、「Extrude」をクリックします。
+    ![alt text](../images/base_long_bottom_extrude.png)
+
+    <br>
+
+    長さを「スマホの厚さ」+ 1 に設定します。
+    ![alt text](../images/base_long_bottom_length.png)
+
+### 上下固定用パーツ
+
+「smabo-hardware/step/smart_phone/smartphone_short_width_37_height_11.step」をインポートし、「パーツの先端〜内側面」までの長さが
+- 「スマホの短手方向/2」+ 1mm
+
+になるように調整します。
+
+!!! note fusion360の場合の具体的な手順
+    「左右固定パーツ」の時と同様の手順で、「スマホの短手方向」を基準にサイズを調整します。
+
+<br>
+
+<br>
+
+また、「固定部の上側面〜下側面」までの長さは
+- 「スマホの厚み」+ 1mm
+
+になるように調整します。
+
+!!! note fusion360の場合の具体的な手順
+    「左右固定パーツ」の時と同様の手順でサイズを調整します。
+
+
 
 ## パーツのエクスポート
 
 パーツのサイズ調整が完了したら、stlファイルとしてエクスポートします。
 
 !!! note fusion360の場合の具体的な手順
+    左上から「File」->「Export」を選択します。
+    ![alt text](../images/base_fusion_export_menu.png)
+
+    <br>
+
+    それぞれ、以下のように設定し「Export」を選択し、ファイルをエクスポートします。
+    - Name：任意の名称
+    - Type：stl
+    - Location：任意の場所
+
+    ![alt text](../images/base_fusion_export_settings.png)
 
 
 
-# モデルの印刷
+# パーツの印刷
 
-今回使用するパーツを3Dプリンタで印刷します。
+今回、新たに追加されるパーツを3Dプリンタで印刷します。
 
 !!! note
     3Dプリンタは機種によって「印刷する際に使用するソフト」が異なるため、ここでは具体的な設定手順ではなく、ポイントのみを記載します。
 
 <br>
 
-今回使用するのは、以下のパーツです。
-
-- smabo-hardware/***/***/.stl
-- smabo-hardware/***/***/.stl
-- smabo-hardware/***/***/.stl（元サイズから調整したもの） × 2
-  - 上下で同じパーツを使用するため2つ印刷します
-- smabo-hardware/***/***/.stl（元サイズから調整したもの）× 2
-  - 左右で同じパーツを使用するため2つ印刷します
-  
-
 <br>
 
-それぞれのパーツは、下図の向きに設定して、印刷してください。
+以下のパーツを図の向きに設定して、印刷してください。
 
 !!! note  印刷の際の注意点
     - パーツのつけ外しの際に、根本から折れにくくするため、凸部は横向きにして印刷
     - サポート材は必ずONにした状態で印刷
 
-- ***.stl
-    ここに画像
+- smabo-hardware/stl/base/base.stl
+    ![alt text](../images/base_print_base.png)
 
-- ***.stl
-    ここに画像
+<br>
 
-- ***.stl
-    ここに画像
+- smabo-hardware/stl/base/cover_back_bread_board.stl
+    ![alt text](../images/base_print_cover_back_bread_board.png)
 
-- ***.stl
-    ここに画像
+<br>
+
+- smabo-hardware/stl/smart_phone/cover_smartphone_base.stl
+    ![alt text](../images/base_print_cover_smartphone_base.png)
+
+<br>
+
+- smabo-hardware/stl/smart_phone/smartphone_long_width_75_height_11.stl（元サイズからお持ちのスマホ用に調整したもの） × 2
+  - 左右で同じパーツを使用するため2つ印刷します
+    ![alt text](../images/base_print_smartphone_long.png)
+
+<br>
+
+- smabo-hardware/stl/smart_phone/smartphone_short_width_37_height_11.stl（元サイズからお持ちのスマホ用に調整したもの）× 2
+  - 上下で同じパーツを使用するため2つ印刷します
+    ![alt text](../images/base_print_smartphone_short.png)
 
 # 組み立て手順
 
 ## 各種パーツの取り付け
 
 以下動画のように、必要パーツを組み立てます。
+
+※ 動画には、前回までに印刷したパーツも含まれます
+
+<!--ここに「smabo-hardware/assembly_movie/base.html」の組み立て動画を埋め込む
+-->
 
 !!! note 組み立ての際のポイント
     上下のパーツに関しては、頻繁に取り外しをする想定ならば
@@ -213,6 +293,7 @@ smaboでは、スマートフォンを固定することができますが、ス
 # 完成系
 
 今回作成したロボットの完成系は下図のようになります。
+![alt text](../images/base_complete.png)
 
 # 次回
 

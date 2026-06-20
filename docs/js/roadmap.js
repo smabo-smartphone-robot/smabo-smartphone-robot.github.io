@@ -384,4 +384,11 @@
     NODES.forEach(function (n) { nodeEls[n.id].classList.remove("is-hover", "is-prereq", "is-unlock"); });
     edgeEls.forEach(function (p) { p.classList.remove("is-prereq", "is-unlock"); });
   }
+
+  // ---- initial highlight (guide pages set data-active to their node) ----
+  var initialActive = svg.getAttribute("data-active");
+  if (initialActive && byId[initialActive]) {
+    activeNode = initialActive;
+    highlight(initialActive);
+  }
 })();
