@@ -13,7 +13,7 @@
 
 - [ロードマップ](#ロードマップ)
 - [できること](#できること)
-- [smabo-brainとは](#smabo-brainとは)
+- [smabo-webとは](#smabo-webとは)
   - [smabo-webのクローン](#smabo-webのクローン)
   - [パッケージのインストール](#パッケージのインストール)
 - [動作手順](#動作手順)
@@ -47,7 +47,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 - smabo-webのセットアップ
 
-# smabo-brainとは
+# smabo-webとは
 
 smabo-webはsmaboの中で
 
