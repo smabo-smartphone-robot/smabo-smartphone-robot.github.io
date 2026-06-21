@@ -276,7 +276,7 @@ smaboでは、スマートフォンを固定することができますが、ス
 
 ※ 動画には、前回までに印刷したパーツも含まれます
 
-<!--ここに「smabo-hardware/assembly_movie/base.html」の組み立て動画を埋め込む
+<!--ここに「docs/assembly_movie/base.html」の組み立て動画を埋め込む
 -->
 
 !!! note 組み立ての際のポイント

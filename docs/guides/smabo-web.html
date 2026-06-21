@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smabo-web — smabo ガイド</title>
+  <meta name="description" content="smabo 製作ガイド：smabo-web のセットアップ。クローン・パッケージインストール・起動と、smabo-brain との接続確認手順。" />
+  <link rel="icon" type="image/png" href="../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/docs.css" />
+  <link rel="stylesheet" href="../css/roadmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <button class="nav__toggle" aria-label="メニューを開閉" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links">
+        <a href="../index.html#ロードマップ">ロードマップ</a>
+        <a href="../components.html">コンポーネント詳細</a>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🖥️ smabo-web</h1>
+      <p>設定変更・手動制御・センサ可視化を行うブラウザツール「smabo-web」をセットアップします。</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
+<li><a href="#ロードマップ">ロードマップ</a></li>
+<li><a href="#できること">できること</a></li>
+<li><a href="#smabo-brainとは">smabo-brainとは</a>
+<ul>
+<li class="toc-h3"><a href="#smabo-webのクローン">smabo-webのクローン</a></li>
+<li class="toc-h3"><a href="#パッケージのインストール">パッケージのインストール</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">動作手順</a>
+<ul>
+<li class="toc-h3"><a href="#smabo-brainの起動">smabo-brainの起動</a></li>
+<li class="toc-h3"><a href="#smabo-webの起動">smabo-webの起動</a></li>
+<li class="toc-h3"><a href="#smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続</a></li>
+</ul>
+</li>
+<li><a href="#次回">次回</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
+<p>本ページは、以下ロードマップ「smabo-web」のガイドページです。</p>
+<p>また、本ページは「<a href="smabo-brain.html">smabo-brain</a>」のガイドを実施している前提で話を進めます。</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../architecture/" data-active="web"
+       aria-label="smabo 製作ガイドのロードマップ図（smabo-web をハイライト）"></svg>
+</div>
+
+<h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
+<p>本ページでは「smabo-web」のセットアップ手順について解説します。</p>
+<p>具体的には、以下の内容を実施します。</p>
+<ul>
+<li>smabo-webのセットアップ</li>
+</ul>
+
+<h2 id="smabo-brainとは">smabo-brainとは<a class="headerlink" href="#smabo-brainとは" title="Permanent link">#</a></h2>
+<p>smabo-webはsmaboの中で</p>
+<ul>
+<li>smaboの設定の変更、手動操作、センサの可視化などの補助的ツール</li>
+</ul>
+<p>の役割を担います。</p>
+<p><img alt="" src="../images/smabo_sysytem_architecture.drawio.svg" /></p>
+
+<h3 id="smabo-webのクローン">smabo-webのクローン<a class="headerlink" href="#smabo-webのクローン" title="Permanent link">#</a></h3>
+<p>以下コマンドでsmabo-webリポジトリをクローンします。</p>
+<pre><code class="language-bash"># ホームディレクトリへ移動
+cd ~ </code></pre>
+<pre><code class="language-bash"># smabo-brainリポジトリのクローン
+git clone https://github.com/smabo-smartphone-robot/smabo-web</code></pre>
+
+<h3 id="パッケージのインストール">パッケージのインストール<a class="headerlink" href="#パッケージのインストール" title="Permanent link">#</a></h3>
+<p>各種プログラムの実行に必要なパッケージをインストールします。</p>
+<pre><code class="language-bash">cd ~/smabo-web</code></pre>
+<pre><code class="language-bash">npm install</code></pre>
+
+<h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
+<p>以下手順で、動作の確認を行います。</p>
+
+<h3 id="smabo-brainの起動">smabo-brainの起動<a class="headerlink" href="#smabo-brainの起動" title="Permanent link">#</a></h3>
+<p>最初に、smabo-brainを起動します。</p>
+<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
+<pre><code class="language-bash">python3 -m brain</code></pre>
+
+<h3 id="smabo-webの起動">smabo-webの起動<a class="headerlink" href="#smabo-webの起動" title="Permanent link">#</a></h3>
+<p>次に、別ターミナルで、smabo-webを起動します。</p>
+<pre><code class="language-bash">cd ~/smabo-web</code></pre>
+<pre><code class="language-bash">npm run dev</code></pre>
+<p>この状態で、ブラウザから<code>http://localhost:5173</code>に接続し、以下のように表示されればOKです。</p>
+
+<h3 id="smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続<a class="headerlink" href="#smabo-brain---smabo-webの接続" title="Permanent link">#</a></h3>
+<p>最後に、smabo-brainとsmabo-webの接続テストを行います。</p>
+<p>smabo-webの「接続」ボタンをクリックします。<br />
+<img alt="alt text" src="../images/web_connect_button.png" /></p>
+<p>右下に「Brain 接続完了」と表示されればOKです。</p>
+<p><img alt="alt text" src="../images/web_brain_connected.png" /></p>
+
+<h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
+<p>次回は、以下ロードマップの</p>
+<ul>
+<li><a href="smabo-app.html">smabo-app</a></li>
+</ul>
+<p>について解説します。</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../architecture/" data-active="app"
+       aria-label="smabo 製作ガイドのロードマップ図（次回：smabo-app をハイライト）"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">概要</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+    <div class="rmap-tooltip__actions">
+      <a class="rmap-tooltip__link" href="">ガイドを読む</a>
+      <a class="rmap-tooltip__link rmap-tooltip__link--design" href="" hidden>設計書を読む</a>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/docs.js"></script>
+  <script src="../js/roadmap.js"></script>
+</body>
+</html>

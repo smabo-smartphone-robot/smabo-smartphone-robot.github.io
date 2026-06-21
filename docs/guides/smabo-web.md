@@ -55,6 +55,8 @@ smabo-webはsmaboの中で
 
 の役割を担います。
 
+![](../images/smabo_sysytem_architecture.drawio.svg)
+
 
 ## smabo-webのクローン
 
@@ -113,21 +115,27 @@ npm run dev
 
 <br>
 
-この状態で、ブラウザから`localhost:******`に接続し、以下のように表示されればOKです。
+この状態で、ブラウザから`http://localhost:5173`に接続し、以下のように表示されればOKです。
 
 
 ## smabo-brain <-> smabo-webの接続
 
 最後に、smabo-brainとsmabo-webの接続テストを行います。
 
-smabo-webの「接続」ボタンをクリックし、接続が成功すればOKです。
+smabo-webの「接続」ボタンをクリックします。
+![alt text](../images/web_connect_button.png)
+
+<br>
+右下に「Brain 接続完了」と表示されればOKです。
+
+![alt text](../images/web_brain_connected.png)
 
 
 # 次回
 
 次回は、以下ロードマップの
 
-- smabo-app
+- [smabo-app](./smabo-app.md)
 
 について解説します。
 

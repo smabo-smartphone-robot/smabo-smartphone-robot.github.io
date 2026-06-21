@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smabo-brain — smabo ガイド</title>
+  <meta name="description" content="smabo 製作ガイド：smabo-brain のセットアップ。VSCode・ターミナル環境の構築、クローン、起動、SBC（ラズパイ）固定パーツの印刷・組み立て手順。" />
+  <link rel="icon" type="image/png" href="../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/docs.css" />
+  <link rel="stylesheet" href="../css/roadmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <button class="nav__toggle" aria-label="メニューを開閉" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links">
+        <a href="../index.html#ロードマップ">ロードマップ</a>
+        <a href="../components.html">コンポーネント詳細</a>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🧠 smabo-brain</h1>
+      <p>各コンポーネントを中継するハブと、画像処理・AIなどの高度な処理を担う「smabo-brain」をセットアップします。</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
+<li><a href="#ロードマップ">ロードマップ</a></li>
+<li><a href="#できること">できること</a></li>
+<li><a href="#smabo-brainとは">smabo-brainとは</a></li>
+<li><a href="#セットアップ先pc-or-sbc">セットアップ先（PC or SBC）</a></li>
+<li><a href="#必要パーツ">必要パーツ</a></li>
+<li><a href="#smabo-brainのセットアップ">smabo-brainのセットアップ</a>
+<ul>
+<li class="toc-h3"><a href="#vscodeのインストール">VSCodeのインストール</a></li>
+<li class="toc-h3"><a href="#ターミナルの使い方linux-macの場合">ターミナルの使い方（Linux, macの場合）</a></li>
+<li class="toc-h3"><a href="#ターミナルの使い方windows">ターミナルの使い方（Windows）</a>
+<ul>
+<li class="toc-h3"><a href="#wslのインストール">WSLのインストール</a></li>
+<li class="toc-h3"><a href="#拡張機能のインストール">拡張機能のインストール</a></li>
+<li class="toc-h3"><a href="#wslの中に入る">WSLの中に入る</a></li>
+</ul>
+</li>
+<li class="toc-h3"><a href="#smabo-brainのクローン">smabo-brainのクローン</a></li>
+<li class="toc-h3"><a href="#パッケージのインストール">パッケージのインストール</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">動作手順</a></li>
+<li><a href="#sbcラズパイ4-or-5の場合">SBC=ラズパイ（4 or 5）の場合</a>
+<ul>
+<li class="toc-h3"><a href="#パーツの印刷">パーツの印刷</a></li>
+<li class="toc-h3"><a href="#組み立て手順">組み立て手順</a></li>
+</ul>
+</li>
+<li><a href="#次回">次回</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
+<p>本ページは、以下ロードマップ「smabo-brain」のガイドページです。</p>
+<p>また、本ページは「<a href="base.html">ベースパーツの作成</a>」のガイドを実施している前提で話を進めます。</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../architecture/" data-active="brain"
+       aria-label="smabo 製作ガイドのロードマップ図（smabo-brain をハイライト）"></svg>
+</div>
+
+<h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
+<p>本ページでは「smabo-brain」のセットアップ手順について解説します。</p>
+<p>具体的には、以下の内容を実施します。</p>
+<ul>
+<li>smabo-brainのセットアップ</li>
+<li>（SBC使用の場合のみ）SBC固定パーツの印刷、組み立て</li>
+</ul>
+
+<h2 id="smabo-brainとは">smabo-brainとは<a class="headerlink" href="#smabo-brainとは" title="Permanent link">#</a></h2>
+<p>smabo-brainはsmaboの中で</p>
+<ul>
+<li>各コンポーネントを中継するハブ</li>
+<li>画像処理やAIなどの高度な処理の実行</li>
+</ul>
+<p>の役割を担います。</p>
+<p><img alt="" src="../images/smabo_sysytem_architecture.drawio.svg" /></p>
+
+<h2 id="セットアップ先pc-or-sbc">セットアップ先（PC or SBC）<a class="headerlink" href="#セットアップ先pc-or-sbc" title="Permanent link">#</a></h2>
+<p>smabo-brainのセットアップ先には、以下の2パターンがあります。</p>
+<ul>
+<li>外部PC<ul>
+<li>「smaboとは別に用意されたPC」にsmabo-brainをセットアップ</li>
+</ul>
+</li>
+<li>SBC(Single Board Computer)<ul>
+<li>smaboにSBCを取り付け、そのSBCにsmabo-brainをセットアップ</li>
+</ul>
+</li>
+</ul>
+<p>smabo-brain自体のセットアップ手順は同じですが、SBCの場合は</p>
+<ul>
+<li>SBC取り付け用パーツの印刷</li>
+<li>SBCのsmaboへの取り付け</li>
+</ul>
+<p>が追加で必要になります。</p>
+<p>そのため、最初は「外部PCへのセットアップ」をおすすめします。</p>
+<blockquote>
+<p><strong>対応SBCについて</strong></p>
+<p>現状、「取り付けパーツ」が用意されているSBCは以下になります。</p>
+<ul>
+<li>ラズパイ（4 or 5）</li>
+</ul>
+<p>上記以外のSBCを取り付けたい場合は「取り付けパーツの3Dモデル」をCADなどで自作する必要があります。</p>
+</blockquote>
+<p>以降では、「外部PC、SBCで共通の手順」について解説した後、「SBC固有の手順」を解説します。</p>
+
+<h2 id="必要パーツ">必要パーツ<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
+<p>本機能の実装に必要なパーツを以下に記載します。</p>
+<table style="display:table; width:100%;">
+<thead>
+<tr>
+<th>部品名</th>
+<th>商品URL</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>【任意】Raspberry Pi4 or 5</td>
+<td>-</td>
+<td>SBCを使用する場合のみ</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="smabo-brainのセットアップ">smabo-brainのセットアップ<a class="headerlink" href="#smabo-brainのセットアップ" title="Permanent link">#</a></h2>
+<p>ここからは、smabo-brainのセットアップ手順について解説します。</p>
+<p>なお、ここからは「ターミナル」を使ったコマンド入力が発生します。</p>
+<blockquote>
+<p><strong>ターミナル</strong></p>
+<p>ターミナルとは、キーボードによる入力だけでパソコンを操作する画面（CUI）のことを言います。</p>
+<p>一般に、システム開発ではターミナルを使って、コマンドなどを実行することが多いです。</p>
+</blockquote>
+
+<h3 id="vscodeのインストール">VSCodeのインストール<a class="headerlink" href="#vscodeのインストール" title="Permanent link">#</a></h3>
+<p>最初に、ターミナルを使用する環境を構築します。</p>
+<p>今回は、Visual Studio Code（VSCode）を使用します（VSCodeはコードエディタの一つです）。</p>
+<p>以下サイトから、ご自身のPCのOSにあったインストーラをダウンロードしてください。</p>
+<p><a href="https://code.visualstudio.com">https://code.visualstudio.com</a></p>
+<p>ダウンロードが完了したら、VSCodeをインストール、起動します。</p>
+
+<h3 id="ターミナルの使い方linux-macの場合">ターミナルの使い方（Linux, macの場合）<a class="headerlink" href="#ターミナルの使い方linux-macの場合" title="Permanent link">#</a></h3>
+<p>画面下部の「TREMINAL」というタブがターミナルになります。</p>
+<p><img alt="alt text" src="../images/vscode_terminal.png" /></p>
+<p>以降、コマンドの記載がある際は、こちらにのタブにて、コマンドを入力してください。</p>
+
+<h3 id="ターミナルの使い方windows">ターミナルの使い方（Windows）<a class="headerlink" href="#ターミナルの使い方windows" title="Permanent link">#</a></h3>
+<p>Windows PCを使用する場合は、WSLをインストールしてください。</p>
+<p>WSL(Windows for Linux)は、</p>
+<ul>
+<li>WindowsでLinuxの環境を使用できるシステム</li>
+</ul>
+<p>です。</p>
+<p>ロボット開発ではLinuxを使用できた方が後々便利なことが多いので、以降はWSL上で作業を進めます。</p>
+
+<h4 id="wslのインストール">WSLのインストール</h4>
+<p>WSLのインストール手順については、以下の記事を参考にしてください。</p>
+<p><a href="https://qiita.com/zakoken/items/61141df6aeae9e3f8e36">WSL2 のインストールとアンインストール</a></p>
+
+<h4 id="拡張機能のインストール">拡張機能のインストール</h4>
+<p>WSLのインストールが完了したら、VScodeにて以下の拡張機能をインストールしてください。</p>
+<ul>
+<li>WSL</li>
+</ul>
+<p><img alt="alt text" src="../images/install_wsl.png" /></p>
+
+<h4 id="wslの中に入る">WSLの中に入る</h4>
+<p>拡張機能のインストールが完了したら、</p>
+<ol>
+<li>「&gt;&lt;」マークをクリック</li>
+<li>「Connected to WSL」をクリックしてください。</li>
+</ol>
+<p><img alt="alt text" src="../images/connect_wsl.png" /></p>
+<p>画面左下に「WSL：Ubuntu」と表示されていればOKです。ここで、画面下部の「TERMINAL」というタブがターミナルになります。</p>
+<p><img alt="alt text" src="../images/wsl_terminal.png" /></p>
+<p>以降、コマンドの記載がある際は、こちらにコマンドを入力してください。</p>
+
+<h3 id="smabo-brainのクローン">smabo-brainのクローン<a class="headerlink" href="#smabo-brainのクローン" title="Permanent link">#</a></h3>
+<p>以下コマンドでsmabo-brainリポジトリをクローンします。</p>
+<pre><code class="language-bash"># ホームディレクトリへ移動
+cd ~ </code></pre>
+<pre><code class="language-bash"># smabo-brainリポジトリのクローン
+git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
+
+<h3 id="パッケージのインストール">パッケージのインストール<a class="headerlink" href="#パッケージのインストール" title="Permanent link">#</a></h3>
+<p>各種プログラムの実行に必要なパッケージをインストールします。</p>
+<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
+<pre><code class="language-bash">pip3 install -r requirements.txt</code></pre>
+
+<h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
+<p>以下手順で、動作の確認を行います。</p>
+<p>smabo-brainを起動します。</p>
+<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
+<pre><code class="language-bash">python3 -m brain</code></pre>
+<p>上記コマンド実行後、エラーが発生せずに、起動が完了すればOKです。</p>
+<p>ここまでで、「SBC、PCで共通の設定」は完了です。
+また、PCにセットアップした方は本ページの実施内容は以上になります。</p>
+<p>以降は、「SBCをsmabo本体に取り付ける」手順について解説します。</p>
+
+<h2 id="sbcラズパイ4-or-5の場合">SBC=ラズパイ（4 or 5）の場合<a class="headerlink" href="#sbcラズパイ4-or-5の場合" title="Permanent link">#</a></h2>
+<p>SBCにラズパイを使用する場合の、パーツの印刷、取り付け手順を解説します。</p>
+
+<h3 id="パーツの印刷">パーツの印刷<a class="headerlink" href="#パーツの印刷" title="Permanent link">#</a></h3>
+<p>今回、新たに追加されるパーツを3Dプリンタで印刷します。</p>
+<blockquote>
+<p>3Dプリンタは機種によって「印刷する際に使用するソフト」が異なるため、ここでは具体的な設定手順ではなく、ポイントのみを記載します。</p>
+</blockquote>
+<br />
+<p>以下のパーツを図の向きに設定して、印刷してください。</p>
+<blockquote>
+<p><strong>印刷の際の注意点</strong></p>
+<ul>
+<li>パーツのつけ外しの際に、根本から折れにくくするため、凸部は横向きにして印刷</li>
+<li>サポート材は必ずONにした状態で印刷</li>
+</ul>
+</blockquote>
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stand.stl<br />
+<img alt="alt text" src="../images/raspi_print_stand.png" /></li>
+</ul>
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stopper1.stl<br />
+<img alt="alt text" src="../images/raspi_print_stopper1.png" /></li>
+</ul>
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stopper2.stl<br />
+<img alt="alt text" src="../images/raspi_print_stopper2.png" /></li>
+</ul>
+
+<h3 id="組み立て手順">組み立て手順<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h3>
+<p>以下動画のように、必要パーツを組み立てます。</p>
+<p>※ 動画には、前回までに印刷したパーツも含まれます</p>
+<p>
+  <iframe src="../assembly_movie/smabo_raspi.html" title="ラズパイ固定パーツ 組み立て手順"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>組み立ての際のポイント</strong></p>
+<p>下図のように、ラズパイを各パーツでraspi_standに固定してください。<br />
+<img alt="" src="../images/assemble_raspi_stand.png" /></p>
+</blockquote>
+
+<h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
+<p>次回は、以下ロードマップの</p>
+<ul>
+<li><a href="smabo-web.html">smabo-web</a></li>
+</ul>
+<p>について解説します。</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../architecture/" data-active="web"
+       aria-label="smabo 製作ガイドのロードマップ図（次回：smabo-web をハイライト）"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">概要</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+    <div class="rmap-tooltip__actions">
+      <a class="rmap-tooltip__link" href="">ガイドを読む</a>
+      <a class="rmap-tooltip__link rmap-tooltip__link--design" href="" hidden>設計書を読む</a>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/docs.js"></script>
+  <script src="../js/roadmap.js"></script>
+</body>
+</html>

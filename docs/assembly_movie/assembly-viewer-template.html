@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+=====================================================================================
+  INTERACTIVE ASSEMBLY VIEWER — TEMPLATE
+=====================================================================================
+  A reusable, single-file interactive "exploded assembly" viewer.
+  Drag to rotate, scroll/pinch to zoom, scrub/jump through the build sequence,
+  parts slide straight in and snap into place.
+
+  ─────────────────────────────────────────────────────────────────────────────────
+  HOW TO USE FOR A NEW ASSEMBLY
+  ─────────────────────────────────────────────────────────────────────────────────
+  1) Produce a GLB that contains ONE named mesh per part, already positioned in the
+     final (assembled) coordinates. The names must match the `key` values in CONFIG.
+     Generate it from a STEP assembly with the Python snippet below
+     (needs `cadquery`/`OCP` + `trimesh`):
+
+        # python3 make_glb.py  ->  writes models/assembly.glb
+        import numpy as np, trimesh
+        from OCP.STEPCAFControl import STEPCAFControl_Reader
+        from OCP.TDocStd import TDocStd_Document
+        from OCP.TCollection import TCollection_ExtendedString
+        from OCP.XCAFDoc import XCAFDoc_DocumentTool
+        from OCP.TDF import TDF_LabelSequence
+        from OCP.TDataStd import TDataStd_Name
+        from OCP.BRepMesh import BRepMesh_IncrementalMesh
+        from OCP.TopExp import TopExp_Explorer
+        from OCP.TopAbs import TopAbs_FACE
+        from OCP.TopoDS import TopoDS
+        from OCP.BRep import BRep_Tool
+        from OCP.TopLoc import TopLoc_Location
+        from OCP.Bnd import Bnd_Box
+        from OCP.BRepBndLib import BRepBndLib
+
+        doc = TDocStd_Document(TCollection_ExtendedString("d"))
+        r = STEPCAFControl_Reader(); r.ReadFile("ASSEMBLY.step"); r.Transfer(doc)
+        st = XCAFDoc_DocumentTool.ShapeTool_s(doc.Main())
+        free = TDF_LabelSequence(); st.GetFreeShapes(free)
+        def nm(l):
+            n = TDataStd_Name()
+            return n.Get().ToExtString() if l.FindAttribute(TDataStd_Name.GetID_s(), n) else "?"
+        def tess(shape):
+            BRepMesh_IncrementalMesh(shape, 0.3, False, 0.5, True)
+            verts, tris = [], []
+            exp = TopExp_Explorer(shape, TopAbs_FACE)
+            while exp.More():
+                face = TopoDS.Face_s(exp.Current()); loc = TopLoc_Location()
+                tri = BRep_Tool.Triangulation_s(face, loc)
+                if tri is not None:
+                    trsf = loc.Transformation(); base = len(verts)
+                    for i in range(1, tri.NbNodes()+1):
+                        p = tri.Node(i).Transformed(trsf); verts.append((p.X(), p.Y(), p.Z()))
+                    rev = face.Orientation() == 1
+                    for i in range(1, tri.NbTriangles()+1):
+                        a, b, c = tri.Triangle(i).Get()
+                        if rev: a, c = c, a
+                        tris.append((base+a-1, base+b-1, base+c-1))
+                exp.Next()
+            return np.array(verts), np.array(tris)
+        root = free.Value(1); comps = TDF_LabelSequence(); st.GetComponents_s(root, comps)
+        counts, scene = {}, trimesh.Scene()
+        for i in range(1, comps.Length()+1):
+            c = comps.Value(i); base_name = nm(c).split(" v")[0]; shp = st.GetShape_s(c)
+            bb = Bnd_Box()
+            try: BRepBndLib.Add_s(shp, bb)
+            except Exception: continue
+            if bb.IsVoid(): continue
+            v, f = tess(shp)
+            if len(v) == 0: continue
+            counts[base_name] = counts.get(base_name, 0) + 1
+            inst = f"{base_name}__{counts[base_name]}"     # <-- this is the CONFIG `key`
+            scene.add_geometry(trimesh.Trimesh(vertices=v, faces=f, process=False),
+                               node_name=inst, geom_name=inst)
+            print(inst)                                    # copy these into CONFIG.parts
+        scene.export("models/assembly.glb")
+
+  2) Fill in the CONFIG block in the <script> below (title, subtitle, modelUrl, parts).
+     `key` = the mesh-name PREFIX printed above. Duplicated parts get __1, __2, …
+     The list order is the build order.
+
+  3) Open it:
+     - Served over http (e.g. `python3 -m http.server`): loads CONFIG.modelUrl directly.
+     - Fully offline / double-click: paste the GLB as base64 into the
+       <script id="glbData"> tag near the bottom (browsers block fetch on file://).
+       Quick base64:  `base64 -i models/assembly.glb | pbcopy`
+
+  NOTE: three.js is loaded from a CDN (needs internet). To make a 100%-offline single
+  file, bundle three + addons with esbuild and inline the result in place of the
+  importmap + module <script>.
+=====================================================================================
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Assembly Sequence</title>
+<style>
+  :root{
+    --bg:#0a0e16; --panel:rgba(18,24,36,.72); --panel-border:rgba(120,140,180,.14);
+    --txt:#e6ecf5; --muted:#7c8aa3; --accent:#39d0d8;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);
+    font-family:"Helvetica Neue",Arial,sans-serif}
+  #app{position:fixed;inset:0}
+  canvas{display:block}
+
+  #title{position:fixed;top:22px;left:26px;z-index:5;pointer-events:none}
+  #title .kicker{font-size:11px;letter-spacing:.32em;color:var(--muted);margin-bottom:4px}
+  #title h1{margin:0;font-size:26px;font-weight:700;letter-spacing:.01em}
+  #title .sub{margin-top:5px;font-size:12px;color:var(--muted)}
+
+  #seq{position:fixed;top:118px;left:26px;width:min(360px,calc(100vw - 40px));z-index:5;
+    background:var(--panel);border:1px solid var(--panel-border);border-radius:14px;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden}
+  #seq .head{display:flex;justify-content:space-between;align-items:center;
+    padding:13px 16px;cursor:pointer;user-select:none;transition:background .15s}
+  #seq .head:hover{background:rgba(120,140,180,.07)}
+  #seq .head .t{font-size:12px;letter-spacing:.16em;color:var(--muted)}
+  #seq .head .hr{display:flex;align-items:center;gap:9px}
+  #seq .head .c{font-size:12px;color:var(--muted)}
+  #seq .head .chev{font-size:11px;color:var(--muted);transition:transform .2s}
+  #seq ul{list-style:none;margin:0;padding:6px;max-height:56vh;overflow:auto;
+    border-top:1px solid var(--panel-border)}
+  #seq.collapsed .chev{transform:rotate(-90deg)}
+  #seq.collapsed ul{display:none}
+  #seq li{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:9px;
+    cursor:pointer;font-size:11px;color:var(--muted);transition:background .15s,color .15s}
+  #seq li:hover{background:rgba(120,140,180,.1)}
+  #seq li .idx{width:16px;font-size:11px;text-align:right;color:#566276;font-variant-numeric:tabular-nums;flex:0 0 auto}
+  #seq li .sw{width:11px;height:11px;border-radius:3px;flex:0 0 auto;
+    box-shadow:0 0 0 1px rgba(255,255,255,.12) inset;opacity:.4;transition:opacity .15s}
+  #seq li .nm{flex:1;min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.3;
+    font-family:ui-monospace,Menlo,Consolas,monospace}
+  #seq li .ck{width:13px;text-align:center;font-size:12px;color:#3ad29a;opacity:0;transition:opacity .15s;flex:0 0 auto}
+  #seq li.done{color:var(--txt)} #seq li.done .sw{opacity:1} #seq li.done .ck{opacity:1}
+  #seq li.active{background:rgba(57,208,216,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(57,208,216,.25)}
+  #seq li.active .sw{opacity:1}
+
+  #hint{position:fixed;left:26px;bottom:18px;z-index:5;font-size:11px;color:var(--muted);
+    letter-spacing:.05em;pointer-events:none}
+
+  #bar{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:5;
+    width:min(720px,calc(100% - 40px));
+    background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:14px 20px 16px}
+  #bar .row1{display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:10px}
+  #bar .row1 .step{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600;flex:0 0 auto}
+  #bar .row1 .lbl{color:var(--txt);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #scrub{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;
+    background:rgba(120,140,180,.22);outline:none;margin:6px 0 12px}
+  #scrub::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;
+    background:#fff;cursor:pointer;box-shadow:0 0 0 4px rgba(57,208,216,.25)}
+  #scrub::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:#fff;cursor:pointer}
+  #bar .row2{display:flex;align-items:center;gap:8px}
+  .btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--panel-border);
+    background:rgba(120,140,180,.08);color:var(--txt);font-size:13px;padding:9px 15px;border-radius:10px;
+    cursor:pointer;transition:background .15s;white-space:nowrap}
+  .btn:hover{background:rgba(120,140,180,.16)}
+  .btn.icon{padding:9px 12px;font-size:14px;line-height:1}
+  .btn.primary{background:var(--accent);color:#04181a;border-color:transparent;font-weight:600}
+  .btn.primary:hover{background:#54e0e7}
+  #bar .spacer{flex:1}
+  .chk{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none}
+  .chk input{accent-color:var(--accent)}
+  #stepTag{font-size:12px;color:var(--muted);letter-spacing:.1em;font-variant-numeric:tabular-nums;min-width:50px;text-align:center}
+
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    z-index:9;color:var(--muted);font-size:13px;letter-spacing:.1em;background:var(--bg)}
+  #banner{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:8;max-width:calc(100vw - 40px);
+    background:rgba(245,190,90,.12);border:1px solid rgba(245,190,90,.35);color:#f2c14e;
+    font-size:12px;padding:8px 14px;border-radius:10px;text-align:center;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  @media (max-width:760px){
+    #seq{top:96px;width:min(300px,calc(100vw - 24px))}
+    #seq ul{max-height:42vh}
+    #title h1{font-size:20px}
+    .btn{padding:9px 12px;font-size:12px}
+    #hint{display:none}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<div id="title">
+  <div class="kicker">INTERACTIVE ASSEMBLY</div>
+  <h1 id="titleName">Assembly</h1>
+  <div class="sub" id="titleSub"></div>
+</div>
+
+<div id="seq" class="collapsed">
+  <div class="head" id="seqHead">
+    <span class="t">ASSEMBLY SEQUENCE</span>
+    <span class="hr"><span class="c" id="seqCount"></span><span class="chev" id="seqChev">▾</span></span>
+  </div>
+  <ul id="seqList"></ul>
+</div>
+
+<div id="hint">Drag to rotate　·　Scroll / pinch to zoom　·　Click a part to jump to its step</div>
+
+<div id="bar">
+  <div class="row1"><span class="step" id="stepNo">00 / 00</span><span class="lbl" id="stepLbl">—</span></div>
+  <input id="scrub" type="range" min="0" max="1000" value="0">
+  <div class="row2">
+    <button class="btn primary" id="playBtn">▶ Play</button>
+    <button class="btn" id="resetBtn">↺ Reset</button>
+    <span class="spacer"></span>
+    <button class="btn icon" id="prevBtn" title="Previous step">◀</button>
+    <span id="stepTag">STEP 0</span>
+    <button class="btn icon" id="nextBtn" title="Next step">▶</button>
+    <label class="chk"><input type="checkbox" id="autoRot"> Auto-rotate</label>
+  </div>
+</div>
+
+<div id="loading">Loading model…</div>
+
+<script type="importmap">
+{ "imports": {
+  "three":"https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+/* ╔══════════════════════════════════════════════════════════════════════════╗
+   ║  CONFIG — edit this block for a new assembly                              ║
+   ╚══════════════════════════════════════════════════════════════════════════╝ */
+const CONFIG = {
+  title:    'Demo Assembly',             // big heading (top-left)
+  subtitle: '',                          // auto-filled if left '' (e.g. "7 parts")
+  modelUrl: 'models/assembly.glb',       // GLB with one named mesh per part
+  stepDuration: 0.6,                     // seconds per part to slide & settle
+  fitSize: 125,                          // on-screen size of the model's largest axis
+  // Build order. `key` = mesh-name PREFIX in the GLB (e.g. "base__1").
+  // `name` = label shown in the UI. `color` = hex.
+  // (The default list below is just a placeholder demo — replace it with your parts.)
+  parts: [
+    { key:'layer1__1', name:'layer_1.stl', color:0x9aa3b2 },
+    { key:'layer2__1', name:'layer_2.stl', color:0xff4d8d },
+    { key:'layer3__1', name:'layer_3.stl', color:0xf5c542 },
+    { key:'layer4__1', name:'layer_4.stl', color:0xff6a3d },
+    { key:'layer5__1', name:'layer_5.stl', color:0xa855f7 },
+  ],
+};
+/* ───────────────────────────────────────────────────────────────────────── */
+
+const SEQ = CONFIG.parts;
+const N = SEQ.length;
+const STEP_DUR = CONFIG.stepDuration;
+
+// ---- three.js setup -------------------------------------------------------
+const app = document.getElementById('app');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0e16);
+scene.fog = new THREE.Fog(0x0a0e16, 480, 1100);
+
+const camera = new THREE.PerspectiveCamera(36, innerWidth/innerHeight, 1, 5000);
+const renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+app.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.dampingFactor = 0.08;
+controls.autoRotateSpeed = 1.3;
+controls.minDistance = 150; controls.maxDistance = 1200;
+
+scene.add(new THREE.HemisphereLight(0xbcd2ff, 0x10131c, 0.9));
+const keyL  = new THREE.DirectionalLight(0xffffff, 2.0); keyL.position.set(120,180,90); scene.add(keyL);
+const fillL = new THREE.DirectionalLight(0x88a4ff, 0.7); fillL.position.set(-140,60,-90); scene.add(fillL);
+const rimL  = new THREE.DirectionalLight(0xffffff, 0.6); rimL.position.set(0,-120,-140); scene.add(rimL);
+
+const root = new THREE.Group();
+scene.add(root);
+
+// ---- load model -----------------------------------------------------------
+const parts = [];    // {def, mesh, mat, assembled, exploded}
+let modelScale = 1;
+
+// Build the scene from a list of { def, geom } where each geom is a BufferGeometry
+// expressed in final (assembled) coordinates. Shared by the GLB and demo paths.
+function buildFromGeoms(items){
+  const box = new THREE.Box3();
+  items.forEach(it=>{ it.geom.computeBoundingBox(); box.union(it.geom.boundingBox); });
+  const gcenter = box.getCenter(new THREE.Vector3());
+  const gsize = box.getSize(new THREE.Vector3());
+  modelScale = CONFIG.fitSize / Math.max(gsize.x, gsize.y, gsize.z, 1e-3);
+
+  items.forEach(({def, geom}, i)=>{
+    geom.translate(-gcenter.x,-gcenter.y,-gcenter.z); // center the whole assembly
+    geom.computeVertexNormals();
+
+    const mat = new THREE.MeshStandardMaterial({ color:def.color, metalness:0.25, roughness:0.5 });
+    const mesh = new THREE.Mesh(geom, mat);
+    mesh.scale.setScalar(modelScale);
+
+    // straight-in approach: slide along the single dominant axis (no diagonal)
+    geom.computeBoundingBox();
+    const pc = geom.boundingBox.getCenter(new THREE.Vector3());
+    let dir;
+    if(i === 0){
+      dir = new THREE.Vector3(0,0,-1);               // first part drops in from below
+    } else {
+      const ax=Math.abs(pc.x), ay=Math.abs(pc.y), az=Math.abs(pc.z);
+      if(ax>=ay && ax>=az)      dir = new THREE.Vector3(Math.sign(pc.x)||1,0,0);
+      else if(ay>=az)           dir = new THREE.Vector3(0,Math.sign(pc.y)||1,0);
+      else                      dir = new THREE.Vector3(0,0,Math.sign(pc.z)||1);
+    }
+    const dist = (i===0) ? 95 : 150;
+    mesh.position.copy(dir.multiplyScalar(dist));
+    mesh.visible = false;
+    root.add(mesh);
+    parts.push({ def, mesh, mat, assembled:new THREE.Vector3(0,0,0), exploded:mesh.position.clone() });
+  });
+
+  root.rotation.x = -Math.PI/2;                      // model Z up -> sit on the grid
+
+  const grid = new THREE.GridHelper(900, 45, 0x2a3550, 0x161d2c);
+  grid.position.y = -78;
+  grid.material.transparent = true; grid.material.opacity = 0.5;
+  scene.add(grid);
+
+  controls.target.set(0,0,0);
+  camera.position.set(250, 195, 320);
+  controls.update();
+
+  document.getElementById('loading').style.display='none';
+  buildSidebar();
+  const h = parseFloat((location.hash.match(/step=([\d.]+)/)||[])[1]);
+  const start = Number.isFinite(h) ? h : N;          // default: show completed assembly
+  playhead = target = Math.min(Math.max(start,0),N);
+  applyState(); updateUI(true);
+}
+
+// Adapter: pull one named mesh per CONFIG part out of a loaded GLB.
+function onModelLoaded(gltf){
+  const src = gltf.scene; src.updateMatrixWorld(true);
+  const items = [];
+  SEQ.forEach(def=>{
+    let found=null;
+    src.traverse(o=>{ if(o.isMesh && !found && o.name.startsWith(def.key)) found=o; });
+    if(!found){ console.warn('missing mesh for key:', def.key); return; }
+    const geom = found.geometry.clone(); geom.applyMatrix4(found.matrixWorld);
+    items.push({ def, geom });
+  });
+  if(!items.length){ buildDemo(); return; }           // GLB had none of the keys
+  buildFromGeoms(items);
+}
+
+// Fallback when no model is available (e.g. opened via file:// with nothing
+// embedded): show a small placeholder assembly so the template previews out-of-the-box.
+function buildDemo(){
+  // A central cube + plates on its side faces. Each plate slides in along its own
+  // face normal from outside, so no part ever passes through another.
+  // [cx,cy,cz, sx,sy,sz] for the plates (thin axis = the face normal).
+  const faces = [
+    [ 27, 0,  0,  4, 40, 40],   // +X face
+    [-27, 0,  0,  4, 40, 40],   // -X face
+    [  0, 0, 27, 40, 40,  4],   // +Z face
+    [  0, 0,-27, 40, 40,  4],   // -Z face
+  ];
+  const items = SEQ.map((def,i)=>{
+    let g;
+    if(i === 0){
+      g = new THREE.BoxGeometry(50, 50, 50);          // base cube
+    } else {
+      const f = faces[(i-1) % faces.length];
+      g = new THREE.BoxGeometry(f[3], f[4], f[5]);
+      g.translate(f[0], f[1], f[2]);
+    }
+    return { def, geom:g };
+  });
+  buildFromGeoms(items);
+  showBanner('Demo geometry — set CONFIG.modelUrl, or paste a GLB into the #glbData tag.');
+}
+function onModelError(err){ console.warn('model load failed:', err); buildDemo(); }
+
+function showBanner(msg){
+  let b=document.getElementById('banner');
+  if(!b){ b=document.createElement('div'); b.id='banner'; document.body.appendChild(b); }
+  b.textContent = msg;
+}
+
+// Prefer a GLB embedded in this file (works by double-click / offline);
+// otherwise fetch CONFIG.modelUrl when served over http; otherwise show the demo.
+// Deferred to a microtask so the whole module (UI consts, animate loop) is ready first.
+const _loader = new GLTFLoader();
+const _glbTag = document.getElementById('glbData');
+queueMicrotask(()=>{
+  if(_glbTag && _glbTag.textContent.trim().length > 100){
+    const b = atob(_glbTag.textContent.trim());
+    const u = new Uint8Array(b.length);
+    for(let i=0;i<b.length;i++) u[i]=b.charCodeAt(i);
+    _loader.parse(u.buffer, '', onModelLoaded, onModelError);
+  } else if(location.protocol === 'file:'){
+    buildDemo();                                      // file:// can't fetch local files
+  } else {
+    fetch(CONFIG.modelUrl)
+      .then(r=>{ if(!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+      .then(buf=> _loader.parse(buf, '', onModelLoaded, onModelError))
+      .catch(onModelError);
+  }
+});
+
+// ---- assembly state -------------------------------------------------------
+// playhead in [0,N]; integer part = #parts fully placed, fraction = active slide
+let playhead = 0, target = 0, isPlaying = false;
+
+// easeOutQuint: strong deceleration that settles EXACTLY into place (no overshoot)
+const ease = t => 1 - Math.pow(1 - t, 5);
+
+const _v = new THREE.Vector3();
+function applyState(){
+  const placed = Math.floor(playhead + 1e-6);
+  const frac = playhead - placed;
+  parts.forEach((p,i)=>{
+    if(i < placed){
+      p.mesh.visible = true;
+      p.mesh.position.copy(p.assembled);
+    } else if(i === placed && frac > 1e-4){
+      p.mesh.visible = true;
+      p.mesh.position.copy(_v.copy(p.exploded).lerp(p.assembled, ease(frac)));
+    } else {
+      p.mesh.visible = false;
+    }
+  });
+  updateUI();
+}
+
+// ---- UI (writes guarded so the control bar is never rebuilt mid-click) -----
+const elScrub = document.getElementById('scrub');
+const elStepNo = document.getElementById('stepNo');
+const elStepLbl = document.getElementById('stepLbl');
+const elStepTag = document.getElementById('stepTag');
+const elPlay = document.getElementById('playBtn');
+let liEls = [];
+
+document.getElementById('titleName').textContent = CONFIG.title;
+document.title = CONFIG.title + ' — Assembly Sequence';
+document.getElementById('titleSub').textContent = CONFIG.subtitle || `${N} part${N===1?'':'s'}`;
+document.getElementById('seqCount').textContent = N;
+
+function buildSidebar(){
+  const ul = document.getElementById('seqList'); ul.innerHTML='';
+  liEls = SEQ.map((d,i)=>{
+    const li=document.createElement('li'); li.title=d.name;
+    li.innerHTML = `<span class="idx">${String(i+1).padStart(2,'0')}</span>`+
+      `<span class="sw" style="background:#${d.color.toString(16).padStart(6,'0')}"></span>`+
+      `<span class="nm">${d.name}</span><span class="ck">✓</span>`;
+    li.onclick = ()=> jumpTo(i+1);
+    ul.appendChild(li); return li;
+  });
+}
+
+let _pPlaced=-1, _pAct=-2, _pLabel='', _pNo='', _pLbl='', _pTag='';
+function updateUI(force){
+  const placed = Math.floor(playhead + 1e-6);
+  const frac = playhead - placed;
+  const done = (playhead >= N - 1e-6);
+  const cur = done ? N : (frac > 1e-3 ? placed+1 : placed);
+  const act = done ? N-1 : (cur>=1 ? cur-1 : -1);
+
+  // scrubber position (cheap, safe to set every frame)
+  elScrub.value = N ? Math.round(playhead/N*1000) : 0;
+  const pct = N ? playhead/N*100 : 0;
+  elScrub.style.background =
+    `linear-gradient(to right,var(--accent) ${pct}%,rgba(120,140,180,.22) ${pct}%)`;
+
+  // list highlight — only touch the DOM when the step actually changes
+  if(force || placed!==_pPlaced || act!==_pAct){
+    liEls.forEach((li,i)=>{ li.classList.toggle('done', i<placed); li.classList.toggle('active', i===act); });
+    _pPlaced=placed; _pAct=act;
+  }
+
+  // text — only rewrite on change (avoids dropping real clicks during animation)
+  const label = done ? '↺ Replay' : (isPlaying ? '❚❚ Pause' : '▶ Play');
+  const no  = `${String(done?N:cur).padStart(2,'0')} / ${String(N).padStart(2,'0')}`;
+  const lbl = done ? 'Assembly complete' : (cur===0 ? '—' : SEQ[cur-1].name);
+  const tag = done ? 'DONE' : `STEP ${cur}`;
+  if(force || label!==_pLabel){ elPlay.innerHTML = label; _pLabel=label; }
+  if(force || no!==_pNo){ elStepNo.textContent = no; _pNo=no; }
+  if(force || lbl!==_pLbl){ elStepLbl.textContent = lbl; _pLbl=lbl; }
+  if(force || tag!==_pTag){ elStepTag.textContent = tag; _pTag=tag; }
+}
+
+function play(){
+  if(playhead >= N - 1e-6){ playhead = 0; applyState(); }
+  target = N; isPlaying = true; updateUI();
+}
+function pause(){ target = playhead; isPlaying = false; updateUI(); }
+function toggle(){ isPlaying ? pause() : play(); }
+function jumpTo(s){ isPlaying = false; target = Math.min(Math.max(s,0),N); updateUI(); }
+
+elPlay.onclick = toggle;
+document.getElementById('resetBtn').onclick = ()=> jumpTo(0);
+document.getElementById('prevBtn').onclick = ()=> jumpTo(Math.ceil(playhead - 1e-3) - 1);
+document.getElementById('nextBtn').onclick = ()=> jumpTo(Math.floor(playhead + 1e-3) + 1);
+elScrub.oninput = ()=>{ isPlaying=false; playhead = target = elScrub.value/1000*N; applyState(); };
+document.getElementById('autoRot').onchange = e=>{ controls.autoRotate = e.target.checked; };
+
+// collapse / expand the sequence panel
+document.getElementById('seqHead').onclick = ()=>
+  document.getElementById('seq').classList.toggle('collapsed');
+
+addEventListener('keydown', e=>{
+  if(e.code==='Space'){ e.preventDefault(); toggle(); }
+  else if(e.code==='ArrowRight'){ jumpTo(Math.floor(playhead + 1e-3) + 1); }
+  else if(e.code==='ArrowLeft'){ jumpTo(Math.ceil(playhead - 1e-3) - 1); }
+});
+
+// ---- loop -----------------------------------------------------------------
+const clock = new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  if(parts.length && playhead !== target){
+    const dir = Math.sign(target - playhead);
+    playhead += dir * dt / STEP_DUR;
+    if((dir>0 && playhead>=target) || (dir<0 && playhead<=target)) playhead = target;
+    applyState();
+  } else if(isPlaying && playhead >= N - 1e-6){
+    isPlaying = false; updateUI();
+  }
+  controls.update();
+  renderer.render(scene,camera);
+}
+animate();
+
+addEventListener('resize', ()=>{
+  camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+</script>
+
+<!-- OPTIONAL: paste the GLB as base64 here for an offline / double-click single file.
+     Leave empty to fetch CONFIG.modelUrl instead. -->
+<script id="glbData" type="application/octet-stream"></script>
+</body>
+</html>
