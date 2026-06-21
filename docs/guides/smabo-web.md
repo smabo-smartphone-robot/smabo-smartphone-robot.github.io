@@ -115,7 +115,7 @@ npm run dev
 
 <br>
 
-この状態で、ブラウザから`http://localhost:5173`に接続し、以下のように表示されればOKです。
+この状態で、ブラウザから`http://localhost:5173`にアクセスしてください。
 
 
 ## smabo-brain <-> smabo-webの接続
