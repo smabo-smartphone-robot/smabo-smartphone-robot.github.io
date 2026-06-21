@@ -12,9 +12,9 @@
   var NODES = [
     { id: "baseparts", file: "base", icon: "🧩", label: "ベースパーツの印刷",        x: 600, y: 0,    w: 140, h: 70, phase: "app",
       tip: "smaboのベースとなるパーツの印刷、組み立て手順を解説します。" },
-    { id: "brain",     icon: "🧠", label: "smabo-brain",   x: 600, y: 130, w: 140, h: 70, phase: "brain",
+    { id: "brain",     file: "smabo-brain", icon: "🧠", label: "smabo-brain",   x: 600, y: 130, w: 140, h: 70, phase: "brain",
       tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
-    { id: "web",       icon: "🖥️", label: "smabo-web",     x: 600, y: 250, w: 140, h: 70, phase: "brain", ext: true,
+    { id: "web",       file: "smabo-web", icon: "🖥️", label: "smabo-web",     x: 600, y: 250, w: 140, h: 70, phase: "brain", ext: true,
       tip: "（仮）設定変更・手動制御・センサ可視化を行うブラウザUI。手動制御などに必要な外部ツールです。" },
     { id: "app",       icon: "📱", label: "smabo-app", x: 600, y: 380, w: 140, h: 70, phase: "brain",
       tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
