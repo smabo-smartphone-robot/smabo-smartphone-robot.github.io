@@ -16,7 +16,7 @@
       tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
     { id: "web",       file: "smabo-web", icon: "🖥️", label: "smabo-web",     x: 600, y: 250, w: 140, h: 70, phase: "brain", ext: true,
       tip: "（仮）設定変更・手動制御・センサ可視化を行うブラウザUI。手動制御などに必要な外部ツールです。" },
-    { id: "app",       icon: "📱", label: "smabo-app", x: 600, y: 380, w: 140, h: 70, phase: "brain",
+    { id: "app",       file: "smabo-app", icon: "📱", label: "smabo-app", x: 600, y: 380, w: 140, h: 70, phase: "brain",
       tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
     { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 810, y: 510, w: 140, h: 70, phase: "brain",
       tip: "（仮）カメラ映像をリアルタイムに解析・物体認識できます。" },
@@ -208,7 +208,7 @@
     }
 
     g.addEventListener("mouseenter", (function (node, gEl) {
-      return function () { highlight(node.id); showTooltip(node, gEl, false); };
+      return function () { stopBlink(); highlight(node.id); showTooltip(node, gEl, false); };
     })(n, g));
     g.addEventListener("mouseleave", function () {
       hideTooltip();
@@ -221,6 +221,7 @@
           clearHighlight();
           hideTooltipImmediate();
         } else {
+          stopBlink();
           activeNode = node.id;
           highlight(node.id);
           showTooltip(node, gEl, true);
@@ -290,7 +291,7 @@
       if (tooltip) tooltip.hidden = true;
       svg.classList.remove("has-tooltip");
       clearHighlight();
-      if (initialActive && byId[initialActive]) highlight(initialActive);
+      applyInitial();
     }, 120);
   }
   function hideTooltipImmediate() {
@@ -298,7 +299,7 @@
     if (tooltip) tooltip.hidden = true;
     svg.classList.remove("has-tooltip");
     clearHighlight();
-    if (initialActive && byId[initialActive]) highlight(initialActive);
+    applyInitial();
   }
 
   if (tooltip) {
@@ -393,10 +394,36 @@
   }
 
   // ---- initial highlight (guide pages set data-active to their node) ----
-  var initialActive = svg.getAttribute("data-active");
-  if (initialActive && byId[initialActive]) {
+  // data-active may be a single id, or several comma-separated ids. With 2+
+  // ids the highlight alternates between them — a blinking "next steps" cue.
+  var initialIds = (svg.getAttribute("data-active") || "")
+    .split(",").map(function (s) { return s.trim(); })
+    .filter(function (id) { return id && byId[id]; });
+  var initialActive = initialIds[0] || null;
+  var blinkTimer = null, blinkIdx = 0;
+
+  function startBlink() {
+    stopBlink();
+    if (!initialIds.length) return;
+    blinkIdx = 0;
+    highlight(initialIds[0]);
+    if (initialIds.length < 2) return;
+    blinkTimer = setInterval(function () {
+      blinkIdx = (blinkIdx + 1) % initialIds.length;
+      highlight(initialIds[blinkIdx]);
+    }, 900);
+  }
+  function stopBlink() {
+    if (blinkTimer) { clearInterval(blinkTimer); blinkTimer = null; }
+  }
+  // Restore the page's default highlight (single node, or the blink cycle).
+  function applyInitial() {
+    if (initialIds.length) startBlink();
+  }
+
+  if (initialIds.length) {
     activeNode = initialActive;
-    highlight(initialActive);
+    startBlink();
   }
   } // ---- end buildRoadmap ----
 
