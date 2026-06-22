@@ -98,7 +98,7 @@ smabo-appはsmaboの中で
 
 スマホから[smabo-appのReleaseページ](https://github.com/smabo-smartphone-robot/smabo-app/releases)にアクセスします。
 
-Releaseページの中で、一番最新のものを選択しダウンロードしてください。
+いくつかあるバージョンの中で、一番最新バージョンのapkファイルをダウンロードしてください。
 
 ダウンロードしたapkファイルを実行するとsmabo-appがインストールされます。
 
