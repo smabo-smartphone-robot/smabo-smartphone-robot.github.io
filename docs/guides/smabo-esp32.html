@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smabo-esp32 — smabo ガイド</title>
+  <meta name="description" content="smabo 製作ガイド：smabo-esp32 のセットアップ。Thonny でのソースコード・設定ファイルの書き込み、必要パーツの3Dプリント、ブレッドボードの配線、動作確認の手順。" />
+  <link rel="icon" type="image/png" href="../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/docs.css" />
+  <link rel="stylesheet" href="../css/roadmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <button class="nav__toggle" aria-label="メニューを開閉" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links">
+        <a href="../index.html#ロードマップ">ロードマップ</a>
+        <a href="../components.html">コンポーネント詳細</a>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🔌 smabo-esp32</h1>
+      <p>アクチュエータの制御とセンサ値の取得を担う smabo-esp32 をセットアップし、必要パーツの印刷・配線・動作確認までを行います。</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
+<li><a href="#ロードマップ">ロードマップ</a></li>
+<li><a href="#できること">できること</a></li>
+<li><a href="#smabo-esp32とは">smabo-esp32とは</a></li>
+<li><a href="#必要パーツ">必要パーツ</a></li>
+<li><a href="#smabo-esp32のセットアップ">smabo-esp32のセットアップ</a>
+<ul>
+<li class="toc-h3"><a href="#thonny書き込みソフトのインストール">Thonny（書き込みソフト）のインストール</a>
+<ul>
+<li class="toc-h3"><a href="#ソースコードの書き込み">ソースコードの書き込み</a></li>
+<li class="toc-h3"><a href="#設定ファイルの書き込み">設定ファイルの書き込み</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#パーツの印刷">パーツの印刷</a></li>
+<li><a href="#ブレッドボードについて">ブレッドボードについて</a></li>
+<li><a href="#組み立て手順">組み立て手順</a>
+<ul>
+<li class="toc-h3"><a href="#配線">配線</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">動作手順</a>
+<ul>
+<li class="toc-h3"><a href="#smabo-brainの起動">smabo-brainの起動</a></li>
+<li class="toc-h3"><a href="#smabo-webの起動">smabo-webの起動</a></li>
+<li class="toc-h3"><a href="#smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続</a></li>
+<li class="toc-h3"><a href="#smabo-brain---esp32の接続">smabo-brain &lt;-&gt; esp32の接続</a></li>
+<li class="toc-h3"><a href="#smabo-web---esp32の接続">smabo-web &lt;-&gt; esp32の接続</a></li>
+</ul>
+</li>
+<li><a href="#次回">次回</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
+<p>本ページは、以下ロードマップ「smabo-esp32」のガイドページです。</p>
+<p>また、本ページは「<a href="smabo-app.html">smabo-app</a>」のガイドを実施している前提で話を進めます。</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../architecture/" data-active="esp32"
+       aria-label="smabo 製作ガイドのロードマップ図（smabo-esp32 をハイライト）"></svg>
+</div>
+
+<h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
+<p>本ページでは「smabo-esp32」のセットアップ手順について解説します。</p>
+<p>具体的には、以下の内容を実施します。</p>
+<ul>
+<li>smabo-esp32のセットアップ</li>
+<li>各種必要パーツの印刷</li>
+<li>配線</li>
+</ul>
+
+<h2 id="smabo-esp32とは">smabo-esp32とは<a class="headerlink" href="#smabo-esp32とは" title="Permanent link">#</a></h2>
+<p>smabo-esp32はsmaboの中で</p>
+<ul>
+<li>アクチュエータの制御</li>
+<li>センサ値の取得</li>
+</ul>
+<p>の役割を担います。</p>
+<p><img alt="" src="../images/smabo_sysytem_architecture.drawio.svg" /></p>
+
+<h2 id="必要パーツ">必要パーツ<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
+<p>本機能の実装に必要なパーツを以下に記載します。</p>
+<table>
+<thead>
+<tr>
+<th>部品名</th>
+<th>商品URL</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32-DevKitC</td>
+<td><a href="https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-機能マイクロコントローラー-TYPE-C-デュアルコアボード/dp/B0GTY64KDC/ref=asc_df_B0GTY64KDC?mcid=350a4550c70e3d30953041512ffe110a&amp;tag=jpgo-22&amp;linkCode=df0&amp;hvadid=792079627413&amp;hvpos=&amp;hvnetw=g&amp;hvrand=17366440597157412973&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9199153&amp;hvtargid=pla-2484301629565&amp;hvocijid=17366440597157412973-B0GTY64KDC-&amp;hvexpln=0&amp;th=1">link</a></td>
+<td>互換品でも可</td>
+</tr>
+<tr>
+<td>ブレッドボード（SAD101）<br /></td>
+<td><a href="https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1">link</a></td>
+<td>一般的なブレッドボードは5穴がです、こちらは6穴になっています。<br />6穴でないとESP32のサイズ的に横幅が足りないので注意してください</td>
+</tr>
+<tr>
+<td>ジャンプワイヤー</td>
+<td><a href="https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL?ref_=Oct_d_obs_d_3332721051_0&amp;pd_rd_w=uPj7Z&amp;content-id=amzn1.sym.017d4a3b-167e-4891-9b01-9ac16ba095fb&amp;pf_rd_p=017d4a3b-167e-4891-9b01-9ac16ba095fb&amp;pf_rd_r=D57C194X1NH6BZACFEPS&amp;pd_rd_wg=FydDx&amp;pd_rd_r=327745d6-16b1-418c-b484-4cea112fb00b&amp;pd_rd_i=B06Y48V9DL">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>電池ボックス（単3×4本、電池スナップ対応）</td>
+<td><a href="https://www.amazon.co.jp/dp/B011IJQ4DI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3">link</a></td>
+<td>電池スナップ対応の方が、取り回しが良いのでお勧めです。</td>
+</tr>
+<tr>
+<td>電池スナップ（電池ボックス用）</td>
+<td><a href="https://www.monotaro.com/p/6866/1105/?cq_med=pla&amp;cq_plt=gp&amp;utm_medium=cpc&amp;utm_source=google&amp;utm_campaign=246-833-4061_23030379799_shopping&amp;utm_content=&amp;utm_term=__x_&amp;utm_id=68661105&amp;gad_source=1&amp;gad_campaignid=23030381413&amp;gbraid=0AAAAADNqOHDvKsE6jsbG6KMsfUBQKF9m5&amp;gclid=Cj0KCQjw2_TQBhCnARIsAF3-XhxFdH-a3GLjp_a8Hy-Uc7kuFklTykWT1kFLZzA1D76_B6tY7Rw4P34aAsPaEALw_wcB">link</a></td>
+<td>コネクタピン付きの方が、ブレッドボードに差しやすくて、抜けにくいのでお勧めです。</td>
+</tr>
+<tr>
+<td>充電式単三電池 × 4</td>
+<td><a href="https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/ref=sr_1_5?qid=1700364346&amp;refinements=p_n_feature_thirteen_browse-bin%3A2314244051&amp;s=electronics&amp;sr=1-5&amp;th=1">link</a></td>
+<td>充電式の方がおすすめです。</td>
+</tr>
+<tr>
+<td>電池充電器</td>
+<td><a href="https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/ref=sr_1_5?keywords=%E9%9B%BB%E6%B1%A0+%E5%85%85%E9%9B%BB%E5%99%A8&amp;qid=1700402201&amp;sr=8-5">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>サーボモータドライバ PCA9685</td>
+<td><a href="https://www.amazon.co.jp/HiLetgo-PCA9685-16%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB-12-%E3%83%93%E3%83%83%E3%83%88-Arduino%E3%81%AB%E5%AF%BE%E5%BF%9C/dp/B01D1D0CX2/ref=asc_df_B01D1D0CX2/?tag=jpgo-22&amp;linkCode=df0&amp;hvadid=218134682078&amp;hvpos=&amp;hvnetw=g&amp;hvrand=18016470498878566809&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=1009487&amp;hvtargid=pla-439629573722&amp;psc=1&amp;mcid=d238c727398c34ec915ad739f9f6f977">link</a></td>
+<td>互換品でも可<br /><br />「ハンド」「首振り」「ロボットアーム」のページの内容を実装する際に必要です。<br />これらの内容を実施しない場合は不要</td>
+</tr>
+<tr>
+<td>ミニブレッドボード</td>
+<td><a href="https://www.amazon.co.jp/Rasbee-SYB-170-%E3%83%9F%E3%83%8B%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%881%E5%80%8B-%E4%B8%A6%E8%A1%8C%E8%BC%B8%E5%85%A5%E5%93%81/dp/B01KRAS4NC/ref=asc_df_B01KRAS4NC?mcid=320216956bbd38fd8ecf662666249eee&amp;tag=jpgo-22&amp;linkCode=df0&amp;hvadid=707442675525&amp;hvpos=&amp;hvnetw=g&amp;hvrand=452252090448367071&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9199153&amp;hvtargid=pla-1457964925645&amp;psc=1&amp;hvocijid=452252090448367071-B01KRAS4NC-&amp;hvexpln=0">link</a></td>
+<td>裏面が粘着テープになっているもの</td>
+</tr>
+<tr>
+<td>TB6612FNG搭載 デュアルモータードライバ</td>
+<td><a href="https://www.amazon.co.jp/TB6612FNG%E6%90%AD%E8%BC%89-%E3%83%87%E3%83%A5%E3%82%A2%E3%83%AB%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90-%E3%83%94%E3%83%B3%E3%83%98%E3%83%83%E3%83%80%E4%BB%98%E3%81%8D-%E5%AE%9F%E8%A3%85%E6%B8%88%E3%81%A7%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%81%BE%E3%81%99-1-2A%C3%972%E5%87%BA%E5%8A%9B/dp/B09C5MSYCC/ref=asc_df_B09C5MSYCC?mcid=de7a458999ca33708a5f7f016232bffc&amp;tag=jpgo-22&amp;linkCode=df0&amp;hvadid=707474905432&amp;hvpos=&amp;hvnetw=g&amp;hvrand=18243089933930576889&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9199153&amp;hvtargid=pla-1422675660387&amp;psc=1&amp;hvocijid=18243089933930576889-B09C5MSYCC-&amp;hvexpln=0">link</a></td>
+<td>互換品でも可（ただし、ピンヘッダ付きでないものは自分ではんだ付けする必要があります）<br /><br />「移動ロボット」「エンコーダ付き移動ロボット」のページの内容を実装する際に必要です。<br />これらの内容を実施しない場合は不要</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="smabo-esp32のセットアップ">smabo-esp32のセットアップ<a class="headerlink" href="#smabo-esp32のセットアップ" title="Permanent link">#</a></h2>
+
+<h3 id="thonny書き込みソフトのインストール">Thonny（書き込みソフト）のインストール<a class="headerlink" href="#thonny書き込みソフトのインストール" title="Permanent link">#</a></h3>
+<p>以下サイトから、PCのOSにあったThonnyのインストーラーのDL、インストールを行います。</p>
+<p><a href="https://thonny.org/">https://thonny.org/</a></p>
+<br />
+<p>インストールが完了したら、Thonnyを起動してください。</p>
+
+<h4 id="ソースコードの書き込み">ソースコードの書き込み</h4>
+<p>ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタンをクリックし「MicroPython(ESP32)」を選択します。</p>
+<p><img alt="alt text" src="../images/esp32_thonny_select_interpreter.png" /></p>
+<br />
+<p>その後、「smabo-esp32」内のpythonファイルを全て選択した状態で右クリックし、「/にアップロード」を選択すると、esp32に書き込まれます。</p>
+<p><img alt="alt text" src="../images/esp32_thonny_upload_source.png" /></p>
+
+<h4 id="設定ファイルの書き込み">設定ファイルの書き込み</h4>
+<p>次に、設定ファイルを書き込みます。</p>
+<p>configディレクトリからお手持ちのesp32の種類にあったjsonファイルを選択し、「config.json」という名前でコピーを作成します。</p>
+<p><img alt="alt text" src="../images/esp32_config_copy.png" /></p>
+<br />
+<p>wifiの欄に「smabo-brainが接続しているwifiのSSID、パスワード」を記載します。
+また、IPの欄に「smabo-brainのIPアドレス」を記載します。</p>
+<blockquote>
+<p><strong>接続先WiFiの周波数について</strong></p>
+<p>WiFiの周波数には2.4GHzと、5GHzの2種類がありますが、</p>
+<ul>
+<li>esp32は、2.4GHzにしか対応していない</li>
+</ul>
+<p>ため注意してください。</p>
+<br />
+<p>一般に、</p>
+<ul>
+<li>Buffalo-F-ooooのようにSSIDに「G」がついている場合は、2.4GHz</li>
+<li>Buffalo-A-ooooのようにSSIDに「A」がついている場合は、5GHz</li>
+</ul>
+<p>となるため、ここで指定するSSIDは「G」がついている方にしてください。</p>
+</blockquote>
+<p><img alt="alt text" src="../images/esp32_config_wifi_ip.png" /></p>
+<br />
+<p>設定の記入が完了したら、ソースコードの時と同様に、config.jsonをesp32へ書き込みます。</p>
+<p><img alt="alt text" src="../images/esp32_config_upload.png" /></p>
+
+<h2 id="パーツの印刷">パーツの印刷<a class="headerlink" href="#パーツの印刷" title="Permanent link">#</a></h2>
+<p>今回、新たに追加されるパーツを3Dプリンタで印刷します。</p>
+<blockquote>
+<p>3Dプリンタは機種によって「印刷する際に使用するソフト」が異なるため、ここでは具体的な設定手順ではなく、ポイントのみを記載します。</p>
+</blockquote>
+<p>以下のパーツを図の向きに設定して、印刷してください。</p>
+<blockquote>
+<p><strong>印刷の際の注意点</strong></p>
+<ul>
+<li>パーツのつけ外しの際に、根本から折れにくくするため、凸部は横向きにして印刷</li>
+<li>サポート材は必ずONにした状態で印刷</li>
+</ul>
+</blockquote>
+<ul>
+<li>smabo-hardware/stl/base/bread_board_stopper_bottom_l.stl<br />
+<img alt="alt text" src="../images/esp32_print_bread_board_stopper_bottom_l.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/bread_board_stopper_bottom_r.stl<br />
+<img alt="alt text" src="../images/esp32_print_bread_board_stopper_bottom_r.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/bread_board_stopper.stl<br />
+<img alt="alt text" src="../images/esp32_print_bread_board_stopper.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/mini_bread_boad_stand.stl<br />
+<img alt="alt text" src="../images/esp32_print_mini_bread_board_stand.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/pca9685_stopper_l.stl<br />
+<img alt="alt text" src="../images/esp32_print_pca9685_stopper_l.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/pca9685_stopper_r_bottom.stl<br />
+<img alt="alt text" src="../images/esp32_print_pca9685_stopper_r_bottom.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/pca9685_stopper_r_top.stl<br />
+<img alt="alt text" src="../images/esp32_print_pca9685_stopper_r_top.png" /></li>
+</ul>
+<br />
+<ul>
+<li>【オプション】smabo-hardware/stl/base/in_base_plate_wire_hole.stl<br />
+<img alt="alt text" src="../images/esp32_print_in_base_plate_wire_hole.png" /><ul>
+<li>本パーツは、「smabo内の仕切り」として使用できます。<br />
+<img alt="alt text" src="../images/esp32_in_base_plate_partition.png" /></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="ブレッドボードについて">ブレッドボードについて<a class="headerlink" href="#ブレッドボードについて" title="Permanent link">#</a></h2>
+<p>SAD101は購入時の状態では、＋極の真ん中にジャンプワイヤーが挿さっています。</p>
+<p>smaboでは、</p>
+<ul>
+<li>+極の「<strong>右側</strong>」を6V電源（乾電池×4）用</li>
+<li>+極の「<strong>左側</strong>」を5V電源（ESP32からの出力）用</li>
+</ul>
+<p>として使用します。</p>
+<p><img alt="alt text" src="../images/esp32_breadboard_power_rails.png" /></p>
+<br />
+<p>そのため、真ん中のジャンプワイヤーは外してください。</p>
+<p><img alt="alt text" src="../images/esp32_breadboard_remove_jumper.png" /></p>
+<blockquote>
+<p><strong>ブレッドボードの中身について</strong></p>
+<p>ブレッドボードの裏面を見てみると、金属の棒が固定してあることがわかります。</p>
+<p><img src="../images/esp32_breadboard_back.png" width="300" /></p>
+<p>そのため、「同じ棒と繋がっている穴」に、複数のジャンプワイヤーを刺した場合、それらは回路的に繋がることになります。</p>
+<p><img alt="alt text" src="../images/esp32_breadboard_connection.png" /></p>
+<p>特に、SAD101の場合</p>
+<ul>
+<li>+極のみ真ん中で途切れていて左右に分かれている</li>
+</ul>
+<p>ため、ジャンプワイヤーは、「+極を1直線に繋ぐために付いていた」ということになります。
+※ 今回は、先述の通り左右で違う電源を使用するため、外しています</p>
+</blockquote>
+
+<h2 id="組み立て手順">組み立て手順<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h2>
+<p>以下動画のように、必要パーツを組み立てます。</p>
+<p>※ 動画には、前回までに印刷したパーツも含まれます</p>
+<p>
+  <iframe src="../assembly_movie/base_bread_board.html" title="smabo-esp32 組み立て手順"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>組み立ての際のポイント</strong></p>
+<p>各パーツを使って、ブレッドボード、PCA9685、ミニブレッドボードを取り付けてください。</p>
+<p>なお、特に以下の点には注意してください。</p>
+<ul>
+<li>ESP32はブレッドボードの左端に差し込んでください</li>
+<li>ミニブレッドボードは、後ろの粘着テープを使って貼り付けてください</li>
+<li>バッテリーボックスはsmaboの中に配置し、ジャンプワイヤーのみを外側に出して、ブレッドボードに挿す形にしてください<ul>
+<li>配線位置については、「配線」の章にて説明します</li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../images/esp32_assembly_points.png" /></p>
+</blockquote>
+
+<h3 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h3>
+<blockquote style="border-left-color:#e03131; background:rgba(224,49,49,.07);">
+<p><strong>ブレッドボードの+極について</strong></p>
+<p>SAD101購入時についていた、<strong style="color:#e03131;">+極のジャンプワイヤーは必ず外してください</strong>。
+ついたままだと、<strong style="color:#e03131;">ESP32, アクチュエータが破損する</strong>可能性があります。</p>
+<p><img alt="alt text" src="../images/esp32_breadboard_remove_jumper.png" /></p>
+</blockquote>
+<p>今回は、アクチュエータなどは動かさないため、以降の準備として「乾電池バッテリーの配線」のみを行います。</p>
+<p>※ 下記表において、「接続先1」と「接続先2」は、両者が回路的に直接繋がっていることを指します。</p>
+<table>
+<thead>
+<tr>
+<th>接続先1</th>
+<th>接続先2</th>
+<th>補足</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>乾電池バッテリーボックスの+極</td>
+<td>ブレッドボードの+極の<strong style="color:#e03131;">右側</strong></td>
+<td>以降、右側を6V電圧として扱うため注意</td>
+</tr>
+<tr>
+<td>乾電池バッテリーボックスの-極</td>
+<td>ブレッドボードの-極</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ESP32の5V電源</td>
+<td>ブレッドボードの+極の<strong style="color:#e03131;">左側</strong></td>
+<td>以降、左側を5V電圧として扱うため注意</td>
+</tr>
+<tr>
+<td>ESP32のGND</td>
+<td>ブレッドボードの-極</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>先述したように、+極は右側と左側で扱う電圧が異なるため</p>
+<ul>
+<li>今後の配線で、<strong style="color:#e03131;">+極の片方に6V, 5V電源を混在させると、ESP32やアクチュエータが破損する原因になる</strong></li>
+</ul>
+<p>ため、配線の際は十分に注意してください。</p>
+<br />
+<p>ESP32-DevKitCの場合の、具体的な配線図は、以下になります。</p>
+<p><img alt="" src="../fritzing/svg/esp32_battery_box.svg" /></p>
+
+<h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
+<p>以下手順で、動作の確認を行います。</p>
+
+<h3 id="smabo-brainの起動">smabo-brainの起動<a class="headerlink" href="#smabo-brainの起動" title="Permanent link">#</a></h3>
+<p>最初に、PC/SBCからsmabo-brainを起動します。</p>
+<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
+<pre><code class="language-bash">python3 -m brain</code></pre>
+
+<h3 id="smabo-webの起動">smabo-webの起動<a class="headerlink" href="#smabo-webの起動" title="Permanent link">#</a></h3>
+<p>次に、PCからsmabo-webを起動します。</p>
+<pre><code class="language-bash">cd ~/smabo-web</code></pre>
+<pre><code class="language-bash">npm run dev</code></pre>
+<p>この状態で、ブラウザから<code>http://localhost:5173</code>にアクセスしてください。</p>
+
+<h3 id="smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続<a class="headerlink" href="#smabo-brain---smabo-webの接続" title="Permanent link">#</a></h3>
+<p>smabo-brainとsmabo-webの接続を行います。</p>
+<p>smabo-webの「Connect」ボタンをクリックします。</p>
+<p><img alt="alt text" src="../images/web_connect_button.png" /></p>
+<br />
+<p>右下に「Brain connected」と表示されればOKです。</p>
+<p><img alt="alt text" src="../images/web_brain_connected.png" /></p>
+
+<h3 id="smabo-brain---esp32の接続">smabo-brain &lt;-&gt; esp32の接続<a class="headerlink" href="#smabo-brain---esp32の接続" title="Permanent link">#</a></h3>
+<p>smabo-brain &lt;-&gt; esp32間は、esp32の電源を入れた際に、<code>config.json</code>に設定された「IP(<code>brain/host</code>) / PORT(<code>brain/port</code>)」に自動接続されます。</p>
+<p>通信接続されているかは、smabo-webの「Config」タブから確認できます。</p>
+<p>「WS (brain &lt;-&gt; ESP32)」の右側にある「Ping」ボタンをクリックし、OKと表示されれば良いです。</p>
+<p><img alt="alt text" src="../images/esp32_web_ws_ping.png" /></p>
+<blockquote>
+<p><strong>接続できなかった場合</strong></p>
+<p>上記手順で通信の疎通が失敗した場合は、<code>config.json</code>のWiFiの設定を書き込みし、esp32に再書き込みしてください。</p>
+</blockquote>
+
+<h3 id="smabo-web---esp32の接続">smabo-web &lt;-&gt; esp32の接続<a class="headerlink" href="#smabo-web---esp32の接続" title="Permanent link">#</a></h3>
+<p>smabo-web &lt;-&gt; esp32の通信は、「Config」タブから確認できます。</p>
+<p>最初に、ESP32とPCをUSB接続した状態で、Thonnyのシェルタブから「ESP32の接続IP」を確認します。</p>
+<p><img alt="alt text" src="../images/esp32_thonny_ip.png" /></p>
+<br />
+<p>次に、smabo-webの「Get Config」の左側のテキストボックスに、確認した「ESP32の接続IP」を入力します。</p>
+<p>最後に、「Config」タブの「REST(web &lt;-&gt; ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。</p>
+<p><img alt="alt text" src="../images/esp32_web_rest_ping.png" /></p>
+
+<h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
+<p>次回は、以下ロードマップの</p>
+<ul>
+<li><a href="hand.html">ハンド</a></li>
+<li><a href="neck.html">首振り</a></li>
+<li><a href="mobile.html">移動ロボット</a></li>
+<li><a href="arm.html">ロボットアーム</a></li>
+<li><a href="smabo-brain-ros.html">smabo-brain-ros</a></li>
+</ul>
+<p>について解説します。</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../architecture/" data-active="hand,neck,mobile,arm,brainros"
+       aria-label="smabo 製作ガイドのロードマップ図（次回：ハンド・首振り・移動ロボット・ロボットアーム・smabo-brain-ros を交互にハイライト）"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">概要</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+    <div class="rmap-tooltip__actions">
+      <a class="rmap-tooltip__link" href="">ガイドを読む</a>
+      <a class="rmap-tooltip__link rmap-tooltip__link--design" href="" hidden>設計書を読む</a>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/docs.js"></script>
+  <script src="../js/roadmap.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
   - [smabo-brain \<-\> smabo-webの接続](#smabo-brain---smabo-webの接続)
   - [smabo-appの接続](#smabo-appの接続)
   - [smaboの顔の設定](#smaboの顔の設定)
-  - [smaboの目の種類を変更する。](#smaboの目の種類を変更する)
+  - [smaboの目を変更する](#smaboの目を変更する)
   - [各種センサーの状態を可視化](#各種センサーの状態を可視化)
   - [音声認識](#音声認識)
   - [smaboに発話させる](#smaboに発話させる)
@@ -187,7 +187,7 @@ smaboの顔は、「Face Settings」から設定を変更できます。
 
 ![alt text](../images/app_face_settings.png)
 
-## smaboの目の種類を変更する。
+## smaboの目を変更する
 
 smabo-webの「Face」タブの「Expression」に「Expression ID（smabo-app内のFace settingsで設定した表情のID）」を変更し、「Set」をクリックすると、smaboの目の種類が変化します。
 
