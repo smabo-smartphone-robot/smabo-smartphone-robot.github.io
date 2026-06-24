@@ -20,7 +20,7 @@
       tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
     { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 810, y: 510, w: 140, h: 70, phase: "brain",
       tip: "（仮）カメラ映像をリアルタイムに解析・物体認識できます。" },
-    { id: "esp32",     icon: "🔌", label: "smabo-esp32",   x: 600, y: 600, w: 140, h: 70, phase: "esp32",
+    { id: "esp32",     file: "smabo-esp32", icon: "🔌", label: "smabo-esp32",   x: 600, y: 600, w: 140, h: 70, phase: "esp32",
       tip: "（仮）ロボットの基本的な通信・制御ができるようになります。" },
     { id: "hand",      icon: "🤏", label: "ハンド",                  x: 355, y: 740, w: 140, h: 70, phase: "esp32",
       tip: "（仮）スマホアプリからグリッパーを開閉操作できます。" },
