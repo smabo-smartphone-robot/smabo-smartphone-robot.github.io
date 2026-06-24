@@ -57,11 +57,8 @@
 </li>
 <li><a href="#パーツの印刷">パーツの印刷</a></li>
 <li><a href="#ブレッドボードについて">ブレッドボードについて</a></li>
-<li><a href="#組み立て手順">組み立て手順</a>
-<ul>
-<li class="toc-h3"><a href="#配線">配線</a></li>
-</ul>
-</li>
+<li><a href="#組み立て手順">組み立て手順</a></li>
+<li><a href="#配線">配線</a></li>
 <li><a href="#動作手順">動作手順</a>
 <ul>
 <li class="toc-h3"><a href="#smabo-brainの起動">smabo-brainの起動</a></li>
@@ -121,7 +118,7 @@
 <tr>
 <td>ブレッドボード（SAD101）<br /></td>
 <td><a href="https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1">link</a></td>
-<td>一般的なブレッドボードは5穴がです、こちらは6穴になっています。<br />6穴でないとESP32のサイズ的に横幅が足りないので注意してください</td>
+<td>一般的なブレッドボードは5穴ですが、こちらは6穴になっています。<br />6穴でないとESP32のサイズ的に横幅が足りないので注意してください</td>
 </tr>
 <tr>
 <td>ジャンプワイヤー</td>
@@ -186,8 +183,13 @@
 <p>configディレクトリからお手持ちのesp32の種類にあったjsonファイルを選択し、「config.json」という名前でコピーを作成します。</p>
 <p><img alt="alt text" src="../images/esp32_config_copy.png" /></p>
 <br />
-<p>wifiの欄に「smabo-brainが接続しているwifiのSSID、パスワード」を記載します。
-また、IPの欄に「smabo-brainのIPアドレス」を記載します。</p>
+<p>以下項目を、環境に応じて記載してください。</p>
+<ul>
+<li><code>wifi/ssid</code>：接続ネットワークのSSID</li>
+<li><code>wifi/password</code>：接続ネットワークのpassword</li>
+<li><code>brain/host</code>：smabo-brainのIPアドレス</li>
+<li><code>brain/port</code>：smabo-brainのweb socketポート</li>
+</ul>
 <blockquote>
 <p><strong>接続先WiFiの周波数について</strong></p>
 <p>WiFiの周波数には2.4GHzと、5GHzの2種類がありますが、</p>
@@ -305,8 +307,8 @@
 <p>なお、特に以下の点には注意してください。</p>
 <ul>
 <li>ESP32はブレッドボードの左端に差し込んでください</li>
-<li>ミニブレッドボードは、後ろの粘着テープを使って貼り付けてください</li>
-<li>バッテリーボックスはsmaboの中に配置し、ジャンプワイヤーのみを外側に出して、ブレッドボードに挿す形にしてください<ul>
+<li>ミニブレッドボードは、背面の粘着テープを使って貼り付けてください</li>
+<li>バッテリーボックスはsmaboの中に配置し、ジャンプワイヤーのみを外側に出して、ブレッドボードに挿す形で配線してください<ul>
 <li>配線位置については、「配線」の章にて説明します</li>
 </ul>
 </li>
@@ -314,7 +316,7 @@
 <p><img alt="alt text" src="../images/esp32_assembly_points.png" /></p>
 </blockquote>
 
-<h3 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h3>
+<h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>
 <blockquote style="border-left-color:#e03131; background:rgba(224,49,49,.07);">
 <p><strong>ブレッドボードの+極について</strong></p>
 <p>SAD101購入時についていた、<strong style="color:#e03131;">+極のジャンプワイヤーは必ず外してください</strong>。
@@ -361,7 +363,7 @@
 <p>ため、配線の際は十分に注意してください。</p>
 <br />
 <p>ESP32-DevKitCの場合の、具体的な配線図は、以下になります。</p>
-<p><img alt="" src="../fritzing/svg/esp32_battery_box.svg" /></p>
+<p><img alt="" src="../fritzing/png/esp32_battery_box.png" /></p>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
 <p>以下手順で、動作の確認を行います。</p>
@@ -392,7 +394,7 @@
 <p><img alt="alt text" src="../images/esp32_web_ws_ping.png" /></p>
 <blockquote>
 <p><strong>接続できなかった場合</strong></p>
-<p>上記手順で通信の疎通が失敗した場合は、<code>config.json</code>のWiFiの設定を書き込みし、esp32に再書き込みしてください。</p>
+<p>上記手順で通信の疎通が失敗した場合は、<code>config.json</code>のWiFiの設定を確認してください。もし、間違っている箇所があった場合、修正した後esp32に再書き込みしてください。</p>
 </blockquote>
 
 <h3 id="smabo-web---esp32の接続">smabo-web &lt;-&gt; esp32の接続<a class="headerlink" href="#smabo-web---esp32の接続" title="Permanent link">#</a></h3>
