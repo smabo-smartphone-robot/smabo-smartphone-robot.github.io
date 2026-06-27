@@ -309,7 +309,11 @@ ESP32-DevKitCの場合の、具体的な配線図は、以下になります。
 
 ## 起動手順
 
-最初に、「[起動手順](./startup.md)」の
+<!--
+htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画するため、html 側は通常のリンク（<a href="startup.html">起動手順</a>）のままでよい（JS 無効時は通常のページ遷移）。
+-->
+
+「[起動手順](./startup.md)」の
 
 - smabo-brainの起動
 - smabo-webの起動
@@ -318,6 +322,10 @@ ESP32-DevKitCの場合の、具体的な配線図は、以下になります。
 - smabo-web <-> esp32の接続
 
 を実行してください。
+
+<br>
+
+各種プログラムの起動、通信が確認できればOKです。
 
 
 # 次回
