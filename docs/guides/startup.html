@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>起動手順 — smabo ガイド</title>
+  <meta name="description" content="smabo 製作ガイド：各コンポーネント（smabo-brain / smabo-web / smabo-app / esp32）の起動・接続手順をまとめた共通ページ。" />
+  <link rel="icon" type="image/png" href="../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/docs.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <button class="nav__toggle" aria-label="メニューを開閉" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links">
+        <a href="../index.html#ロードマップ">ロードマップ</a>
+        <a href="../components.html">コンポーネント詳細</a>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🚀 起動手順</h1>
+      <p>各コンポーネント（smabo-brain / smabo-web / smabo-app / esp32）の起動・接続手順をまとめた共通ページです。各ガイドの「動作手順」から参照されます。</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#smabo-brainの起動">smabo-brainの起動</a></li>
+<li><a href="#smabo-webの起動">smabo-webの起動</a></li>
+<li><a href="#smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続</a></li>
+<li><a href="#smabo-appの接続">smabo-appの接続</a></li>
+<li><a href="#smabo-brain---esp32の接続">smabo-brain &lt;-&gt; esp32の接続</a></li>
+<li><a href="#smabo-web---esp32の接続">smabo-web &lt;-&gt; esp32の接続</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<h2 id="はじめに">はじめに<a class="headerlink" href="#はじめに" title="Permanent link">#</a></h2>
+<p>本ページは、smabo の各コンポーネントの起動・接続手順をまとめた共通ページです。各ガイドの「動作手順」から参照されます。実施するのは、各ガイドの「動作手順」で指定された項目だけで構いません。</p>
+
+<h2 id="smabo-brainの起動">smabo-brainの起動<a class="headerlink" href="#smabo-brainの起動" title="Permanent link">#</a></h2>
+<p>最初に、PC/SBCからsmabo-brainを起動します。</p>
+<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
+<pre><code class="language-bash">python3 -m brain</code></pre>
+
+<h2 id="smabo-webの起動">smabo-webの起動<a class="headerlink" href="#smabo-webの起動" title="Permanent link">#</a></h2>
+<p>次に、PCからsmabo-webを起動します。</p>
+<pre><code class="language-bash">cd ~/smabo-web</code></pre>
+<pre><code class="language-bash">npm run dev</code></pre>
+<p>この状態で、ブラウザから<code>http://localhost:5173</code>にアクセスしてください。</p>
+
+<h2 id="smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続<a class="headerlink" href="#smabo-brain---smabo-webの接続" title="Permanent link">#</a></h2>
+<p>smabo-brainとsmabo-webの接続を行います。</p>
+<p>smabo-webの「Connect」ボタンをクリックします。</p>
+<p><img alt="alt text" src="../images/web_connect_button.png" /></p>
+<br />
+<p>右下に「Brain connected」と表示されればOKです。</p>
+<p><img alt="alt text" src="../images/web_brain_connected.png" /></p>
+
+<h2 id="smabo-appの接続">smabo-appの接続<a class="headerlink" href="#smabo-appの接続" title="Permanent link">#</a></h2>
+<blockquote>
+<p>以降で載せているスマホ画面のスクリーンショットはシミュレータを使用していますが、実際は物理的なスマホ内の画面になります。</p>
+</blockquote>
+<p>smabo-appを起動し、画面をダブルタップすると表示される「歯車マーク」をタップし、設定画面を開きます。<br />
+<img alt="alt text" src="../images/app_settings_open.png" /></p>
+<br />
+<p>IPの欄に「smabo-brainを起動しているPC/SBCのIPアドレス」を入力し、「Save &amp; Reconnect」をタップします。</p>
+<p><img alt="alt text" src="../images/app_settings_ip.png" /></p>
+<p>しばらくして「Brain connected」と表示されればOKです。</p>
+<p><img alt="alt text" src="../images/app_brain_connected.png" /></p>
+
+<h2 id="smabo-brain---esp32の接続">smabo-brain &lt;-&gt; esp32の接続<a class="headerlink" href="#smabo-brain---esp32の接続" title="Permanent link">#</a></h2>
+<p>smabo-brain &lt;-&gt; esp32間は、esp32の電源を入れた際に、<code>config.json</code>に設定された「IP(<code>brain/host</code>) / PORT(<code>brain/port</code>)」に自動接続されます。</p>
+<p>通信接続されているかは、smabo-webの「Config」タブから確認できます。</p>
+<p>「WS (brain &lt;-&gt; ESP32)」の右側にある「Ping」ボタンをクリックし、OKと表示されれば良いです。</p>
+<p><img alt="alt text" src="../images/esp32_web_ws_ping.png" /></p>
+<blockquote>
+<p><strong>接続できなかった場合</strong></p>
+<p>上記手順で通信の疎通が失敗した場合は、<code>config.json</code>のWiFiの設定を確認してください。もし、間違っている箇所があった場合、修正した後esp32に再書き込みしてください。</p>
+</blockquote>
+
+<h2 id="smabo-web---esp32の接続">smabo-web &lt;-&gt; esp32の接続<a class="headerlink" href="#smabo-web---esp32の接続" title="Permanent link">#</a></h2>
+<p>smabo-web &lt;-&gt; esp32の通信は、「Config」タブから確認できます。</p>
+<p>最初に、ESP32とPCをUSB接続した状態で、Thonnyのシェルタブから「ESP32の接続IP」を確認します。</p>
+<p><img alt="alt text" src="../images/esp32_thonny_ip.png" /></p>
+<p>次に、smabo-webの「Get Config」の左側のテキストボックスに、確認した「ESP32の接続IP」を入力します。</p>
+<p>最後に、「Config」タブの「REST(web &lt;-&gt; ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。</p>
+<p><img alt="alt text" src="../images/esp32_web_rest_ping.png" /></p>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/docs.js"></script>
+</body>
+</html>

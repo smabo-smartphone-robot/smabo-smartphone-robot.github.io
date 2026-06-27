@@ -44,9 +44,9 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 # 画像処理とは
 
-smaboでは、スマホアプリがカメラ映像を`/camera/image/compressed`としてsmabo-brainへ送信します。
+smaboでは、スマホアプリがカメラ映像をWebRTCでsmabo-brainへ送信します。
 
-smabo-brainはこの映像を受け取り、
+smabo-brainはこの映像からフレームを取り出して受け取り、
 - 顔・物体の検出
 - 検出結果をもとにした視線追従（`/look_at`）
 
@@ -59,7 +59,7 @@ smabo-brainはこの映像を受け取り、
 
 以下手順で、動作の確認を行います。
 
-スマホアプリでカメラ送信を有効にし、smabo-webの「Sensors」タブにカメラ映像が表示されればOKです。
+スマホアプリでカメラ送信を有効にし、smabo-webの「Sensors」タブ（または「Vision」タブ）で「▶ プレビュー」をONにして、カメラ映像が表示されればOKです。
 
 
 # 次回

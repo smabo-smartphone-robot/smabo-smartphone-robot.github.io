@@ -17,9 +17,6 @@
   - [smabo-webのクローン](#smabo-webのクローン)
   - [パッケージのインストール](#パッケージのインストール)
 - [動作手順](#動作手順)
-  - [smabo-brainの起動](#smabo-brainの起動)
-  - [smabo-webの起動](#smabo-webの起動)
-  - [smabo-brain \<-\> smabo-webの接続](#smabo-brain---smabo-webの接続)
 - [次回](#次回)
 
 # ロードマップ
@@ -87,48 +84,13 @@ npm install
 
 # 動作手順
 
-以下手順で、動作の確認を行います。
+最初に、「[起動手順](./startup.md)」の
 
+- smabo-brainの起動
+- smabo-webの起動
+- smabo-brain <-> smabo-webの接続
 
-## smabo-brainの起動
-
-最初に、smabo-brainを起動します。
-
-```bash
-cd ~/smabo-brain
-```
-
-```bash
-python3 -m brain
-```
-
-## smabo-webの起動
-
-次に、別ターミナルで、smabo-webを起動します。
-
-```bash
-cd ~/smabo-web
-```
-```bash
-npm run dev
-```
-
-<br>
-
-この状態で、ブラウザから`http://localhost:5173`にアクセスしてください。
-
-
-## smabo-brain <-> smabo-webの接続
-
-最後に、smabo-brainとsmabo-webの接続テストを行います。
-
-smabo-webの「接続」ボタンをクリックします。
-![alt text](../images/web_connect_button.png)
-
-<br>
-右下に「Brain 接続完了」と表示されればOKです。
-
-![alt text](../images/web_brain_connected.png)
+を実行してください。
 
 
 # 次回

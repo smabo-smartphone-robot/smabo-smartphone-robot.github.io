@@ -17,10 +17,6 @@
 - [smabo-appとは](#smabo-appとは)
   - [smabo-appのインストール](#smabo-appのインストール)
 - [動作手順](#動作手順)
-  - [smabo-brainの起動](#smabo-brainの起動)
-  - [smabo-webの起動](#smabo-webの起動)
-  - [smabo-brain \<-\> smabo-webの接続](#smabo-brain---smabo-webの接続)
-  - [smabo-appの接続](#smabo-appの接続)
   - [smaboの顔の設定](#smaboの顔の設定)
   - [smaboの目を変更する](#smaboの目を変更する)
   - [各種センサーの状態を可視化](#各種センサーの状態を可視化)
@@ -105,75 +101,14 @@ smabo-appはsmaboの中で
 
 # 動作手順
 
-以下手順で、動作の確認を行います。
+最初に、「[起動手順](./startup.md)」の
 
-## smabo-brainの起動
+- smabo-brainの起動
+- smabo-webの起動
+- smabo-brain <-> smabo-webの接続
+- smabo-appの接続
 
-最初に、PC/SBCからsmabo-brainを起動します。
-
-```bash
-cd ~/smabo-brain
-```
-
-```bash
-python3 -m brain
-```
-
-## smabo-webの起動
-
-次に、PCからsmabo-webを起動します。
-
-```bash
-cd ~/smabo-web
-```
-```bash
-npm run dev
-```
-
-<br>
-
-この状態で、ブラウザから`http://localhost:5173`にアクセスしてください。
-
-
-## smabo-brain <-> smabo-webの接続
-
-smabo-brainとsmabo-webの接続を行います。
-
-smabo-webの「Connect」ボタンをクリックします。
-
-
-![alt text](../images/web_connect_button.png)
-
-<br>
-右下に「Brain connected」と表示されればOKです。
-
-
-![alt text](../images/web_brain_connected.png)
-
-
-## smabo-appの接続
-
-!!! note
-    以降で載せているスマホ画面のスクリーンショットはシミュレータを使用していますが、実際は物理的なスマホ内の画面になります。
-
-
-    
-
-smabo-appを起動し、画面をダブルタップすると表示される「歯車マーク」をタップし、設定画面を開きます。
-![alt text](../images/app_settings_open.png)
-
-<br>
-
-IPの欄に「smabo-brainを起動しているPC/SBCのIPアドレス」を入力し、「Save & Reconnect」をタップします。
-
-![alt text](../images/app_settings_ip.png)
-
-<br>
-
-
-しばらくして「Brain connected」と表示されればOKです。
-
-![alt text](../images/app_brain_connected.png)
+を実行してください。
 
 ## smaboの顔の設定
 

@@ -24,11 +24,6 @@
 - [組み立て手順](#組み立て手順)
 - [配線](#配線)
 - [動作手順](#動作手順)
-  - [smabo-brainの起動](#smabo-brainの起動)
-  - [smabo-webの起動](#smabo-webの起動)
-  - [smabo-brain \<-\> smabo-webの接続](#smabo-brain---smabo-webの接続)
-  - [smabo-brain \<-\> esp32の接続](#smabo-brain---esp32の接続)
-  - [smabo-web \<-\> esp32の接続](#smabo-web---esp32の接続)
 - [次回](#次回)
 
 # ロードマップ
@@ -311,83 +306,15 @@ ESP32-DevKitCの場合の、具体的な配線図は、以下になります。
 
 # 動作手順
 
-以下手順で、動作の確認を行います。
+最初に、「[起動手順](./startup.md)」の
 
-## smabo-brainの起動
+- smabo-brainの起動
+- smabo-webの起動
+- smabo-brain <-> smabo-webの接続
+- smabo-brain <-> esp32の接続
+- smabo-web <-> esp32の接続
 
-最初に、PC/SBCからsmabo-brainを起動します。
-
-```bash
-cd ~/smabo-brain
-```
-
-```bash
-python3 -m brain
-```
-
-## smabo-webの起動
-
-次に、PCからsmabo-webを起動します。
-
-```bash
-cd ~/smabo-web
-```
-```bash
-npm run dev
-```
-
-<br>
-
-この状態で、ブラウザから`http://localhost:5173`にアクセスしてください。
-
-
-## smabo-brain <-> smabo-webの接続
-
-smabo-brainとsmabo-webの接続を行います。
-
-smabo-webの「Connect」ボタンをクリックします。
-
-
-![alt text](../images/web_connect_button.png)
-
-<br>
-右下に「Brain connected」と表示されればOKです。
-
-
-![alt text](../images/web_brain_connected.png)
-
-## smabo-brain <-> esp32の接続
-
-smabo-brain <-> esp32間は、esp32の電源を入れた際に、`config.json`に設定された「IP(`brain/host`) / PORT(`brain/port`)」に自動接続されます。
-
-<br>
-
-通信接続されているかは、smabo-webの「Config」タブから確認できます。
-
-「WS (brain <-> ESP32)」の右側にある「Ping」ボタンをクリックし、OKと表示されれば良いです。
-
-![alt text](../images/esp32_web_ws_ping.png)
-
-!!! note 接続できなかった場合
-    上記手順で通信の疎通が失敗した場合は、`config.json`のWiFiの設定を確認してください。もし、間違っている箇所があった場合、修正した後esp32に再書き込みしてください。
-
-## smabo-web <-> esp32の接続
-
-smabo-web <-> esp32の通信は、「Config」タブから確認できます。
-
-<br>
-
-最初に、ESP32とPCをUSB接続した状態で、Thonnyのシェルタブから「ESP32の接続IP」を確認します。
-
-![alt text](../images/esp32_thonny_ip.png)
-
-<br>
-
-次に、smabo-webの「Get Config」の左側のテキストボックスに、確認した「ESP32の接続IP」を入力します。
-
-最後に、「Config」タブの「REST(web <-> ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。
-
-![alt text](../images/esp32_web_rest_ping.png)
+を実行してください。
 
 
 # 次回

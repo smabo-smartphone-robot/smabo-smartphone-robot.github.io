@@ -10,11 +10,14 @@
     import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')
       .then(({ default: mermaid }) => {
         mermaid.initialize({
-          startOnLoad: true,
+          startOnLoad: false,
           theme: 'neutral',
           securityLevel: 'loose',
           fontFamily: 'inherit',
         });
+        // Mermaid is imported lazily (after the load event), so `startOnLoad`
+        // would never fire — render the .mermaid blocks explicitly instead.
+        return mermaid.run();
       })
       .catch((e) => console.error('Mermaid failed to load:', e));
   }

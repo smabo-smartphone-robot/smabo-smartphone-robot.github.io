@@ -10,7 +10,7 @@
   // design: true  → show 設計書 button linking to DESIGN_DIR + id + ".html"
   // ext: true → 別リポジトリの外部ツール（必須）。色を分けて区別する。
   var NODES = [
-    { id: "baseparts", file: "base", icon: "🧩", label: "ベースパーツの印刷",        x: 600, y: 0,    w: 140, h: 70, phase: "app",
+    { id: "baseparts", file: "base", icon: "🧩", label: "ベースパーツの作成",        x: 600, y: 0,    w: 140, h: 70, phase: "app",
       tip: "smaboのベースとなるパーツの印刷、組み立て手順を解説します。" },
     { id: "brain",     file: "smabo-brain", icon: "🧠", label: "smabo-brain",   x: 600, y: 130, w: 140, h: 70, phase: "brain",
       tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
@@ -18,7 +18,13 @@
       tip: "（仮）設定変更・手動制御・センサ可視化を行うブラウザUI。手動制御などに必要な外部ツールです。" },
     { id: "app",       file: "smabo-app", icon: "📱", label: "smabo-app", x: 600, y: 380, w: 140, h: 70, phase: "brain",
       tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
-    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 810, y: 510, w: 140, h: 70, phase: "brain",
+    { id: "face",      file: "smabo-app", icon: "😊", label: "smaboの顔",   x: 260, y: 510, w: 140, h: 70, phase: "brain",
+      tip: "（仮）スマホ画面に表情豊かな目を表示し、視線追従や瞬きをします。" },
+    { id: "sensors",   file: "smabo-app", icon: "📲", label: "スマホセンサ", x: 470, y: 510, w: 140, h: 70, phase: "brain",
+      tip: "（仮）スマホのIMU・GPS・カメラをロボットのセンサとして使えます。" },
+    { id: "voice",     file: "smabo-app", icon: "🎤", label: "音声処理",     x: 730, y: 510, w: 140, h: 70, phase: "brain",
+      tip: "（仮）ウェイクワードで録音し、smabo-brain が音声認識します。" },
+    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 940, y: 510, w: 140, h: 70, phase: "brain",
       tip: "（仮）カメラ映像をリアルタイムに解析・物体認識できます。" },
     { id: "esp32",     file: "smabo-esp32", icon: "🔌", label: "smabo-esp32",   x: 600, y: 600, w: 140, h: 70, phase: "esp32",
       tip: "（仮）ロボットの基本的な通信・制御ができるようになります。" },
@@ -42,14 +48,18 @@
 
   // node centers (cx = x + w/2):
   //   baseparts/app/brain/web/esp32 = 670
-  //   imgproc = 880, hand = 425, neck = 605, mobile/encmobile = 765, arm = 915, brainros = 1065
+  //   smabo-app の子機能を横一列に: face = 330, sensors = 540, voice = 800, imgproc = 1010
+  //   hand = 425, neck = 605, mobile/encmobile = 765, arm = 915, brainros = 1065
   //   nav = 765, plan = 915
 
   var EDGES = [
     { from: "baseparts", to: "brain",     d: "M 670 70 L 670 128" },
     { from: "brain",     to: "web",       d: "M 670 200 L 670 248" },
     { from: "web",       to: "app",       d: "M 670 320 L 670 378" },
-    { from: "app",       to: "imgproc",   d: "M 670 450 L 670 468 Q 670 478 680 478 L 870 478 Q 880 478 880 508" },
+    { from: "app",       to: "face",      d: "M 670 450 L 670 468 Q 670 478 660 478 L 340 478 Q 330 478 330 488 L 330 508" },
+    { from: "app",       to: "sensors",   d: "M 670 450 L 670 468 Q 670 478 660 478 L 550 478 Q 540 478 540 488 L 540 508" },
+    { from: "app",       to: "voice",     d: "M 670 450 L 670 468 Q 670 478 680 478 L 790 478 Q 800 478 800 488 L 800 508" },
+    { from: "app",       to: "imgproc",   d: "M 670 450 L 670 468 Q 670 478 680 478 L 1000 478 Q 1010 478 1010 488 L 1010 508" },
     { from: "app",       to: "esp32",     d: "M 670 450 L 670 598" },
     { from: "esp32",     to: "hand",      d: "M 670 670 L 670 696 Q 670 706 660 706 L 435 706 Q 425 706 425 716 L 425 738" },
     { from: "esp32",     to: "neck",      d: "M 670 670 L 670 696 Q 670 706 660 706 L 615 706 Q 605 706 605 716 L 605 738" },

@@ -51,10 +51,6 @@
 </li>
 <li><a href="#動作手順">動作手順</a>
 <ul>
-<li class="toc-h3"><a href="#smabo-brainの起動">smabo-brainの起動</a></li>
-<li class="toc-h3"><a href="#smabo-webの起動">smabo-webの起動</a></li>
-<li class="toc-h3"><a href="#smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続</a></li>
-<li class="toc-h3"><a href="#smabo-appの接続">smabo-appの接続</a></li>
 <li class="toc-h3"><a href="#smaboの顔の設定">smaboの顔の設定</a></li>
 <li class="toc-h3"><a href="#smaboの目を変更する">smaboの目を変更する</a></li>
 <li class="toc-h3"><a href="#各種センサーの状態を可視化">各種センサーの状態を可視化</a></li>
@@ -72,8 +68,8 @@
 <p>また、本ページは「<a href="smabo-web.html">smabo-web</a>」のガイドを実施している前提で話を進めます。</p>
 <div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
   <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
-       data-guide-dir="" data-design-dir="../architecture/" data-active="app"
-       aria-label="smabo 製作ガイドのロードマップ図（smabo-app をハイライト）"></svg>
+       data-guide-dir="" data-design-dir="../architecture/" data-active="app,face,sensors,voice"
+       aria-label="smabo 製作ガイドのロードマップ図（smabo-app と顔・スマホセンサ・音声処理をハイライト）"></svg>
 </div>
 
 <h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
@@ -131,38 +127,14 @@
 <p>ダウンロードしたapkファイルを実行するとsmabo-appがインストールされます。</p>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
-<p>以下手順で、動作の確認を行います。</p>
-
-<h3 id="smabo-brainの起動">smabo-brainの起動<a class="headerlink" href="#smabo-brainの起動" title="Permanent link">#</a></h3>
-<p>最初に、PC/SBCからsmabo-brainを起動します。</p>
-<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
-<pre><code class="language-bash">python3 -m brain</code></pre>
-
-<h3 id="smabo-webの起動">smabo-webの起動<a class="headerlink" href="#smabo-webの起動" title="Permanent link">#</a></h3>
-<p>次に、PCからsmabo-webを起動します。</p>
-<pre><code class="language-bash">cd ~/smabo-web</code></pre>
-<pre><code class="language-bash">npm run dev</code></pre>
-<p>この状態で、ブラウザから<code>http://localhost:5173</code>にアクセスしてください。</p>
-
-<h3 id="smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続<a class="headerlink" href="#smabo-brain---smabo-webの接続" title="Permanent link">#</a></h3>
-<p>smabo-brainとsmabo-webの接続を行います。</p>
-<p>smabo-webの「Connect」ボタンをクリックします。</p>
-<p><img alt="alt text" src="../images/web_connect_button.png" /></p>
-<br />
-<p>右下に「Brain connected」と表示されればOKです。</p>
-<p><img alt="alt text" src="../images/web_brain_connected.png" /></p>
-
-<h3 id="smabo-appの接続">smabo-appの接続<a class="headerlink" href="#smabo-appの接続" title="Permanent link">#</a></h3>
-<blockquote>
-<p>以降で載せているスマホ画面のスクリーンショットはシミュレータを使用していますが、実際は物理的なスマホ内の画面になります。</p>
-</blockquote>
-<p>smabo-appを起動し、画面をダブルタップすると表示される「歯車マーク」をタップし、設定画面を開きます。<br />
-<img alt="alt text" src="../images/app_settings_open.png" /></p>
-<br />
-<p>IPの欄に「smabo-brainを起動しているPC/SBCのIPアドレス」を入力し、「Save &amp; Reconnect」をタップします。</p>
-<p><img alt="alt text" src="../images/app_settings_ip.png" /></p>
-<p>しばらくして「Brain connected」と表示されればOKです。</p>
-<p><img alt="alt text" src="../images/app_brain_connected.png" /></p>
+<p>最初に、「<a href="startup.html">起動手順</a>」の</p>
+<ul>
+<li>smabo-brainの起動</li>
+<li>smabo-webの起動</li>
+<li>smabo-brain &lt;-&gt; smabo-webの接続</li>
+<li>smabo-appの接続</li>
+</ul>
+<p>を実行してください。</p>
 
 <h3 id="smaboの顔の設定">smaboの顔の設定<a class="headerlink" href="#smaboの顔の設定" title="Permanent link">#</a></h3>
 <p>smaboの顔は、「Face Settings」から設定を変更できます。</p>

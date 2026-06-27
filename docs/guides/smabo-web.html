@@ -49,13 +49,7 @@
 <li class="toc-h3"><a href="#パッケージのインストール">パッケージのインストール</a></li>
 </ul>
 </li>
-<li><a href="#動作手順">動作手順</a>
-<ul>
-<li class="toc-h3"><a href="#smabo-brainの起動">smabo-brainの起動</a></li>
-<li class="toc-h3"><a href="#smabo-webの起動">smabo-webの起動</a></li>
-<li class="toc-h3"><a href="#smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続</a></li>
-</ul>
-</li>
+<li><a href="#動作手順">動作手順</a></li>
 <li><a href="#次回">次回</a></li>
 </ul></nav>
         <article class="doc-content">
@@ -97,25 +91,13 @@ git clone https://github.com/smabo-smartphone-robot/smabo-web</code></pre>
 <pre><code class="language-bash">npm install</code></pre>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
-<p>以下手順で、動作の確認を行います。</p>
-
-<h3 id="smabo-brainの起動">smabo-brainの起動<a class="headerlink" href="#smabo-brainの起動" title="Permanent link">#</a></h3>
-<p>最初に、smabo-brainを起動します。</p>
-<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
-<pre><code class="language-bash">python3 -m brain</code></pre>
-
-<h3 id="smabo-webの起動">smabo-webの起動<a class="headerlink" href="#smabo-webの起動" title="Permanent link">#</a></h3>
-<p>次に、別ターミナルで、smabo-webを起動します。</p>
-<pre><code class="language-bash">cd ~/smabo-web</code></pre>
-<pre><code class="language-bash">npm run dev</code></pre>
-<p>この状態で、ブラウザから<code>http://localhost:5173</code>にアクセスしてください。</p>
-
-<h3 id="smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続<a class="headerlink" href="#smabo-brain---smabo-webの接続" title="Permanent link">#</a></h3>
-<p>最後に、smabo-brainとsmabo-webの接続テストを行います。</p>
-<p>smabo-webの「接続」ボタンをクリックします。<br />
-<img alt="alt text" src="../images/web_connect_button.png" /></p>
-<p>右下に「Brain 接続完了」と表示されればOKです。</p>
-<p><img alt="alt text" src="../images/web_brain_connected.png" /></p>
+<p>最初に、「<a href="startup.html">起動手順</a>」の</p>
+<ul>
+<li>smabo-brainの起動</li>
+<li>smabo-webの起動</li>
+<li>smabo-brain &lt;-&gt; smabo-webの接続</li>
+</ul>
+<p>を実行してください。</p>
 
 <h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
 <p>次回は、以下ロードマップの</p>
