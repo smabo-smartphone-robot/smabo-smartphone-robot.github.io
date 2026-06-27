@@ -61,19 +61,16 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 ## 起動手順
 
+<!--htmlに変換する際は、startup.md の中で、「smabo-brainの起動」「smabo-webの起動」「smabo-brain <-> smabo-webの接続」「smabo-appの接続」のみをフィルタしたものを表示すること-->
+
 <!--
-起動・接続手順は共通ページ「startup.md（startup.html）」に集約しているため、各ページでは直書きせず、ここで該当する項目だけを箇条書きで参照すること（ページにより項目を増減する）。
-htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画するため、html 側は通常のリンク（<a href="startup.html">起動手順</a>）のままでよい（JS 無効時は通常のページ遷移）。
+htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画する。
+ポップアップでは、リンクの data-steps 属性（startup.html の各 h2 の id をカンマ区切りで列挙）に挙げた手順だけを表示する。表示対象（data-steps）はこのページでは以下:
+<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">こちらの起動手順</a>
+（JS 無効時は data-steps が無視され、通常のページ遷移になる）
 -->
 
-最初に、「[起動手順](./startup.md)」の
-
-- smabo-brainの起動
-- smabo-webの起動
-- smabo-brain <-> smabo-webの接続
-- smabo-appの接続
-
-を実行してください。
+「[こちらの起動手順](./startup.md)」の内容を実行してください。
 
 
 ## smaboの顔のカスタマイズ
@@ -112,7 +109,7 @@ smaboの目はデフォルトでは、ランダムに動きますが、モード
 
 次回は、以下ロードマップの
 
-- メインパーツの作成
+- [ベースパーツの作成](./base.md)
 
 について解説します。
 

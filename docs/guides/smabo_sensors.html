@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>画像処理 — smabo ガイド</title>
-  <meta name="description" content="smabo 製作ガイド：画像処理。スマホカメラ映像の画像認識（ARマーカー・色・顔・QR）と、認識結果をもとにした目・サーボ・走行の制御。" />
+  <title>スマホのセンサー — smabo ガイド</title>
+  <meta name="description" content="smabo 製作ガイド：スマホのセンサー。スマホのマイク・カメラ・IMU・GPS を smabo のセンサーとして smabo-web で可視化します。" />
   <link rel="icon" type="image/png" href="../images/smabo_icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,8 +32,8 @@
   <section class="doc-hero">
     <div class="container">
       <span class="eyebrow">Guide</span>
-      <h1>👁️ 画像処理</h1>
-      <p>スマホのカメラ映像を smabo-brain で画像認識（ARマーカー・色・顔・QR）し、認識結果をもとに smabo の目やサーボ、走行を制御します。</p>
+      <h1>📲 スマホのセンサー</h1>
+      <p>スマホのマイク・カメラ・IMU・GPS を smabo のセンサーとして smabo-web で可視化します。</p>
     </div>
   </section>
 
@@ -43,11 +43,11 @@
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
 <li><a href="#できること">できること</a></li>
+<li><a href="#必要パーツ">必要パーツ</a></li>
 <li><a href="#動作手順">動作手順</a>
 <ul>
 <li class="toc-h3"><a href="#起動手順">起動手順</a></li>
-<li class="toc-h3"><a href="#画像認識">画像認識</a></li>
-<li class="toc-h3"><a href="#物体認識をもとに制御">物体認識をもとに制御</a></li>
+<li class="toc-h3"><a href="#各種センサーの状態を可視化">各種センサーの状態を可視化</a></li>
 </ul>
 </li>
 <li><a href="#次回">次回</a></li>
@@ -55,88 +55,56 @@
         <article class="doc-content">
 
 <h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
-<p>本ページは、以下ロードマップ「画像処理」のガイドページです。</p>
-<p>また、本ページは「<a href="smabo-brain.html">smabo-brain</a>」と「<a href="smabo-app.html">smabo-app</a>」のガイドを実施している前提で話を進めます。</p>
+<p>本ページは、以下ロードマップ「スマホのセンサー」のガイドページです。</p>
+<p>また、本ページは「smabo-app」のガイドを実施している前提で話を進めます。</p>
 <div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
   <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
-       data-guide-dir="" data-design-dir="../architecture/" data-active="imgproc"
-       aria-label="smabo 製作ガイドのロードマップ図（画像処理 をハイライト）"></svg>
+       data-guide-dir="" data-design-dir="../architecture/" data-active="sensors"
+       aria-label="smabo 製作ガイドのロードマップ図（スマホのセンサー をハイライト）"></svg>
 </div>
 
 <h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
-<p>本ページでは「画像処理」機能の実装について解説します。</p>
+<p>本ページでは「スマホのセンサー」機能の使い方について解説します。</p>
 <br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
-<li>画像処理<ul>
-<li>ARマーカー認識</li>
-<li>顔認識</li>
-<li>色認識</li>
-<li>QRコード認識</li>
+<li>スマホの各種センサーの可視化<ul>
+<li>マイク、カメラ、IMU、GPS</li>
 </ul>
 </li>
-<li>画像処理結果をもとに制御</li>
 </ul>
+
+<h2 id="必要パーツ">必要パーツ<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
+<p>本機能の実装に必要なパーツを以下に記載します。</p>
+<table>
+<thead>
+<tr>
+<th>部品名</th>
+<th>商品URL</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>スマートフォン</td>
+<td>-</td>
+<td>smabo-appをインストール済みのスマホ</td>
+</tr>
+</tbody>
+</table>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
 <h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
 <p>「<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">こちらの起動手順</a>」の内容を実行してください。</p>
 
-<h3 id="画像認識">画像認識<a class="headerlink" href="#画像認識" title="Permanent link">#</a></h3>
-<p>smabo-webの「Vision」タブにて画像認識に関する設定が可能で、「Detection」の「enabled」を有効化することで、画像認識機能を有効化できます。</p>
-<p><img alt="alt text" src="../images/web_vision_detection.png" /></p>
+<h3 id="各種センサーの状態を可視化">各種センサーの状態を可視化<a class="headerlink" href="#各種センサーの状態を可視化" title="Permanent link">#</a></h3>
+<p>smaboの各種センサのON/OFFは左下のボタンで設定できます。</p>
+<p><img alt="alt text" src="../images/app_sensor_toggle.png" /></p>
 <br />
-<p>画像認識はいくつかの種類が用意してあり、「Mode」を変更することで、以下の物体を認識可能です。</p>
-<ul>
-<li>ARマーカー</li>
-<li>指定した色の物体</li>
-<li>顔認識</li>
-<li>QRコード</li>
-</ul>
-<p><img alt="alt text" src="../images/web_vision_mode.png" /></p>
+<p>センサをONにした状態で、smabo-webで「Sensors」タブを確認すると、各種センサの情報を可視化できます。</p>
+<p><img alt="alt text" src="../images/app_sensor_web.png" /></p>
 <br />
-<p>なお、Min sizeを設定することで</p>
-<ul>
-<li>画像内で認識対象とする物体の最小サイズ（このサイズ以上の物体は認識対象とする）</li>
-</ul>
-<p>を設定可能です（プレビューを有効化すると、右下に最小サイズの枠が表示されます）。</p>
-<p><img alt="alt text" src="../images/web_vision_min_size.png" /></p>
-
-<h3 id="物体認識をもとに制御">物体認識をもとに制御<a class="headerlink" href="#物体認識をもとに制御" title="Permanent link">#</a></h3>
-<p>「BEHAVIORS」にて、認識結果をもとにした制御も可能です。</p>
-<p>具体的には、</p>
-<ul>
-<li>認識した中で、「一番大きい物体」の座標や画像サイズをもとに制御</li>
-</ul>
-<p>します。</p>
-<p><img alt="alt text" src="../images/web_vision_behaviors.png" /></p>
-<br />
-<p>制御の種類としては、以下になります。</p>
-<ul>
-<li>目の制御<ul>
-<li>認識した物体を追従するようにsmaboの目が動作</li>
-</ul>
-</li>
-<li>サーボの制御<ul>
-<li>認識した物体に追従するようにサーボが動作</li>
-<li>左右方向、上下方向それぞれにサーボを設定可能</li>
-<li>詳細は「<a href="neck.html">顔振り</a>」にて解説</li>
-</ul>
-</li>
-<li>二輪駆動ロボットの制御<ul>
-<li>認識した物体を追従するようにロボットを制御</li>
-<li>物体のサイズが、target sizeに設定されたサイズを維持するように、ロボットが前進、後退</li>
-<li>詳細は、「<a href="mobile.html">移動ロボット</a>」にて解説</li>
-</ul>
-</li>
-</ul>
-<br />
-<p>例えば、「目の制御」の場合、</p>
-<ul>
-<li>smabo-appの顔のモードを「Follow」にした状態</li>
-</ul>
-<p>で、認識対象の物体をカメラの前に持ってくると、smaboの目が追従することが確認できます。</p>
-<p><img alt="" src="../images/app_eye_follow_mode.png" /></p>
+<p>センサーは画像処理、音声認識などロボットの様々な制御に使用され、今後のページでも登場します。</p>
 
 <h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
 <p>次回は、以下ロードマップの</p>
