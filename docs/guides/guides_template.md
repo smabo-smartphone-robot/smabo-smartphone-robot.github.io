@@ -123,16 +123,17 @@ ESP32-DevKitCの場合の、具体的な配線図は、以下になります。
 
 ## 起動手順
 
+<!--htmlに変換する際は、startup.md の中で、「ooo」「XXX」のみをフィルタしたものを表示すること-->
+
 <!--
-起動・接続手順は共通ページ「startup.md（startup.html）」に集約しているため、各ページでは直書きせず、ここで該当する項目だけを箇条書きで参照すること（ページにより項目を増減する）。
-htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画するため、html 側は通常のリンク（<a href="startup.html">起動手順</a>）のままでよい（JS 無効時は通常のページ遷移）。
+起動・接続手順は共通ページ「startup.md（startup.html）」に集約しているため、各ページでは直書きせず、必要な手順は html 側のリンクの data-steps 属性で指定する（ページにより項目を増減する）。
+htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画する。
+ポップアップでは、リンクの data-steps 属性（startup.html の各 h2 の id をカンマ区切りで列挙）に挙げた手順だけを表示する。表示対象（data-steps）はこのコメントに記載し、html 側のリンクに同じ値を付与すること。例:
+<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動">こちらの起動手順</a>
+（JS 無効時は data-steps が無視され、通常のページ遷移になる）
 -->
 
-最初に、「[起動手順](./startup.md)」の
-
-- oooo
-
-を実行してください。
+「[こちらの起動手順](./startup.md)」の内容を実行してください。
 
 
 

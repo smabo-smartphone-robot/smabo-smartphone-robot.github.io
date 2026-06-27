@@ -66,7 +66,19 @@
   }
   function onKey(e) { if (e.key === 'Escape') close(); }
 
-  async function open(href) {
+  // Keep only the sections (h2 + following content) whose id is listed in
+  // `steps` (comma-separated). Lets each page show just the relevant procedure.
+  function filterSteps(content, steps) {
+    const keep = new Set(steps.split(',').map((s) => s.trim()).filter(Boolean));
+    if (keep.size === 0) return;
+    let keeping = false;
+    for (const el of Array.from(content.children)) {
+      if (el.tagName === 'H2') keeping = keep.has(el.id);
+      if (!keeping) el.remove();
+    }
+  }
+
+  async function open(href, steps) {
     if (overlay) return;
     overlay = document.createElement('div');
     overlay.className = 'startup-modal';
@@ -88,6 +100,7 @@
       const content = doc.querySelector('.doc-content');
       if (!content) throw new Error('no content');
       content.querySelectorAll('.headerlink').forEach((a) => a.remove());
+      if (steps) filterSteps(content, steps);
       body.innerHTML = '';
       body.appendChild(content);
     } catch (err) {
@@ -101,7 +114,8 @@
       // Let modifier / non-left clicks open the page normally (new tab etc.).
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
       e.preventDefault();
-      open(a.getAttribute('href'));
+      // data-steps (comma-separated section ids) → show only those steps.
+      open(a.getAttribute('href'), a.getAttribute('data-steps'));
     });
   }
 })();

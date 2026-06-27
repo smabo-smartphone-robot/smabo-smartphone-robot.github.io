@@ -13,18 +13,17 @@
 
 - [ロードマップ](#ロードマップ)
 - [できること](#できること)
-- [smabo-webとは](#smabo-webとは)
-  - [smabo-webのクローン](#smabo-webのクローン)
-  - [パッケージのインストール](#パッケージのインストール)
+- [必要パーツ](#必要パーツ)
 - [動作手順](#動作手順)
   - [起動手順](#起動手順)
+  - [各種センサーの状態を可視化](#各種センサーの状態を可視化)
 - [次回](#次回)
 
 # ロードマップ
 
-本ページは、以下ロードマップ「smabo-web」のガイドページです。
+本ページは、以下ロードマップ「スマホのセンサー」のガイドページです。
 
-また、本ページは「[smabo-brain](./smabo-brain.md)」のガイドを実施している前提で話を進めます。
+また、本ページは「smabo-app」のガイドを実施している前提で話を進めます。
 
 <!--
 htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.htmlに記載してあるロードマップを添付すること。ただし、本ページのノードをハイライトした状態にすること。また、roadmap.htmlに記載のロードマップの0.5倍のサイズとすること。
@@ -37,76 +36,65 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 # できること
 
-本ページでは「smabo-web」のセットアップ手順について解説します。
+本ページでは「スマホのセンサー」機能の使い方について解説します。
 
 <br>
 
 具体的には、以下の内容を実施します。
 
-- smabo-webのセットアップ
+- スマホの各種センサーの可視化
+  - マイク、カメラ、IMU、GPS
 
-# smabo-webとは
+# 必要パーツ
 
-smabo-webはsmaboの中で
+本機能の実装に必要なパーツを以下に記載します。
 
-- smaboの設定の変更、手動操作、センサの可視化などの補助的ツール
-
-の役割を担います。
-
-![](../images/smabo_sysytem_architecture.drawio.svg)
-
-
-## smabo-webのクローン
-
-以下コマンドでsmabo-webリポジトリをクローンします。
-
-```bash
-# ホームディレクトリへ移動
-cd ~ 
-```
-
-```bash
-# smabo-brainリポジトリのクローン
-git clone https://github.com/smabo-smartphone-robot/smabo-web
-```
-
-## パッケージのインストール
-
-各種プログラムの実行に必要なパッケージをインストールします。
-
-```bash
-cd ~/smabo-web
-```
-
-```bash
-npm install
-```
+| 部品名 | 商品URL | 備考 |
+| --- | --- | --- |
+| スマートフォン | - | smabo-appをインストール済みのスマホ |
 
 
 # 動作手順
 
 ## 起動手順
 
-<!--htmlに変換する際は、startup.md の中で、「smabo-brainの起動」「smabo-webの起動」「smabo-brain <-> smabo-webの接続」のみをフィルタしたものを表示すること-->
-
 <!--
-htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画する。
-ポップアップでは、リンクの data-steps 属性（startup.html の各 h2 の id をカンマ区切りで列挙）に挙げた手順だけを表示する。表示対象（data-steps）はこのページでは以下:
-<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続">こちらの起動手順</a>
-（JS 無効時は data-steps が無視され、通常のページ遷移になる）
+起動・接続手順は共通ページ「startup.md（startup.html）」に集約しているため、各ページでは直書きせず、ここで該当する項目だけを箇条書きで参照すること（ページにより項目を増減する）。
+htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画するため、html 側は通常のリンク（<a href="startup.html">起動手順</a>）のままでよい（JS 無効時は通常のページ遷移）。
 -->
 
-「[こちらの起動手順](./startup.md)」の内容を実行してください。
+最初に、「[起動手順](./startup.md)」の
+
+- smabo-brainの起動
+- smabo-webの起動
+- smabo-brain <-> smabo-webの接続
+- smabo-appの接続
+
+を実行してください。
+
+
+## 各種センサーの状態を可視化
+
+smaboの各種センサのON/OFFは左下のボタンで設定できます。
+
+![alt text](../images/app_sensor_toggle.png)
 
 <br>
 
-各種プログラムの起動、通信が確認できればOKです。
+センサをONにした状態で、smabo-webで「Sensors」タブを確認すると、各種センサの情報を可視化できます。
+
+![alt text](../images/app_sensor_web.png)
+
+<br>
+
+センサーは画像処理、音声認識などロボットの様々な制御に使用され、今後のページでも登場します。
+
 
 # 次回
 
 次回は、以下ロードマップの
 
-- [smabo-app](./smabo-app.md)
+- メインパーツの作成
 
 について解説します。
 

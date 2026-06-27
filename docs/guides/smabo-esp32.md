@@ -309,19 +309,16 @@ ESP32-DevKitCの場合の、具体的な配線図は、以下になります。
 
 ## 起動手順
 
+<!--htmlに変換する際は、startup.md の中で、「smabo-brainの起動」「smabo-webの起動」「smabo-brain <-> smabo-webの接続」「smabo-brain <-> esp32の接続」「smabo-web <-> esp32の接続」のみをフィルタしたものを表示すること-->
+
 <!--
-htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画するため、html 側は通常のリンク（<a href="startup.html">起動手順</a>）のままでよい（JS 無効時は通常のページ遷移）。
+htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画する。
+ポップアップでは、リンクの data-steps 属性（startup.html の各 h2 の id をカンマ区切りで列挙）に挙げた手順だけを表示する。表示対象（data-steps）はこのページでは以下:
+<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">こちらの起動手順</a>
+（JS 無効時は data-steps が無視され、通常のページ遷移になる）
 -->
 
-「[起動手順](./startup.md)」の
-
-- smabo-brainの起動
-- smabo-webの起動
-- smabo-brain <-> smabo-webの接続
-- smabo-brain <-> esp32の接続
-- smabo-web <-> esp32の接続
-
-を実行してください。
+「[こちらの起動手順](./startup.md)」の内容を実行してください。
 
 <br>
 

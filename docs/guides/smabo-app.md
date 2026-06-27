@@ -18,12 +18,6 @@
   - [smabo-appのインストール](#smabo-appのインストール)
 - [動作手順](#動作手順)
   - [起動手順](#起動手順)
-  - [smaboの顔の設定](#smaboの顔の設定)
-  - [smaboの目を変更する](#smaboの目を変更する)
-  - [各種センサーの状態を可視化](#各種センサーの状態を可視化)
-  - [音声認識](#音声認識)
-  - [smaboに発話させる](#smaboに発話させる)
-  - [smaboの目を動かす](#smaboの目を動かす)
 - [次回](#次回)
 
 # ロードマップ
@@ -104,103 +98,30 @@ smabo-appはsmaboの中で
 
 ## 起動手順
 
+<!--htmlに変換する際は、startup.md の中で、「smabo-brainの起動」「smabo-webの起動」「smabo-brain <-> smabo-webの接続」「smabo-appの接続」のみをフィルタしたものを表示すること-->
+
 <!--
-htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画するため、html 側は通常のリンク（<a href="startup.html">起動手順</a>）のままでよい（JS 無効時は通常のページ遷移）。
+htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画する。
+ポップアップでは、リンクの data-steps 属性（startup.html の各 h2 の id をカンマ区切りで列挙）に挙げた手順だけを表示する。表示対象（data-steps）はこのページでは以下:
+<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">こちらの起動手順</a>
+（JS 無効時は data-steps が無視され、通常のページ遷移になる）
 -->
 
-「[起動手順](./startup.md)」の
-
-- smabo-brainの起動
-- smabo-webの起動
-- smabo-brain <-> smabo-webの接続
-- smabo-appの接続
-
-を実行してください。
+「[こちらの起動手順](./startup.md)」の内容を実行してください。
 
 
 <br>
 
 各種プログラムの起動、通信が確認できればOKです。
 
-## smaboの顔の設定
-
-smaboの顔は、「Face Settings」から設定を変更できます。
-
-![alt text](../images/app_face_settings_button.png)
-
-<br>
-
-設定では「目の大きさ」「目の種類」「背景色の変更」などができます。
-
-![alt text](../images/app_face_settings.png)
-
-## smaboの目を変更する
-
-smabo-webの「Face」タブの「Expression」に「Expression ID（smabo-app内のFace settingsで設定した表情のID）」を変更し、「Set」をクリックすると、smaboの目の種類が変化します。
-
-![alt text](../images/app_expression_set.png)
-
-## 各種センサーの状態を可視化
-
-smaboの各種センサのON/OFFは左下のボタンで設定できます。
-
-![alt text](../images/app_sensor_toggle.png)
-
-<br>
-
-センサをONにした状態で、smabo-webで「Sensors」タブを確認すると、各種センサの情報を可視化できます。
-
-![alt text](../images/app_sensor_web.png)
-
-## 音声認識
-
-smaboに対して「smabo」と話しかけると、smaboの目が虹色に光ります。
-
-目が虹色の状態で何か言葉を話すと、音声認識が開始されます（認識する言語は、smabo-appの設定画面から変更できます）。
-
-![alt text](../images/app_voice_listening.png)
-
-
-<br>
-
-
-
-目の色が戻った後に、smabo-webの「Face」タブの「Recognized speech」を確認すると、先ほど話した言葉が表示されます。
-
-
-![alt text](../images/app_recognized_speech.png)
-
-
-## smaboに発話させる
-
-smabo-webの「Face」タブの「SPEECH / SAY」で、任意の文章を入力し、「SAY」ボタンをクリックすると入力された音声がスマホから発話されます（発話する言語は、smabo-appの設定画面から変更できます）。
-
-
-![alt text](../images/app_speech_say.png)
-
-<br>
-
-
-なお、「Bubble ON」「Speak ON」ボタンにて発話のON/OFF、吹き出しの有無を設定可能です。
-
-![alt text](../images/app_speech_toggle.png)
-
-## smaboの目を動かす
-
-smaboの目はデフォルトでは、ランダムに動きますが、モードを「Follow」に変更すると、外部からの通信により自由に動かすことができます。
-
-![alt text](../images/app_eye_follow_mode.png)
-
-<br>
-
-smabo-webの「Face」タブの「Gaze control」でコントローラを操作すると、それに合わせて目が動くことが確認できます。
-
-![alt text](../images/app_gaze_control.png)
 
 # 次回
 
 次回は、以下ロードマップの
 
+- [smaboの顔](./smabo_face.md)
+- [スマホのセンサー](./smabo_sensors.md)
+- [音声処理](./audioproc.md)
 - [画像処理](./imgproc.md)
 - [ベースパーツの作成](./base.md)
 
