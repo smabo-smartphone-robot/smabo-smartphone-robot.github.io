@@ -61,7 +61,11 @@
 <li class="toc-h3"><a href="#パッケージのインストール">パッケージのインストール</a></li>
 </ul>
 </li>
-<li><a href="#動作手順">動作手順</a></li>
+<li><a href="#動作手順">動作手順</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">起動手順</a></li>
+</ul>
+</li>
 <li><a href="#sbcラズパイ4-or-5の場合">SBC=ラズパイ（4 or 5）の場合</a>
 <ul>
 <li class="toc-h3"><a href="#パーツの印刷">パーツの印刷</a></li>
@@ -74,7 +78,6 @@
 
 <h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
 <p>本ページは、以下ロードマップ「smabo-brain」のガイドページです。</p>
-<p>また、本ページは「<a href="base.html">ベースパーツの作成</a>」のガイドを実施している前提で話を進めます。</p>
 <div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
   <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
        data-guide-dir="" data-design-dir="../architecture/" data-active="brain"
@@ -212,11 +215,14 @@ git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
 <pre><code class="language-bash">pip3 install -r requirements.txt</code></pre>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
-<p>以下手順で、動作の確認を行います。</p>
-<p>smabo-brainを起動します。</p>
-<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
-<pre><code class="language-bash">python3 -m brain</code></pre>
-<p>上記コマンド実行後、エラーが発生せずに、起動が完了すればOKです。</p>
+<h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
+<p>最初に、「<a href="startup.html">起動手順</a>」の</p>
+<ul>
+<li>smabo-brainの起動</li>
+</ul>
+<p>を実行してください。</p>
+<br />
+<p>エラーが発生せずに、起動が完了すればOKです。</p>
 <p>ここまでで、「SBC、PCで共通の設定」は完了です。
 また、PCにセットアップした方は本ページの実施内容は以上になります。</p>
 <p>以降は、「SBCをsmabo本体に取り付ける」手順について解説します。</p>

@@ -156,3 +156,39 @@
   .doc-wrap { grid-template-columns: 1fr; padding-block: 36px; }
   .doc-toc { display: none; }
 }
+
+/* startup-procedure popup (docs.js) */
+.startup-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, .5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6vh 16px;
+  overflow-y: auto;
+}
+.startup-modal__dialog {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+  padding: 28px 28px 32px;
+}
+.startup-modal__close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+  color: #666;
+}
+.startup-modal__close:hover { color: #000; }
+.startup-modal__body { margin-top: 6px; }
+.startup-modal__loading { color: #888; }

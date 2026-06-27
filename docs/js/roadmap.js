@@ -10,74 +10,74 @@
   // design: true  → show 設計書 button linking to DESIGN_DIR + id + ".html"
   // ext: true → 別リポジトリの外部ツール（必須）。色を分けて区別する。
   var NODES = [
-    { id: "baseparts", file: "base", icon: "🧩", label: "ベースパーツの作成",        x: 600, y: 0,    w: 140, h: 70, phase: "app",
-      tip: "smaboのベースとなるパーツの印刷、組み立て手順を解説します。" },
-    { id: "brain",     file: "smabo-brain", icon: "🧠", label: "smabo-brain",   x: 600, y: 130, w: 140, h: 70, phase: "brain",
+    { id: "brain",     file: "smabo-brain", icon: "🧠", label: "smabo-brain",   x: 600, y: 0,    w: 140, h: 70, phase: "brain",
       tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
-    { id: "web",       file: "smabo-web", icon: "🖥️", label: "smabo-web",     x: 600, y: 250, w: 140, h: 70, phase: "brain", ext: true,
+    { id: "web",       file: "smabo-web", icon: "🖥️", label: "smabo-web",     x: 600, y: 130, w: 140, h: 70, phase: "brain", ext: true,
       tip: "（仮）設定変更・手動制御・センサ可視化を行うブラウザUI。手動制御などに必要な外部ツールです。" },
-    { id: "app",       file: "smabo-app", icon: "📱", label: "smabo-app", x: 600, y: 380, w: 140, h: 70, phase: "brain",
+    { id: "app",       file: "smabo-app", icon: "📱", label: "smabo-app", x: 600, y: 260, w: 140, h: 70, phase: "brain",
       tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
-    { id: "face",      file: "smabo-app", icon: "😊", label: "smaboの顔",   x: 260, y: 510, w: 140, h: 70, phase: "brain",
+    { id: "face",      file: "smabo-app", icon: "😊", label: "smaboの顔",   x: 260, y: 390, w: 140, h: 70, phase: "brain",
       tip: "（仮）スマホ画面に表情豊かな目を表示し、視線追従や瞬きをします。" },
-    { id: "sensors",   file: "smabo-app", icon: "📲", label: "スマホセンサ", x: 470, y: 510, w: 140, h: 70, phase: "brain",
+    { id: "sensors",   file: "smabo-app", icon: "📲", label: "スマホセンサ", x: 470, y: 390, w: 140, h: 70, phase: "brain",
       tip: "（仮）スマホのIMU・GPS・カメラをロボットのセンサとして使えます。" },
-    { id: "voice",     file: "smabo-app", icon: "🎤", label: "音声処理",     x: 730, y: 510, w: 140, h: 70, phase: "brain",
+    { id: "voice",     file: "smabo-app", icon: "🎤", label: "音声処理",     x: 730, y: 390, w: 140, h: 70, phase: "brain",
       tip: "（仮）ウェイクワードで録音し、smabo-brain が音声認識します。" },
-    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 940, y: 510, w: 140, h: 70, phase: "brain",
+    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 940, y: 390, w: 140, h: 70, phase: "brain",
       tip: "（仮）カメラ映像をリアルタイムに解析・物体認識できます。" },
-    { id: "esp32",     file: "smabo-esp32", icon: "🔌", label: "smabo-esp32",   x: 600, y: 600, w: 140, h: 70, phase: "esp32",
+    { id: "baseparts", file: "base", icon: "🧩", label: "ベースパーツの作成",        x: 600, y: 520, w: 140, h: 70, phase: "esp32",
+      tip: "smaboのベースとなるパーツの印刷、組み立て手順を解説します。" },
+    { id: "esp32",     file: "smabo-esp32", icon: "🔌", label: "smabo-esp32",   x: 600, y: 650, w: 140, h: 70, phase: "esp32",
       tip: "（仮）ロボットの基本的な通信・制御ができるようになります。" },
-    { id: "hand",      icon: "🤏", label: "ハンド",                  x: 355, y: 740, w: 140, h: 70, phase: "esp32",
+    { id: "hand",      icon: "🤏", label: "ハンド",                  x: 355, y: 790, w: 140, h: 70, phase: "esp32",
       tip: "（仮）スマホアプリからグリッパーを開閉操作できます。" },
-    { id: "neck",      icon: "🔄", label: "首振り",                  x: 535, y: 740, w: 140, h: 70, phase: "esp32",
+    { id: "neck",      icon: "🔄", label: "首振り",                  x: 535, y: 790, w: 140, h: 70, phase: "esp32",
       tip: "（仮）スマホのカメラをパン（左右）方向に向けられます。" },
-    { id: "mobile",    icon: "🚗", label: "移動ロボット",             x: 695, y: 740, w: 140, h: 70, phase: "esp32",
+    { id: "mobile",    icon: "🚗", label: "移動ロボット",             x: 695, y: 790, w: 140, h: 70, phase: "esp32",
       tip: "（仮）スマホアプリでロボットを前後左右に走行させられます。" },
-    { id: "arm",       icon: "🦾", label: "ロボットアーム",           x: 845, y: 740, w: 140, h: 70, phase: "esp32",
+    { id: "arm",       icon: "🦾", label: "ロボットアーム",           x: 845, y: 790, w: 140, h: 70, phase: "esp32",
       tip: "（仮）スマホアプリでアームを手動操作できます。" },
-    { id: "encmobile", icon: "⚙️", label: "エンコーダ付",  x: 695, y: 870, w: 140, h: 70, phase: "esp32",
+    { id: "encmobile", icon: "⚙️", label: "エンコーダ付",  x: 695, y: 920, w: 140, h: 70, phase: "esp32",
       tip: "（仮）エンコーダにより精度の高い直進・旋回ができます。" },
-    { id: "brainros",  icon: "🤖", label: "brain-ros", x: 995, y: 740, w: 140, h: 70, phase: "brainros",
+    { id: "brainros",  icon: "🤖", label: "brain-ros", x: 995, y: 790, w: 140, h: 70, phase: "brainros",
       tip: "（仮）ROSを使ってセンサーとアクチュエータを統合制御できます。" },
-    { id: "nav",       icon: "🗺️", label: "ナビゲーション",           x: 695, y: 1000, w: 140, h: 70, phase: "brainros",
+    { id: "nav",       icon: "🗺️", label: "ナビゲーション",           x: 695, y: 1050, w: 140, h: 70, phase: "brainros",
       tip: "（仮）地図を生成して自律的に目的地へ移動できます。" },
-    { id: "plan",      icon: "📐", label: "動作計画",                x: 845, y: 1000, w: 140, h: 70, phase: "brainros",
+    { id: "plan",      icon: "📐", label: "動作計画",                x: 845, y: 1050, w: 140, h: 70, phase: "brainros",
       tip: "（仮）障害物を回避しながらアームや機体を自律動作させられます。" }
   ];
 
   // node centers (cx = x + w/2):
-  //   baseparts/app/brain/web/esp32 = 670
+  //   brain/web/app/baseparts/esp32 = 670（中央列）
   //   smabo-app の子機能を横一列に: face = 330, sensors = 540, voice = 800, imgproc = 1010
+  //   baseparts は app の子（中央, esp32 の親）→ app → baseparts → esp32
   //   hand = 425, neck = 605, mobile/encmobile = 765, arm = 915, brainros = 1065
   //   nav = 765, plan = 915
 
   var EDGES = [
-    { from: "baseparts", to: "brain",     d: "M 670 70 L 670 128" },
-    { from: "brain",     to: "web",       d: "M 670 200 L 670 248" },
-    { from: "web",       to: "app",       d: "M 670 320 L 670 378" },
-    { from: "app",       to: "face",      d: "M 670 450 L 670 468 Q 670 478 660 478 L 340 478 Q 330 478 330 488 L 330 508" },
-    { from: "app",       to: "sensors",   d: "M 670 450 L 670 468 Q 670 478 660 478 L 550 478 Q 540 478 540 488 L 540 508" },
-    { from: "app",       to: "voice",     d: "M 670 450 L 670 468 Q 670 478 680 478 L 790 478 Q 800 478 800 488 L 800 508" },
-    { from: "app",       to: "imgproc",   d: "M 670 450 L 670 468 Q 670 478 680 478 L 1000 478 Q 1010 478 1010 488 L 1010 508" },
-    { from: "app",       to: "esp32",     d: "M 670 450 L 670 598" },
-    { from: "esp32",     to: "hand",      d: "M 670 670 L 670 696 Q 670 706 660 706 L 435 706 Q 425 706 425 716 L 425 738" },
-    { from: "esp32",     to: "neck",      d: "M 670 670 L 670 696 Q 670 706 660 706 L 615 706 Q 605 706 605 716 L 605 738" },
-    { from: "esp32",     to: "mobile",    d: "M 670 670 L 670 696 Q 670 706 680 706 L 755 706 Q 765 706 765 716 L 765 738" },
-    { from: "esp32",     to: "arm",       d: "M 670 670 L 670 696 Q 670 706 680 706 L 905 706 Q 915 706 915 716 L 915 738" },
-    { from: "mobile",    to: "encmobile", d: "M 765 810 L 765 868" },
-    { from: "esp32",     to: "brainros",  d: "M 670 670 L 670 696 Q 670 706 680 706 L 1055 706 Q 1065 706 1065 716 L 1065 738" },
-    { from: "encmobile", to: "nav",       d: "M 765 940 L 765 998" },
-    { from: "arm",       to: "plan",      d: "M 915 810 L 915 998" },
-    { from: "brainros",  to: "nav",       d: "M 1065 810 L 1065 958 Q 1065 968 1055 968 L 925 968 M 905 968 L 775 968 Q 765 968 765 978 L 765 998", jumps: [{x: 915, y: 968}] },
-    { from: "brainros",  to: "plan",      d: "M 1065 810 L 1065 858 Q 1065 868 1055 868 L 925 868 Q 915 868 915 878 L 915 998" }
+    { from: "brain",     to: "web",       d: "M 670 70 L 670 128" },
+    { from: "web",       to: "app",       d: "M 670 200 L 670 258" },
+    { from: "app",       to: "face",      d: "M 670 330 L 670 348 Q 670 358 660 358 L 340 358 Q 330 358 330 368 L 330 388" },
+    { from: "app",       to: "sensors",   d: "M 670 330 L 670 348 Q 670 358 660 358 L 550 358 Q 540 358 540 368 L 540 388" },
+    { from: "app",       to: "voice",     d: "M 670 330 L 670 348 Q 670 358 680 358 L 790 358 Q 800 358 800 368 L 800 388" },
+    { from: "app",       to: "imgproc",   d: "M 670 330 L 670 348 Q 670 358 680 358 L 1000 358 Q 1010 358 1010 368 L 1010 388" },
+    { from: "app",       to: "baseparts", d: "M 670 330 L 670 518" },
+    { from: "baseparts", to: "esp32",     d: "M 670 590 L 670 648" },
+    { from: "esp32",     to: "hand",      d: "M 670 720 L 670 746 Q 670 756 660 756 L 435 756 Q 425 756 425 766 L 425 788" },
+    { from: "esp32",     to: "neck",      d: "M 670 720 L 670 746 Q 670 756 660 756 L 615 756 Q 605 756 605 766 L 605 788" },
+    { from: "esp32",     to: "mobile",    d: "M 670 720 L 670 746 Q 670 756 680 756 L 755 756 Q 765 756 765 766 L 765 788" },
+    { from: "esp32",     to: "arm",       d: "M 670 720 L 670 746 Q 670 756 680 756 L 905 756 Q 915 756 915 766 L 915 788" },
+    { from: "esp32",     to: "brainros",  d: "M 670 720 L 670 746 Q 670 756 680 756 L 1055 756 Q 1065 756 1065 766 L 1065 788" },
+    { from: "mobile",    to: "encmobile", d: "M 765 860 L 765 918" },
+    { from: "encmobile", to: "nav",       d: "M 765 990 L 765 1048" },
+    { from: "arm",       to: "plan",      d: "M 915 860 L 915 1048" },
+    { from: "brainros",  to: "nav",       d: "M 1065 860 L 1065 1008 Q 1065 1018 1055 1018 L 925 1018 M 905 1018 L 775 1018 Q 765 1018 765 1028 L 765 1048", jumps: [{x: 915, y: 1018}] },
+    { from: "brainros",  to: "plan",      d: "M 1065 860 L 1065 908 Q 1065 918 1055 918 L 925 918 Q 915 918 915 928 L 915 1048" }
   ];
 
   var BANDS = [
-    { cls: "app",      top: -24, bot: 110  },
-    { cls: "brain",    top: 110, bot: 580  },
-    { cls: "esp32",    top: 580, bot: 950  },
-    { cls: "brainros", top: 950, bot: 1095 }
+    { cls: "brain",    top: -24, bot: 470  },
+    { cls: "esp32",    top: 470, bot: 1000 },
+    { cls: "brainros", top: 1000, bot: 1130 }
   ];
 
   // ---- derived graph ---------------------------------------------------

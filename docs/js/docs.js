@@ -47,3 +47,61 @@
   );
   for (const h of headings) observer.observe(h);
 })();
+
+// --- Startup-procedure popup --------------------------------------------
+// Links to startup.html open the 起動手順 in a modal instead of navigating
+// away. Progressive enhancement: without JS the link is a normal page link.
+(function () {
+  const links = Array.from(document.querySelectorAll('a[href$="startup.html"]'));
+  if (links.length === 0) return;
+
+  let overlay = null;
+
+  function close() {
+    if (!overlay) return;
+    overlay.remove();
+    overlay = null;
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKey);
+  }
+  function onKey(e) { if (e.key === 'Escape') close(); }
+
+  async function open(href) {
+    if (overlay) return;
+    overlay = document.createElement('div');
+    overlay.className = 'startup-modal';
+    overlay.innerHTML =
+      '<div class="startup-modal__dialog" role="dialog" aria-modal="true" aria-label="起動手順">' +
+        '<button class="startup-modal__close" type="button" aria-label="閉じる">×</button>' +
+        '<div class="startup-modal__body"><p class="startup-modal__loading">読み込み中…</p></div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKey);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    overlay.querySelector('.startup-modal__close').addEventListener('click', close);
+
+    const body = overlay.querySelector('.startup-modal__body');
+    try {
+      const res = await fetch(href);
+      const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+      const content = doc.querySelector('.doc-content');
+      if (!content) throw new Error('no content');
+      content.querySelectorAll('.headerlink').forEach((a) => a.remove());
+      body.innerHTML = '';
+      body.appendChild(content);
+    } catch (err) {
+      body.innerHTML =
+        '<p>内容を読み込めませんでした。<a href="' + href + '">起動手順ページを開く</a></p>';
+    }
+  }
+
+  for (const a of links) {
+    a.addEventListener('click', (e) => {
+      // Let modifier / non-left clicks open the page normally (new tab etc.).
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      open(a.getAttribute('href'));
+    });
+  }
+})();
