@@ -87,11 +87,17 @@
     /* parse data-flows */
     var activeFlows = [];
     try { activeFlows = JSON.parse(svg.getAttribute("data-flows") || "[]"); } catch(e) {}
-    var anyActive = activeFlows.length > 0;
 
-    /* highlighted nodes = endpoints of all active flows */
+    /* parse data-active (comma-separated node IDs for node-only highlight) */
     var hi = {};
+    (svg.getAttribute("data-active") || "").split(",").forEach(function (s) {
+      s = s.trim(); if (s) hi[s] = true;
+    });
+
+    /* highlighted nodes = data-active + endpoints of all active flows */
     activeFlows.forEach(function (af) { hi[af.from] = true; hi[af.to] = true; });
+
+    var anyActive = activeFlows.length > 0 || Object.keys(hi).length > 0;
 
     /* match FLOWS geometry entries against active flow specs */
     FLOWS.forEach(function (f) {
