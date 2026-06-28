@@ -43,8 +43,7 @@
       <div class="doc-wrap">
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
-<li><a href="#できること">できること</a></li>
-<li><a href="#構成">構成</a></li>
+<li><a href="#概要">概要</a></li>
 <li><a href="#必要パーツ">必要パーツ</a></li>
 <li><a href="#動作手順">動作手順</a>
 <ul>
@@ -65,19 +64,12 @@
        aria-label="smabo 製作ガイドのロードマップ図（スマホのセンサー をハイライト）"></svg>
 </div>
 
-<h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
+<h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
 <p>本ページでは「スマホのセンサー」機能の使い方について解説します。</p>
-<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
-<li>スマホの各種センサーの可視化<ul>
-<li>カメラ、IMU、GPS（マイクに関しては「<a href="audioproc.html">音声認識</a>」にて解説）</li>
+<li>スマホから受け取ったセンサデータ（画像、IMU、GPS）をsmabo-webで可視化</li>
 </ul>
-</li>
-</ul>
-
-<h2 id="構成">構成<a class="headerlink" href="#構成" title="Permanent link">#</a></h2>
-<p>今回のシステム構成は、下図になります。</p>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
        data-flows='[{"from":"app","to":"brain","transport":"webrtc","lines":["画像"]},{"from":"app","to":"brain","transport":"ws","lines":["IMU","GPS"]},{"from":"brain","to":"web","transport":"webrtc","lines":["画像"]},{"from":"brain","to":"web","transport":"ws","lines":["IMU","GPS"]}]'

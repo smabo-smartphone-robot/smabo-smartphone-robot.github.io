@@ -43,8 +43,7 @@
       <div class="doc-wrap">
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
-<li><a href="#できること">できること</a></li>
-<li><a href="#システム構成">システム構成</a></li>
+<li><a href="#概要">概要</a></li>
 <li><a href="#必要パーツ">必要パーツ</a></li>
 <li><a href="#動作手順">動作手順</a>
 <ul>
@@ -67,18 +66,13 @@
        aria-label="smabo 製作ガイドのロードマップ図（smaboの顔 をハイライト）"></svg>
 </div>
 
-<h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
+<h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
 <p>本ページでは「smaboの顔機能」の使い方について解説します。</p>
-<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
-<li>smaboの顔のカスタマイズ</li>
-<li>smaboの表情の変更</li>
-<li>smaboの目をコントローラーで動かす</li>
+<li>smabo-webから、smaboの表情を変更</li>
+<li>smabo-webから、smaboの目をコントロール</li>
 </ul>
-
-<h2 id="システム構成">システム構成<a class="headerlink" href="#システム構成" title="Permanent link">#</a></h2>
-<p>今回のシステム構成は、下図になります。</p>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
        data-flows='[{"from":"web","to":"brain","transport":"ws","lines":["表情変更","目の制御"]},{"from":"brain","to":"app","transport":"ws","lines":["表情変更","目の制御"]}]'

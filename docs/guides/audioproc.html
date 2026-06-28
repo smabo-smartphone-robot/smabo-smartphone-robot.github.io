@@ -43,8 +43,7 @@
       <div class="doc-wrap">
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
-<li><a href="#できること">できること</a></li>
-<li><a href="#システム構成">システム構成</a></li>
+<li><a href="#概要">概要</a></li>
 <li><a href="#必要パーツ">必要パーツ</a></li>
 <li><a href="#動作手順">動作手順</a>
 <ul>
@@ -66,17 +65,16 @@
        aria-label="smabo 製作ガイドのロードマップ図（音声処理 をハイライト）"></svg>
 </div>
 
-<h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
+<h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
 <p>本ページでは「音声処理機能」について解説します。</p>
-<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
-<li>音声認識機能</li>
-<li>音声発話機能</li>
+<li>スマホのマイクから取得した音声を、音声認識<ul>
+<li>認識結果をsmabo-webに表示</li>
 </ul>
-
-<h2 id="システム構成">システム構成<a class="headerlink" href="#システム構成" title="Permanent link">#</a></h2>
-<p>今回のシステム構成は、下図になります。</p>
+</li>
+<li>smabo-webで指定した文字列をスマホで発話</li>
+</ul>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
        data-flows='[{"from":"app","to":"brain","transport":"ws","lines":["音声"]},{"from":"brain","to":"web","transport":"ws","lines":["音声認識結果"]},{"from":"web","to":"brain","transport":"ws","lines":["発話文字列"]},{"from":"brain","to":"app","transport":"ws","lines":["発話文字列"]}]'

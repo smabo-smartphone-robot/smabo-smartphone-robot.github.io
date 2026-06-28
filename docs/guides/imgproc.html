@@ -43,8 +43,7 @@
       <div class="doc-wrap">
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
-<li><a href="#できること">できること</a></li>
-<li><a href="#システム構成">システム構成</a></li>
+<li><a href="#概要">概要</a></li>
 <li><a href="#動作手順">動作手順</a>
 <ul>
 <li class="toc-h3"><a href="#起動手順">起動手順</a></li>
@@ -65,23 +64,20 @@
        aria-label="smabo 製作ガイドのロードマップ図（画像処理 をハイライト）"></svg>
 </div>
 
-<h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
+<h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
 <p>本ページでは「画像処理」機能の実装について解説します。</p>
-<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
-<li>画像処理<ul>
-<li>ARマーカー認識</li>
-<li>顔認識</li>
-<li>色認識</li>
-<li>QRコード認識</li>
+<li>smabo-webから画像処理の設定<ul>
+<li>認識対象（色物体、ARマーカー、QRコード）の設定など</li>
 </ul>
 </li>
-<li>画像処理結果をもとに制御</li>
+<li>カメラから取得した画像をもとに、対象物体を識別<ul>
+<li>識別結果をsmabo-webで可視化</li>
+<li>識別結果をもとにsmaboの目を制御</li>
 </ul>
-
-<h2 id="システム構成">システム構成<a class="headerlink" href="#システム構成" title="Permanent link">#</a></h2>
-<p>今回のシステム構成は、下図になります。</p>
+</li>
+</ul>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
        data-flows='[{"from":"app","to":"brain","transport":"webrtc","lines":["画像"]},{"from":"brain","to":"web","transport":"webrtc","lines":["画像"]},{"from":"brain","to":"app","transport":"ws","lines":["目の制御"]},{"from":"web","to":"brain","transport":"ws","lines":["画像処理設定"]},{"from":"brain","to":"web","transport":"ws","lines":["画像処理検出結果"]}]'
