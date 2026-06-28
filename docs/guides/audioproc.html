@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/docs.css" />
   <link rel="stylesheet" href="../css/roadmap.css" />
+  <link rel="stylesheet" href="../css/sysmap.css" />
 </head>
 <body>
 
@@ -43,6 +44,7 @@
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
 <li><a href="#できること">できること</a></li>
+<li><a href="#システム構成">システム構成</a></li>
 <li><a href="#必要パーツ">必要パーツ</a></li>
 <li><a href="#動作手順">動作手順</a>
 <ul>
@@ -72,6 +74,14 @@
 <li>音声認識機能</li>
 <li>音声発話機能</li>
 </ul>
+
+<h2 id="システム構成">システム構成<a class="headerlink" href="#システム構成" title="Permanent link">#</a></h2>
+<p>今回のシステム構成は、下図になります。</p>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"app","to":"brain","transport":"ws","lines":["音声"]},{"from":"brain","to":"web","transport":"ws","lines":["音声認識結果"]},{"from":"web","to":"brain","transport":"ws","lines":["発話文字列"]},{"from":"brain","to":"app","transport":"ws","lines":["発話文字列"]}]'
+       aria-label="smabo システム構成図（音声処理 をハイライト）"></svg>
+</div>
 
 <h2 id="必要パーツ">必要パーツ<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
 <p>本機能の実装に必要なパーツを以下に記載します。</p>
@@ -152,5 +162,6 @@
   <script src="../js/main.js"></script>
   <script src="../js/docs.js"></script>
   <script src="../js/roadmap.js"></script>
+  <script src="../js/sysmap.js"></script>
 </body>
 </html>

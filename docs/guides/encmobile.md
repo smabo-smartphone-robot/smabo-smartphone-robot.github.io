@@ -13,6 +13,7 @@
 
 - [ロードマップ](#ロードマップ)
 - [できること](#できること)
+- [構成](#構成)
 - [必要パーツ](#必要パーツ)
 - [パーツの印刷](#パーツの印刷)
 - [組み立て手順](#組み立て手順)
@@ -51,6 +52,19 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
     smabo-esp32はエンコーダから左右の車輪速度を計算し、`/wheel_vel`（left/right/dt）としてsmabo-brainへ送信します。
     smabo-brainはこれを積分して自己位置（x/y/θ）を求め、`/odom`として配信します。
     エンコーダ走行を使う場合は、smabo-esp32の`modes.encoder_drive`を有効にします。
+
+# 構成
+
+今回は、下図のようになります。
+
+<!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
+<!-- 以下例のように記述するので、ハイライトするノードと矢印、およびラベルに記述する内容を確認し、アーキテクチャ図を作成してください -->
+<!-- 例）コンポーネント1 -[websocket]-> コンポーネント2：データ種類1, データ種類2 -->
+<!-- 今回の、具体的な構成は以下になります。 -->
+<!-- smabo-brain -[websocket]-> smabo-esp32 : 速度指令 -->
+<!-- smabo-esp32 -[websocket]-> smabo-brain : ホイール速度 -->
+
+![](../images/smabo_sysytem_architecture.drawio.svg)
 
 # 必要パーツ
 

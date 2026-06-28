@@ -13,6 +13,7 @@
 
 - [ロードマップ](#ロードマップ)
 - [できること](#できること)
+- [構成](#構成)
 - [smabo-brain-rosとは](#smabo-brain-rosとは)
   - [smabo-brain-rosのクローン](#smabo-brain-rosのクローン)
   - [ビルド](#ビルド)
@@ -43,6 +44,19 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 具体的には、以下の内容を実施します。
 
 - smabo-brain-rosのセットアップ
+
+# 構成
+
+今回は、下図のようになります。
+
+<!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
+<!-- 以下例のように記述するので、ハイライトするノードと矢印、およびラベルに記述する内容を確認し、アーキテクチャ図を作成してください -->
+<!-- 例）コンポーネント1 -[websocket]-> コンポーネント2：データ種類1, データ種類2 -->
+<!-- 今回の、具体的な構成は以下になります。 -->
+<!-- smabo-brain -[websocket]-> smabo-esp32 : 速度指令, サーボ制御 -->
+<!-- smabo-esp32 -[websocket]-> smabo-brain : ホイール速度, LiDAR -->
+
+![](../images/smabo_sysytem_architecture.drawio.svg)
 
 # smabo-brain-rosとは
 

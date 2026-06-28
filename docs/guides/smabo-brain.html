@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/docs.css" />
   <link rel="stylesheet" href="../css/roadmap.css" />
+  <link rel="stylesheet" href="../css/sysmap.css" />
 </head>
 <body>
 
@@ -43,7 +44,7 @@
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
 <li><a href="#できること">できること</a></li>
-<li><a href="#smabo-brainとは">smabo-brainとは</a></li>
+<li><a href="#システム構成">システム構成</a></li>
 <li><a href="#セットアップ先pc-or-sbc">セットアップ先（PC or SBC）</a></li>
 <li><a href="#必要パーツ">必要パーツ</a></li>
 <li><a href="#smabo-brainのセットアップ">smabo-brainのセットアップ</a>
@@ -86,20 +87,26 @@
 
 <h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
 <p>本ページでは「smabo-brain」のセットアップ手順について解説します。</p>
+<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
 <li>smabo-brainのセットアップ</li>
 <li>（SBC使用の場合のみ）SBC固定パーツの印刷、組み立て</li>
 </ul>
 
-<h2 id="smabo-brainとは">smabo-brainとは<a class="headerlink" href="#smabo-brainとは" title="Permanent link">#</a></h2>
+<h2 id="システム構成">システム構成<a class="headerlink" href="#システム構成" title="Permanent link">#</a></h2>
+<p>今回のシステム構成は、下図になります。</p>
 <p>smabo-brainはsmaboの中で</p>
 <ul>
 <li>各コンポーネントを中継するハブ</li>
 <li>画像処理やAIなどの高度な処理の実行</li>
 </ul>
 <p>の役割を担います。</p>
-<p><img alt="" src="../images/smabo_sysytem_architecture.drawio.svg" /></p>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[]'
+       aria-label="smabo システム構成図（smabo-brain をハイライト）"></svg>
+</div>
 
 <h2 id="セットアップ先pc-or-sbc">セットアップ先（PC or SBC）<a class="headerlink" href="#セットアップ先pc-or-sbc" title="Permanent link">#</a></h2>
 <p>smabo-brainのセットアップ先には、以下の2パターンがあります。</p>
@@ -113,6 +120,7 @@
 </ul>
 </li>
 </ul>
+<br />
 <br />
 <p>smabo-brain自体のセットアップ手順は同じですが、SBCの場合は</p>
 <ul>
@@ -129,6 +137,7 @@
 </ul>
 <p>上記以外のSBCを取り付けたい場合は「取り付けパーツの3Dモデル」をCADなどで自作する必要があります。</p>
 </blockquote>
+<br />
 <p>以降では、「外部PC、SBCで共通の手順」について解説した後、「SBC固有の手順」を解説します。</p>
 
 <h2 id="必要パーツ">必要パーツ<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
@@ -161,9 +170,12 @@
 
 <h3 id="vscodeのインストール">VSCodeのインストール<a class="headerlink" href="#vscodeのインストール" title="Permanent link">#</a></h3>
 <p>最初に、ターミナルを使用する環境を構築します。</p>
+<br />
 <p>今回は、Visual Studio Code（VSCode）を使用します（VSCodeはコードエディタの一つです）。</p>
+<br />
 <p>以下サイトから、ご自身のPCのOSにあったインストーラをダウンロードしてください。</p>
 <p><a href="https://code.visualstudio.com">https://code.visualstudio.com</a></p>
+<br />
 <p>ダウンロードが完了したら、VSCodeをインストール、起動します。</p>
 
 <h3 id="ターミナルの使い方linux-macの場合">ターミナルの使い方（Linux, macの場合）<a class="headerlink" href="#ターミナルの使い方linux-macの場合" title="Permanent link">#</a></h3>
@@ -173,6 +185,7 @@
 
 <h3 id="ターミナルの使い方windows">ターミナルの使い方（Windows）<a class="headerlink" href="#ターミナルの使い方windows" title="Permanent link">#</a></h3>
 <p>Windows PCを使用する場合は、WSLをインストールしてください。</p>
+<br />
 <p>WSL(Windows for Linux)は、</p>
 <ul>
 <li>WindowsでLinuxの環境を使用できるシステム</li>
@@ -198,6 +211,7 @@
 <li>「Connected to WSL」をクリックしてください。</li>
 </ol>
 <p><img alt="alt text" src="../images/connect_wsl.png" /></p>
+<br />
 <p>画面左下に「WSL：Ubuntu」と表示されていればOKです。ここで、画面下部の「TERMINAL」というタブがターミナルになります。</p>
 <p><img alt="alt text" src="../images/wsl_terminal.png" /></p>
 <p>以降、コマンドの記載がある際は、こちらにコマンドを入力してください。</p>
@@ -219,8 +233,10 @@ git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
 <p>「<a href="startup.html" data-steps="smabo-brainの起動">こちらの起動手順</a>」の内容を実行してください。</p>
 <br />
 <p>エラーが発生せずに、起動が完了すればOKです。</p>
+<br />
 <p>ここまでで、「SBC、PCで共通の設定」は完了です。
 また、PCにセットアップした方は本ページの実施内容は以上になります。</p>
+<br />
 <p>以降は、「SBCをsmabo本体に取り付ける」手順について解説します。</p>
 
 <h2 id="sbcラズパイ4-or-5の場合">SBC=ラズパイ（4 or 5）の場合<a class="headerlink" href="#sbcラズパイ4-or-5の場合" title="Permanent link">#</a></h2>
@@ -244,10 +260,12 @@ git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
 <li>smabo-hardware/stl/raspi/raspi_stand.stl<br />
 <img alt="alt text" src="../images/raspi_print_stand.png" /></li>
 </ul>
+<br />
 <ul>
 <li>smabo-hardware/stl/raspi/raspi_stopper1.stl<br />
 <img alt="alt text" src="../images/raspi_print_stopper1.png" /></li>
 </ul>
+<br />
 <ul>
 <li>smabo-hardware/stl/raspi/raspi_stopper2.stl<br />
 <img alt="alt text" src="../images/raspi_print_stopper2.png" /></li>
@@ -308,5 +326,6 @@ git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
   <script src="../js/main.js"></script>
   <script src="../js/docs.js"></script>
   <script src="../js/roadmap.js"></script>
+  <script src="../js/sysmap.js"></script>
 </body>
 </html>

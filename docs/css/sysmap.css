@@ -1,0 +1,107 @@
+/* =========================================================
+   smabo — interactive system-architecture diagram (sysmap)
+   Rendered by js/sysmap.js into <svg class="sys-svg" data-active="...">.
+   Transport colours match docs/images/smabo_system_architecture.drawio.svg.
+   ========================================================= */
+
+.sys-wrap { padding: 4px 0 20px; }
+.sys-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  font-family: var(--font);
+  --ws:      #6c8ebf;  /* WebSocket — blue  (drawio #6c8ebf) */
+  --webrtc:  #d79b00;  /* WebRTC    — amber */
+  --rest:    #82b366;  /* REST API  — green (drawio #82b366) */
+}
+
+/* ----- containers ----- */
+.sys-container {
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+/* 外部ツール — gray (drawio fill=#f5f5f5 stroke=#666) */
+.sys-container--ext  { fill: #f5f5f5; stroke: #666666; }
+/* smabo本体 — light pinkish-red (drawio fill=#f8cecc stroke=#b85450) */
+.sys-container--body { fill: #f8cecc; stroke: #b85450; }
+
+.sys-container__label      { fill: #5a5a5a; font-weight: 800; font-size: 17px; }
+.sys-container__label--body { fill: #7a1f1f; }
+
+/* lit when any inner component is highlighted */
+.sys-cont.is-active .sys-container--ext  { fill: #e8eaf6; stroke: var(--indigo); stroke-width: 2.8; }
+.sys-cont.is-active .sys-container--body { fill: #fde8e8; stroke: #a81010;      stroke-width: 2.8; }
+.sys-cont.is-active .sys-container__label      { fill: var(--indigo-dark); }
+.sys-cont.is-active .sys-container__label--body { fill: #8b0000; }
+
+/* ----- component nodes ----- */
+.sys-node__box {
+  fill: #fff;
+  stroke: var(--line);
+  stroke-width: 1.8;
+  filter: drop-shadow(0 4px 12px rgba(30, 32, 58, 0.08));
+}
+.sys-node__label { fill: var(--ink);      font-weight: 800; font-size: 17px; }
+.sys-node__sub   { fill: var(--muted);    font-weight: 600; font-size: 13px; }
+
+.sys-node.is-dim { opacity: 0.38; }
+.sys-node.is-active .sys-node__box {
+  fill: #eef0fb;
+  stroke: var(--indigo);
+  stroke-width: 3;
+  filter: drop-shadow(0 8px 20px rgba(79, 70, 229, 0.28));
+}
+.sys-node.is-active .sys-node__label { fill: var(--indigo-dark); }
+
+/* ----- arrow markers (filled by class set in the marker <path>) ----- */
+.sys-arrow--dim    { fill: var(--line); opacity: 0.7; }
+.sys-arrow--ws     { fill: var(--ws); }
+.sys-arrow--webrtc { fill: var(--webrtc); }
+.sys-arrow--rest   { fill: var(--rest); }
+
+/* ----- edges (data-flow arrows) ----- */
+.sys-edge {
+  stroke: var(--line);
+  stroke-width: 2;
+  opacity: 0.45;
+}
+/* REST is dashed (solid arrows = ws / webrtc) */
+.sys-edge--rest { stroke-dasharray: 7 5; }
+
+/* active (flowing) edges — animated dashes, same technique as roadmap */
+.sys-edge.is-flow {
+  stroke-width: 3.4;
+  opacity: 1;
+  stroke-dasharray: 9 7;
+  animation: sys-flow 0.6s linear infinite;
+}
+.sys-edge.is-flow.sys-edge--ws     { stroke: var(--ws); }
+.sys-edge.is-flow.sys-edge--webrtc { stroke: var(--webrtc); stroke-dasharray: 9 7; }
+.sys-edge.is-flow.sys-edge--rest   { stroke: var(--rest);   stroke-dasharray: 7 6; }
+
+@keyframes sys-flow { to { stroke-dashoffset: -16; } }
+@media (prefers-reduced-motion: reduce) { .sys-edge.is-flow { animation: none; } }
+
+/* ----- labels riding on the arrows ----- */
+.sys-flabel text {
+  paint-order: stroke;   /* white halo so text reads over the arrow */
+  stroke: #fff;
+  stroke-width: 3.8px;
+  stroke-linejoin: round;
+}
+.sys-flabel__item { font-weight: 600; font-size: 13px; fill: var(--muted); }
+
+/* active: tinted by transport */
+.sys-flabel.is-on .sys-flabel__item                 { fill: var(--ink-soft); }
+.sys-flabel.is-on.sys-flabel--ws     .sys-flabel__item { fill: #3d6496; }
+.sys-flabel.is-on.sys-flabel--webrtc .sys-flabel__item { fill: #9b6e00; }
+.sys-flabel.is-on.sys-flabel--rest   .sys-flabel__item { fill: #4d7a3a; }
+
+/* ----- transport legend ----- */
+.sys-legend__title { fill: var(--muted); font-size: 12px; font-weight: 800; }
+.sys-legend__label { fill: var(--ink-soft); font-size: 13px; font-weight: 700; }
+.sys-legend__line  { stroke-width: 4; stroke-linecap: round; }
+.sys-legend__line--ws     { stroke: var(--ws); }
+.sys-legend__line--webrtc { stroke: var(--webrtc); }
+.sys-legend__line--rest   { stroke: var(--rest); stroke-dasharray: 7 5; }

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/docs.css" />
   <link rel="stylesheet" href="../css/roadmap.css" />
+  <link rel="stylesheet" href="../css/sysmap.css" />
 </head>
 <body>
 
@@ -43,7 +44,7 @@
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
 <li><a href="#できること">できること</a></li>
-<li><a href="#smabo-brainとは">smabo-brainとは</a>
+<li><a href="#システム構成">システム構成</a>
 <ul>
 <li class="toc-h3"><a href="#smabo-webのクローン">smabo-webのクローン</a></li>
 <li class="toc-h3"><a href="#パッケージのインストール">パッケージのインストール</a></li>
@@ -69,18 +70,24 @@
 
 <h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
 <p>本ページでは「smabo-web」のセットアップ手順について解説します。</p>
+<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
 <li>smabo-webのセットアップ</li>
 </ul>
 
-<h2 id="smabo-webとは">smabo-brainとは<a class="headerlink" href="#smabo-brainとは" title="Permanent link">#</a></h2>
+<h2 id="システム構成">システム構成<a class="headerlink" href="#システム構成" title="Permanent link">#</a></h2>
+<p>今回のシステム構成は、下図になります。</p>
 <p>smabo-webはsmaboの中で</p>
 <ul>
 <li>smaboの設定の変更、手動操作、センサの可視化などの補助的ツール</li>
 </ul>
 <p>の役割を担います。</p>
-<p><img alt="" src="../images/smabo_sysytem_architecture.drawio.svg" /></p>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[]'
+       aria-label="smabo システム構成図（smabo-web をハイライト）"></svg>
+</div>
 
 <h3 id="smabo-webのクローン">smabo-webのクローン<a class="headerlink" href="#smabo-webのクローン" title="Permanent link">#</a></h3>
 <p>以下コマンドでsmabo-webリポジトリをクローンします。</p>
@@ -143,5 +150,6 @@ git clone https://github.com/smabo-smartphone-robot/smabo-web</code></pre>
   <script src="../js/main.js"></script>
   <script src="../js/docs.js"></script>
   <script src="../js/roadmap.js"></script>
+  <script src="../js/sysmap.js"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/docs.css" />
   <link rel="stylesheet" href="../css/roadmap.css" />
+  <link rel="stylesheet" href="../css/sysmap.css" />
 </head>
 <body>
 
@@ -43,8 +44,8 @@
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
 <li><a href="#できること">できること</a></li>
-<li><a href="#必要パーツ">必要パーツ</a></li>
-<li><a href="#smabo-appとは">smabo-appとは</a>
+<li><a href="#構成">構成</a></li>
+<li><a href="#必要パーツ">必要パーツ</a>
 <ul>
 <li class="toc-h3"><a href="#smabo-appのインストール">smabo-appのインストール</a></li>
 </ul>
@@ -52,12 +53,6 @@
 <li><a href="#動作手順">動作手順</a>
 <ul>
 <li class="toc-h3"><a href="#起動手順">起動手順</a></li>
-<li class="toc-h3"><a href="#smaboの顔の設定">smaboの顔の設定</a></li>
-<li class="toc-h3"><a href="#smaboの目を変更する">smaboの目を変更する</a></li>
-<li class="toc-h3"><a href="#各種センサーの状態を可視化">各種センサーの状態を可視化</a></li>
-<li class="toc-h3"><a href="#音声認識">音声認識</a></li>
-<li class="toc-h3"><a href="#smaboに発話させる">smaboに発話させる</a></li>
-<li class="toc-h3"><a href="#smaboの目を動かす">smaboの目を動かす</a></li>
 </ul>
 </li>
 <li><a href="#次回">次回</a></li>
@@ -75,6 +70,7 @@
 
 <h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
 <p>本ページでは「smabo-app」のセットアップ手順について解説します。</p>
+<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
 <li>smabo-appのセットアップ</li>
@@ -87,6 +83,20 @@
 </ul>
 </li>
 </ul>
+
+<h2 id="構成">構成<a class="headerlink" href="#構成" title="Permanent link">#</a></h2>
+<p>今回のシステム構成は、下図になります。</p>
+<p>smabo-appはsmaboの中で</p>
+<ul>
+<li>smaboの顔</li>
+<li>smaboのセンサー（スマホのセンサーを使用）</li>
+</ul>
+<p>の役割を担います。</p>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[]'
+       aria-label="smabo システム構成図（smabo-app をハイライト）"></svg>
+</div>
 
 <h2 id="必要パーツ">必要パーツ<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
 <p>本機能の実装に必要なパーツを以下に記載します。</p>
@@ -107,15 +117,6 @@
 </tbody>
 </table>
 
-<h2 id="smabo-appとは">smabo-appとは<a class="headerlink" href="#smabo-appとは" title="Permanent link">#</a></h2>
-<p>smabo-appはsmaboの中で</p>
-<ul>
-<li>smaboの顔</li>
-<li>smaboのセンサー（スマホのセンサーを使用）</li>
-</ul>
-<p>の役割を担います。</p>
-<p><img alt="" src="../images/smabo_sysytem_architecture.drawio.svg" /></p>
-
 <h3 id="smabo-appのインストール">smabo-appのインストール<a class="headerlink" href="#smabo-appのインストール" title="Permanent link">#</a></h3>
 <p>スマホにsmabo-appをインストールします。</p>
 <p>なお、ここではandroidの手順のみを記載します。</p>
@@ -134,46 +135,6 @@
 <br/>
 
 <p>各種プログラムの起動、通信が確認できればOKです。</p>
-
-
-<h3 id="smaboの顔の設定">smaboの顔の設定<a class="headerlink" href="#smaboの顔の設定" title="Permanent link">#</a></h3>
-<p>smaboの顔は、「Face Settings」から設定を変更できます。</p>
-<p><img alt="alt text" src="../images/app_face_settings_button.png" /></p>
-<br />
-<p>設定では「目の大きさ」「目の種類」「背景色の変更」などができます。</p>
-<p><img alt="alt text" src="../images/app_face_settings.png" /></p>
-
-<h3 id="smaboの目を変更する">smaboの目を変更する<a class="headerlink" href="#smaboの目を変更する" title="Permanent link">#</a></h3>
-<p>smabo-webの「Face」タブの「Expression」に「Expression ID（smabo-app内のFace settingsで設定した表情のID）」を変更し、「Set」をクリックすると、smaboの目の種類が変化します。</p>
-<p><img alt="alt text" src="../images/app_expression_set.png" /></p>
-
-<h3 id="各種センサーの状態を可視化">各種センサーの状態を可視化<a class="headerlink" href="#各種センサーの状態を可視化" title="Permanent link">#</a></h3>
-<p>smaboの各種センサのON/OFFは左下のボタンで設定できます。</p>
-<p><img alt="alt text" src="../images/app_sensor_toggle.png" /></p>
-<br />
-<p>センサをONにした状態で、smabo-webで「Sensors」タブを確認すると、各種センサの情報を可視化できます。</p>
-<p><img alt="alt text" src="../images/app_sensor_web.png" /></p>
-
-<h3 id="音声認識">音声認識<a class="headerlink" href="#音声認識" title="Permanent link">#</a></h3>
-<p>smaboに対して「smabo」と話しかけると、smaboの目が虹色に光ります。</p>
-<p>目が虹色の状態で何か言葉を話すと、音声認識が開始されます（認識する言語は、smabo-appの設定画面から変更できます）。</p>
-<p><img alt="alt text" src="../images/app_voice_listening.png" /></p>
-<p>目の色が戻った後に、smabo-webの「Face」タブの「Recognized speech」を確認すると、先ほど話した言葉が表示されます。</p>
-<p><img alt="alt text" src="../images/app_recognized_speech.png" /></p>
-
-<h3 id="smaboに発話させる">smaboに発話させる<a class="headerlink" href="#smaboに発話させる" title="Permanent link">#</a></h3>
-<p>smabo-webの「Face」タブの「SPEECH / SAY」で、任意の文章を入力し、「SAY」ボタンをクリックすると入力された音声がスマホから発話されます（発話する言語は、smabo-appの設定画面から変更できます）。</p>
-<p><img alt="alt text" src="../images/app_speech_say.png" /></p>
-<br />
-<p>なお、「Bubble ON」「Speak ON」ボタンにて発話のON/OFF、吹き出しの有無を設定可能です。</p>
-<p><img alt="alt text" src="../images/app_speech_toggle.png" /></p>
-
-<h3 id="smaboの目を動かす">smaboの目を動かす<a class="headerlink" href="#smaboの目を動かす" title="Permanent link">#</a></h3>
-<p>smaboの目はデフォルトでは、ランダムに動きますが、モードを「Follow」に変更すると、外部からの通信により自由に動かすことができます。</p>
-<p><img alt="alt text" src="../images/app_eye_follow_mode.png" /></p>
-<br />
-<p>smabo-webの「Face」タブの「Gaze control」でコントローラを操作すると、それに合わせて目が動くことが確認できます。</p>
-<p><img alt="alt text" src="../images/app_gaze_control.png" /></p>
 
 <h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
 <p>次回は、以下ロードマップの</p>
@@ -220,5 +181,6 @@
   <script src="../js/main.js"></script>
   <script src="../js/docs.js"></script>
   <script src="../js/roadmap.js"></script>
+  <script src="../js/sysmap.js"></script>
 </body>
 </html>

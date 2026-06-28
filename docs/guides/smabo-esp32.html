@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/docs.css" />
   <link rel="stylesheet" href="../css/roadmap.css" />
+  <link rel="stylesheet" href="../css/sysmap.css" />
 </head>
 <body>
 
@@ -43,7 +44,7 @@
         <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
 <li><a href="#ロードマップ">ロードマップ</a></li>
 <li><a href="#できること">できること</a></li>
-<li><a href="#smabo-esp32とは">smabo-esp32とは</a></li>
+<li><a href="#構成">構成</a></li>
 <li><a href="#必要パーツ">必要パーツ</a></li>
 <li><a href="#smabo-esp32のセットアップ">smabo-esp32のセットアップ</a>
 <ul>
@@ -79,6 +80,7 @@
 
 <h2 id="できること">できること<a class="headerlink" href="#できること" title="Permanent link">#</a></h2>
 <p>本ページでは「smabo-esp32」のセットアップ手順について解説します。</p>
+<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
 <li>smabo-esp32のセットアップ</li>
@@ -86,14 +88,18 @@
 <li>配線</li>
 </ul>
 
-<h2 id="smabo-esp32とは">smabo-esp32とは<a class="headerlink" href="#smabo-esp32とは" title="Permanent link">#</a></h2>
-<p>smabo-esp32はsmaboの中で</p>
+<h2 id="構成">構成<a class="headerlink" href="#構成" title="Permanent link">#</a></h2>
+<p>今回のシステム構成は、下図になります。</p>
+<p>smabo-esp32は</p>
 <ul>
-<li>アクチュエータの制御</li>
-<li>センサ値の取得</li>
+<li>esp32に繋いだセンサやアクチュエータの制御</li>
 </ul>
 <p>の役割を担います。</p>
-<p><img alt="" src="../images/smabo_sysytem_architecture.drawio.svg" /></p>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[]'
+       aria-label="smabo システム構成図（smabo-esp32 をハイライト）"></svg>
+</div>
 
 <h2 id="必要パーツ">必要パーツ<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
 <p>本機能の実装に必要なパーツを以下に記載します。</p>
@@ -279,14 +285,16 @@
 <p><strong>ブレッドボードの中身について</strong></p>
 <p>ブレッドボードの裏面を見てみると、金属の棒が固定してあることがわかります。</p>
 <p><img src="../images/esp32_breadboard_back.png" width="300" /></p>
+<br />
+<br />
 <p>そのため、「同じ棒と繋がっている穴」に、複数のジャンプワイヤーを刺した場合、それらは回路的に繋がることになります。</p>
 <p><img alt="alt text" src="../images/esp32_breadboard_connection.png" /></p>
 <p>特に、SAD101の場合</p>
 <ul>
 <li>+極のみ真ん中で途切れていて左右に分かれている</li>
 </ul>
-<p>ため、ジャンプワイヤーは、「+極を1直線に繋ぐために付いていた」ということになります。
-※ 今回は、先述の通り左右で違う電源を使用するため、外しています</p>
+<p>ため、ジャンプワイヤーは、「+極を1直線に繋ぐために付いていた」ということになります。</p>
+<p>※ 今回は、先述の通り左右で違う電源を使用するため、外しています</p>
 </blockquote>
 
 <h2 id="組み立て手順">組み立て手順<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h2>
@@ -319,6 +327,7 @@
 ついたままだと、<strong style="color:#e03131;">ESP32, アクチュエータが破損する</strong>可能性があります。</p>
 <p><img alt="alt text" src="../images/esp32_breadboard_remove_jumper.png" /></p>
 </blockquote>
+<br />
 <p>今回は、アクチュエータなどは動かさないため、以降の準備として「乾電池バッテリーの配線」のみを行います。</p>
 <p>※ 下記表において、「接続先1」と「接続先2」は、両者が回路的に直接繋がっていることを指します。</p>
 <table>
@@ -415,5 +424,6 @@
   <script src="../js/main.js"></script>
   <script src="../js/docs.js"></script>
   <script src="../js/roadmap.js"></script>
+  <script src="../js/sysmap.js"></script>
 </body>
 </html>
