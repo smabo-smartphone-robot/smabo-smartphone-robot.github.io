@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ハンド — smabo ガイド</title>
-  <meta name="description" content="smabo 製作ガイド：ハンド。" />
+  <meta name="description" content="smabo 製作ガイド：ハンド機能。ハンドのコントローラー制御とランダム制御の実装手順。" />
   <link rel="icon" type="image/png" href="../images/smabo_icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/docs.css" />
+  <link rel="stylesheet" href="../css/roadmap.css" />
+  <link rel="stylesheet" href="../css/sysmap.css" />
 </head>
 <body>
 
@@ -20,9 +23,7 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav__links">
-        <a href="../index.html#features">特徴</a>
-        <a href="../index.html#system">システム構成</a>
-        <a href="../index.html">ロードマップ</a>
+        <a href="../index.html#ロードマップ">ロードマップ</a>
         <a href="../components.html">コンポーネント詳細</a>
         <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
@@ -33,31 +34,251 @@
     <div class="container">
       <span class="eyebrow">Guide</span>
       <h1>🤏 ハンド</h1>
-      <p>必要な構成：<code style="background:rgba(255,255,255,.18);color:#fff">smabo-app + smabo-esp32</code></p>
+      <p>ハンドのコントローラー制御とランダム制御を実装します。</p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container" style="max-width:760px">
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">目次</div><ul>
+<li><a href="#ロードマップ">ロードマップ</a></li>
+<li><a href="#概要">概要</a></li>
+<li><a href="#必要パーツ">必要パーツ</a></li>
+<li><a href="#パーツの印刷">パーツの印刷</a></li>
+<li><a href="#組み立て手順">組み立て手順</a></li>
+<li><a href="#配線">配線</a></li>
+<li><a href="#完成系">完成系</a></li>
+<li><a href="#動作手順">動作手順</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">起動手順</a></li>
+<li class="toc-h3"><a href="#サーボ設定">サーボ設定</a></li>
+<li class="toc-h3"><a href="#コントローラー制御">コントローラー制御</a></li>
+<li class="toc-h3"><a href="#ランダム制御">ランダム制御</a></li>
+</ul>
+</li>
+<li><a href="#次回">次回</a></li>
+</ul></nav>
+        <article class="doc-content">
 
-      <div class="callout">
-        <span class="emoji">🚧</span>
-        <span>このガイド記事は準備中です。内容は順次追加していきます。</span>
+<h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
+<p>本ページは、以下ロードマップ「ハンド」のガイドページです。</p>
+<p>また、本ページは「<a href="smabo-esp32.html">smabo-esp32</a>」のガイドを実施している前提で話を進めます。</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../architecture/" data-active="hand"
+       aria-label="smabo 製作ガイドのロードマップ図（ハンド をハイライト）"></svg>
+</div>
+
+<h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
+<p>本ページでは「ハンド機能」について解説します。</p>
+<p>具体的には、以下の内容を実施します。</p>
+<ul>
+<li>ハンドのコントローラー制御</li>
+<li>ハンドのランダム制御</li>
+</ul>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[]' data-active="web,brain,esp32"
+       aria-label="smabo システム構成図（smabo-web・smabo-brain・smabo-esp32 をハイライト）"></svg>
+</div>
+
+<h2 id="必要パーツ">必要パーツ<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
+<p>本機能の実装に必要なパーツを以下に記載します。</p>
+<table>
+<thead>
+<tr>
+<th>部品名</th>
+<th>商品URL</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32-DevKitC</td>
+<td><a href="https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-機能マイクロコントローラー-TYPE-C-デュアルコアボード/dp/B0GTY64KDC/ref=asc_df_B0GTY64KDC?mcid=350a4550c70e3d30953041512ffe110a&amp;tag=jpgo-22&amp;linkCode=df0&amp;hvadid=792079627413&amp;hvpos=&amp;hvnetw=g&amp;hvrand=17366440597157412973&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9199153&amp;hvtargid=pla-2484301629565&amp;hvocijid=17366440597157412973-B0GTY64KDC-&amp;hvexpln=0&amp;th=1">link</a></td>
+<td>互換品でも可</td>
+</tr>
+<tr>
+<td>ブレッドボード（SAD101）<br /></td>
+<td><a href="https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1">link</a></td>
+<td>一般的なブレッドボードは5穴ですが、こちらは6穴になっています。<br />6穴でないとESP32のサイズ的に横幅が足りないので注意してください</td>
+</tr>
+<tr>
+<td>ジャンプワイヤー</td>
+<td><a href="https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL?ref_=Oct_d_obs_d_3332721051_0&amp;pd_rd_w=uPj7Z&amp;content-id=amzn1.sym.017d4a3b-167e-4891-9b01-9ac16ba095fb&amp;pf_rd_p=017d4a3b-167e-4891-9b01-9ac16ba095fb&amp;pf_rd_r=D57C194X1NH6BZACFEPS&amp;pd_rd_wg=FydDx&amp;pd_rd_r=327745d6-16b1-418c-b484-4cea112fb00b&amp;pd_rd_i=B06Y48V9DL">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>電池ボックス（単3×4本、電池スナップ対応）</td>
+<td><a href="https://www.amazon.co.jp/dp/B011IJQ4DI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3">link</a></td>
+<td>電池スナップ対応の方が、取り回しが良いのでお勧めです。</td>
+</tr>
+<tr>
+<td>電池スナップ（電池ボックス用）</td>
+<td><a href="https://www.monotaro.com/p/6866/1105/?cq_med=pla&amp;cq_plt=gp&amp;utm_medium=cpc&amp;utm_source=google&amp;utm_campaign=246-833-4061_23030379799_shopping&amp;utm_content=&amp;utm_term=__x_&amp;utm_id=68661105&amp;gad_source=1&amp;gad_campaignid=23030381413&amp;gbraid=0AAAAADNqOHDvKsE6jsbG6KMsfUBQKF9m5&amp;gclid=Cj0KCQjw2_TQBhCnARIsAF3-XhxFdH-a3GLjp_a8Hy-Uc7kuFklTykWT1kFLZzA1D76_B6tY7Rw4P34aAsPaEALw_wcB">link</a></td>
+<td>コネクタピン付きの方が、ブレッドボードに差しやすくて、抜けにくいのでお勧めです。</td>
+</tr>
+<tr>
+<td>充電式単三電池 × 4</td>
+<td><a href="https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/ref=sr_1_5?qid=1700364346&amp;refinements=p_n_feature_thirteen_browse-bin%3A2314244051&amp;s=electronics&amp;sr=1-5&amp;th=1">link</a></td>
+<td>充電式の方がおすすめです。</td>
+</tr>
+<tr>
+<td>電池充電器</td>
+<td><a href="https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/ref=sr_1_5?keywords=%E9%9B%BB%E6%B1%A0+%E5%85%85%E9%9B%BB%E5%99%A8&amp;qid=1700402201&amp;sr=8-5">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>サーボモータドライバ PCA9685</td>
+<td><a href="https://www.amazon.co.jp/HiLetgo-PCA9685-16%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB-12-%E3%83%93%E3%83%83%E3%83%88-Arduino%E3%81%AB%E5%AF%BE%E5%BF%9C/dp/B01D1D0CX2/ref=asc_df_B01D1D0CX2/?tag=jpgo-22&amp;linkCode=df0&amp;hvadid=218134682078&amp;hvpos=&amp;hvnetw=g&amp;hvrand=18016470498878566809&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=1009487&amp;hvtargid=pla-439629573722&amp;psc=1&amp;mcid=d238c727398c34ec915ad739f9f6f977">link</a></td>
+<td>互換品でも可</td>
+</tr>
+<tr>
+<td>SG90 × 2</td>
+<td><a href="https://akizukidenshi.com/catalog/g/gM-08761/">link</a></td>
+<td>互換品でも良いですが、ホーンのサイズが純正と異なる場合は、パーツにうまくはまりません。<br />そのため、ホーンを削るか、3Dモデルの修正が発生する可能性があります。</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="パーツの印刷">パーツの印刷<a class="headerlink" href="#パーツの印刷" title="Permanent link">#</a></h2>
+<p>今回、新たに追加されるパーツを3Dプリンタで印刷します。</p>
+<blockquote>
+<p>3Dプリンタは機種によって「印刷する際に使用するソフト」が異なるため、ここでは具体的な設定手順ではなく、ポイントのみを記載します。</p>
+</blockquote>
+<br />
+<p>以下のパーツを図の向きに設定して、印刷してください。</p>
+<blockquote>
+<p><strong>印刷の際の注意点</strong></p>
+<ul>
+<li>パーツのつけ外しの際に、根本から折れにくくするため、凸部は横向きにして印刷</li>
+<li>サポート材は必ずONにした状態で印刷</li>
+</ul>
+</blockquote>
+<ul>
+<li>smabo-hardware/stl/hand/sg90/sg90_plate_1.stl × 2<br />
+左右で同じパーツを使用するため、2つ印刷します<br />
+<img alt="alt text" src="../images/hand_print_sg90_plate_1.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/hand/sg90/sg90_plate_2.stl × 2<br />
+左右で同じパーツを使用するため、2つ印刷します<br />
+<img alt="alt text" src="../images/hand_print_sg90_plate_2.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/hand/sg90/sg90_base.stl × 2<br />
+左右で同じパーツを使用するため、2つ印刷します<br />
+<img alt="alt text" src="../images/hand_print_sg90_base.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/hand/sg90/arm_hand.stl × 2<br />
+左右で同じパーツを使用するため、2つ印刷します<br />
+<img alt="alt text" src="../images/hand_print_arm_hand.png" /></li>
+</ul>
+
+<h2 id="組み立て手順">組み立て手順<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h2>
+<p>以下動画のように、必要パーツを組み立てます。</p>
+<p>※ 動画には、前回までに印刷したパーツも含まれます</p>
+<p>
+  <iframe src="../assembly_movie/hand.html" title="ハンド 組み立て手順"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>組み立ての際のポイント</strong></p>
+<p>組み立て動画では、SG90の取り付け手順は分からないため、以下に記載します。</p>
+<br />
+<p>最初に、下図のように「sg90_plate_1」と「sg90_plate_2」でsg90を固定し、ボディに取り付けます。</p>
+<p><img alt="" src="../images/hand_create_1.png" /></p>
+<p><img alt="" src="../images/hand_create_2.png" /></p>
+<br />
+<p>そして、sg90_baseを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、SG90に付属のネジでホーンとサーボを固定してもOKです）。</p>
+<p><img alt="" src="../images/hand_create_3.png" /></p>
+<br />
+<p>最後に、arm_handを取り付ければ完成です。</p>
+<p><img alt="" src="../images/hand_create_4.png" /></p>
+</blockquote>
+
+<h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>
+<blockquote style="border-left-color:#e03131; background:rgba(224,49,49,.07);">
+<p><strong>ブレッドボードの+極について</strong></p>
+<p>SAD101購入時についていた、<strong style="color:#e03131;">+極のジャンプワイヤーは必ず外してください</strong>。
+ついたままだと、<strong style="color:#e03131;">ESP32, アクチュエータが破損する</strong>可能性があります。</p>
+<p><img alt="alt text" src="../images/esp32_breadboard_remove_jumper.png" /></p>
+</blockquote>
+<br />
+<p>※ 下記表において、「接続先1」と「接続先2」は、両者が回路的に直接繋がっていることを指します。</p>
+<table>
+<thead>
+<tr>
+<th>接続先1</th>
+<th>接続先2</th>
+<th>補足</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>乾電池バッテリーボックスの+極</td>
+<td>ブレッドボードの+極の<strong style="color:#e03131;">右側</strong></td>
+<td>以降、右側を6V電圧として扱うため注意</td>
+</tr>
+<tr>
+<td>乾電池バッテリーボックスの-極</td>
+<td>ブレッドボードの-極</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ESP32の5V電源</td>
+<td>ブレッドボードの+極の<strong style="color:#e03131;">左側</strong></td>
+<td>以降、左側を5V電圧として扱うため注意</td>
+</tr>
+<tr>
+<td>ESP32のGND</td>
+<td>ブレッドボードの-極</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<br />
+<p>ESP32-DevKitCの場合の、具体的な配線図は、以下になります。</p>
+<p><img alt="" src="../fritzing/png/hand.png" /></p>
+<blockquote>
+<p><strong>配線の際のポイント</strong></p>
+<p>oooo</p>
+</blockquote>
+
+<h2 id="完成系">完成系<a class="headerlink" href="#完成系" title="Permanent link">#</a></h2>
+<p>今回作成したロボットの完成系は下図のようになります。</p>
+
+<h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
+<h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
+<p>「<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">こちらの起動手順</a>」の内容を実行してください。</p>
+
+<h3 id="サーボ設定">サーボ設定<a class="headerlink" href="#サーボ設定" title="Permanent link">#</a></h3>
+
+<h3 id="コントローラー制御">コントローラー制御<a class="headerlink" href="#コントローラー制御" title="Permanent link">#</a></h3>
+<p>smabo-webの「Servo」タブの「***」で、先ほど指定したサーボのスライダーを操作すると、ハンドが動くことが確認できます。</p>
+
+<h3 id="ランダム制御">ランダム制御<a class="headerlink" href="#ランダム制御" title="Permanent link">#</a></h3>
+
+<h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
+<p>次回は、以下ロードマップの</p>
+<ul>
+<li>oooo</li>
+</ul>
+<p>について解説します。</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../architecture/" data-active=""
+       aria-label="smabo 製作ガイドのロードマップ図（次回）"></svg>
+</div>
+
+        </article>
       </div>
-
-      <h2 class="subhead">この記事を始める前に（前提）</h2>
-      <ul>
-        <li><a href="smabo-esp32.html">smabo-esp32</a></li>
-      </ul>
-
-      <h2 class="subhead">この記事を終えると解放されること</h2>
-      <ul>
-        <li class="muted" style="color:var(--muted)">このロードマップ上の終着点のひとつです</li>
-      </ul>
-
-      <p style="margin-top:36px">
-        <a class="btn btn--ghost" href="../index.html">← ロードマップに戻る</a>
-      </p>
     </div>
   </section>
 
@@ -67,6 +288,24 @@
     </div>
   </footer>
 
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">概要</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+    <div class="rmap-tooltip__actions">
+      <a class="rmap-tooltip__link" href="">ガイドを読む</a>
+      <a class="rmap-tooltip__link rmap-tooltip__link--design" href="" hidden>設計書を読む</a>
+    </div>
+  </div>
+
   <script src="../js/main.js"></script>
+  <script src="../js/docs.js"></script>
+  <script src="../js/roadmap.js"></script>
+  <script src="../js/sysmap.js"></script>
 </body>
 </html>

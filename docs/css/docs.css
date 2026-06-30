@@ -101,8 +101,9 @@
   padding: 10px 14px;
   text-align: left;
   border-bottom: 1px solid var(--line);
-  white-space: nowrap;
 }
+.doc-content th { white-space: nowrap; }
+.doc-content td { white-space: normal; word-break: break-word; }
 .doc-content thead th { background: var(--bg-soft); font-weight: 700; color: var(--ink); }
 .doc-content tbody tr:last-child td { border-bottom: none; }
 .doc-content table code { white-space: normal; }

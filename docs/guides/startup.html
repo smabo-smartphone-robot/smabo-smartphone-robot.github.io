@@ -49,6 +49,8 @@
 </ul></nav>
         <article class="doc-content">
 
+<p><strong>スマホ、PC、SBC、ESP32は全て「同一ネットワーク」に接続した状態で、以下手順を実行してください。</strong></p>
+
 <h2 id="smabo-brainの起動">smabo-brainの起動<a class="headerlink" href="#smabo-brainの起動" title="Permanent link">#</a></h2>
 <p>最初に、PC/SBCからsmabo-brainを起動します。</p>
 <pre><code class="language-bash">cd ~/smabo-brain</code></pre>
@@ -61,28 +63,17 @@
 <p>この状態で、ブラウザから<code>http://localhost:5173</code>にアクセスしてください。</p>
 
 <h2 id="smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-webの接続<a class="headerlink" href="#smabo-brain---smabo-webの接続" title="Permanent link">#</a></h2>
-<p>smabo-brainとsmabo-webの接続を行います。</p>
-<p>smabo-webの「Connect」ボタンをクリックします。</p>
-<p><img alt="alt text" src="../images/web_connect_button.png" /></p>
-<br />
-<p>右下に「Brain connected」と表示されればOKです。</p>
+<p>smabo-webアクセス時に、右下に「Brain connected」と表示されればOKです。</p>
 <p><img alt="alt text" src="../images/web_brain_connected.png" /></p>
 
 <h2 id="smabo-appの接続">smabo-appの接続<a class="headerlink" href="#smabo-appの接続" title="Permanent link">#</a></h2>
 <blockquote>
 <p>以降で載せているスマホ画面のスクリーンショットはシミュレータを使用していますが、実際は物理的なスマホ内の画面になります。</p>
 </blockquote>
-<p>smabo-appを起動し、画面をダブルタップすると表示される「歯車マーク」をタップし、設定画面を開きます。<br />
-<img alt="alt text" src="../images/app_settings_open.png" /></p>
-<br />
-<p>IPの欄に「smabo-brainを起動しているPC/SBCのIPアドレス」を入力し、「Save &amp; Reconnect」をタップします。</p>
-<p><img alt="alt text" src="../images/app_settings_ip.png" /></p>
-<p>しばらくして「Brain connected」と表示されればOKです。</p>
+<p>smabo-appを起動し、しばらくして「Brain connected」と表示されればOKです。</p>
 <p><img alt="alt text" src="../images/app_brain_connected.png" /></p>
 
 <h2 id="smabo-brain---esp32の接続">smabo-brain &lt;-&gt; esp32の接続<a class="headerlink" href="#smabo-brain---esp32の接続" title="Permanent link">#</a></h2>
-<p>smabo-brain &lt;-&gt; esp32間は、esp32の電源を入れた際に、<code>config.json</code>に設定された「IP(<code>brain/host</code>) / PORT(<code>brain/port</code>)」に自動接続されます。</p>
-<p>通信接続されているかは、smabo-webの「Config」タブから確認できます。</p>
 <p>「WS (brain &lt;-&gt; ESP32)」の右側にある「Ping」ボタンをクリックし、OKと表示されれば良いです。</p>
 <p><img alt="alt text" src="../images/esp32_web_ws_ping.png" /></p>
 <blockquote>
@@ -91,11 +82,7 @@
 </blockquote>
 
 <h2 id="smabo-web---esp32の接続">smabo-web &lt;-&gt; esp32の接続<a class="headerlink" href="#smabo-web---esp32の接続" title="Permanent link">#</a></h2>
-<p>smabo-web &lt;-&gt; esp32の通信は、「Config」タブから確認できます。</p>
-<p>最初に、ESP32とPCをUSB接続した状態で、Thonnyのシェルタブから「ESP32の接続IP」を確認します。</p>
-<p><img alt="alt text" src="../images/esp32_thonny_ip.png" /></p>
-<p>次に、smabo-webの「Get Config」の左側のテキストボックスに、確認した「ESP32の接続IP」を入力します。</p>
-<p>最後に、「Config」タブの「REST(web &lt;-&gt; ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。</p>
+<p>「Config」タブの「REST(web &lt;-&gt; ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。</p>
 <p><img alt="alt text" src="../images/esp32_web_rest_ping.png" /></p>
 
         </article>

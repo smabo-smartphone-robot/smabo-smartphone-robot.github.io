@@ -41,7 +41,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
 
 # 概要
 
-本ページでは「****」機能の実装について解説します。
+本ページでは「****機能」について解説します。
 
 具体的には、以下の内容を実施します。
 - oooooo
@@ -60,7 +60,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
 <!-- smabo-app-[websocket]->smabo-brain : 画像、音声 -->
 
 
-![](../images/smabo_sysytem_architecture.drawio.svg)
+![](../images/smabo_system_architecture.drawio.svg)
 
 # 必要パーツ
 
