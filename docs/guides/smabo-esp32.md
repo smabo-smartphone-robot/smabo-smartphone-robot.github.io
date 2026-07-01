@@ -296,7 +296,7 @@ smaboでは、
 
 <br>
 
-ESP32-DevKitCの場合の、具体的な配線図は、以下になります。
+ESP32-DevKitCの場合の配線図は、以下になります。
 
 ![](../fritzing/png/esp32_battery_box.png)
 

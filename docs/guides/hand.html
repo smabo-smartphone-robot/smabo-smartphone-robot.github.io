@@ -59,7 +59,27 @@
 </li>
 <li><a href="#次回">次回</a></li>
 </ul></nav>
+
         <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">目次</div><ul>
+<li><a href="#ロードマップ">ロードマップ</a></li>
+<li><a href="#概要">概要</a></li>
+<li><a href="#必要パーツ">必要パーツ</a></li>
+<li><a href="#パーツの印刷">パーツの印刷</a></li>
+<li><a href="#組み立て手順">組み立て手順</a></li>
+<li><a href="#配線">配線</a></li>
+<li><a href="#完成系">完成系</a></li>
+<li><a href="#動作手順">動作手順</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">起動手順</a></li>
+<li class="toc-h3"><a href="#サーボ設定">サーボ設定</a></li>
+<li class="toc-h3"><a href="#コントローラー制御">コントローラー制御</a></li>
+<li class="toc-h3"><a href="#ランダム制御">ランダム制御</a></li>
+</ul>
+</li>
+<li><a href="#次回">次回</a></li>
+</ul></nav>
 
 <h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
 <p>本ページは、以下ロードマップ「ハンド」のガイドページです。</p>
@@ -72,6 +92,8 @@
 
 <h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
 <p>本ページでは「ハンド機能」について解説します。</p>
+<p><img alt="" src="../gif/smabo_hand_manual_random.gif" /></p>
+<br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
 <li>ハンドのコントローラー制御</li>
@@ -204,13 +226,7 @@
 </blockquote>
 
 <h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>
-<blockquote style="border-left-color:#e03131; background:rgba(224,49,49,.07);">
-<p><strong>ブレッドボードの+極について</strong></p>
-<p>SAD101購入時についていた、<strong style="color:#e03131;">+極のジャンプワイヤーは必ず外してください</strong>。
-ついたままだと、<strong style="color:#e03131;">ESP32, アクチュエータが破損する</strong>可能性があります。</p>
-<p><img alt="alt text" src="../images/esp32_breadboard_remove_jumper.png" /></p>
-</blockquote>
-<br />
+<p>下記表の内容に従って、配線します。</p>
 <p>※ 下記表において、「接続先1」と「接続先2」は、両者が回路的に直接繋がっていることを指します。</p>
 <table>
 <thead>
@@ -241,36 +257,88 @@
 <td>ブレッドボードの-極</td>
 <td>-</td>
 </tr>
+<tr>
+<td>PCA9685のV++</td>
+<td>ブレッドボードの＋極の右側</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685のVCC</td>
+<td>ブレッドボードの＋極の左側</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685のSDA</td>
+<td>config.jsonの<code>i2c/sda</code>に設定されているピン</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685のSCL</td>
+<td>config.jsonの<code>i2c/scl</code>に設定されているピン</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685のGND</td>
+<td>ブレッドボードの-極</td>
+<td>-</td>
+</tr>
 </tbody>
 </table>
 <br />
-<p>ESP32-DevKitCの場合の、具体的な配線図は、以下になります。</p>
+<p>ESP32-DevKitCの場合の配線図は、以下になります。</p>
+<p>※ デフォルト設定の場合、左腕のサーボをchannel=0, 右腕のサーボをchannel=1に接続してください。</p>
 <p><img alt="" src="../fritzing/png/hand.png" /></p>
 <blockquote>
 <p><strong>配線の際のポイント</strong></p>
-<p>oooo</p>
+<p>SG90のケーブルは、smabo背面右下の隙間から通す形でPCA9685に接続してください</p>
 </blockquote>
 
 <h2 id="完成系">完成系<a class="headerlink" href="#完成系" title="Permanent link">#</a></h2>
 <p>今回作成したロボットの完成系は下図のようになります。</p>
+<p><img alt="" src="../images/smabo_hand.png" /></p>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
 <h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
 <p>「<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">こちらの起動手順</a>」の内容を実行してください。</p>
 
 <h3 id="サーボ設定">サーボ設定<a class="headerlink" href="#サーボ設定" title="Permanent link">#</a></h3>
+<p>smabo-webの「Config」タブのModes/servosにて、各サーボの設定を変更可能です。</p>
+<p>最初に、「ハンドの左右のサーボモータは反対方向についている」ため、回転方向を合わせるために、right_handのみinverseを有効にします。</p>
+<p><img alt="alt text" src="../images/hand_servo_inverse.png" /></p>
+<br />
+<p>次に、left_hand, right_handを有効化します。</p>
+<p><img alt="alt text" src="../images/hand_servo_enable.png" /></p>
 
 <h3 id="コントローラー制御">コントローラー制御<a class="headerlink" href="#コントローラー制御" title="Permanent link">#</a></h3>
-<p>smabo-webの「Servo」タブの「***」で、先ほど指定したサーボのスライダーを操作すると、ハンドが動くことが確認できます。</p>
+<p>コントローラー制御の手順を説明します。</p>
+<p>modeを「manual」に設定してください。</p>
+<p><img alt="alt text" src="../images/hand_mode_manual.png" /></p>
+<br />
+<p>「Servo」タブで各サーボの角度を変更すると、それに合わせて左右の腕が動作します。</p>
+<p><img alt="" src="../gif/smabo_hand_manual.gif" /></p>
 
 <h3 id="ランダム制御">ランダム制御<a class="headerlink" href="#ランダム制御" title="Permanent link">#</a></h3>
+<p>ランダム制御の手順を説明します。</p>
+<p>modeを「random (hands)」に設定してください。</p>
+<p><img alt="alt text" src="../images/hand_mode_random.png" /></p>
+<blockquote>
+<p><strong>random_group</strong></p>
+<p>同じrandom_groupに設定されたサーボモーターは、同じタイミングでランダムに動作します。</p>
+<br />
+<p>逆に、左右のハンドを異なるタイミングでランダムに動かしたい場合は、left_hand, right_handそれぞれが別のrandom_groupに属するように設定してください。</p>
+<br />
+<p>なお、新規のrandom_groupは「Add random Group」をクリックすると、追加できます。</p>
+<p><img alt="alt text" src="../images/hand_add_random_group.png" /></p>
+</blockquote>
+<br />
+<p>しばらく待つと、ランダムなタイミングで左右のハンドが動作することが確認できます。</p>
+<p><img alt="" src="../gif/smabo_hand_random.gif" /></p>
 
 <h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
-<p>次回は、以下ロードマップの</p>
-<ul>
-<li>oooo</li>
-</ul>
-<p>について解説します。</p>
+<p>本ページは、ロードマップの終端の1つです。</p>
+<br />
+<p>smaboには、他にも様々な機能があります。</p>
+<p>他にも試したい機能がある場合は、ロードマップからお好きなページをご覧ください。</p>
 <div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
   <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
        data-guide-dir="" data-design-dir="../architecture/" data-active=""

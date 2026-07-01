@@ -37,6 +37,8 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 本ページでは「smabo-app」のセットアップ手順について解説します。
 
+![](../images/smabo-app_general.png)
+
 smabo-appはsmaboの中で
 
 - smaboの顔

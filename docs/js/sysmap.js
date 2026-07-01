@@ -52,7 +52,7 @@
       pts: [[520, 180], [520, 332]], label: [520, 225, "start", "mid"] },
 
     { from: "brain",   to: "web", transport: "webrtc",
-      pts: [[620, 332], [620, 180]], label: [620, 225, "start", "mid"] },
+      pts: [[620, 332], [620, 180]], label: [620, 290, "start", "mid"] },
 
     { from: "brain", to: "web",   transport: "ws",
       pts: [[685, 332], [685, 180]], label: [685, 290, "start", "mid"] },

@@ -20,6 +20,7 @@
   - [ターミナルの使い方（Linux, macの場合）](#ターミナルの使い方linux-macの場合)
   - [ターミナルの使い方（Windows）](#ターミナルの使い方windows)
     - [WSLのインストール](#wslのインストール)
+    - [mirroredモードの有効化](#mirroredモードの有効化)
     - [拡張機能のインストール](#拡張機能のインストール)
     - [WSLの中に入る](#wslの中に入る)
   - [smabo-brainのクローン](#smabo-brainのクローン)
@@ -166,6 +167,15 @@ WSL(Windows for Linux)は、
 WSLのインストール手順については、以下の記事を参考にしてください。
 
 [WSL2 のインストールとアンインストール](https://qiita.com/zakoken/items/61141df6aeae9e3f8e36)
+
+
+### mirroredモードの有効化
+
+WSL2のデフォルト設定では、外部環境との通信ができません。
+
+以降で、スマホやESP32といった外部機器との通信が必要になるため、以下の記事を参考にmirroredモードに設定してください。
+
+[wsl2 mirroredネットワーク、WindowsとLinuxの良いとこどり！](https://qiita.com/shansukey/items/008669cdf392315a656f)
 
 
 ### 拡張機能のインストール

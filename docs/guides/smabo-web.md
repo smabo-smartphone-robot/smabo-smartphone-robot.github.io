@@ -36,6 +36,10 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 本ページでは「smabo-web」のセットアップ手順について解説します。
 
+![alt text](../images/web_general.png)
+
+<br>
+
 smabo-webはsmaboの中で
 
 - smaboの設定の変更、手動操作、センサの可視化などの補助的ツール

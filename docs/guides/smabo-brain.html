@@ -53,6 +53,7 @@
 <li class="toc-h3"><a href="#ターミナルの使い方windows">ターミナルの使い方（Windows）</a>
 <ul>
 <li class="toc-h3"><a href="#wslのインストール">WSLのインストール</a></li>
+<li class="toc-h3"><a href="#mirroredモードの有効化">mirroredモードの有効化</a></li>
 <li class="toc-h3"><a href="#拡張機能のインストール">拡張機能のインストール</a></li>
 <li class="toc-h3"><a href="#wslの中に入る">WSLの中に入る</a></li>
 </ul>
@@ -75,6 +76,41 @@
 <li><a href="#次回">次回</a></li>
 </ul></nav>
         <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">目次</div><ul>
+<li><a href="#ロードマップ">ロードマップ</a></li>
+<li><a href="#概要">概要</a></li>
+<li><a href="#セットアップ先pc-or-sbc">セットアップ先（PC or SBC）</a></li>
+<li><a href="#必要パーツ">必要パーツ</a></li>
+<li><a href="#smabo-brainのセットアップ">smabo-brainのセットアップ</a>
+<ul>
+<li class="toc-h3"><a href="#vscodeのインストール">VSCodeのインストール</a></li>
+<li class="toc-h3"><a href="#ターミナルの使い方linux-macの場合">ターミナルの使い方（Linux, macの場合）</a></li>
+<li class="toc-h3"><a href="#ターミナルの使い方windows">ターミナルの使い方（Windows）</a>
+<ul>
+<li class="toc-h3"><a href="#wslのインストール">WSLのインストール</a></li>
+<li class="toc-h3"><a href="#mirroredモードの有効化">mirroredモードの有効化</a></li>
+<li class="toc-h3"><a href="#拡張機能のインストール">拡張機能のインストール</a></li>
+<li class="toc-h3"><a href="#wslの中に入る">WSLの中に入る</a></li>
+</ul>
+</li>
+<li class="toc-h3"><a href="#smabo-brainのクローン">smabo-brainのクローン</a></li>
+<li class="toc-h3"><a href="#パッケージのインストール">パッケージのインストール</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">動作手順</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">起動手順</a></li>
+</ul>
+</li>
+<li><a href="#sbcラズパイ4-or-5の場合">SBC=ラズパイ（4 or 5）の場合</a>
+<ul>
+<li class="toc-h3"><a href="#パーツの印刷">パーツの印刷</a></li>
+<li class="toc-h3"><a href="#組み立て手順">組み立て手順</a></li>
+</ul>
+</li>
+<li><a href="#次回">次回</a></li>
+</ul></nav>
 
 <h2 id="ロードマップ">ロードマップ<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
 <p>本ページは、以下ロードマップ「smabo-brain」のガイドページです。</p>
@@ -186,6 +222,11 @@
 <h4 id="wslのインストール">WSLのインストール</h4>
 <p>WSLのインストール手順については、以下の記事を参考にしてください。</p>
 <p><a href="https://qiita.com/zakoken/items/61141df6aeae9e3f8e36">WSL2 のインストールとアンインストール</a></p>
+
+<h4 id="mirroredモードの有効化">mirroredモードの有効化</h4>
+<p>WSL2のデフォルト設定では、外部環境との通信ができません。</p>
+<p>以降で、スマホやESP32といった外部機器との通信が必要になるため、以下の記事を参考にmirroredモードに設定してください。</p>
+<p><a href="https://qiita.com/shansukey/articles/008669cdf392315a656f">wsl2 mirroredネットワーク、WindowsとLinuxの良いとこどり！</a></p>
 
 <h4 id="拡張機能のインストール">拡張機能のインストール</h4>
 <p>WSLのインストールが完了したら、VScodeにて以下の拡張機能をインストールしてください。</p>
