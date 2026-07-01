@@ -101,7 +101,7 @@
 </ul>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
-       data-flows='[]' data-active="web,brain,esp32"
+       data-flows='[{"from":"web","to":"brain","transport":"ws","lines":["サーボ制御値"]},{"from":"brain","to":"esp32","transport":"ws","lines":["サーボ制御値"]},{"from":"web","to":"esp32","transport":"rest","lines":["esp32設定変更"]}]' data-active="web,brain,esp32"
        aria-label="smabo システム構成図（smabo-web・smabo-brain・smabo-esp32 をハイライト）"></svg>
 </div>
 
