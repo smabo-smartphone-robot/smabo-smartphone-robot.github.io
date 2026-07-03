@@ -97,6 +97,8 @@ h1, h2, h3 { line-height: 1.3; font-weight: 800; }
 .btn:hover { text-decoration: none; transform: translateY(-2px); }
 .btn--primary { background: var(--indigo); color: #fff; box-shadow: var(--shadow-sm); }
 .btn--primary:hover { background: var(--indigo-dark); }
+.nav__links a.btn--primary,
+.nav__links a.btn--primary:hover { color: #fff; }
 .btn--ghost { background: #fff; color: var(--indigo); border-color: var(--line); }
 .btn--ghost:hover { border-color: var(--indigo); }
 
@@ -422,20 +424,5 @@ pre code { background: none; padding: 0; color: inherit; }
   .arch__link { padding: 4px 0; }
   .arch__link span { transform: rotate(90deg); display: inline-block; }
 
-  .nav__links {
-    position: fixed;
-    inset: 64px 0 auto 0;
-    flex-direction: column;
-    gap: 0;
-    background: #fff;
-    border-bottom: 1px solid var(--line);
-    padding: 8px 0;
-    transform: translateY(-130%);
-    transition: transform 0.25s ease;
-    box-shadow: var(--shadow);
-  }
-  .nav__links.open { transform: translateY(0); }
-  .nav__links a { width: 100%; padding: 14px 24px; }
-  .nav__toggle { display: block; }
-  .nav__links .btn { margin: 8px 24px; }
+  .nav__toggle { display: none; }
 }
