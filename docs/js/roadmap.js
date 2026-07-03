@@ -11,27 +11,27 @@
   // ext: true → 別リポジトリの外部ツール（必須）。色を分けて区別する。
   var NODES = [
     { id: "brain",     file: "smabo-brain", icon: "🧠", label: "smabo-brain",   x: 600, y: 0,    w: 140, h: 70, phase: "brain",
-      tip: "（仮）SBC上でPythonプログラムを動かしてロボットを制御できます。" },
+      tip: "smabo-brainのセットアップ手順について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>smabo-brainは<br>・<strong>各コンポーネントを中継するハブ</strong><br>・<strong>画像処理やAIなどの高度な処理の実行</strong><br>の役割を担います。<svg class='sys-svg rmap-tip-sysmap' viewBox='0 0 1200 520' data-flows='[{\"from\":\"web\",\"to\":\"brain\",\"transport\":\"ws\",\"lines\":[\"制御値\"]},{\"from\":\"brain\",\"to\":\"web\",\"transport\":\"ws\",\"lines\":[\"センサ値\"]},{\"from\":\"brain\",\"to\":\"web\",\"transport\":\"webrtc\",\"lines\":[\"画像\"]},{\"from\":\"brain\",\"to\":\"esp32\",\"transport\":\"ws\",\"lines\":[\"制御値\"]},{\"from\":\"esp32\",\"to\":\"brain\",\"transport\":\"ws\",\"lines\":[\"センサ値\"]},{\"from\":\"app\",\"to\":\"brain\",\"transport\":\"ws\",\"lines\":[\"スマホセンサ値\"]},{\"from\":\"app\",\"to\":\"brain\",\"transport\":\"webrtc\",\"lines\":[\"画像\"]},{\"from\":\"brain\",\"to\":\"app\",\"transport\":\"ws\",\"lines\":[\"制御値\"]}]' data-active='brain'></svg>" },
     { id: "web",       file: "smabo-web", icon: "🖥️", label: "smabo-web",     x: 600, y: 130, w: 140, h: 70, phase: "brain", ext: true,
-      tip: "（仮）設定変更・手動制御・センサ可視化を行うブラウザUI。手動制御などに必要な外部ツールです。" },
+      tip: "smabo-webのセットアップ手順について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>smabo-webは<br>・<strong>smaboの設定の変更、手動操作、センサの可視化などの補助的ツール</strong><br>の役割を担います。<svg class='sys-svg rmap-tip-sysmap' viewBox='0 0 1200 520' data-flows='[{\"from\":\"web\",\"to\":\"brain\",\"transport\":\"ws\",\"lines\":[\"制御値\"]},{\"from\":\"brain\",\"to\":\"web\",\"transport\":\"ws\",\"lines\":[\"センサ値\"]},{\"from\":\"brain\",\"to\":\"web\",\"transport\":\"webrtc\",\"lines\":[\"画像\"]},{\"from\":\"web\",\"to\":\"esp32\",\"transport\":\"rest\",\"lines\":[\"esp32設定変更\"]}]' data-active='web'></svg>" },
     { id: "app",       file: "smabo-app", icon: "📱", label: "smabo-app", x: 600, y: 260, w: 140, h: 70, phase: "brain",
-      tip: "（仮）スマホからロボットのカメラ映像を確認・操作できます。" },
+      tip: "「smabo-app」のセットアップ手順について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>smabo-appは<br>・<strong>smaboの顔</strong><br>・<strong>smaboのセンサー</strong><br>の役割を担います。<svg class='sys-svg rmap-tip-sysmap' viewBox='0 0 1200 520' data-flows='[{\"from\":\"app\",\"to\":\"brain\",\"transport\":\"ws\",\"lines\":[\"スマホセンサ値\"]},{\"from\":\"app\",\"to\":\"brain\",\"transport\":\"webrtc\",\"lines\":[\"画像\"]},{\"from\":\"brain\",\"to\":\"app\",\"transport\":\"ws\",\"lines\":[\"制御値\"]}]' data-active='app'></svg>" },
     { id: "face",      file: "smabo_face", icon: "😊", label: "smaboの顔",   x: 260, y: 390, w: 140, h: 70, phase: "brain",
-      tip: "（仮）スマホ画面に表情豊かな目を表示し、視線追従や瞬きをします。" },
+      tip: "「smaboの顔機能」の使い方について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>・<strong>smabo-webから、smaboの表情を変更</strong><br><img data-src=\"../gif/eye_change.gif\"><br>・<strong>smabo-webから、smaboの目をコントロール</strong><br><img data-src=\"../gif/eye_control_manual.gif\">" },
     { id: "sensors",   file: "smabo_sensors", icon: "📲", label: "スマホセンサ", x: 470, y: 390, w: 140, h: 70, phase: "brain",
-      tip: "（仮）スマホのIMU・GPS・カメラをロボットのセンサとして使えます。" },
+      tip: "「smaboのセンサー」について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>・<strong>スマホのセンサデータ（画像、IMU、GPS）をsmabo-webで可視化</strong><br><img data-src=\"../gif/smabo-web-sensor.gif\">" },
     { id: "voice",     file: "audioproc", icon: "🎤", label: "音声処理",     x: 730, y: 390, w: 140, h: 70, phase: "brain",
-      tip: "（仮）ウェイクワードで録音し、smabo-brain が音声認識します。" },
-    { id: "imgproc",   icon: "👁️", label: "画像処理",                x: 940, y: 390, w: 140, h: 70, phase: "brain",
-      tip: "（仮）カメラ映像をリアルタイムに解析・物体認識できます。" },
+      tip: "「音声処理機能」について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>・<strong>スマホで取得した音声を、音声認識</strong><br><img data-src=\"../images/app_recognized_speech.png\"><br>・<strong>smabo-webで指定した文字列を発話</strong><br><img data-src=\"../images/app_speech_say.png\">" },
+    { id: "imgproc",   file: "imgproc", icon: "👁️", label: "画像処理",                x: 940, y: 390, w: 140, h: 70, phase: "brain",
+      tip: "「画像処理機能」について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>・<strong>カメラから取得した画像をもとに、対象物体を識別</strong><br><img data-src=\"../gif/img_proc_smabo_web.gif\"><br><img data-src=\"../gif/eye_control_img_proc.gif\">" },
     { id: "baseparts", file: "base", icon: "🧩", label: "ベースパーツの作成",        x: 600, y: 520, w: 140, h: 70, phase: "esp32",
-      tip: "smaboのベースとなるパーツの印刷、組み立て手順を解説します。" },
+      tip: "「ベースパーツの作成」手順について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>・<strong>自分のスマホのサイズに合わせた3Dモデルの修正</strong><br><img data-src=\"../images/base_long_inner_extrude.png\"><br>・<strong>ベースパーツの3Dプリンタによる印刷</strong><br><img data-src=\"../images/base_print_base.png\">" },
     { id: "esp32",     file: "smabo-esp32", icon: "🔌", label: "smabo-esp32",   x: 600, y: 650, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）ロボットの基本的な通信・制御ができるようになります。" },
-    { id: "hand",      icon: "🤏", label: "ハンド",                  x: 355, y: 790, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）スマホアプリからグリッパーを開閉操作できます。" },
-    { id: "neck",      icon: "🔄", label: "首振り",                  x: 535, y: 790, w: 140, h: 70, phase: "esp32",
-      tip: "（仮）スマホのカメラをパン（左右）方向に向けられます。" },
+      tip: "「smabo-esp32」のセットアップ手順について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>smabo-esp32は<br>・<strong>esp32に繋いだセンサやアクチュエータの制御</strong><br>の役割を担います。<svg class='sys-svg rmap-tip-sysmap' viewBox='0 0 1200 520' data-flows='[{\"from\":\"web\",\"to\":\"esp32\",\"transport\":\"rest\",\"lines\":[\"esp32設定\"]},{\"from\":\"brain\",\"to\":\"esp32\",\"transport\":\"ws\",\"lines\":[\"制御値\"]},{\"from\":\"esp32\",\"to\":\"brain\",\"transport\":\"ws\",\"lines\":[\"センサ値\"]}]' data-active='esp32'></svg>" },
+    { id: "hand",      file: "hand", icon: "🤏", label: "ハンド",                  x: 355, y: 790, w: 140, h: 70, phase: "esp32",
+      tip: "「ハンド機能」について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>・<strong>ハンドのコントローラー制御</strong><br><img data-src=\"../gif/smabo_hand_manual.gif\"><br>・<strong>ハンドのランダム制御</strong><br><img data-src=\"../gif/smabo_hand_random.gif\">" },
+    { id: "neck",      file: "neck", icon: "🔄", label: "首振り",                  x: 535, y: 790, w: 140, h: 70, phase: "esp32",
+      tip: "「首振り機能」について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><a class='rmap-tip-btn rmap-tip-btn--design' data-design-btn>設計書を読む</a><br>・首振りのコントローラー制御<br><img data-src=\"../gif/smabo_neck_manual.gif\"><br>・首振りのランダム制御<br><img data-src=\"../gif/smabo_neck_random.gif\"><br>・画像認識による首振り制御<br><img data-src=\"../gif/smabo_neck_img_proc.gif\">" },
     { id: "mobile",    icon: "🚗", label: "移動ロボット",             x: 695, y: 790, w: 140, h: 70, phase: "esp32",
       tip: "（仮）スマホアプリでロボットを前後左右に走行させられます。" },
     { id: "arm",       icon: "🦾", label: "ロボットアーム",           x: 845, y: 790, w: 140, h: 70, phase: "esp32",
@@ -247,53 +247,77 @@
   // ---- tooltip ---------------------------------------------------------
   var activeNode  = null;
   var tooltip     = document.getElementById("rmap-tooltip");
-  var tipBody       = tooltip && tooltip.querySelector(".rmap-tooltip__body");
-  var tipImg        = tooltip && tooltip.querySelector(".rmap-tooltip__img");
-  var tipLink       = tooltip && tooltip.querySelector(".rmap-tooltip__link:not(.rmap-tooltip__link--design)");
-  var tipDesignLink = tooltip && tooltip.querySelector(".rmap-tooltip__link--design");
+  var tipBody     = tooltip && tooltip.querySelector(".rmap-tooltip__body");
+  var tipImg      = tooltip && tooltip.querySelector(".rmap-tooltip__img");
 
   var hideTimer = null;
 
   function showTooltip(n, nodeEl, lock) {
     clearTimeout(hideTimer);
     if (!tooltip || !n.tip) return;
-    tipBody.textContent = n.tip;
-    if (tipLink) tipLink.href = guideDir + (n.file || n.id) + ".html";
+    tipBody.innerHTML = n.tip;
+    tipBody.querySelectorAll('img[data-src]').forEach(function(img) {
+      img.src = guideDir + img.getAttribute('data-src');
+    });
+    tipBody.querySelectorAll('a[data-guide-btn]').forEach(function(a) {
+      a.href = guideDir + (n.file || n.id) + ".html";
+    });
+    tipBody.querySelectorAll('a[data-design-btn]').forEach(function(a) {
+      if (n.design) {
+        a.href = designDir + n.id + ".html";
+        a.hidden = false;
+      } else {
+        a.hidden = true;
+      }
+    });
     if (lock) svg.classList.add("has-tooltip");
     else svg.classList.remove("has-tooltip");
-    if (tipDesignLink) {
-      if (n.design) {
-        tipDesignLink.href = designDir + n.id + ".html";
-        tipDesignLink.hidden = false;
-      } else {
-        tipDesignLink.hidden = true;
-      }
-    }
     if (n.tipImg && tipImg) {
-      tipImg.src = n.tipImg;
+      tipImg.src = guideDir + n.tipImg;
       tipImg.hidden = false;
     } else if (tipImg) {
       tipImg.hidden = true;
     }
+    tooltip.style.visibility = 'hidden';
     tooltip.hidden = false;
-    var r   = nodeEl.getBoundingClientRect();
-    var tw  = tooltip.offsetWidth;
-    var th  = tooltip.offsetHeight;
-    var gap = 14;
-    var vw  = window.innerWidth;
-    var vh  = window.innerHeight;
-    var left, top;
-    if (r.right + gap + tw <= vw - 8) {
-      left = r.right + gap;
-    } else if (r.left - gap - tw >= 8) {
-      left = r.left - tw - gap;
-    } else {
-      left = Math.max(8, (vw - tw) / 2);
+    if (window.sysmapBuild) {
+      tipBody.querySelectorAll('.sys-svg').forEach(function(s) {
+        window.sysmapBuild(s);
+      });
     }
-    top = r.top + (r.height - th) / 2;
-    top = Math.max(8, Math.min(top, vh - th - 8));
-    tooltip.style.left = left + "px";
-    tooltip.style.top  = top  + "px";
+    var r = nodeEl.getBoundingClientRect();
+    function reposition() {
+      var tw  = tooltip.offsetWidth;
+      var th  = tooltip.offsetHeight;
+      var gap = 14;
+      var vw  = window.innerWidth;
+      var vh  = window.innerHeight;
+      var left, top;
+      if (r.right + gap + tw <= vw - 8) {
+        left = r.right + gap;
+      } else if (r.left - gap - tw >= 8) {
+        left = r.left - tw - gap;
+      } else {
+        left = Math.max(8, (vw - tw) / 2);
+      }
+      top = r.top + (r.height - th) / 2;
+      top = Math.max(8, Math.min(top, vh - th - 8));
+      tooltip.style.left = left + "px";
+      tooltip.style.top  = top  + "px";
+    }
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        reposition();
+        tooltip.style.visibility = '';
+        tipBody.querySelectorAll('img').forEach(function(img) {
+          if (!img.complete) {
+            img.addEventListener('load', function() {
+              if (!tooltip.hidden) reposition();
+            }, { once: true });
+          }
+        });
+      });
+    });
   }
   function hideTooltip() {
     clearTimeout(hideTimer);

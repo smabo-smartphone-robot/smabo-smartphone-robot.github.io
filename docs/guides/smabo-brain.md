@@ -55,6 +55,7 @@ smabo-brainはsmaboの中で
 の役割を担います。
 
 <!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
+
 <!-- 以下例のように記述するので、ハイライトするノードと矢印、およびラベルに記述する内容を確認し、アーキテクチャ図を作成してください -->
 <!-- 例）コンポーネント1 -[websocket]-> コンポーネント2：データ種類1, データ種類2 -->
 <!-- 上記の場合、-->
@@ -63,9 +64,16 @@ smabo-brainはsmaboの中で
 <!-- 3. 矢印には、「データ種類1、データ種類2」とラベルを記述。ここで、読点ごとに改行すること（読点はラベルには含まない）>
 <!-- 4. ラベルの行数が増えると、ラベルがノードや矢印通しで重なる可能性があるので、重なっていないことを確認すること-->
 
-
 <!-- 今回の、具体的な構成は以下になります。 -->
-<!-- 今回はセットアップだけなのでsmabo-brainをハイライトするだけ-->
+<!-- smabo-web-[websocket]->smabo-brain：制御値 -->
+<!-- smabo-brain-[websocket]->smabo-web：センサ値 -->
+<!-- smabo-brain-[webRTC]->smabo-web：画像 -->
+<!-- smabo-brain-[websocket]->smabo-esp32：制御値 -->
+<!-- smabo-esp32-[websocket]->smabo-brain：センサ値 -->
+<!-- smabo-app-[websocket]->smabo-brain：スマホセンサ値 -->
+<!-- smabo-app-[webRTC]->smabo-brain：画像 -->
+<!-- smabo-brain-[websocket]->smabo-app：制御値 -->
+
 ![](../images/smabo_sysytem_architecture.drawio.svg)
 
 

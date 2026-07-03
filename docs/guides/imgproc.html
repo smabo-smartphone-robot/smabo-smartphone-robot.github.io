@@ -65,19 +65,17 @@
 </div>
 
 <h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
-<p>本ページでは「画像処理」機能の実装について解説します。</p>
+<p>本ページでは「画像処理機能」について解説します。</p>
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
-<li>smabo-webから画像処理の設定<ul>
-<li>認識対象（色物体、ARマーカー、QRコード）の設定など</li>
-</ul>
-</li>
 <li>カメラから取得した画像をもとに、対象物体を識別<ul>
 <li>識別結果をsmabo-webで可視化</li>
 <li>識別結果をもとにsmaboの目を制御</li>
 </ul>
 </li>
 </ul>
+<p><img alt="" src="../gif/img_proc_smabo_web.gif" /></p>
+<p><img alt="" src="../gif/eye_control_img_proc.gif" /></p>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
        data-flows='[{"from":"app","to":"brain","transport":"webrtc","lines":["画像"]},{"from":"brain","to":"web","transport":"webrtc","lines":["画像"]},{"from":"brain","to":"app","transport":"ws","lines":["目の制御"]},{"from":"web","to":"brain","transport":"ws","lines":["画像処理設定"]},{"from":"brain","to":"web","transport":"ws","lines":["画像処理結果"]}]'
@@ -139,10 +137,12 @@
 <br />
 <p>例えば、「目の制御」の場合、</p>
 <ul>
-<li>smabo-appの顔のモードを「Follow」にした状態</li>
+<li>smabo-appの顔のモードを「Follow」に</li>
 </ul>
-<p>で、認識対象の物体をカメラの前に持ってくると、smaboの目が追従することが確認できます。</p>
 <p><img alt="" src="../images/app_eye_follow_mode.png" /></p>
+<p>設定します。</p>
+<p>この状態で、認識対象の物体をカメラの前に持ってくると、smaboの目が追従することが確認できます。</p>
+<p><img alt="" src="../gif/eye_control_img_proc.gif" /></p>
 
 <h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
 <p>次回は、以下ロードマップの</p>
@@ -176,10 +176,6 @@
     <p class="rmap-tooltip__label">概要</p>
     <p class="rmap-tooltip__body"></p>
     <img class="rmap-tooltip__img" src="" alt="" hidden />
-    <div class="rmap-tooltip__actions">
-      <a class="rmap-tooltip__link" href="">ガイドを読む</a>
-      <a class="rmap-tooltip__link rmap-tooltip__link--design" href="" hidden>設計書を読む</a>
-    </div>
   </div>
 
   <script src="../js/main.js"></script>

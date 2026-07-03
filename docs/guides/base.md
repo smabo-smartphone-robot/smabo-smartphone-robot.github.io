@@ -52,7 +52,11 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 具体的には、以下の内容を実施します。
 
 - 自分のスマホのサイズに合わせた3Dモデルの修正
+![alt text](../images/base_long_inner_extrude.png)
+
+
 - ベースパーツの3Dプリンタによる印刷
+![alt text](../images/base_print_base.png)
 
 
 # 必要パーツ

@@ -85,8 +85,6 @@
 
 <h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
 <p>本ページでは「smabo-web」のセットアップ手順について解説します。</p>
-<p><img alt="alt text" src="../images/web_general.png" /></p>
-<br />
 <p>smabo-webはsmaboの中で</p>
 <ul>
 <li>smaboの設定の変更、手動操作、センサの可視化などの補助的ツール</li>
@@ -94,7 +92,7 @@
 <p>の役割を担います。</p>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
-       data-flows='[]' data-active="web"
+       data-flows='[{"from":"web","to":"brain","transport":"ws","lines":["制御値"]},{"from":"brain","to":"web","transport":"ws","lines":["センサ値"]},{"from":"brain","to":"web","transport":"webrtc","lines":["画像"]},{"from":"web","to":"esp32","transport":"rest","lines":["esp32設定変更"]}]' data-active="web"
        aria-label="smabo システム構成図（smabo-web をハイライト）"></svg>
 </div>
 
@@ -150,10 +148,6 @@ git clone https://github.com/smabo-smartphone-robot/smabo-web</code></pre>
     <p class="rmap-tooltip__label">概要</p>
     <p class="rmap-tooltip__body"></p>
     <img class="rmap-tooltip__img" src="" alt="" hidden />
-    <div class="rmap-tooltip__actions">
-      <a class="rmap-tooltip__link" href="">ガイドを読む</a>
-      <a class="rmap-tooltip__link rmap-tooltip__link--design" href="" hidden>設計書を読む</a>
-    </div>
   </div>
 
   <script src="../js/main.js"></script>

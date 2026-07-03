@@ -109,7 +109,7 @@
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(40,42,90,.12);
   padding: 10px 12px;
-  width: 168px;
+  width: 320px;
   max-width: calc(100vw - 24px);
   box-sizing: border-box;
 }
@@ -127,7 +127,7 @@
 .rmap-tooltip:hover .rmap-tooltip__handle { color: var(--muted); }
 .rmap-tooltip__link { cursor: pointer; }
 .rmap-tooltip__label {
-  font-size: 0.72rem;
+  font-size: 0.63rem;
   font-weight: 800;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -135,7 +135,7 @@
   margin: 0 0 6px;
 }
 .rmap-tooltip__body {
-  font-size: 0.84rem;
+  font-size: 0.72rem;
   color: var(--ink);
   margin: 0;
   line-height: 1.5;
@@ -147,13 +147,15 @@
   border-radius: 8px;
   margin-top: 10px;
 }
-.rmap-tooltip__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
+.rmap-tooltip__body img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-top: 6px;
+  margin-bottom: 4px;
 }
-.rmap-tooltip__link {
+.rmap-tip-btn {
   display: inline-block;
   font-size: 0.78rem;
   font-weight: 700;
@@ -162,9 +164,19 @@
   border: 1.5px solid var(--indigo);
   border-radius: 999px;
   padding: 4px 12px;
+  margin: 8px 4px 12px 0;
   transition: background .15s ease, color .15s ease;
 }
-.rmap-tooltip__link:hover { background: var(--indigo); color: #fff; }
-.rmap-tooltip__link--design { color: var(--cyan); border-color: var(--cyan); }
-.rmap-tooltip__link--design:hover { background: var(--cyan); color: #fff; }
+.rmap-tip-btn:hover { background: var(--indigo); color: #fff; }
+.rmap-tip-btn--design { color: var(--cyan); border-color: var(--cyan); }
+.rmap-tip-btn--design:hover { background: var(--cyan); color: #fff; }
+
+.rmap-tip-sysmap {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1200 / 520;
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
 

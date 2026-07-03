@@ -85,7 +85,6 @@
 
 <h2 id="概要">概要<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
 <p>本ページでは「smabo-app」のセットアップ手順について解説します。</p>
-<p><img alt="" src="../images/smabo-app_general.png" /></p>
 <p>smabo-appはsmaboの中で</p>
 <ul>
 <li>smaboの顔</li>
@@ -94,7 +93,7 @@
 <p>の役割を担います。</p>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
-       data-flows='[]' data-active="app"
+       data-flows='[{"from":"app","to":"brain","transport":"webrtc","lines":["画像"]},{"from":"app","to":"brain","transport":"ws","lines":["スマホセンサ値"]},{"from":"brain","to":"app","transport":"ws","lines":["制御値"]}]' data-active="app"
        aria-label="smabo システム構成図（smabo-app をハイライト）"></svg>
 </div>
 
@@ -172,10 +171,6 @@
     <p class="rmap-tooltip__label">概要</p>
     <p class="rmap-tooltip__body"></p>
     <img class="rmap-tooltip__img" src="" alt="" hidden />
-    <div class="rmap-tooltip__actions">
-      <a class="rmap-tooltip__link" href="">ガイドを読む</a>
-      <a class="rmap-tooltip__link rmap-tooltip__link--design" href="" hidden>設計書を読む</a>
-    </div>
   </div>
 
   <script src="../js/main.js"></script>

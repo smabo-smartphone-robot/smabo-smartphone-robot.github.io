@@ -36,10 +36,6 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 本ページでは「smabo-web」のセットアップ手順について解説します。
 
-![alt text](../images/web_general.png)
-
-<br>
-
 smabo-webはsmaboの中で
 
 - smaboの設定の変更、手動操作、センサの可視化などの補助的ツール
@@ -47,6 +43,7 @@ smabo-webはsmaboの中で
 の役割を担います。
 
 <!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
+
 <!-- 以下例のように記述するので、ハイライトするノードと矢印、およびラベルに記述する内容を確認し、アーキテクチャ図を作成してください -->
 <!-- 例）コンポーネント1 -[websocket]-> コンポーネント2：データ種類1, データ種類2 -->
 <!-- 上記の場合、-->
@@ -55,9 +52,12 @@ smabo-webはsmaboの中で
 <!-- 3. 矢印には、「データ種類1、データ種類2」とラベルを記述。ここで、読点ごとに改行すること（読点はラベルには含まない）>
 <!-- 4. ラベルの行数が増えると、ラベルがノードや矢印通しで重なる可能性があるので、重なっていないことを確認すること-->
 
-
 <!-- 今回の、具体的な構成は以下になります。 -->
-<!-- 今回はセットアップするだけなので、smabo-webをハイライトするだけ -->
+<!-- smabo-web-[websocket]->smabo-brain：制御値 -->
+<!-- smabo-brain-[websocket]->smabo-web：センサ値 -->
+<!-- smabo-brain-[webRTC]->smabo-web：画像 -->
+<!-- smabo-web-[REST API]->smabo-esp32：esp32設定変更 -->
+
 
 ![](../images/smabo_sysytem_architecture.drawio.svg)
 

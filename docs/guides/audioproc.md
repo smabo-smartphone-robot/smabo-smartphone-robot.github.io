@@ -37,12 +37,12 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 本ページでは「音声処理機能」について解説します。
 
 具体的には、以下の内容を実施します。
-- スマホのマイクから取得した音声を、音声認識
+- スマホで取得した音声を、音声認識
   - 認識結果をsmabo-webに表示
 ![alt text](../images/app_recognized_speech.png)
 
 
-- smabo-webで指定した文字列をスマホで発話
+- smabo-webで指定した文字列を発話
 ![alt text](../images/app_speech_say.png)
 
 
