@@ -252,8 +252,13 @@
 
   var hideTimer = null;
 
-  /* close button — added once, reused across tooltips */
+  /* close button + fullscreen title — added once, reused across tooltips */
+  var titleEl = null;
   if (tooltip) {
+    titleEl = document.createElement('p');
+    titleEl.className = 'rmap-tooltip__title';
+    tooltip.insertBefore(titleEl, tooltip.firstChild);
+
     var closeBtn = document.createElement('button');
     closeBtn.className = 'rmap-tooltip__close';
     closeBtn.setAttribute('aria-label', '閉じる');
@@ -283,6 +288,7 @@
     if (lock) svg.classList.add("has-tooltip");
     else svg.classList.remove("has-tooltip");
     tooltip.classList.toggle('rmap-tooltip--fullscreen', !!lock);
+    if (titleEl) titleEl.textContent = (n.icon ? n.icon + ' ' : '') + (n.label || '');
     if (n.tipImg && tipImg) {
       tipImg.src = guideDir + n.tipImg;
       tipImg.hidden = false;
@@ -384,7 +390,7 @@
     }
 
     tooltip.addEventListener("mousedown", function (ev) {
-      if (ev.target.closest("a")) return;
+      if (ev.target.closest("a, button")) return;
       startDrag(ev.clientX, ev.clientY);
       ev.preventDefault();
     });
@@ -392,7 +398,7 @@
     document.addEventListener("mouseup", endDrag);
 
     tooltip.addEventListener("touchstart", function (ev) {
-      if (ev.target.closest("a")) return;
+      if (ev.target.closest("a, button")) return;
       startDrag(ev.touches[0].clientX, ev.touches[0].clientY);
       ev.stopPropagation();
     }, { passive: true });

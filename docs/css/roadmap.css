@@ -180,6 +180,14 @@
   overflow: hidden;
 }
 
+.rmap-tooltip__title {
+  display: none;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0 40px 14px 0;
+  color: var(--ink);
+}
+
 .rmap-tooltip__close {
   display: none;
   position: absolute;
@@ -207,6 +215,9 @@
   }
   .rmap-tooltip--fullscreen .rmap-tooltip__handle {
     display: none;
+  }
+  .rmap-tooltip--fullscreen .rmap-tooltip__title {
+    display: block;
   }
   .rmap-tooltip--fullscreen .rmap-tooltip__close {
     display: block;
