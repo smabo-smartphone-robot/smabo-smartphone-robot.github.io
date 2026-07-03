@@ -180,3 +180,13 @@
   overflow: hidden;
 }
 
+@media (max-width: 600px) {
+  .rmap-tooltip {
+    width: 230px;
+    max-width: calc(100vw - 32px);
+  }
+  .rmap-tip-sysmap {
+    display: none;
+  }
+}
+
