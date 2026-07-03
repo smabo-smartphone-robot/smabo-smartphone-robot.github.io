@@ -50,7 +50,10 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
 
 具体的には、以下の内容を実施します。
 - ハンドのコントローラー制御
+![](../gif/smabo_hand_manual.gif)
+
 - ハンドのランダム制御
+![](../gif/smabo_hand_random.gif)
 
 <!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
 
@@ -143,11 +146,6 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
 
     そして、sg90_baseを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、SG90に付属のネジでホーンとサーボを固定してもOKです）。
     ![](../images/hand_create_3.png)
-
-    <br>
-
-    最後に、arm_handを取り付ければ完成です。
-    ![](../images/hand_create_4.png)
     
 
 # 配線
@@ -211,9 +209,12 @@ htmlに変換する際、「起動手順」へのリンク（startup.html）は�
 
 ## サーボ設定
 
-smabo-webの「Config」タブのModes/servosにて、各サーボの設定を変更可能です。
+smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設定を変更可能です。
 
-最初に、「ハンドの左右のサーボモータは反対方向についている」ため、回転方向を合わせるために、right_handのみinverseを有効にします。
+最初に、「ハンドの左右のサーボモータは反対方向についている」ため、回転方向を合わせるために、
+- 「right_hand」のみ「inverse」を有効
+
+にします。
 
 
 ![alt text](../images/hand_servo_inverse.png)
@@ -221,18 +222,22 @@ smabo-webの「Config」タブのModes/servosにて、各サーボの設定を�
 
 <br>
 
-次に、left_hand, right_handを有効化します。
+次に、
+- 「left_hand」「right_hand」を有効化
+
+します。
 
 ![alt text](../images/hand_servo_enable.png)
-
 
 ## コントローラー制御
 
 コントローラー制御の手順を説明します。
 
-modeを「manual」に設定してください。
+「Config」タブの「Modes/servos」にて、left_han, right_handの
 
+- 「mode」を「manual」
 
+に設定してください。
 
 ![alt text](../images/hand_mode_manual.png)
 
@@ -246,7 +251,12 @@ modeを「manual」に設定してください。
 
 ランダム制御の手順を説明します。
 
-modeを「random」、groupを「hands」に設定してください。 
+「Config」タブの「Modes/servos」にて、left_han, right_handの
+
+- 「mode」を「random」
+- 「group」を「hands」
+
+に設定してください。 
 
 ![alt text](../images/hand_mode_random.png)
 

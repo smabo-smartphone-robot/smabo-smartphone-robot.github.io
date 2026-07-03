@@ -39,6 +39,8 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 具体的には、以下の内容を実施します。
 - スマホから受け取ったセンサデータ（画像、IMU、GPS）をsmabo-webで可視化
+![](../images/app_sensor_web.png)
+
 
 <!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
 <!-- 以下例のように記述するので、ハイライトするノードと矢印、およびラベルに記述する内容を確認し、アーキテクチャ図を作成してください -->

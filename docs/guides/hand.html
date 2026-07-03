@@ -96,8 +96,12 @@
 <br />
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
-<li>ハンドのコントローラー制御</li>
-<li>ハンドのランダム制御</li>
+<li>ハンドのコントローラー制御
+<p><img src="../gif/smabo_hand_manual.gif" /></p>
+</li>
+<li>ハンドのランダム制御
+<p><img src="../gif/smabo_hand_random.gif" /></p>
+</li>
 </ul>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
   <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
@@ -220,9 +224,6 @@
 <br />
 <p>そして、sg90_baseを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、SG90に付属のネジでホーンとサーボを固定してもOKです）。</p>
 <p><img alt="" src="../images/hand_create_3.png" /></p>
-<br />
-<p>最後に、arm_handを取り付ければ完成です。</p>
-<p><img alt="" src="../images/hand_create_4.png" /></p>
 </blockquote>
 
 <h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>
@@ -302,16 +303,28 @@
 <p>「<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">こちらの起動手順</a>」の内容を実行してください。</p>
 
 <h3 id="サーボ設定">サーボ設定<a class="headerlink" href="#サーボ設定" title="Permanent link">#</a></h3>
-<p>smabo-webの「Config」タブのModes/servosにて、各サーボの設定を変更可能です。</p>
-<p>最初に、「ハンドの左右のサーボモータは反対方向についている」ため、回転方向を合わせるために、right_handのみinverseを有効にします。</p>
+<p>smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設定を変更可能です。</p>
+<p>最初に、「ハンドの左右のサーボモータは反対方向についている」ため、回転方向を合わせるために、</p>
+<ul>
+<li>「right_hand」のみ「inverse」を有効</li>
+</ul>
+<p>にします。</p>
 <p><img alt="alt text" src="../images/hand_servo_inverse.png" /></p>
 <br />
-<p>次に、left_hand, right_handを有効化します。</p>
+<p>次に、</p>
+<ul>
+<li>「left_hand」「right_hand」を有効化</li>
+</ul>
+<p>します。</p>
 <p><img alt="alt text" src="../images/hand_servo_enable.png" /></p>
 
 <h3 id="コントローラー制御">コントローラー制御<a class="headerlink" href="#コントローラー制御" title="Permanent link">#</a></h3>
 <p>コントローラー制御の手順を説明します。</p>
-<p>modeを「manual」に設定してください。</p>
+<p>「Config」タブの「Modes/servos」にて、left_han, right_handの</p>
+<ul>
+<li>「mode」を「manual」</li>
+</ul>
+<p>に設定してください。</p>
 <p><img alt="alt text" src="../images/hand_mode_manual.png" /></p>
 <br />
 <p>「Servo」タブで各サーボの角度を変更すると、それに合わせて左右の腕が動作します。</p>
@@ -319,7 +332,12 @@
 
 <h3 id="ランダム制御">ランダム制御<a class="headerlink" href="#ランダム制御" title="Permanent link">#</a></h3>
 <p>ランダム制御の手順を説明します。</p>
-<p>modeを「random」、groupを「hands」に設定してください。 </p>
+<p>「Config」タブの「Modes/servos」にて、left_han, right_handの</p>
+<ul>
+<li>「mode」を「random」</li>
+<li>「group」を「hands」</li>
+</ul>
+<p>に設定してください。 </p>
 <p><img alt="alt text" src="../images/hand_mode_random.png" /></p>
 <blockquote>
 <p><strong>random_group</strong></p>

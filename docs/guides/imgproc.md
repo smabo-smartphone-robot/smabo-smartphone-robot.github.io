@@ -56,7 +56,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 <!-- smabo-brain -[webrtc]-> smabo-web : 画像 -->
 <!-- smabo-brain -[websocket]-> smabo-app：目の制御-->
 <!-- smabo-web -[websocket]-> smabo-brain：画像処理設定-->
-<!-- smabo-brain -[websocket]-> smabo-web：画像処理検出結果-->
+<!-- smabo-brain -[websocket]-> smabo-web：画像処理結果-->
 
 ![](../images/smabo_sysytem_architecture.drawio.svg)
 
@@ -120,7 +120,7 @@ smabo-webの「Vision」タブにて画像認識に関する設定が可能で�
 - サーボの制御
   - 認識した物体に追従するようにサーボが動作
   - 左右方向、上下方向それぞれにサーボを設定可能
-  - 詳細は「[顔振り](./neck.md)」にて解説
+  - 詳細は「[首振り](./neck.md)」にて解説
 - 二輪駆動ロボットの制御
   - 認識した物体を追従するようにロボットを制御
   - 物体のサイズが、target sizeに設定されたサイズを維持するように、ロボットが前進、後退

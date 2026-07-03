@@ -39,7 +39,12 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 具体的には、以下の内容を実施します。
 - スマホのマイクから取得した音声を、音声認識
   - 認識結果をsmabo-webに表示
+![alt text](../images/app_recognized_speech.png)
+
+
 - smabo-webで指定した文字列をスマホで発話
+![alt text](../images/app_speech_say.png)
+
 
 
 <!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
