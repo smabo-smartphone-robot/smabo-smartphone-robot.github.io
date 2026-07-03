@@ -225,6 +225,10 @@
     });
     g.addEventListener("touchend", (function (node, gEl) {
       return function (ev) {
+        var t = ev.changedTouches[0];
+        var dx = t.clientX - touchStartX;
+        var dy = t.clientY - touchStartY;
+        if (dx * dx + dy * dy > 100) return;
         ev.preventDefault();
         if (activeNode === node.id) {
           activeNode = null;
@@ -246,6 +250,13 @@
 
   // ---- tooltip ---------------------------------------------------------
   var activeNode  = null;
+  var touchStartX = 0, touchStartY = 0;
+  svg.addEventListener('touchstart', function(ev) {
+    if (ev.touches.length === 1) {
+      touchStartX = ev.touches[0].clientX;
+      touchStartY = ev.touches[0].clientY;
+    }
+  }, { passive: true });
   var tooltip     = document.getElementById("rmap-tooltip");
   var tipBody     = tooltip && tooltip.querySelector(".rmap-tooltip__body");
   var tipImg      = tooltip && tooltip.querySelector(".rmap-tooltip__img");
