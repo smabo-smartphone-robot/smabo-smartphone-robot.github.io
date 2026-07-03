@@ -252,6 +252,16 @@
 
   var hideTimer = null;
 
+  /* close button — added once, reused across tooltips */
+  if (tooltip) {
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'rmap-tooltip__close';
+    closeBtn.setAttribute('aria-label', '閉じる');
+    closeBtn.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    closeBtn.addEventListener('click', function() { hideTooltipImmediate(); });
+    tooltip.appendChild(closeBtn);
+  }
+
   function showTooltip(n, nodeEl, lock) {
     clearTimeout(hideTimer);
     if (!tooltip || !n.tip) return;
@@ -272,6 +282,7 @@
     });
     if (lock) svg.classList.add("has-tooltip");
     else svg.classList.remove("has-tooltip");
+    tooltip.classList.toggle('rmap-tooltip--fullscreen', !!lock);
     if (n.tipImg && tipImg) {
       tipImg.src = guideDir + n.tipImg;
       tipImg.hidden = false;
@@ -322,7 +333,10 @@
   function hideTooltip() {
     clearTimeout(hideTimer);
     hideTimer = setTimeout(function () {
-      if (tooltip) tooltip.hidden = true;
+      if (tooltip) {
+        tooltip.hidden = true;
+        tooltip.classList.remove('rmap-tooltip--fullscreen');
+      }
       svg.classList.remove("has-tooltip");
       clearHighlight();
       applyInitial();
@@ -330,7 +344,10 @@
   }
   function hideTooltipImmediate() {
     clearTimeout(hideTimer);
-    if (tooltip) tooltip.hidden = true;
+    if (tooltip) {
+      tooltip.hidden = true;
+      tooltip.classList.remove('rmap-tooltip--fullscreen');
+    }
     svg.classList.remove("has-tooltip");
     clearHighlight();
     applyInitial();
