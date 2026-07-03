@@ -212,6 +212,7 @@
     height: 100vh !important;
     border-radius: 0 !important;
     overflow-y: auto;
+    touch-action: pan-y;
   }
   .rmap-tooltip--fullscreen .rmap-tooltip__handle {
     display: none;

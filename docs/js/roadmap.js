@@ -391,6 +391,7 @@
 
     tooltip.addEventListener("mousedown", function (ev) {
       if (ev.target.closest("a, button")) return;
+      if (tooltip.classList.contains('rmap-tooltip--fullscreen')) return;
       startDrag(ev.clientX, ev.clientY);
       ev.preventDefault();
     });
@@ -399,6 +400,7 @@
 
     tooltip.addEventListener("touchstart", function (ev) {
       if (ev.target.closest("a, button")) return;
+      if (tooltip.classList.contains('rmap-tooltip--fullscreen')) return;
       startDrag(ev.touches[0].clientX, ev.touches[0].clientY);
       ev.stopPropagation();
     }, { passive: true });
