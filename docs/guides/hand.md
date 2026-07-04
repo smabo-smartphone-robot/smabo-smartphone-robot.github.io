@@ -52,7 +52,6 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
 - ハンドのランダム制御
 <video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_hand_random.mp4" type="video/mp4"></video>
 
-v
 
 # 必要パーツ
 
