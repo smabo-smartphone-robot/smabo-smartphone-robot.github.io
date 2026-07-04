@@ -40,8 +40,8 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 - カメラから取得した画像をもとに、対象物体を識別
   - 識別結果をsmabo-webで可視化
   - 識別結果をもとにsmaboの目を制御
-![](../gif/img_proc_smabo_web.gif)
-![](../gif/eye_control_img_proc.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/img_proc_smabo_web.mp4" type="video/mp4"></video>
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/eye_control_img_proc.mp4" type="video/mp4"></video>
 
 <!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
 <!-- 以下例のように記述するので、ハイライトするノードと矢印、およびラベルに記述する内容を確認し、アーキテクチャ図を作成してください -->
@@ -138,7 +138,7 @@ smabo-webの「Vision」タブにて画像認識に関する設定が可能で�
 この状態で、認識対象の物体をカメラの前に持ってくると、smaboの目が追従することが確認できます。
 
 
-![](../gif/eye_control_img_proc.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/eye_control_img_proc.mp4" type="video/mp4"></video>
 
 
 

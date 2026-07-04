@@ -104,10 +104,10 @@ smabo-appは
 
 
 - **smabo-webから、smaboの表情を変更**
-![](./gif/eye_change.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/eye_change.mp4" type="video/mp4"></video>
 
 - **smabo-webから、smaboの目をコントロール**
-![](./gif/eye_control_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/eye_control_manual.mp4" type="video/mp4"></video>
 
 
 # sensors
@@ -119,7 +119,7 @@ smabo-appは
 
 - **スマホのセンサデータ（画像、IMU、GPS）をsmabo-webで可視化**
 
-![](./gif/smabo-web-sensor.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo-web-sensor.mp4" type="video/mp4"></video>
 
 
 # voice
@@ -149,8 +149,8 @@ smabo-appは
 
 - **カメラから取得した画像をもとに、対象物体を識別**
 
-![](./gif/img_proc_smabo_web.gif)
-![](./gif/eye_control_img_proc.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/img_proc_smabo_web.mp4" type="video/mp4"></video>
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/eye_control_img_proc.mp4" type="video/mp4"></video>
 
 # baseparts
 
@@ -202,10 +202,10 @@ smabo-esp32は
 
 
 - **ハンドのコントローラー制御**
-![](./gif/smabo_hand_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_hand_manual.mp4" type="video/mp4"></video>
 
 - **ハンドのランダム制御**
-![](./gif/smabo_hand_random.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_hand_random.mp4" type="video/mp4"></video>
 
 # neck
 
@@ -216,11 +216,11 @@ smabo-esp32は
 
 
 - 首振りのコントローラー制御
-![](../gif/smabo_neck_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_neck_manual.mp4" type="video/mp4"></video>
 
 
 - 首振りのランダム制御
-![](../gif/smabo_neck_random.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_neck_random.mp4" type="video/mp4"></video>
 
 - 画像認識による首振り制御
-![](../gif/smabo_neck_img_proc.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_neck_img_proc.mp4" type="video/mp4"></video>

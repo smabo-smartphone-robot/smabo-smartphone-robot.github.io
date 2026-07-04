@@ -47,14 +47,14 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 具体的には、以下の内容を実施します。
 
 - 首振りのコントローラー制御
-![](../gif/smabo_neck_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_manual.mp4" type="video/mp4"></video>
 
 
 - 首振りのランダム制御
-![](../gif/smabo_neck_random.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_random.mp4" type="video/mp4"></video>
 
 - 画像認識による首振り制御
-![](../gif/smabo_neck_img_proc.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_img_proc.mp4" type="video/mp4"></video>
 
 <br>
 
@@ -232,7 +232,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 「Servo」タブで各サーボの角度を変更すると、それに合わせてsmaboが左右に動作します。
 
-![](../gif/smabo_neck_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_manual.mp4" type="video/mp4"></video>
 
 ## ランダム制御
 
@@ -260,7 +260,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 しばらく待つと、ランダムなタイミングでsmaboが左右に動作することが確認できます。
 
-![](../gif/smabo_neck_random.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_random.mp4" type="video/mp4"></video>
 
 ## 画像処理による制御
 
@@ -299,7 +299,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 設定完了後、スマホカメラの前に認識対象の物体を近づけると、物体に追従するようにsmaboが首振りすることが確認できます。
 
-![](../gif/smabo_neck_img_proc.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_img_proc.mp4" type="video/mp4"></video>
 
 # 次回
 

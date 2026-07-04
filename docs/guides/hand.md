@@ -47,10 +47,10 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
 
 具体的には、以下の内容を実施します。
 - ハンドのコントローラー制御
-![](../gif/smabo_hand_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_hand_manual.mp4" type="video/mp4"></video>
 
 - ハンドのランダム制御
-![](../gif/smabo_hand_random.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_hand_random.mp4" type="video/mp4"></video>
 
 v
 
@@ -227,7 +227,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 「Servo」タブで各サーボの角度を変更すると、それに合わせて左右の腕が動作します。
 
-![](../gif/smabo_hand_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_hand_manual.mp4" type="video/mp4"></video>
 
 ## ランダム制御
 
@@ -263,7 +263,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 しばらく待つと、ランダムなタイミングで左右のハンドが動作することが確認できます。
 
 
-![](../gif/smabo_hand_random.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_hand_random.mp4" type="video/mp4"></video>
 
 
 # 次回

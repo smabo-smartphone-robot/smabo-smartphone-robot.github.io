@@ -41,11 +41,11 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 具体的には、以下の内容を実施します。
 
 - smabo-webから、smaboの表情を変更
-![](../gif/eye_change.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/eye_change.mp4" type="video/mp4"></video>
 
 
 - smabo-webから、smaboの目をコントロール
-![](../gif/eye_control_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/eye_control_manual.mp4" type="video/mp4"></video>
 
 <!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
 <!-- 以下例のように記述するので、ハイライトするノードと矢印、およびラベルに記述する内容を確認し、アーキテクチャ図を作成してください -->
@@ -102,7 +102,7 @@ smaboの顔は、「Face Settings」から設定を変更できます。
 
 smabo-webの「Face」タブの「Expression」に「Expression ID（smabo-app内のFace settingsで設定した表情のID）」を変更し、「Set」をクリックすると、smaboの目の種類が変化します。
 
-![](../gif/eye_change.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/eye_change.mp4" type="video/mp4"></video>
 
 
 ## smaboの目をコントローラーで動かす
@@ -116,7 +116,7 @@ smaboの目はデフォルトでは、ランダムに動きますが、モード
 
 例えば、smabo-webの「Face」タブの「Gaze control」でコントローラを操作すると、それに合わせて目が動くことが確認できます。
 
-![](../gif/eye_control_manual.gif)
+<video autoplay loop muted playsinline style="max-width:100%"><source src="../video/eye_control_manual.mp4" type="video/mp4"></video>
 
 # 次回
 
