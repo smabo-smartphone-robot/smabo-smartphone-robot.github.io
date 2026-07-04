@@ -411,6 +411,28 @@ pre code { background: none; padding: 0; color: inherit; }
 }
 
 /* =========================================================
+   language switcher
+   ========================================================= */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.lang-switch__item {
+  padding: 4px 7px;
+  border-radius: 6px;
+  color: var(--ink-soft);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+a.lang-switch__item { text-decoration: none; }
+a.lang-switch__item:hover { color: var(--indigo); background: var(--bg-tint); }
+.lang-switch__sep { color: var(--line); padding: 0 1px; }
+.lang-switch__item--active { color: var(--indigo); background: var(--bg-tint); }
+
+/* =========================================================
    responsive
    ========================================================= */
 @media (max-width: 860px) {

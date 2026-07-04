@@ -182,7 +182,7 @@ ESP32-DevKitCの場合の配線図は、以下になります。
 
 今回作成したロボットの完成系は下図のようになります。
 
-![](../images/smabo_neck.png)
+![](../images/smabo_neck.jpg)
 
 
 # 動作手順
@@ -215,7 +215,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 します。
 
-![alt text](../images/neck_config_head_pan_enable.png)
+![alt text](../images/neck_config_head_pan_enable.jpg)
 
 ## コントローラー制御
 
@@ -226,7 +226,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定してください。
 
-![alt text](../images/neck_config_mode_manual.png)
+![alt text](../images/neck_config_mode_manual.jpg)
 
 <br>
 
@@ -244,7 +244,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定してください。 
 
-![alt text](../images/neck_config_mode_random.png)
+![alt text](../images/neck_config_mode_random.jpg)
 
 
 !!! note random_group
@@ -271,7 +271,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定してください。
 
-![alt text](../images/neck_config_mode_manual.png)
+![alt text](../images/neck_config_mode_manual.jpg)
 
 <br>
 
@@ -281,7 +281,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 します。
 
-![alt text](../images/neck_vision_detection.png)
+![alt text](../images/neck_vision_detection.jpg)
 
 
 <br>
@@ -293,7 +293,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定します。
 
-![alt text](../images/neck_vision_servo_follow.png)
+![alt text](../images/neck_vision_servo_follow.jpg)
 
 <br>
 

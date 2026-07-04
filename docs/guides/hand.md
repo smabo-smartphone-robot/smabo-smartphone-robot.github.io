@@ -120,13 +120,13 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
     <br>
 
     最初に、下図のように「sg90_plate_1」と「sg90_plate_2」でsg90を固定し、ボディに取り付けます。
-    ![](../images/hand_create_1.png)
-    ![](../images/hand_create_2.png)
+    ![](../images/hand_create_1.jpg)
+    ![](../images/hand_create_2.jpg)
 
     <br>
 
     そして、sg90_baseを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、SG90に付属のネジでホーンとサーボを固定してもOKです）。
-    ![](../images/hand_create_3.png)
+    ![](../images/hand_create_3.jpg)
     
 
 # 配線
@@ -165,7 +165,7 @@ ESP32-DevKitCの場合の配線図は、以下になります。
 
 今回作成したロボットの完成系は下図のようになります。
 
-![](../images/smabo_hand.png)
+![](../images/smabo_hand.jpg)
 
 # 動作手順
 

@@ -19,7 +19,13 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
-      <nav class="nav__links">        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <span class="lang-switch__item lang-switch__item--active">JP</span>
+          <span class="lang-switch__sep">/</span>
+          <a class="lang-switch__item" href="../en/guides/base.html" onclick="localStorage.setItem('smabo-lang-pref','en')">EN</a>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
     </div>
   </header>
@@ -79,10 +85,10 @@
 <p>具体的には、以下の内容を実施します。</p>
 <ul>
 <li>自分のスマホのサイズに合わせた3Dモデルの修正
-<p><img alt="alt text" src="../images/base_long_inner_extrude.png" /></p>
+<p><img alt="alt text" src="../images/base_long_inner_extrude.jpg" /></p>
 </li>
 <li>ベースパーツの3Dプリンタによる印刷
-<p><img alt="alt text" src="../images/base_print_base.png" /></p>
+<p><img alt="alt text" src="../images/base_print_base.jpg" /></p>
 </li>
 </ul>
 
@@ -158,20 +164,20 @@
 <blockquote>
 <p><strong>fusion360の場合の具体的な手順</strong></p>
 <p>左側タブの「Upload」をクリックします。<br />
-<img alt="alt text" src="../images/base_fusion_upload.png" /></p>
+<img alt="alt text" src="../images/base_fusion_upload.jpg" /></p>
 <p>「Select Files」をクリックします。<br />
-<img alt="alt text" src="../images/base_fusion_select_files.png" /></p>
+<img alt="alt text" src="../images/base_fusion_select_files.jpg" /></p>
 <p>「smartphone_long_width_75_height_11.step」を選択します。<br />
-<img alt="alt text" src="../images/base_fusion_select_long_step.png" /></p>
+<img alt="alt text" src="../images/base_fusion_select_long_step.jpg" /></p>
 <p>インポートが完了したら、smartphone_long_width_75_height_11を開きます。</p>
 <p>外側面を選択した状態で「Extrude」をクリックします。<br />
-<img alt="alt text" src="../images/base_long_outer_extrude.png" /></p>
+<img alt="alt text" src="../images/base_long_outer_extrude.jpg" /></p>
 <p>長さを「スマホの長手方向/2」 + 3 + 1 に設定します。<br />
-<img alt="alt text" src="../images/base_long_outer_length.png" /></p>
+<img alt="alt text" src="../images/base_long_outer_length.jpg" /></p>
 <p>同様に内側面を選択した状態で「Extrude」をクリックします。<br />
-<img alt="alt text" src="../images/base_long_inner_extrude.png" /></p>
+<img alt="alt text" src="../images/base_long_inner_extrude.jpg" /></p>
 <p>長さを「スマホの長手方向/2」 +  1 に設定します。<br />
-<img alt="alt text" src="../images/base_long_inner_length.png" /></p>
+<img alt="alt text" src="../images/base_long_inner_length.jpg" /></p>
 </blockquote>
 <br />
 <p>また、「固定部の上側面〜下側面」までの長さは</p>
@@ -182,13 +188,13 @@
 <blockquote>
 <p><strong>fusion360の場合の具体的な手順</strong></p>
 <p>上面を選択し、「Extrude」をクリックします。<br />
-<img alt="alt text" src="../images/base_long_top_extrude.png" /></p>
+<img alt="alt text" src="../images/base_long_top_extrude.jpg" /></p>
 <p>長さを「スマホの厚さ」+ 1 + 3 に設定します。<br />
-<img alt="alt text" src="../images/base_long_top_length.png" /></p>
+<img alt="alt text" src="../images/base_long_top_length.jpg" /></p>
 <p>下面を選択し、「Extrude」をクリックします。<br />
-<img alt="alt text" src="../images/base_long_bottom_extrude.png" /></p>
+<img alt="alt text" src="../images/base_long_bottom_extrude.jpg" /></p>
 <p>長さを「スマホの厚さ」+ 1 に設定します。<br />
-<img alt="alt text" src="../images/base_long_bottom_length.png" /></p>
+<img alt="alt text" src="../images/base_long_bottom_length.jpg" /></p>
 </blockquote>
 
 <h4 id="上下固定用パーツ">上下固定用パーツ</h4>
@@ -217,14 +223,14 @@
 <blockquote>
 <p><strong>fusion360の場合の具体的な手順</strong></p>
 <p>左上から「File」-&gt;「Export」を選択します。<br />
-<img alt="alt text" src="../images/base_fusion_export_menu.png" /></p>
+<img alt="alt text" src="../images/base_fusion_export_menu.jpg" /></p>
 <p>それぞれ、以下のように設定し「Export」を選択し、ファイルをエクスポートします。</p>
 <ul>
 <li>Name：任意の名称</li>
 <li>Type：stl</li>
 <li>Location：任意の場所</li>
 </ul>
-<p><img alt="alt text" src="../images/base_fusion_export_settings.png" /></p>
+<p><img alt="alt text" src="../images/base_fusion_export_settings.jpg" /></p>
 </blockquote>
 
 <h2 id="パーツの印刷">パーツの印刷<a class="headerlink" href="#パーツの印刷" title="Permanent link">#</a></h2>
@@ -244,24 +250,24 @@
 </blockquote>
 <ul>
 <li>smabo-hardware/stl/base/base.stl<br />
-<img alt="alt text" src="../images/base_print_base.png" /></li>
+<img alt="alt text" src="../images/base_print_base.jpg" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/base/cover_back_bread_board.stl<br />
-<img alt="alt text" src="../images/base_print_cover_back_bread_board.png" /></li>
+<img alt="alt text" src="../images/base_print_cover_back_bread_board.jpg" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/smart_phone/cover_smartphone_base.stl<br />
-<img alt="alt text" src="../images/base_print_cover_smartphone_base.png" /></li>
+<img alt="alt text" src="../images/base_print_cover_smartphone_base.jpg" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/smart_phone/smartphone_long_width_75_height_11.stl（元サイズからお持ちのスマホ用に調整したもの） × 2
 <ul>
 <li>左右で同じパーツを使用するため2つ印刷します<br />
-<img alt="alt text" src="../images/base_print_smartphone_long.png" /></li>
+<img alt="alt text" src="../images/base_print_smartphone_long.jpg" /></li>
 </ul>
 </li>
 </ul>
@@ -270,7 +276,7 @@
 <li>smabo-hardware/stl/smart_phone/smartphone_short_width_37_height_11.stl（元サイズからお持ちのスマホ用に調整したもの）× 2
 <ul>
 <li>上下で同じパーツを使用するため2つ印刷します<br />
-<img alt="alt text" src="../images/base_print_smartphone_short.png" /></li>
+<img alt="alt text" src="../images/base_print_smartphone_short.jpg" /></li>
 </ul>
 </li>
 </ul>
@@ -300,7 +306,7 @@
 
 <h2 id="完成系">完成系<a class="headerlink" href="#完成系" title="Permanent link">#</a></h2>
 <p>今回作成したロボットの完成系は下図のようになります。<br />
-<img alt="alt text" src="../images/base_complete.png" /></p>
+<img alt="alt text" src="../images/base_complete.jpg" /></p>
 
 <h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
 <p>次回は、以下ロードマップの</p>

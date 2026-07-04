@@ -17,15 +17,15 @@
 
   /* ---- layout (viewBox 0 0 1200 480) ------------------------------------ */
   var CONTAINERS = [
-    { label: "外部ツール", members: ["web"],
+    { label: "外部ツール", labelEn: "External Tool", members: ["web"],
       x: 466, y: 16,  w: 278, h: 190 },
-    { label: "smabo本体",  members: ["app", "brain", "esp32"],
+    { label: "smabo本体",  labelEn: "smabo body", members: ["app", "brain", "esp32"],
       x: 28,  y: 298, w: 1144, h: 200, lblBottom: true },
   ];
 
   var NODES = [
     { id: "web",   icon: "🖥️", label: "smabo-web",   sub: "PC",             x: 493, y: 60,  w: 224, h: 120 },
-    { id: "app",   icon: "📱", label: "smabo-app",   sub: "スマートフォン", x: 66,  y: 332, w: 224, h: 120 },
+    { id: "app",   icon: "📱", label: "smabo-app",   sub: "スマートフォン", subEn: "Smartphone", x: 66,  y: 332, w: 224, h: 120 },
     { id: "brain", icon: "🧠", label: "smabo-brain", sub: "SBC or PC",      x: 493, y: 332, w: 224, h: 120 },
     { id: "esp32", icon: "🔌", label: "smabo-esp32", sub: "ESP32",          x: 924, y: 332, w: 224, h: 120 },
   ];
@@ -82,6 +82,7 @@
 
   /* ---- main build -------------------------------------------------------- */
   function build(svg) {
+    var isEn = window.location.pathname.indexOf('/en/') !== -1;
     while (svg.firstChild) svg.removeChild(svg.firstChild);
 
     /* parse data-flows */
@@ -129,7 +130,8 @@
         x: c.x, y: c.y, width: c.w, height: c.h, rx: 20, ry: 20 }));
       var lx = c.x + c.w / 2;
       var ly = c.lblBottom ? c.y + c.h - 14 : c.y + 24;
-      g.appendChild(text(lx, ly, c.label, "sys-container__label" + (c.lblBottom ? " sys-container__label--body" : ""), "middle"));
+      var clabel = isEn && c.labelEn ? c.labelEn : c.label;
+      g.appendChild(text(lx, ly, clabel, "sys-container__label" + (c.lblBottom ? " sys-container__label--body" : ""), "middle"));
       gC.appendChild(g);
     });
     svg.appendChild(gC);
@@ -153,12 +155,12 @@
       var g = el("g", { class: "sys-node" + (anyActive ? (on ? " is-active" : " is-dim") : "") });
       g.appendChild(el("rect", { class: "sys-node__box", x: n.x, y: n.y, width: n.w, height: n.h, rx: 14, ry: 14 }));
       g.appendChild(text(cx, cy - 6,  n.icon + "  " + n.label, "sys-node__label", "middle"));
-      g.appendChild(text(cx, cy + 16, n.sub,                   "sys-node__sub",   "middle"));
+      g.appendChild(text(cx, cy + 16, (isEn && n.subEn ? n.subEn : n.sub), "sys-node__sub", "middle"));
       gN.appendChild(g);
     });
     svg.appendChild(gN);
 
-    svg.appendChild(legend());
+    svg.appendChild(legend(isEn));
   }
 
   /* ---- label on active arrow -------------------------------------------- */
@@ -199,10 +201,10 @@
   }
 
   /* ---- transport legend (top-right) -------------------------------------- */
-  function legend() {
+  function legend(isEn) {
     var g  = el("g", { class: "sys-legend" });
     var x0 = 1050, y0 = 28;
-    g.appendChild(text(x0, y0 - 16, "凡例（通信方式）", "sys-legend__title", "start"));
+    g.appendChild(text(x0, y0 - 16, isEn ? "Legend (Transport)" : "凡例（通信方式）", "sys-legend__title", "start"));
     [
       ["ws",     "WebSocket"],
       ["webrtc", "WebRTC"],

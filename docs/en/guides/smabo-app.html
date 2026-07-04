@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smabo-app — smabo Guide</title>
+  <meta name="description" content="smabo Guide: Setting up smabo-app. Install on smartphone, connect, configure face, sensor visualization, audio processing, and gaze control." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/smabo-app.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>📱 smabo-app</h1>
+      <p>Set up smabo-app — the smartphone app that serves as smabo's face and sensor hub.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#概要">Overview</a></li>
+<li><a href="#必要パーツ">Required Parts</a>
+<ul>
+<li class="toc-h3"><a href="#smabo-appのインストール">Installing smabo-app</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">Startup Procedure</a></li>
+</ul>
+</li>
+<li><a href="#次回">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#概要">Overview</a></li>
+<li><a href="#必要パーツ">Required Parts</a>
+<ul>
+<li class="toc-h3"><a href="#smabo-appのインストール">Installing smabo-app</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">Startup Procedure</a></li>
+</ul>
+</li>
+<li><a href="#次回">Next</a></li>
+</ul></nav>
+
+<h2 id="ロードマップ">Roadmap<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
+<p>This page is the guide for the "smabo-app" node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="smabo-web.html">smabo-web</a> setup.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="app"
+       aria-label="smabo build guide roadmap (smabo-app highlighted)"></svg>
+</div>
+
+<h2 id="概要">Overview<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
+<p>This page explains the setup procedure for "smabo-app".</p>
+<p>smabo-app serves as:</p>
+<ul>
+<li>smabo's face</li>
+<li>smabo's sensor hub (using the phone's built-in sensors)</li>
+</ul>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"app","to":"brain","transport":"webrtc","lines":["Camera feed"]},{"from":"app","to":"brain","transport":"ws","lines":["Phone sensor values"]},{"from":"brain","to":"app","transport":"ws","lines":["Control values"]}]' data-active="app"
+       aria-label="smabo system diagram (smabo-app highlighted)"></svg>
+</div>
+
+<h2 id="必要パーツ">Required Parts<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
+<p>Parts required to implement this feature:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Product URL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Smartphone</td>
+<td>-</td>
+<td>Your own smartphone</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="smabo-appのインストール">Installing smabo-app<a class="headerlink" href="#smabo-appのインストール" title="Permanent link">#</a></h3>
+<p>Install smabo-app on your smartphone.</p>
+<p>Note: The following steps are for Android only.</p>
+<blockquote>
+<p>For iOS, Flutter installation and additional steps are required. See the README on the <a href="https://github.com/smabo-smartphone-robot/smabo-app">smabo-app repository</a> for details.</p>
+<p>Note: Installing on iOS requires a macOS PC.</p>
+</blockquote>
+<p>Access the <a href="https://github.com/smabo-smartphone-robot/smabo-app/releases">smabo-app Releases page</a> from your phone.</p>
+<p>Download the latest APK file from the available versions.</p>
+<p>Run the downloaded APK to install smabo-app.</p>
+
+<h2 id="動作手順">Operation<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
+<h3 id="起動手順">Startup Procedure<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
+<p><a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">Follow the startup procedure here</a>.</p>
+
+<br/>
+
+<p>Setup is complete once all programs start and communication is confirmed.</p>
+
+<h2 id="次回">Next<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
+<p>Next, follow the guides for:</p>
+<ul>
+<li><a href="smabo_face.html">smabo's face</a></li>
+<li><a href="smabo_sensors.html">Phone sensors</a></li>
+<li><a href="audioproc.html">Audio processing</a></li>
+<li><a href="imgproc.html">Image processing</a></li>
+<li><a href="base.html">Base parts assembly</a></li>
+</ul>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="face,sensors,voice,imgproc,baseparts"
+       aria-label="smabo build guide roadmap (next: face, phone sensors, audio processing, image processing, base parts highlighted)"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

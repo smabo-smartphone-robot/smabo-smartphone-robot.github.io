@@ -52,11 +52,11 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 具体的には、以下の内容を実施します。
 
 - 自分のスマホのサイズに合わせた3Dモデルの修正
-![alt text](../images/base_long_inner_extrude.png)
+![alt text](../images/base_long_inner_extrude.jpg)
 
 
 - ベースパーツの3Dプリンタによる印刷
-![alt text](../images/base_print_base.png)
+![alt text](../images/base_print_base.jpg)
 
 
 # 必要パーツ
@@ -126,17 +126,17 @@ smaboでは、スマートフォンを固定することができますが、ス
 
 !!! note fusion360の場合の具体的な手順
     左側タブの「Upload」をクリックします。
-    ![alt text](../images/base_fusion_upload.png)
+    ![alt text](../images/base_fusion_upload.jpg)
 
     <br>
 
     「Select Files」をクリックします。
-    ![alt text](../images/base_fusion_select_files.png)
+    ![alt text](../images/base_fusion_select_files.jpg)
 
     <br>
 
     「smartphone_long_width_75_height_11.step」を選択します。
-    ![alt text](../images/base_fusion_select_long_step.png)
+    ![alt text](../images/base_fusion_select_long_step.jpg)
 
     <br>
 
@@ -145,22 +145,22 @@ smaboでは、スマートフォンを固定することができますが、ス
     <br>
 
     外側面を選択した状態で「Extrude」をクリックします。
-    ![alt text](../images/base_long_outer_extrude.png)
+    ![alt text](../images/base_long_outer_extrude.jpg)
 
     <br>
 
     長さを「スマホの長手方向/2」 + 3 + 1 に設定します。
-    ![alt text](../images/base_long_outer_length.png)
+    ![alt text](../images/base_long_outer_length.jpg)
 
     <br>
 
     同様に内側面を選択した状態で「Extrude」をクリックします。
-    ![alt text](../images/base_long_inner_extrude.png)
+    ![alt text](../images/base_long_inner_extrude.jpg)
 
     <br>
 
     長さを「スマホの長手方向/2」 +  1 に設定します。
-    ![alt text](../images/base_long_inner_length.png)
+    ![alt text](../images/base_long_inner_length.jpg)
 
 <br>
 
@@ -173,22 +173,22 @@ smaboでは、スマートフォンを固定することができますが、ス
 
 !!! note fusion360の場合の具体的な手順
     上面を選択し、「Extrude」をクリックします。
-    ![alt text](../images/base_long_top_extrude.png)
+    ![alt text](../images/base_long_top_extrude.jpg)
 
     <br>
 
     長さを「スマホの厚さ」+ 1 + 3 に設定します。
-    ![alt text](../images/base_long_top_length.png)
+    ![alt text](../images/base_long_top_length.jpg)
 
     <br>
 
     下面を選択し、「Extrude」をクリックします。
-    ![alt text](../images/base_long_bottom_extrude.png)
+    ![alt text](../images/base_long_bottom_extrude.jpg)
 
     <br>
 
     長さを「スマホの厚さ」+ 1 に設定します。
-    ![alt text](../images/base_long_bottom_length.png)
+    ![alt text](../images/base_long_bottom_length.jpg)
 
 ### 上下固定用パーツ
 
@@ -220,7 +220,7 @@ smaboでは、スマートフォンを固定することができますが、ス
 
 !!! note fusion360の場合の具体的な手順
     左上から「File」->「Export」を選択します。
-    ![alt text](../images/base_fusion_export_menu.png)
+    ![alt text](../images/base_fusion_export_menu.jpg)
 
     <br>
 
@@ -229,7 +229,7 @@ smaboでは、スマートフォンを固定することができますが、ス
     - Type：stl
     - Location：任意の場所
 
-    ![alt text](../images/base_fusion_export_settings.png)
+    ![alt text](../images/base_fusion_export_settings.jpg)
 
 
 
@@ -251,29 +251,29 @@ smaboでは、スマートフォンを固定することができますが、ス
     - サポート材は必ずONにした状態で印刷
 
 - smabo-hardware/stl/base/base.stl
-    ![alt text](../images/base_print_base.png)
+    ![alt text](../images/base_print_base.jpg)
 
 <br>
 
 - smabo-hardware/stl/base/cover_back_bread_board.stl
-    ![alt text](../images/base_print_cover_back_bread_board.png)
+    ![alt text](../images/base_print_cover_back_bread_board.jpg)
 
 <br>
 
 - smabo-hardware/stl/smart_phone/cover_smartphone_base.stl
-    ![alt text](../images/base_print_cover_smartphone_base.png)
+    ![alt text](../images/base_print_cover_smartphone_base.jpg)
 
 <br>
 
 - smabo-hardware/stl/smart_phone/smartphone_long_width_75_height_11.stl（元サイズからお持ちのスマホ用に調整したもの） × 2
   - 左右で同じパーツを使用するため2つ印刷します
-    ![alt text](../images/base_print_smartphone_long.png)
+    ![alt text](../images/base_print_smartphone_long.jpg)
 
 <br>
 
 - smabo-hardware/stl/smart_phone/smartphone_short_width_37_height_11.stl（元サイズからお持ちのスマホ用に調整したもの）× 2
   - 上下で同じパーツを使用するため2つ印刷します
-    ![alt text](../images/base_print_smartphone_short.png)
+    ![alt text](../images/base_print_smartphone_short.jpg)
 
 # 組み立て手順
 
@@ -300,7 +300,7 @@ smaboでは、スマートフォンを固定することができますが、ス
 # 完成系
 
 今回作成したロボットの完成系は下図のようになります。
-![alt text](../images/base_complete.png)
+![alt text](../images/base_complete.jpg)
 
 # 次回
 

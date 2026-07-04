@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio Processing — smabo Guide</title>
+  <meta name="description" content="smabo Guide: Use smabo's audio features: wake word detection ('smabo'), speech recognition, and text-to-speech via smabo-web." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/audioproc.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🎤 Audio Processing</h1>
+      <p>Say "smabo" to activate listening mode, let smabo-brain recognize your speech, and make smabo speak any text you enter in smabo-web.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+<li class="toc-h3"><a href="#wake-word">Wake Word</a></li>
+<li class="toc-h3"><a href="#speech-recognition">Speech Recognition</a></li>
+<li class="toc-h3"><a href="#text-to-speech">Text-to-Speech</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+<li class="toc-h3"><a href="#wake-word">Wake Word</a></li>
+<li class="toc-h3"><a href="#speech-recognition">Speech Recognition</a></li>
+<li class="toc-h3"><a href="#text-to-speech">Text-to-Speech</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">#</a></h2>
+<p>This page is the guide for the "Audio Processing" node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="smabo-app.html">smabo-app</a> setup.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="voice"
+       aria-label="smabo build guide roadmap (Audio Processing highlighted)"></svg>
+</div>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>This page explains the <strong>Audio Processing feature</strong> of smabo.</p>
+<p>Specifically, you will:</p>
+<ul>
+<li>Recognize speech captured by the phone's microphone
+<ul>
+<li>Display the recognized text in smabo-web</li>
+</ul>
+<p><img alt="" src="../../images/app_recognized_speech.png" /></p>
+</li>
+<li>Make smabo speak a text string entered in smabo-web
+<p><img alt="" src="../../images/app_speech_say.jpg" /></p>
+</li>
+</ul>
+
+<h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
+<h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
+<p>Follow <a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">the startup procedure here</a>.</p>
+
+<h3 id="wake-word">Wake Word<a class="headerlink" href="#wake-word" title="Permanent link">#</a></h3>
+<p>Say <strong>"smabo"</strong> near the phone to activate listening mode — smabo's eyes will light up in rainbow colors (the wake word can be changed in smabo-app Settings).</p>
+<p>Once the eyes are rainbow-colored, speak any phrase to start speech recognition (the recognition language can also be changed in smabo-app Settings).</p>
+<p><img alt="" src="../../images/app_voice_listening.png" /></p>
+
+<h3 id="speech-recognition">Speech Recognition<a class="headerlink" href="#speech-recognition" title="Permanent link">#</a></h3>
+<p>After smabo's eyes return to normal, check the <strong>Recognized speech</strong> field in the <strong>Face</strong> tab of smabo-web — it will display what you said.</p>
+<p><img alt="" src="../../images/app_recognized_speech.png" /></p>
+
+<h3 id="text-to-speech">Text-to-Speech<a class="headerlink" href="#text-to-speech" title="Permanent link">#</a></h3>
+<p>In the <strong>SPEECH / SAY</strong> section of the <strong>Face</strong> tab in smabo-web, enter any text and click the <strong>SAY</strong> button — the phone's speaker will read it aloud (the language can be changed in smabo-app Settings).</p>
+<p><img alt="" src="../../images/app_speech_say.jpg" /></p>
+<br />
+<p>Use the <strong>Bubble ON</strong> and <strong>Speak ON</strong> buttons to toggle the speech bubble and audio output independently.</p>
+<p><img alt="" src="../../images/app_speech_toggle.png" /></p>
+
+<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">#</a></h2>
+<p>This is a terminal node on the roadmap.</p>
+<p>To explore other features, pick another page from the roadmap.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active=""
+       aria-label="smabo build guide roadmap (next)"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

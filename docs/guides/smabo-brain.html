@@ -19,7 +19,13 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
-      <nav class="nav__links">        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <span class="lang-switch__item lang-switch__item--active">JP</span>
+          <span class="lang-switch__sep">/</span>
+          <a class="lang-switch__item" href="../en/guides/smabo-brain.html" onclick="localStorage.setItem('smabo-lang-pref','en')">EN</a>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
     </div>
   </header>
@@ -227,7 +233,7 @@
 <ul>
 <li>WSL</li>
 </ul>
-<p><img alt="alt text" src="../images/install_wsl.png" /></p>
+<p><img alt="alt text" src="../images/install_wsl.jpg" /></p>
 
 <h4 id="wslの中に入る">WSLの中に入る</h4>
 <p>拡張機能のインストールが完了したら、</p>
@@ -235,7 +241,7 @@
 <li>「&gt;&lt;」マークをクリック</li>
 <li>「Connected to WSL」をクリックしてください。</li>
 </ol>
-<p><img alt="alt text" src="../images/connect_wsl.png" /></p>
+<p><img alt="alt text" src="../images/connect_wsl.jpg" /></p>
 <br />
 <p>画面左下に「WSL：Ubuntu」と表示されていればOKです。ここで、画面下部の「TERMINAL」というタブがターミナルになります。</p>
 <p><img alt="alt text" src="../images/wsl_terminal.png" /></p>
@@ -283,17 +289,17 @@ git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
 </blockquote>
 <ul>
 <li>smabo-hardware/stl/raspi/raspi_stand.stl<br />
-<img alt="alt text" src="../images/raspi_print_stand.png" /></li>
+<img alt="alt text" src="../images/raspi_print_stand.jpg" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/raspi/raspi_stopper1.stl<br />
-<img alt="alt text" src="../images/raspi_print_stopper1.png" /></li>
+<img alt="alt text" src="../images/raspi_print_stopper1.jpg" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/raspi/raspi_stopper2.stl<br />
-<img alt="alt text" src="../images/raspi_print_stopper2.png" /></li>
+<img alt="alt text" src="../images/raspi_print_stopper2.jpg" /></li>
 </ul>
 
 <h3 id="組み立て手順">組み立て手順<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h3>
@@ -307,7 +313,7 @@ git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
 <blockquote>
 <p><strong>組み立ての際のポイント</strong></p>
 <p>下図のように、ラズパイを各パーツでraspi_standに固定してください。<br />
-<img alt="" src="../images/assemble_raspi_stand.png" /></p>
+<img alt="" src="../images/assemble_raspi_stand.jpg" /></p>
 </blockquote>
 
 <h2 id="次回">次回<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>

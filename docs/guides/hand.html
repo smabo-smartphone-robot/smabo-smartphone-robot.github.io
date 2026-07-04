@@ -19,7 +19,13 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
-      <nav class="nav__links">        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <span class="lang-switch__item lang-switch__item--active">JP</span>
+          <span class="lang-switch__sep">/</span>
+          <a class="lang-switch__item" href="../en/guides/hand.html" onclick="localStorage.setItem('smabo-lang-pref','en')">EN</a>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
     </div>
   </header>
@@ -211,11 +217,11 @@
 <p>組み立て動画では、SG90の取り付け手順は分からないため、以下に記載します。</p>
 <br />
 <p>最初に、下図のように「sg90_plate_1」と「sg90_plate_2」でsg90を固定し、ボディに取り付けます。</p>
-<p><img alt="" src="../images/hand_create_1.png" /></p>
-<p><img alt="" src="../images/hand_create_2.png" /></p>
+<p><img alt="" src="../images/hand_create_1.jpg" /></p>
+<p><img alt="" src="../images/hand_create_2.jpg" /></p>
 <br />
 <p>そして、sg90_baseを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、SG90に付属のネジでホーンとサーボを固定してもOKです）。</p>
-<p><img alt="" src="../images/hand_create_3.png" /></p>
+<p><img alt="" src="../images/hand_create_3.jpg" /></p>
 </blockquote>
 
 <h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>
@@ -288,7 +294,7 @@
 
 <h2 id="完成系">完成系<a class="headerlink" href="#完成系" title="Permanent link">#</a></h2>
 <p>今回作成したロボットの完成系は下図のようになります。</p>
-<p><img alt="" src="../images/smabo_hand.png" /></p>
+<p><img alt="" src="../images/smabo_hand.jpg" /></p>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
 <h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>

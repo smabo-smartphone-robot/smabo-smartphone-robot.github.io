@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Head Rotation (Neck) — smabo Guide</title>
+  <meta name="description" content="smabo build guide: Head Rotation (Neck). Implement manual, random, and image-recognition-based head rotation using the MG996R servo." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/neck.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🔄 Head Rotation (Neck)</h1>
+      <p>Assemble and control smabo's neck servo — supports manual, random, and image-recognition-based head rotation.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#required-parts">Required Parts</a></li>
+<li><a href="#printing">3D Printing Parts</a></li>
+<li><a href="#assembly">Assembly</a></li>
+<li><a href="#wiring">Wiring</a></li>
+<li><a href="#finished">Finished Result</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+<li class="toc-h3"><a href="#servo-settings">Servo Settings</a></li>
+<li class="toc-h3"><a href="#manual-control">Manual Control</a></li>
+<li class="toc-h3"><a href="#random-control">Random Control</a></li>
+<li class="toc-h3"><a href="#image-recognition-control">Image-Recognition Control</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">#</a></h2>
+<p>This page is the guide for the 'Head Rotation (Neck)' node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="smabo-esp32.html">smabo-esp32</a> setup.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="neck"
+       aria-label="smabo build guide roadmap (Head Rotation highlighted)"></svg>
+</div>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>This page explains the Head Rotation (Neck) feature.</p>
+<br />
+<p>Specifically, you will implement:</p>
+<ul>
+<li>Manual controller control
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_neck_manual.mp4" type="video/mp4"></video></p>
+</li>
+<li>Random motion control
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_neck_random.mp4" type="video/mp4"></video></p>
+</li>
+<li>Image-recognition-based head tracking
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_neck_img_proc.mp4" type="video/mp4"></video></p>
+</li>
+</ul>
+<br />
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"web","to":"brain","transport":"ws","lines":["Servo control values"]},{"from":"brain","to":"esp32","transport":"ws","lines":["Servo control values"]},{"from":"web","to":"esp32","transport":"rest","lines":["ESP32 config"]},{"from":"app","to":"brain","transport":"webrtc","lines":["Camera feed"]},{"from":"brain","to":"web","transport":"webrtc","lines":["Camera feed"]},{"from":"brain","to":"web","transport":"ws","lines":["Image processing result"]}]' data-active="web,brain,esp32,app"
+       aria-label="smabo system diagram (Head Rotation highlighted)"></svg>
+</div>
+
+<h2 id="required-parts">Required Parts<a class="headerlink" href="#required-parts" title="Permanent link">#</a></h2>
+<p>The following parts are required to implement this feature.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Product URL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32-DevKitC</td>
+<td><a href="https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-%E6%A9%9F%E8%83%BD%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-TYPE-C-%E3%83%87%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%B3%E3%82%A2%E3%83%9C%E3%83%BC%E3%83%89/dp/B0GTY64KDC/">link</a></td>
+<td>Compatible alternatives OK</td>
+</tr>
+<tr>
+<td>Breadboard (SAD101)<br /></td>
+<td><a href="https://www.amazon.co.jp/%E3%82%B5%E3%83%B3%E3%83%8F%E3%83%A4%E3%83%88-%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89-SAD-101/dp/B00DSKCS68?th=1">link</a></td>
+<td>Standard breadboards have 5 holes per row, but this one has 6 — required for the ESP32's width.</td>
+</tr>
+<tr>
+<td>Jump wires</td>
+<td><a href="https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Battery box (AA ×4, battery-snap compatible)</td>
+<td><a href="https://www.amazon.co.jp/dp/B011IJQ4DI">link</a></td>
+<td>Battery snap version is recommended for easier handling.</td>
+</tr>
+<tr>
+<td>Battery snap (for battery box)</td>
+<td><a href="https://www.monotaro.com/p/6866/1105/">link</a></td>
+<td>A version with connector pins is recommended — easier to insert into the breadboard and less likely to come loose.</td>
+</tr>
+<tr>
+<td>Rechargeable AA batteries × 4</td>
+<td><a href="https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/">link</a></td>
+<td>Rechargeable batteries are recommended.</td>
+</tr>
+<tr>
+<td>Battery charger</td>
+<td><a href="https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Servo motor driver PCA9685</td>
+<td><a href="https://www.amazon.co.jp/HiLetgo-PCA9685-16%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB-12-%E3%83%93%E3%83%83%E3%83%88-Arduino%E3%81%AB%E5%AF%BE%E5%BF%9C/dp/B01D1D0CX2/">link</a></td>
+<td>Compatible alternatives OK</td>
+</tr>
+<tr>
+<td>MG996R</td>
+<td><a href="https://akizukidenshi.com/catalog/g/g112534/">link</a></td>
+<td>Compatible alternatives OK, but if the horn size differs from the genuine part, the printed parts may not fit — horn trimming or 3D model modification may be required.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="printing">3D Printing Parts<a class="headerlink" href="#printing" title="Permanent link">#</a></h2>
+<p>Print the newly added parts on your 3D printer.</p>
+<blockquote>
+<p>Because slicer software varies by printer model, only key points are noted here rather than step-by-step slicer instructions.</p>
+</blockquote>
+<br />
+<p>Print the following parts oriented as shown in the images.</p>
+<blockquote>
+<p><strong>Printing tips</strong></p>
+<ul>
+<li>Orient convex protrusions sideways to prevent fractures at the base when attaching/detaching.</li>
+<li>Always enable support material.</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p>smabo-hardware/stl/pan/mg996r/pan_adapter.stl</p>
+<p><img alt="pan_adapter" src="../../images/neck_print_pan_adapter.png" /></p>
+</li>
+<br />
+<li>
+<p>smabo-hardware/stl/pan/mg996r/pan_plate_top.stl</p>
+<p><img alt="pan_plate_top" src="../../images/neck_print_pan_plate_top.png" /></p>
+</li>
+<br />
+<li>
+<p>smabo-hardware/stl/pan/mg996r/pan_stand_left.stl</p>
+<p><img alt="pan_stand_left" src="../../images/neck_print_pan_stand_left.png" /></p>
+</li>
+<br />
+<li>
+<p>smabo-hardware/stl/pan/mg996r/pan_stand_right.stl</p>
+<p><img alt="pan_stand_right" src="../../images/neck_print_pan_stand_right.png" /></p>
+</li>
+</ul>
+
+<h2 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">#</a></h2>
+<p>Assemble the required parts as shown in the video below.</p>
+<p>Note: the video also includes parts printed in previous steps.</p>
+<div style="width:100%;aspect-ratio:16/9;margin-block:1em">
+  <iframe src="../../assembly_movie/neck.html" style="width:100%;height:100%;border:none;border-radius:12px" title="Neck Assembly" loading="lazy"></iframe>
+</div>
+<blockquote>
+<p><strong>Assembly tips</strong></p>
+<p>The assembly video does not show how to attach the MG996R servo, so the steps are described here.</p>
+<br />
+<p>First, fix the MG996R between pan_stand_left and pan_stand_right as shown below.</p>
+<p><img alt="Neck assembly step 1" src="../../images/neck_create_1.jpg" /></p>
+<br />
+<p>Slide pan_plate_top over from the top and fit the horn in. No tools required, but you may optionally screw the horn to the servo using the included screws.</p>
+<p><img alt="Neck assembly step 2" src="../../images/neck_create_2.jpg" /></p>
+</blockquote>
+
+<h2 id="wiring">Wiring<a class="headerlink" href="#wiring" title="Permanent link">#</a></h2>
+<p>Wire according to the table below.</p>
+<p>In the table, "Point A" and "Point B" are directly connected in the circuit.</p>
+<table>
+<thead>
+<tr>
+<th>Point A</th>
+<th>Point B</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery box (+)</td>
+<td>Breadboard + rail (<strong style="color:#e03131;">right</strong> side)</td>
+<td>Right rail = 6 V; do not mix with 5 V side</td>
+</tr>
+<tr>
+<td>Battery box (-)</td>
+<td>Breadboard - rail</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ESP32 5 V pin</td>
+<td>Breadboard + rail (<strong style="color:#e03131;">left</strong> side)</td>
+<td>Left rail = 5 V; do not mix with 6 V side</td>
+</tr>
+<tr>
+<td>ESP32 GND</td>
+<td>Breadboard - rail</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 V++</td>
+<td>Breadboard + rail (right side)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 VCC</td>
+<td>Breadboard + rail (left side)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 SDA</td>
+<td>Pin set in config.json <code>i2c/sda</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 SCL</td>
+<td>Pin set in config.json <code>i2c/scl</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 GND</td>
+<td>Breadboard - rail</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<br />
+<p>Wiring diagram for ESP32-DevKitC:</p>
+<p>In default config, connect the neck servo to channel=2.</p>
+<p><img alt="Neck wiring diagram" src="../../fritzing/png/neck.png" /></p>
+
+<h2 id="finished">Finished Result<a class="headerlink" href="#finished" title="Permanent link">#</a></h2>
+<p>The completed robot looks like this.</p>
+<p><img alt="smabo with neck servo" src="../../images/smabo_neck.jpg" /></p>
+
+<h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
+<h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
+<p><a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">Follow the startup procedure here</a>.</p>
+
+<h3 id="servo-settings">Servo Settings<a class="headerlink" href="#servo-settings" title="Permanent link">#</a></h3>
+<p>Servo settings can be changed in the 'Modes/servos' section of the 'Config' tab in smabo-web.</p>
+<p>Here, enable:</p>
+<ul>
+<li>'head_pan'</li>
+</ul>
+<p><img alt="Enable head_pan" src="../../images/neck_config_head_pan_enable.jpg" /></p>
+
+<h3 id="manual-control">Manual Control<a class="headerlink" href="#manual-control" title="Permanent link">#</a></h3>
+<p>Steps for manual controller control.</p>
+<p>In the 'Config' tab → 'Modes/servos', for head_pan, set:</p>
+<ul>
+<li>'mode' to 'manual'</li>
+</ul>
+<p><img alt="Mode set to manual" src="../../images/neck_config_mode_manual.jpg" /></p>
+<br />
+<p>Adjust the servo angle in the 'Servo' tab to rotate smabo left and right.</p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_neck_manual.mp4" type="video/mp4"></video></p>
+
+<h3 id="random-control">Random Control<a class="headerlink" href="#random-control" title="Permanent link">#</a></h3>
+<p>Steps for random motion control.</p>
+<p>In the 'Config' tab → 'Modes/servos', for head_pan, set:</p>
+<ul>
+<li>'mode' to 'random'</li>
+<li>'group' to 'neck'</li>
+</ul>
+<p><img alt="Mode set to random" src="../../images/neck_config_mode_random.jpg" /></p>
+<blockquote>
+<p><strong>random_group</strong></p>
+<p>Servos assigned to the same random_group will move at the same random time.</p>
+<br />
+<p>New random_groups can be added by clicking the "Add random Group" button.</p>
+<p><img alt="Add random group" src="../../images/hand_add_random_group.png" /></p>
+</blockquote>
+<br />
+<p>After a moment, smabo will turn left/right at random intervals.</p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_neck_random.mp4" type="video/mp4"></video></p>
+
+<h3 id="image-recognition-control">Image-Recognition Control<a class="headerlink" href="#image-recognition-control" title="Permanent link">#</a></h3>
+<p>Steps for image-recognition-based control.</p>
+<p>In the 'Config' tab → 'Modes/servos', set head_pan's:</p>
+<ul>
+<li>'mode' to 'manual'</li>
+</ul>
+<p><img alt="Mode set to manual for image control" src="../../images/neck_config_mode_manual.jpg" /></p>
+<br />
+<p>In the 'Vision' tab → 'Detection':</p>
+<ul>
+<li>Enable 'Enabled', and</li>
+<li>Select your detection mode (e.g., color mode to track a blue object)</li>
+</ul>
+<p><img alt="Vision detection settings" src="../../images/neck_vision_detection.jpg" /></p>
+<br />
+<p>In 'Behaviors':</p>
+<ul>
+<li>Enable 'Servo follow', and set</li>
+<li>'Pan joint' to 'head_pan'</li>
+<li>'Pan Direction' to 'reversed(-1)'</li>
+</ul>
+<p><img alt="Servo follow settings" src="../../images/neck_vision_servo_follow.jpg" /></p>
+<br />
+<p>After configuring, place the target object in front of the phone camera. smabo will rotate its head to track the object.</p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_neck_img_proc.mp4" type="video/mp4"></video></p>
+
+<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">#</a></h2>
+<p>This is a terminal node on the roadmap.</p>
+<p>To explore other features, pick another page from the roadmap.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="neck"
+       aria-label="smabo build guide roadmap (Head Rotation highlighted)"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

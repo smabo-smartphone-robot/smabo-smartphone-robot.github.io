@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smabo-brain — smabo Guide</title>
+  <meta name="description" content="smabo Guide: Setting up smabo-brain. VSCode and terminal environment setup, cloning, launching, and 3D printing/assembling the SBC (Raspberry Pi) mounting parts." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/smabo-brain.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🧠 smabo-brain</h1>
+      <p>Set up smabo-brain — the hub that relays all components and runs advanced processing like image recognition and AI.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#概要">Overview</a></li>
+<li><a href="#セットアップ先pc-or-sbc">Setup Target (PC or SBC)</a></li>
+<li><a href="#必要パーツ">Required Parts</a></li>
+<li><a href="#smabo-brainのセットアップ">Setting Up smabo-brain</a>
+<ul>
+<li class="toc-h3"><a href="#vscodeのインストール">Installing VSCode</a></li>
+<li class="toc-h3"><a href="#ターミナルの使い方linux-macの場合">Using the Terminal (Linux / macOS)</a></li>
+<li class="toc-h3"><a href="#ターミナルの使い方windows">Using the Terminal (Windows)</a>
+<ul>
+<li class="toc-h3"><a href="#wslのインストール">Installing WSL</a></li>
+<li class="toc-h3"><a href="#mirroredモードの有効化">Enabling Mirrored Mode</a></li>
+<li class="toc-h3"><a href="#拡張機能のインストール">Installing the Extension</a></li>
+<li class="toc-h3"><a href="#wslの中に入る">Entering WSL</a></li>
+</ul>
+</li>
+<li class="toc-h3"><a href="#smabo-brainのクローン">Cloning smabo-brain</a></li>
+<li class="toc-h3"><a href="#パッケージのインストール">Installing Packages</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">Startup Procedure</a></li>
+</ul>
+</li>
+<li><a href="#sbcラズパイ4-or-5の場合">For Raspberry Pi (4 or 5)</a>
+<ul>
+<li class="toc-h3"><a href="#パーツの印刷">3D Printing Parts</a></li>
+<li class="toc-h3"><a href="#組み立て手順">Assembly</a></li>
+</ul>
+</li>
+<li><a href="#次回">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#概要">Overview</a></li>
+<li><a href="#セットアップ先pc-or-sbc">Setup Target (PC or SBC)</a></li>
+<li><a href="#必要パーツ">Required Parts</a></li>
+<li><a href="#smabo-brainのセットアップ">Setting Up smabo-brain</a>
+<ul>
+<li class="toc-h3"><a href="#vscodeのインストール">Installing VSCode</a></li>
+<li class="toc-h3"><a href="#ターミナルの使い方linux-macの場合">Using the Terminal (Linux / macOS)</a></li>
+<li class="toc-h3"><a href="#ターミナルの使い方windows">Using the Terminal (Windows)</a>
+<ul>
+<li class="toc-h3"><a href="#wslのインストール">Installing WSL</a></li>
+<li class="toc-h3"><a href="#mirroredモードの有効化">Enabling Mirrored Mode</a></li>
+<li class="toc-h3"><a href="#拡張機能のインストール">Installing the Extension</a></li>
+<li class="toc-h3"><a href="#wslの中に入る">Entering WSL</a></li>
+</ul>
+</li>
+<li class="toc-h3"><a href="#smabo-brainのクローン">Cloning smabo-brain</a></li>
+<li class="toc-h3"><a href="#パッケージのインストール">Installing Packages</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">Startup Procedure</a></li>
+</ul>
+</li>
+<li><a href="#sbcラズパイ4-or-5の場合">For Raspberry Pi (4 or 5)</a>
+<ul>
+<li class="toc-h3"><a href="#パーツの印刷">3D Printing Parts</a></li>
+<li class="toc-h3"><a href="#組み立て手順">Assembly</a></li>
+</ul>
+</li>
+<li><a href="#次回">Next</a></li>
+</ul></nav>
+
+<h2 id="ロードマップ">Roadmap<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
+<p>This page is the guide for the "smabo-brain" node on the roadmap below.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="brain"
+       aria-label="smabo build guide roadmap (smabo-brain highlighted)"></svg>
+</div>
+
+<h2 id="概要">Overview<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
+<p>This page explains the setup procedure for "smabo-brain".</p>
+<p>smabo-brain serves as:</p>
+<ul>
+<li>The hub relaying all components</li>
+<li>Running advanced tasks such as image processing and AI</li>
+</ul>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"web","to":"brain","transport":"ws","lines":["Control values"]},{"from":"brain","to":"web","transport":"ws","lines":["Sensor values"]},{"from":"brain","to":"web","transport":"webrtc","lines":["Camera feed"]},{"from":"brain","to":"esp32","transport":"ws","lines":["Control values"]},{"from":"esp32","to":"brain","transport":"ws","lines":["Sensor values"]},{"from":"app","to":"brain","transport":"ws","lines":["Phone sensor values"]},{"from":"app","to":"brain","transport":"webrtc","lines":["Camera feed"]},{"from":"brain","to":"app","transport":"ws","lines":["Control values"]}]' data-active="brain"
+       aria-label="smabo system diagram (smabo-brain highlighted)"></svg>
+</div>
+
+<h2 id="セットアップ先pc-or-sbc">Setup Target (PC or SBC)<a class="headerlink" href="#セットアップ先pc-or-sbc" title="Permanent link">#</a></h2>
+<p>smabo-brain can be set up on:</p>
+<ul>
+<li>External PC<ul>
+<li>Install smabo-brain on a separate PC (not smabo itself)</li>
+</ul>
+</li>
+<li>SBC (Single Board Computer)<ul>
+<li>Attach an SBC to smabo and install smabo-brain on it</li>
+</ul>
+</li>
+</ul>
+<br />
+<br />
+<p>The smabo-brain setup is the same for both. The SBC option additionally requires:</p>
+<ul>
+<li>3D printing the SBC mounting parts</li>
+<li>Attaching the SBC to smabo</li>
+</ul>
+<p>We recommend starting with the External PC option.</p>
+<blockquote>
+<p><strong>Supported SBCs</strong></p>
+<p>The following SBCs currently have available mounting parts:</p>
+<ul>
+<li>Raspberry Pi (4 or 5)</li>
+</ul>
+<p>For other SBCs, you will need to design custom mounting parts using CAD software.</p>
+</blockquote>
+<br />
+<p>The following sections cover the common setup steps for both PC and SBC, followed by Raspberry Pi-specific steps.</p>
+
+<h2 id="必要パーツ">Required Parts<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
+<p>Parts required to implement this feature:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Product URL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[Optional] Raspberry Pi 4 or 5</td>
+<td>-</td>
+<td>Required only for SBC setup</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="smabo-brainのセットアップ">Setting Up smabo-brain<a class="headerlink" href="#smabo-brainのセットアップ" title="Permanent link">#</a></h2>
+<p>The following explains the setup steps for smabo-brain.</p>
+<p>From here, you will need to enter commands using the "terminal".</p>
+<blockquote>
+<p><strong>Terminal</strong></p>
+<p>A terminal (also called a CLI or command-line interface) is a text-based screen for controlling a computer using only keyboard input.</p>
+<p>In software development, the terminal is commonly used to run commands and scripts.</p>
+</blockquote>
+
+<h3 id="vscodeのインストール">Installing VSCode<a class="headerlink" href="#vscodeのインストール" title="Permanent link">#</a></h3>
+<p>First, set up an environment for using the terminal.</p>
+<br />
+<p>We will use Visual Studio Code (VSCode), a popular code editor.</p>
+<br />
+<p>Download and install VSCode from the official site, selecting the installer for your operating system:</p>
+<p><a href="https://code.visualstudio.com">https://code.visualstudio.com</a></p>
+<br />
+<p>Once the download is complete, install and launch VSCode.</p>
+
+<h3 id="ターミナルの使い方linux-macの場合">Using the Terminal (Linux / macOS)<a class="headerlink" href="#ターミナルの使い方linux-macの場合" title="Permanent link">#</a></h3>
+<p>The TERMINAL tab at the bottom of the window is the terminal.</p>
+<p><img alt="alt text" src="../../images/vscode_terminal.png" /></p>
+<p>Whenever a command appears in this guide, enter it in this tab.</p>
+
+<h3 id="ターミナルの使い方windows">Using the Terminal (Windows)<a class="headerlink" href="#ターミナルの使い方windows" title="Permanent link">#</a></h3>
+<p>If you are using a Windows PC, please install WSL.</p>
+<br />
+<p>WSL (Windows Subsystem for Linux) lets you run a Linux environment inside Windows.</p>
+<ul>
+<li>Run a Linux environment on Windows</li>
+</ul>
+<p>Linux is widely used in robotics development, so working inside WSL is recommended for future convenience.</p>
+
+<h4 id="wslのインストール">Installing WSL</h4>
+<p>For WSL installation instructions, refer to the following article:</p>
+<p><a href="https://qiita.com/zakoken/items/61141df6aeae9e3f8e36">WSL2 のインストールとアンインストール</a></p>
+
+<h4 id="mirroredモードの有効化">Enabling Mirrored Mode</h4>
+<p>By default, WSL2 cannot communicate with external devices on your network.</p>
+<p>Since smabo requires communication with the smartphone and ESP32, configure WSL2 in mirrored network mode. Refer to the following article:</p>
+<p><a href="https://qiita.com/shansukey/articles/008669cdf392315a656f">wsl2 mirroredネットワーク、WindowsとLinuxの良いとこどり！</a></p>
+
+<h4 id="拡張機能のインストール">Installing the Extension</h4>
+<p>After installing WSL, install the following extension in VSCode:</p>
+<ul>
+<li>WSL</li>
+</ul>
+<p><img alt="alt text" src="../../images/install_wsl.jpg" /></p>
+
+<h4 id="wslの中に入る">Entering WSL</h4>
+<p>After installing the extension:</p>
+<ol>
+<li>Click the "&gt;&lt;" icon in the bottom-left corner</li>
+<li>Click "Connect to WSL"</li>
+</ol>
+<p><img alt="alt text" src="../../images/connect_wsl.jpg" /></p>
+<br />
+<p>If "WSL: Ubuntu" is shown in the bottom-left corner, you are connected. The TERMINAL tab at the bottom of the window is now your terminal.</p>
+<p><img alt="alt text" src="../../images/wsl_terminal.png" /></p>
+<p>Whenever a command appears in this guide, enter it in this terminal.</p>
+
+<h3 id="smabo-brainのクローン">Cloning smabo-brain<a class="headerlink" href="#smabo-brainのクローン" title="Permanent link">#</a></h3>
+<p>Clone the smabo-brain repository with the following commands.</p>
+<pre><code class="language-bash"># Move to home directory
+cd ~ </code></pre>
+<pre><code class="language-bash"># Clone smabo-brain repository
+git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
+
+<h3 id="パッケージのインストール">Installing Packages<a class="headerlink" href="#パッケージのインストール" title="Permanent link">#</a></h3>
+<p>Install the packages required to run the programs.</p>
+<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
+<pre><code class="language-bash">pip3 install -r requirements.txt</code></pre>
+
+<h2 id="動作手順">Operation<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
+<h3 id="起動手順">Startup Procedure<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
+<p><a href="startup.html" data-steps="smabo-brainの起動">Follow the startup procedure here</a>.</p>
+<br />
+<p>If smabo-brain starts without errors, setup is complete.</p>
+<br />
+<p>Common setup for both PC and SBC is now complete.
+If you used an external PC, you're done with this guide.</p>
+<br />
+<p>The following sections cover attaching the SBC to the smabo body.</p>
+
+<h2 id="sbcラズパイ4-or-5の場合">For Raspberry Pi (4 or 5)<a class="headerlink" href="#sbcラズパイ4-or-5の場合" title="Permanent link">#</a></h2>
+<p>This section explains how to 3D print and attach the mounting parts when using a Raspberry Pi as the SBC.</p>
+
+<h3 id="パーツの印刷">3D Printing Parts<a class="headerlink" href="#パーツの印刷" title="Permanent link">#</a></h3>
+<p>Print the newly required parts with your 3D printer.</p>
+<blockquote>
+<p>Because the slicing software differs by 3D printer model, this guide only covers the key points rather than specific slicer settings.</p>
+</blockquote>
+<br />
+<p>Print the following parts in the orientations shown in the images.</p>
+<blockquote>
+<p><strong>Printing notes</strong></p>
+<ul>
+<li>Print protrusions sideways to prevent them from snapping at the base when attaching/detaching parts</li>
+<li>Always enable support material when printing</li>
+</ul>
+</blockquote>
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stand.stl<br />
+<img alt="alt text" src="../../images/raspi_print_stand.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stopper1.stl<br />
+<img alt="alt text" src="../../images/raspi_print_stopper1.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stopper2.stl<br />
+<img alt="alt text" src="../../images/raspi_print_stopper2.jpg" /></li>
+</ul>
+
+<h3 id="組み立て手順">Assembly<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h3>
+<p>Assemble the parts as shown in the video below.</p>
+<p>※ The video includes parts printed in previous steps.</p>
+<p>
+  <iframe src="../../assembly_movie/smabo_raspi.html" title="Raspberry Pi mounting parts assembly"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>Assembly tip</strong></p>
+<p>Fix the Raspberry Pi to raspi_stand using the parts shown below.<br />
+<img alt="" src="../../images/assemble_raspi_stand.jpg" /></p>
+</blockquote>
+
+<h2 id="次回">Next<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
+<p>Next, follow the guide for:</p>
+<ul>
+<li><a href="smabo-web.html">smabo-web</a></li>
+</ul>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="web"
+       aria-label="smabo build guide roadmap (next: smabo-web highlighted)"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

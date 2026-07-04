@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base Parts — smabo Guide</title>
+  <meta name="description" content="smabo build guide: Creating the base parts. Adjust smartphone mounting part dimensions, 3D-print base parts, and assemble." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/base.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🧩 Base Parts</h1>
+      <p>Customize and 3D-print the base parts to fit your smartphone, then assemble smabo's body.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#required-parts">Required Parts</a></li>
+<li><a href="#download-repo">Downloading the smabo-hardware Repository</a></li>
+<li><a href="#adjust-parts">Adjusting Smartphone Mounting Parts</a>
+<ul>
+<li class="toc-h3"><a href="#measure-phone">Measuring Your Smartphone</a></li>
+<li class="toc-h3"><a href="#adjust-dimensions">Adjusting Part Dimensions</a>
+<ul>
+<li class="toc-h3"><a href="#left-right-parts">Left/Right Mounting Parts</a></li>
+<li class="toc-h3"><a href="#top-bottom-parts">Top/Bottom Mounting Parts</a></li>
+</ul>
+</li>
+<li class="toc-h3"><a href="#export-parts">Exporting the Parts</a></li>
+</ul>
+</li>
+<li><a href="#printing">3D Printing Parts</a></li>
+<li><a href="#assembly">Assembly</a>
+<ul>
+<li class="toc-h3"><a href="#attach-parts">Attaching the Parts</a></li>
+<li class="toc-h3"><a href="#attach-phone">Attaching Your Smartphone</a></li>
+</ul>
+</li>
+<li><a href="#finished">Finished Result</a></li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">#</a></h2>
+<p>This page is the guide for the 'Base Parts' node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="smabo-app.html">smabo-app</a> setup.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="baseparts"
+       aria-label="smabo build guide roadmap (Base Parts highlighted)"></svg>
+</div>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>This page explains how to create the base parts.</p>
+<br />
+<p>Specifically, you will:</p>
+<ul>
+<li>Modify the 3D model to fit your smartphone
+<p><img alt="Adjusting inner extrude" src="../../images/base_long_inner_extrude.jpg" /></p>
+</li>
+<li>Print base parts with a 3D printer
+<p><img alt="Printed base" src="../../images/base_print_base.jpg" /></p>
+</li>
+</ul>
+
+<h2 id="required-parts">Required Parts<a class="headerlink" href="#required-parts" title="Permanent link">#</a></h2>
+<p>The following parts are required to implement this feature.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Product URL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Smartphone</td>
+<td>-</td>
+<td>Your own smartphone</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="download-repo">Downloading the smabo-hardware Repository<a class="headerlink" href="#download-repo" title="Permanent link">#</a></h2>
+<p>First, download the smabo-hardware repository, which contains:</p>
+<ul>
+<li>STL and STEP files for 3D parts used in smabo</li>
+</ul>
+<p><a href="https://github.com/smabo-smartphone-robot/smabo-hardware">https://github.com/smabo-smartphone-robot/smabo-hardware</a></p>
+<blockquote>
+<p>The smabo-hardware repository contains all parts. Download it to a convenient location — you'll use it throughout the build.</p>
+</blockquote>
+
+<h2 id="adjust-parts">Adjusting Smartphone Mounting Parts<a class="headerlink" href="#adjust-parts" title="Permanent link">#</a></h2>
+<p>smabo can hold your smartphone, but phone sizes vary from person to person. This section explains how to adjust the mounting parts to fit your phone.</p>
+
+<h3 id="measure-phone">Measuring Your Smartphone<a class="headerlink" href="#measure-phone" title="Permanent link">#</a></h3>
+<p>First, measure your smartphone's:</p>
+<ul>
+<li>Long side</li>
+<li>Short side</li>
+<li>Thickness (measure the thickest point if the camera protrudes)</li>
+</ul>
+<p>Measure in millimeters. If you use a case, measure with the case on.</p>
+<blockquote>
+<p><strong>Caliper</strong></p>
+<p>You can check the manufacturer's spec sheet, use a ruler, or — recommended — use a caliper.<br />
+A caliper is a precision measuring tool that gives more accurate readings than a ruler. It is commonly used in robot building. If you don't have one, consider purchasing one.</p>
+</blockquote>
+
+<h3 id="adjust-dimensions">Adjusting Part Dimensions<a class="headerlink" href="#adjust-dimensions" title="Permanent link">#</a></h3>
+<p>Next, follow these steps to resize each part to match your phone.</p>
+<blockquote>
+<p><strong>CAD software</strong></p>
+<p>Any CAD software works. Fusion 360 steps are shown as an example in the notes below.</p>
+</blockquote>
+
+<h4 id="left-right-parts">Left/Right Mounting Parts</h4>
+<p>Import "smabo-hardware/step/smart_phone/smartphone_long_width_75_height_11.step" and adjust so the distance from part tip to inner face equals:</p>
+<ul>
+<li>(phone long side / 2) + 1 mm</li>
+</ul>
+<blockquote>
+<p><strong>Fusion 360 step-by-step</strong></p>
+<p>Click "Upload" in the left panel.<br />
+<img alt="Fusion upload" src="../../images/base_fusion_upload.jpg" /></p>
+<p>Click "Select Files".<br />
+<img alt="Fusion select files" src="../../images/base_fusion_select_files.jpg" /></p>
+<p>Select "smartphone_long_width_75_height_11.step".<br />
+<img alt="Fusion select long step" src="../../images/base_fusion_select_long_step.jpg" /></p>
+<p>After the import completes, open smartphone_long_width_75_height_11.</p>
+<p>Select the outer face and click "Extrude".<br />
+<img alt="Long outer extrude" src="../../images/base_long_outer_extrude.jpg" /></p>
+<p>Set the length to (phone long side / 2) + 3 + 1.<br />
+<img alt="Long outer length" src="../../images/base_long_outer_length.jpg" /></p>
+<p>Select the inner face and click "Extrude".<br />
+<img alt="Long inner extrude" src="../../images/base_long_inner_extrude.jpg" /></p>
+<p>Set the length to (phone long side / 2) + 1.<br />
+<img alt="Long inner length" src="../../images/base_long_inner_length.jpg" /></p>
+</blockquote>
+<br />
+<p>Also adjust the distance from the top to the bottom face of the clamp section to:</p>
+<ul>
+<li>phone thickness + 1 mm</li>
+</ul>
+<blockquote>
+<p><strong>Fusion 360 step-by-step</strong></p>
+<p>Select the top face and click "Extrude".<br />
+<img alt="Long top extrude" src="../../images/base_long_top_extrude.jpg" /></p>
+<p>Set the length to phone thickness + 1 + 3.<br />
+<img alt="Long top length" src="../../images/base_long_top_length.jpg" /></p>
+<p>Select the bottom face and click "Extrude".<br />
+<img alt="Long bottom extrude" src="../../images/base_long_bottom_extrude.jpg" /></p>
+<p>Set the length to phone thickness + 1.<br />
+<img alt="Long bottom length" src="../../images/base_long_bottom_length.jpg" /></p>
+</blockquote>
+
+<h4 id="top-bottom-parts">Top/Bottom Mounting Parts</h4>
+<p>Import "smabo-hardware/step/smart_phone/smartphone_short_width_37_height_11.step" and adjust so the distance from part tip to inner face equals:</p>
+<ul>
+<li>(phone short side / 2) + 1 mm</li>
+</ul>
+<blockquote>
+<p><strong>Fusion 360 step-by-step</strong></p>
+<p>Follow the same steps as for the Left/Right Mounting Parts, using the phone's short side as the reference dimension.</p>
+</blockquote>
+<br />
+<p>Also adjust the clamp height:</p>
+<ul>
+<li>phone thickness + 1 mm</li>
+</ul>
+<blockquote>
+<p><strong>Fusion 360 step-by-step</strong></p>
+<p>Follow the same steps as for the Left/Right Mounting Parts.</p>
+</blockquote>
+
+<h3 id="export-parts">Exporting the Parts<a class="headerlink" href="#export-parts" title="Permanent link">#</a></h3>
+<p>Once you have finished resizing, export the parts as STL files.</p>
+<blockquote>
+<p><strong>Fusion 360 step-by-step</strong></p>
+<p>From the top menu, choose File → Export.<br />
+<img alt="Fusion export menu" src="../../images/base_fusion_export_menu.jpg" /></p>
+<p>Set the following options and click "Export" to save the file:</p>
+<ul>
+<li>Name: any name you like</li>
+<li>Type: STL</li>
+<li>Location: any folder you like</li>
+</ul>
+<p><img alt="Fusion export settings" src="../../images/base_fusion_export_settings.jpg" /></p>
+</blockquote>
+
+<h2 id="printing">3D Printing Parts<a class="headerlink" href="#printing" title="Permanent link">#</a></h2>
+<p>Print the newly added parts on your 3D printer.</p>
+<blockquote>
+<p>Because slicer software varies by printer model, only key points are noted here rather than step-by-step slicer instructions.</p>
+</blockquote>
+<br />
+<br />
+<p>Print the following parts oriented as shown in the images.</p>
+<blockquote>
+<p><strong>Printing tips</strong></p>
+<ul>
+<li>Orient convex protrusions sideways to prevent fractures at the base when attaching/detaching.</li>
+<li>Always enable support material.</li>
+</ul>
+</blockquote>
+<ul>
+<li>smabo-hardware/stl/base/base.stl<br />
+<img alt="base.stl" src="../../images/base_print_base.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/cover_back_bread_board.stl<br />
+<img alt="cover_back_bread_board.stl" src="../../images/base_print_cover_back_bread_board.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/smart_phone/cover_smartphone_base.stl<br />
+<img alt="cover_smartphone_base.stl" src="../../images/base_print_cover_smartphone_base.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/smart_phone/smartphone_long_width_75_height_11.stl (adjusted from original size for your phone) × 2
+<ul>
+<li>Print 2 copies — same part used on the left and right.<br />
+<img alt="smartphone_long part" src="../../images/base_print_smartphone_long.jpg" /></li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/smart_phone/smartphone_short_width_37_height_11.stl (adjusted from original size for your phone) × 2
+<ul>
+<li>Print 2 copies — same part used on the top and bottom.<br />
+<img alt="smartphone_short part" src="../../images/base_print_smartphone_short.jpg" /></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">#</a></h2>
+
+<h3 id="attach-parts">Attaching the Parts<a class="headerlink" href="#attach-parts" title="Permanent link">#</a></h3>
+<p>Assemble the required parts as shown in the video below.</p>
+<p>Note: the video also includes parts printed in previous steps.</p>
+<p>
+  <iframe src="../../assembly_movie/base.html" title="Base Parts Assembly"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>Assembly tip</strong></p>
+<p>If you plan to remove your phone frequently, you can leave only the bottom part installed and slide the phone in and out from the top. Note that if the robot is inverted the phone will fall out in this configuration.</p>
+</blockquote>
+
+<h3 id="attach-phone">Attaching Your Smartphone<a class="headerlink" href="#attach-phone" title="Permanent link">#</a></h3>
+<p>Verify that your smartphone fits securely.</p>
+
+<h2 id="finished">Finished Result<a class="headerlink" href="#finished" title="Permanent link">#</a></h2>
+<p>The completed base looks like this:<br />
+<img alt="Completed base" src="../../images/base_complete.jpg" /></p>
+
+<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">#</a></h2>
+<p>Next, follow the guide for:</p>
+<ul>
+<li><a href="smabo-esp32.html">smabo-esp32</a></li>
+</ul>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="esp32"
+       aria-label="smabo build guide roadmap (next: smabo-esp32 highlighted)"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

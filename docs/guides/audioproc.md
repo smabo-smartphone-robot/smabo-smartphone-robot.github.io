@@ -43,7 +43,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 
 - smabo-webで指定した文字列を発話
-![alt text](../images/app_speech_say.png)
+![alt text](../images/app_speech_say.jpg)
 
 
 
@@ -113,7 +113,7 @@ smaboに対して「smabo」と話しかけると、smaboの目が虹色に光�
 smabo-webの「Face」タブの「SPEECH / SAY」で、任意の文章を入力し、「SAY」ボタンをクリックすると入力された音声がスマホから発話されます（発話する言語は、smabo-appの設定画面から変更できます）。
 
 
-![alt text](../images/app_speech_say.png)
+![alt text](../images/app_speech_say.jpg)
 
 <br>
 

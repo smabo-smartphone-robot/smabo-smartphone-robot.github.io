@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smabo-web — smabo Guide</title>
+  <meta name="description" content="smabo Guide: Setting up smabo-web. Clone, install packages, launch, and verify connection with smabo-brain." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/smabo-web.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🖥️ smabo-web</h1>
+      <p>Set up smabo-web — the browser-based tool for configuration, manual control, and sensor visualization.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#概要">Overview</a>
+<ul>
+<li class="toc-h3"><a href="#smabo-webのクローン">Cloning smabo-web</a></li>
+<li class="toc-h3"><a href="#パッケージのインストール">Installing Packages</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">Startup Procedure</a></li>
+</ul>
+</li>
+<li><a href="#次回">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#概要">Overview</a>
+<ul>
+<li class="toc-h3"><a href="#smabo-webのクローン">Cloning smabo-web</a></li>
+<li class="toc-h3"><a href="#パッケージのインストール">Installing Packages</a></li>
+</ul>
+</li>
+<li><a href="#動作手順">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#起動手順">Startup Procedure</a></li>
+</ul>
+</li>
+<li><a href="#次回">Next</a></li>
+</ul></nav>
+
+<h2 id="ロードマップ">Roadmap<a class="headerlink" href="#ロードマップ" title="Permanent link">#</a></h2>
+<p>This page is the guide for the "smabo-web" node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="smabo-brain.html">smabo-brain</a> setup.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="web"
+       aria-label="smabo build guide roadmap (smabo-web highlighted)"></svg>
+</div>
+
+<h2 id="概要">Overview<a class="headerlink" href="#概要" title="Permanent link">#</a></h2>
+<p>This page explains the setup procedure for "smabo-web".</p>
+<p>smabo-web serves as:</p>
+<ul>
+<li>An auxiliary tool for smabo configuration, manual operation, and sensor visualization</li>
+</ul>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"web","to":"brain","transport":"ws","lines":["Control values"]},{"from":"brain","to":"web","transport":"ws","lines":["Sensor values"]},{"from":"brain","to":"web","transport":"webrtc","lines":["Camera feed"]},{"from":"web","to":"esp32","transport":"rest","lines":["ESP32 config"]}]' data-active="web"
+       aria-label="smabo system diagram (smabo-web highlighted)"></svg>
+</div>
+
+<h3 id="smabo-webのクローン">Cloning smabo-web<a class="headerlink" href="#smabo-webのクローン" title="Permanent link">#</a></h3>
+<p>Clone the smabo-web repository with the following commands.</p>
+<pre><code class="language-bash"># Move to home directory
+cd ~ </code></pre>
+<pre><code class="language-bash"># Clone smabo-web repository
+git clone https://github.com/smabo-smartphone-robot/smabo-web</code></pre>
+
+<h3 id="パッケージのインストール">Installing Packages<a class="headerlink" href="#パッケージのインストール" title="Permanent link">#</a></h3>
+<p>Install the required packages.</p>
+<pre><code class="language-bash">cd ~/smabo-web</code></pre>
+<pre><code class="language-bash">npm install</code></pre>
+
+<h2 id="動作手順">Operation<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
+<h3 id="起動手順">Startup Procedure<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
+<p><a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続">Follow the startup procedure here</a>.</p>
+
+<br/>
+
+<p>Setup is complete once all programs start and communication is confirmed.</p>
+
+<h2 id="次回">Next<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
+<p>Next, follow the guide for:</p>
+<ul>
+<li><a href="smabo-app.html">smabo-app</a></li>
+</ul>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="app"
+       aria-label="smabo build guide roadmap (next: smabo-app highlighted)"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

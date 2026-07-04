@@ -136,7 +136,7 @@ smabo-appは
 
 
 - **smabo-webで指定した文字列を発話**
-![alt text](../images/app_speech_say.png)
+![alt text](../images/app_speech_say.jpg)
 
 
 # imgproc
@@ -160,10 +160,10 @@ smabo-appは
 
 
 - **自分のスマホのサイズに合わせた3Dモデルの修正**
-![alt text](../images/base_long_inner_extrude.png)
+![alt text](../images/base_long_inner_extrude.jpg)
 
 - **ベースパーツの3Dプリンタによる印刷**
-![alt text](../images/base_print_base.png)
+![alt text](../images/base_print_base.jpg)
 
 # esp32
 

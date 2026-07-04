@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smabo-esp32 — smabo Guide</title>
+  <meta name="description" content="smabo build guide: set up smabo-esp32. Flash source code and config with Thonny, 3D-print required parts, wire the breadboard, and verify operation." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/smabo-esp32.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🔌 smabo-esp32</h1>
+      <p>Set up smabo-esp32 — the firmware that controls sensors and actuators connected to the ESP32.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#required-parts">Required Parts</a></li>
+<li><a href="#setup">Setting Up smabo-esp32</a>
+<ul>
+<li class="toc-h3"><a href="#install-thonny">Installing Thonny (Flash Tool)</a>
+<ul>
+<li class="toc-h3"><a href="#flash-source">Flashing the Source Code</a></li>
+<li class="toc-h3"><a href="#flash-config">Flashing the Config File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#printing">3D Printing Parts</a></li>
+<li><a href="#about-breadboard">About the Breadboard</a></li>
+<li><a href="#assembly">Assembly</a></li>
+<li><a href="#wiring">Wiring</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#required-parts">Required Parts</a></li>
+<li><a href="#setup">Setting Up smabo-esp32</a>
+<ul>
+<li class="toc-h3"><a href="#install-thonny">Installing Thonny (Flash Tool)</a>
+<ul>
+<li class="toc-h3"><a href="#flash-source">Flashing the Source Code</a></li>
+<li class="toc-h3"><a href="#flash-config">Flashing the Config File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#printing">3D Printing Parts</a></li>
+<li><a href="#about-breadboard">About the Breadboard</a></li>
+<li><a href="#assembly">Assembly</a></li>
+<li><a href="#wiring">Wiring</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">#</a></h2>
+<p>This page is the guide for the 'smabo-esp32' node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="base.html">Base Parts</a> guide.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="esp32"
+       aria-label="smabo build guide roadmap (smabo-esp32 highlighted)"></svg>
+</div>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>This page explains how to set up smabo-esp32.</p>
+<p>smabo-esp32 is responsible for:</p>
+<ul>
+<li>Controlling sensors and actuators connected to the ESP32</li>
+</ul>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"web","to":"esp32","transport":"rest","lines":["ESP32 config"]},{"from":"brain","to":"esp32","transport":"ws","lines":["Control values"]},{"from":"esp32","to":"brain","transport":"ws","lines":["Sensor values"]}]' data-active="esp32"
+       aria-label="smabo system diagram (smabo-esp32 highlighted)"></svg>
+</div>
+
+<h2 id="required-parts">Required Parts<a class="headerlink" href="#required-parts" title="Permanent link">#</a></h2>
+<p>The following parts are required to implement this feature.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Product URL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32-DevKitC</td>
+<td><a href="https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-機能マイクロコントローラー-TYPE-C-デュアルコアボード/dp/B0GTY64KDC/ref=asc_df_B0GTY64KDC?mcid=350a4550c70e3d30953041512ffe110a&amp;tag=jpgo-22&amp;linkCode=df0&amp;hvadid=792079627413&amp;hvpos=&amp;hvnetw=g&amp;hvrand=17366440597157412973&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9199153&amp;hvtargid=pla-2484301629565&amp;hvocijid=17366440597157412973-B0GTY64KDC-&amp;hvexpln=0&amp;th=1">link</a></td>
+<td>Compatible alternatives OK</td>
+</tr>
+<tr>
+<td>Breadboard (SAD101)<br /></td>
+<td><a href="https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1">link</a></td>
+<td>Standard breadboards have 5 holes per row, but this one has 6 — required for the ESP32's width.</td>
+</tr>
+<tr>
+<td>Jump wires</td>
+<td><a href="https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Battery box (AA ×4, battery-snap compatible)</td>
+<td><a href="https://www.amazon.co.jp/dp/B011IJQ4DI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3">link</a></td>
+<td>Battery snap version is recommended for easier handling.</td>
+</tr>
+<tr>
+<td>Battery snap (for battery box)</td>
+<td><a href="https://www.monotaro.com/p/6866/1105/">link</a></td>
+<td>A version with connector pins is recommended — easier to insert into the breadboard and less likely to come loose.</td>
+</tr>
+<tr>
+<td>Rechargeable AA batteries × 4</td>
+<td><a href="https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/">link</a></td>
+<td>Rechargeable batteries are recommended.</td>
+</tr>
+<tr>
+<td>Battery charger</td>
+<td><a href="https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Servo motor driver PCA9685</td>
+<td><a href="https://www.amazon.co.jp/HiLetgo-PCA9685-16%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB-12-%E3%83%93%E3%83%83%E3%83%88-Arduino%E3%81%AB%E5%AF%BE%E5%BF%9C/dp/B01D1D0CX2/">link</a></td>
+<td>Compatible alternatives OK, but only needed if implementing Hand / Neck / Robot Arm features.</td>
+</tr>
+<tr>
+<td>Mini breadboard</td>
+<td><a href="https://www.amazon.co.jp/Rasbee-SYB-170-%E3%83%9F%E3%83%8B%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%881%E5%80%8B-%E4%B8%A6%E8%A1%8C%E8%BC%B8%E5%85%A5%E5%93%81/dp/B01KRAS4NC/">link</a></td>
+<td>Choose one with an adhesive backing.</td>
+</tr>
+<tr>
+<td>TB6612FNG dual motor driver</td>
+<td><a href="https://www.amazon.co.jp/TB6612FNG%E6%90%AD%E8%BC%89-%E3%83%87%E3%83%A5%E3%82%A2%E3%83%AB%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90-%E3%83%94%E3%83%B3%E3%83%98%E3%83%83%E3%83%80%E4%BB%98%E3%81%8D-%E5%AE%9F%E8%A3%85%E6%B8%88%E3%81%A7%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%81%BE%E3%81%99-1-2A%C3%972%E5%87%BA%E5%8A%9B/dp/B09C5MSYCC/">link</a></td>
+<td>Compatible alternatives OK (though a version without pre-soldered pin headers will require soldering yourself).<br /><br />Only needed if implementing Mobile Robot / Encoder Mobile Robot features.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="setup">Setting Up smabo-esp32<a class="headerlink" href="#setup" title="Permanent link">#</a></h2>
+
+<h3 id="install-thonny">Installing Thonny (Flash Tool)<a class="headerlink" href="#install-thonny" title="Permanent link">#</a></h3>
+<p>Download and install Thonny for your OS from:</p>
+<p><a href="https://thonny.org/">https://thonny.org/</a></p>
+<br />
+<p>Once installation is complete, launch Thonny.</p>
+
+<h4 id="flash-source">Flashing the Source Code</h4>
+<p>Connect the ESP32 to your PC via USB, then click the bottom-right button and select 'MicroPython (ESP32)'.</p>
+<p><img alt="Thonny — select interpreter" src="../../images/esp32_thonny_select_interpreter.jpg" /></p>
+<br />
+<p>Select all Python files inside 'smabo-esp32', right-click and choose 'Upload to /' to flash them to the ESP32.</p>
+<p><img alt="Thonny — upload source" src="../../images/esp32_thonny_upload_source.jpg" /></p>
+
+<h4 id="flash-config">Flashing the Config File</h4>
+<p>Next, flash the config file.</p>
+<p>From the config directory, select the JSON file matching your ESP32 model and copy it as 'config.json'.</p>
+<p><img alt="Copy config file" src="../../images/esp32_config_copy.jpg" /></p>
+<br />
+<p>Fill in the following fields for your environment:</p>
+<ul>
+<li><code>wifi/ssid</code> — SSID of the network to connect to</li>
+<li><code>wifi/password</code> — password of that network</li>
+</ul>
+<blockquote>
+<p><strong>WiFi frequency note</strong></p>
+<p>ESP32 only supports 2.4 GHz WiFi.</p>
+<ul>
+<li>SSIDs ending in 'G' (e.g., Buffalo-G-xxxx) are 2.4 GHz</li>
+<li>SSIDs ending in 'A' (e.g., Buffalo-A-xxxx) are 5 GHz</li>
+</ul>
+<p>Use the 'G' SSID here.</p>
+</blockquote>
+<p><img alt="Config WiFi and IP settings" src="../../images/esp32_config_wifi_ip.jpg" /></p>
+<br />
+<p>Once you have filled in the settings, flash config.json to the ESP32 the same way you flashed the source code.</p>
+<p><img alt="Upload config to ESP32" src="../../images/esp32_config_upload.jpg" /></p>
+
+<h2 id="printing">3D Printing Parts<a class="headerlink" href="#printing" title="Permanent link">#</a></h2>
+<p>Print the newly added parts on your 3D printer.</p>
+<blockquote>
+<p>Because slicer software varies by printer model, only key points are noted here rather than step-by-step slicer instructions.</p>
+</blockquote>
+<p>Print the following parts oriented as shown in the images.</p>
+<blockquote>
+<p><strong>Printing tips</strong></p>
+<ul>
+<li>Orient the convex parts sideways to prevent breakage at the base when attaching/detaching.</li>
+<li>Always enable support material.</li>
+</ul>
+</blockquote>
+<ul>
+<li>smabo-hardware/stl/base/bread_board_stopper_bottom_l.stl<br />
+<img alt="bread_board_stopper_bottom_l" src="../../images/esp32_print_bread_board_stopper_bottom_l.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/bread_board_stopper_bottom_r.stl<br />
+<img alt="bread_board_stopper_bottom_r" src="../../images/esp32_print_bread_board_stopper_bottom_r.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/bread_board_stopper.stl<br />
+<img alt="bread_board_stopper" src="../../images/esp32_print_bread_board_stopper.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/mini_bread_boad_stand.stl<br />
+<img alt="mini_bread_board_stand" src="../../images/esp32_print_mini_bread_board_stand.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/pca9685_stopper_l.stl<br />
+<img alt="pca9685_stopper_l" src="../../images/esp32_print_pca9685_stopper_l.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/pca9685_stopper_r_bottom.stl<br />
+<img alt="pca9685_stopper_r_bottom" src="../../images/esp32_print_pca9685_stopper_r_bottom.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/base/pca9685_stopper_r_top.stl<br />
+<img alt="pca9685_stopper_r_top" src="../../images/esp32_print_pca9685_stopper_r_top.png" /></li>
+</ul>
+<br />
+<ul>
+<li>[Optional] smabo-hardware/stl/base/in_base_plate_wire_hole.stl<br />
+<img alt="in_base_plate_wire_hole" src="../../images/esp32_print_in_base_plate_wire_hole.png" /><ul>
+<li>This part can be used as an internal divider inside smabo.<br />
+<img alt="Partition inside base plate" src="../../images/esp32_in_base_plate_partition.jpg" /></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="about-breadboard">About the Breadboard<a class="headerlink" href="#about-breadboard" title="Permanent link">#</a></h2>
+<p>The SAD101 ships with a jumper wire inserted in the middle of the + rail.</p>
+<p>In smabo, the + rail is split into two zones:</p>
+<ul>
+<li><strong>Right</strong> side of + rail → 6 V (battery box)</li>
+<li><strong>Left</strong> side of + rail → 5 V (ESP32 output)</li>
+</ul>
+<p><img alt="Breadboard power rails" src="../../images/esp32_breadboard_power_rails.png" /></p>
+<br />
+<p>Therefore, remove the factory-installed jumper wire in the center of the + rail.</p>
+<p><img alt="Remove jumper wire" src="../../images/esp32_breadboard_remove_jumper.png" /></p>
+<blockquote>
+<p><strong>Inside the breadboard</strong></p>
+<p>Looking at the back of the breadboard, you can see metal strips running along each row.</p>
+<p><img src="../../images/esp32_breadboard_back.png" width="300" /></p>
+<br />
+<br />
+<p>Any holes connected to the same strip are electrically connected, so multiple jump wires inserted in those holes form a circuit.</p>
+<p><img alt="Breadboard connections" src="../../images/esp32_breadboard_connection.png" /></p>
+<p>On the SAD101 in particular, the + rail is split in the middle — left and right are separate. The factory jumper wire was there to bridge them into one continuous rail.</p>
+<p>Because we use different voltages on each side, that jumper must be removed.</p>
+</blockquote>
+
+<h2 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">#</a></h2>
+<p>Assemble the required parts as shown in the video below.</p>
+<p>Note: the video also includes parts printed in previous steps.</p>
+<p>
+  <iframe src="../../assembly_movie/base_bread_board.html" title="smabo-esp32 Assembly"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>Assembly tips</strong></p>
+<p>Use the printed parts to mount the breadboard, PCA9685, and mini breadboard. Pay particular attention to the following:</p>
+<ul>
+<li>Insert the ESP32 into the left end of the breadboard.</li>
+<li>Attach the mini breadboard using its adhesive backing.</li>
+<li>Place the battery box inside smabo and route only the jump wires outside, connecting them to the breadboard.<ul>
+<li>Wiring positions are explained in the Wiring section below.</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Assembly key points" src="../../images/esp32_assembly_points.jpg" /></p>
+</blockquote>
+
+<h2 id="wiring">Wiring<a class="headerlink" href="#wiring" title="Permanent link">#</a></h2>
+<blockquote style="border-left-color:#e03131; background:rgba(224,49,49,.07);">
+<p><strong>About the breadboard + rail</strong></p>
+<p>Always remove the + rail jumper wire that came with the SAD101.
+Leaving it in may <strong style="color:#e03131;">damage the ESP32 and actuators</strong>.</p>
+<p><img alt="Remove jumper wire" src="../../images/esp32_breadboard_remove_jumper.png" /></p>
+</blockquote>
+<br />
+<p>For this step we are not yet driving any actuators, so only the battery wiring is needed as preparation for later steps.</p>
+<p>In the table below, "Point A" and "Point B" are directly connected in the circuit.</p>
+<table>
+<thead>
+<tr>
+<th>Point A</th>
+<th>Point B</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery box (+)</td>
+<td>Breadboard + rail (<strong style="color:#e03131;">right</strong> side)</td>
+<td>Right rail = 6 V; do not mix with 5 V side</td>
+</tr>
+<tr>
+<td>Battery box (-)</td>
+<td>Breadboard - rail</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ESP32 5 V pin</td>
+<td>Breadboard + rail (<strong style="color:#e03131;">left</strong> side)</td>
+<td>Left rail = 5 V; do not mix with 6 V side</td>
+</tr>
+<tr>
+<td>ESP32 GND</td>
+<td>Breadboard - rail</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>As noted above, the left and right sides of the + rail carry different voltages.</p>
+<ul>
+<li>Mixing 6 V and 5 V on the same rail half will <strong style="color:#e03131;">damage the ESP32 and actuators</strong>.</li>
+</ul>
+<p>Please wire carefully.</p>
+<br />
+<p>Wiring diagram for ESP32-DevKitC:</p>
+<p><img alt="Wiring diagram" src="../../fritzing/png/esp32_battery_box.png" /></p>
+
+<h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
+<h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
+<p><a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">Follow the startup procedure here</a>.</p>
+
+<br/>
+
+<p>Setup is complete once all programs start and communication is confirmed.</p>
+
+<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">#</a></h2>
+<p>Next, follow the guide for:</p>
+<ul>
+<li><a href="hand.html">Hand</a></li>
+<li><a href="neck.html">Head Rotation (Neck)</a></li>
+<li><a href="mobile.html">Mobile Robot</a></li>
+<li><a href="arm.html">Robot Arm</a></li>
+<li><a href="brainros.html">smabo-brain-ros</a></li>
+</ul>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="hand,neck,mobile,arm,brainros"
+       aria-label="smabo build guide roadmap (next: Hand, Neck, Mobile, Arm, smabo-brain-ros highlighted alternately)"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

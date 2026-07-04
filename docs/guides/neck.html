@@ -19,7 +19,13 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
-      <nav class="nav__links">        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <span class="lang-switch__item lang-switch__item--active">JP</span>
+          <span class="lang-switch__sep">/</span>
+          <a class="lang-switch__item" href="../en/guides/neck.html" onclick="localStorage.setItem('smabo-lang-pref','en')">EN</a>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
     </div>
   </header>
@@ -265,7 +271,7 @@
 
 <h2 id="完成系">完成系<a class="headerlink" href="#完成系" title="Permanent link">#</a></h2>
 <p>今回作成したロボットの完成系は下図のようになります。</p>
-<p><img alt="" src="../images/smabo_neck.png" /></p>
+<p><img alt="" src="../images/smabo_neck.jpg" /></p>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
 <h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
@@ -278,7 +284,7 @@
 <li>「head_pan」を有効化</li>
 </ul>
 <p>します。</p>
-<p><img alt="alt text" src="../images/neck_config_head_pan_enable.png" /></p>
+<p><img alt="alt text" src="../images/neck_config_head_pan_enable.jpg" /></p>
 
 <h3 id="コントローラー制御">コントローラー制御<a class="headerlink" href="#コントローラー制御" title="Permanent link">#</a></h3>
 <p>コントローラー制御の手順を説明します。</p>
@@ -287,7 +293,7 @@
 <li>「mode」を「manual」</li>
 </ul>
 <p>に設定してください。</p>
-<p><img alt="alt text" src="../images/neck_config_mode_manual.png" /></p>
+<p><img alt="alt text" src="../images/neck_config_mode_manual.jpg" /></p>
 <br />
 <p>「Servo」タブで各サーボの角度を変更すると、それに合わせてsmaboが左右に動作します。</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_manual.mp4" type="video/mp4"></video></p>
@@ -300,7 +306,7 @@
 <li>「group」を「neck」</li>
 </ul>
 <p>に設定してください。 </p>
-<p><img alt="alt text" src="../images/neck_config_mode_random.png" /></p>
+<p><img alt="alt text" src="../images/neck_config_mode_random.jpg" /></p>
 <blockquote>
 <p><strong>random_group</strong></p>
 <p>同じrandom_groupに設定されたサーボモーターは、同じタイミングでランダムに動作します。</p>
@@ -319,7 +325,7 @@
 <li>「mode」を「manual」</li>
 </ul>
 <p>に設定してください。</p>
-<p><img alt="alt text" src="../images/neck_config_mode_manual.png" /></p>
+<p><img alt="alt text" src="../images/neck_config_mode_manual.jpg" /></p>
 <br />
 <p>「Vision」タブの「Detection」にて、</p>
 <ul>
@@ -327,7 +333,7 @@
 <li>任意の認識モードを設定（ここでは、colorモードで青色の物体を認識するように設定しています）</li>
 </ul>
 <p>します。</p>
-<p><img alt="alt text" src="../images/neck_vision_detection.png" /></p>
+<p><img alt="alt text" src="../images/neck_vision_detection.jpg" /></p>
 <br />
 <p>次に、「Behaviors」の</p>
 <ul>
@@ -336,7 +342,7 @@
 <li>「Pan Direction」を「reversed(-1)」</li>
 </ul>
 <p>に設定します。</p>
-<p><img alt="alt text" src="../images/neck_vision_servo_follow.png" /></p>
+<p><img alt="alt text" src="../images/neck_vision_servo_follow.jpg" /></p>
 <br />
 <p>設定完了後、スマホカメラの前に認識対象の物体を近づけると、物体に追従するようにsmaboが首振りすることが確認できます。</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_img_proc.mp4" type="video/mp4"></video></p>

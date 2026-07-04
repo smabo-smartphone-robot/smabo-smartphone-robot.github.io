@@ -14,19 +14,28 @@
   <link rel="stylesheet" href="css/docs.css" />
   <link rel="stylesheet" href="css/roadmap.css" />
   <link rel="stylesheet" href="css/sysmap.css" />
+  <script>
+    (function(){var p=localStorage.getItem('smabo-lang-pref');if(!p||p==='en'){localStorage.setItem('smabo-lang-pref','en');location.replace('en/index.html');}})();
+  </script>
 </head>
 <body>
 
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="index.html"><img class="brand__mark" src="images/smabo_icon.png" alt="smabo" /> smabo</a>
-      <nav class="nav__links">        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <span class="lang-switch__item lang-switch__item--active">JP</span>
+          <span class="lang-switch__sep">/</span>
+          <a class="lang-switch__item" href="en/index.html" onclick="localStorage.setItem('smabo-lang-pref','en')">EN</a>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
     </div>
   </header>
 
   <section class="doc-hero doc-hero--cover">
-    <img src="images/hero_jp.png" alt="smabo" />
+    <img src="images/hero_jp.jpg" alt="smabo" />
   </section>
 
   <section class="section" style="padding-block:0">
@@ -41,7 +50,7 @@
   <h1><br>できること</h1>
   初学者向けの<br>
   様々な機能がそろっています
-  <img src="images/smabo_usage.png" alt="smabo" />
+  <img src="images/smabo_usage.jpg" alt="smabo" />
 
 </div>
 

@@ -191,7 +191,7 @@ WSL2のデフォルト設定では、外部環境との通信ができません�
 WSLのインストールが完了したら、VScodeにて以下の拡張機能をインストールしてください。
 - WSL
 
-![alt text](../images/install_wsl.png)
+![alt text](../images/install_wsl.jpg)
 
 
 
@@ -202,7 +202,7 @@ WSLのインストールが完了したら、VScodeにて以下の拡張機能�
 1. 「><」マークをクリック
 2. 「Connected to WSL」をクリックしてください。
 
-![alt text](../images/connect_wsl.png)
+![alt text](../images/connect_wsl.jpg)
 
 
 <br>
@@ -289,17 +289,17 @@ SBCにラズパイを使用する場合の、パーツの印刷、取り付け�
     - サポート材は必ずONにした状態で印刷
 
 - smabo-hardware/stl/raspi/raspi_stand.stl
-    ![alt text](../images/raspi_print_stand.png)
+    ![alt text](../images/raspi_print_stand.jpg)
 
 <br>
 
 - smabo-hardware/stl/raspi/raspi_stopper1.stl
-    ![alt text](../images/raspi_print_stopper1.png)
+    ![alt text](../images/raspi_print_stopper1.jpg)
 
 <br>
 
 - smabo-hardware/stl/raspi/raspi_stopper2.stl
-    ![alt text](../images/raspi_print_stopper2.png)
+    ![alt text](../images/raspi_print_stopper2.jpg)
 
 
 ## 組み立て手順
@@ -312,7 +312,7 @@ SBCにラズパイを使用する場合の、パーツの印刷、取り付け�
 
 !!! note 組み立ての際のポイント
     下図のように、ラズパイを各パーツでraspi_standに固定してください。
-    ![](../images/assemble_raspi_stand.png)
+    ![](../images/assemble_raspi_stand.jpg)
 
 
 # 次回

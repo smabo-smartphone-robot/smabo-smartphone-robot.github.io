@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hand — smabo Guide</title>
+  <meta name="description" content="smabo build guide: Hand feature. Implement manual controller control and random motion control for smabo's hands." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/hand.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🤏 Hand</h1>
+      <p>Assemble and control smabo's hand servo mechanism — supports manual controller input and random motion.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#required-parts">Required Parts</a></li>
+<li><a href="#printing">3D Printing Parts</a></li>
+<li><a href="#assembly">Assembly</a></li>
+<li><a href="#wiring">Wiring</a></li>
+<li><a href="#finished">Finished Result</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+<li class="toc-h3"><a href="#servo-settings">Servo Settings</a></li>
+<li class="toc-h3"><a href="#manual-control">Manual Control</a></li>
+<li class="toc-h3"><a href="#random-control">Random Control</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+
+        <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#required-parts">Required Parts</a></li>
+<li><a href="#printing">3D Printing Parts</a></li>
+<li><a href="#assembly">Assembly</a></li>
+<li><a href="#wiring">Wiring</a></li>
+<li><a href="#finished">Finished Result</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+<li class="toc-h3"><a href="#servo-settings">Servo Settings</a></li>
+<li class="toc-h3"><a href="#manual-control">Manual Control</a></li>
+<li class="toc-h3"><a href="#random-control">Random Control</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">#</a></h2>
+<p>This page is the guide for the 'Hand' node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="smabo-esp32.html">smabo-esp32</a> setup.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="hand"
+       aria-label="smabo build guide roadmap (Hand highlighted)"></svg>
+</div>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>This page explains the Hand feature.</p>
+<p>Specifically, you will implement:</p>
+<ul>
+<li>Manual controller control of the hand
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_hand_manual.mp4" type="video/mp4"></video></p>
+</li>
+<li>Random motion control of the hand
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_hand_random.mp4" type="video/mp4"></video></p>
+</li>
+</ul>
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"web","to":"brain","transport":"ws","lines":["Servo control values"]},{"from":"brain","to":"esp32","transport":"ws","lines":["Servo control values"]},{"from":"web","to":"esp32","transport":"rest","lines":["ESP32 config"]}]' data-active="web,brain,esp32"
+       aria-label="smabo system diagram (smabo-web, smabo-brain, smabo-esp32 highlighted)"></svg>
+</div>
+
+<h2 id="required-parts">Required Parts<a class="headerlink" href="#required-parts" title="Permanent link">#</a></h2>
+<p>The following parts are required to implement this feature.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Product URL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32-DevKitC</td>
+<td><a href="https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-機能マイクロコントローラー-TYPE-C-デュアルコアボード/dp/B0GTY64KDC/ref=asc_df_B0GTY64KDC?mcid=350a4550c70e3d30953041512ffe110a&amp;tag=jpgo-22&amp;linkCode=df0&amp;hvadid=792079627413&amp;hvpos=&amp;hvnetw=g&amp;hvrand=17366440597157412973&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9199153&amp;hvtargid=pla-2484301629565&amp;hvocijid=17366440597157412973-B0GTY64KDC-&amp;hvexpln=0&amp;th=1">link</a></td>
+<td>Compatible alternatives OK</td>
+</tr>
+<tr>
+<td>Breadboard (SAD101)<br /></td>
+<td><a href="https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1">link</a></td>
+<td>Standard breadboards have 5 holes per row, but this one has 6 — required for the ESP32's width.</td>
+</tr>
+<tr>
+<td>Jump wires</td>
+<td><a href="https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Battery box (AA ×4, battery-snap compatible)</td>
+<td><a href="https://www.amazon.co.jp/dp/B011IJQ4DI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3">link</a></td>
+<td>Battery snap version is recommended for easier handling.</td>
+</tr>
+<tr>
+<td>Battery snap (for battery box)</td>
+<td><a href="https://www.monotaro.com/p/6866/1105/">link</a></td>
+<td>A version with connector pins is recommended — easier to insert into the breadboard and less likely to come loose.</td>
+</tr>
+<tr>
+<td>Rechargeable AA batteries × 4</td>
+<td><a href="https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/">link</a></td>
+<td>Rechargeable batteries are recommended.</td>
+</tr>
+<tr>
+<td>Battery charger</td>
+<td><a href="https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Servo motor driver PCA9685</td>
+<td><a href="https://www.amazon.co.jp/HiLetgo-PCA9685-16%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB-12-%E3%83%93%E3%83%83%E3%83%88-Arduino%E3%81%AB%E5%AF%BE%E5%BF%9C/dp/B01D1D0CX2/">link</a></td>
+<td>Compatible alternatives OK</td>
+</tr>
+<tr>
+<td>SG90 × 2</td>
+<td><a href="https://akizukidenshi.com/catalog/g/gM-08761/">link</a></td>
+<td>Compatible alternatives OK, but if the horn size differs from the genuine part, the printed parts may not fit — horn trimming or 3D model modification may be required.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="printing">3D Printing Parts<a class="headerlink" href="#printing" title="Permanent link">#</a></h2>
+<p>Print the newly added parts on your 3D printer.</p>
+<blockquote>
+<p>Because slicer software varies by printer model, only key points are noted here rather than step-by-step slicer instructions.</p>
+</blockquote>
+<br />
+<p>Print the following parts oriented as shown in the images.</p>
+<blockquote>
+<p><strong>Printing tips</strong></p>
+<ul>
+<li>Orient convex protrusions sideways to prevent fractures at the base when attaching/detaching.</li>
+<li>Always enable support material.</li>
+</ul>
+</blockquote>
+<ul>
+<li>smabo-hardware/stl/hand/sg90/sg90_plate_1.stl × 2<br />
+Print 2 (same part used on left and right)<br />
+<img alt="sg90_plate_1" src="../../images/hand_print_sg90_plate_1.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/hand/sg90/sg90_plate_2.stl × 2<br />
+Print 2 (same part used on left and right)<br />
+<img alt="sg90_plate_2" src="../../images/hand_print_sg90_plate_2.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/hand/sg90/sg90_base.stl × 2<br />
+Print 2 (same part used on left and right)<br />
+<img alt="sg90_base" src="../../images/hand_print_sg90_base.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/hand/sg90/arm_hand.stl × 2<br />
+Print 2 (same part used on left and right)<br />
+<img alt="arm_hand" src="../../images/hand_print_arm_hand.png" /></li>
+</ul>
+
+<h2 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">#</a></h2>
+<p>Assemble the required parts as shown in the video below.</p>
+<p>Note: the video also includes parts printed in previous steps.</p>
+<p>
+  <iframe src="../../assembly_movie/hand.html" title="Hand Assembly"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>Assembly tips</strong></p>
+<p>The assembly video does not show how to attach the SG90 servos, so the steps are described here.</p>
+<br />
+<p>First, fix the SG90 between sg90_plate_1 and sg90_plate_2 as shown, then attach the assembly to the body.</p>
+<p><img alt="Hand assembly step 1" src="../../images/hand_create_1.jpg" /></p>
+<p><img alt="Hand assembly step 2" src="../../images/hand_create_2.jpg" /></p>
+<br />
+<p>Slide sg90_base over from the top and fit the horn in. No tools required, but you may optionally screw the horn to the servo using the included screws.</p>
+<p><img alt="Hand assembly step 3" src="../../images/hand_create_3.jpg" /></p>
+</blockquote>
+
+<h2 id="wiring">Wiring<a class="headerlink" href="#wiring" title="Permanent link">#</a></h2>
+<p>Wire according to the table below.</p>
+<p>In the table, "Point A" and "Point B" are directly connected in the circuit.</p>
+<table>
+<thead>
+<tr>
+<th>Point A</th>
+<th>Point B</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery box (+)</td>
+<td>Breadboard + rail (<strong style="color:#e03131;">right</strong> side)</td>
+<td>Right rail = 6 V; do not mix with 5 V side</td>
+</tr>
+<tr>
+<td>Battery box (-)</td>
+<td>Breadboard - rail</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ESP32 5 V pin</td>
+<td>Breadboard + rail (<strong style="color:#e03131;">left</strong> side)</td>
+<td>Left rail = 5 V; do not mix with 6 V side</td>
+</tr>
+<tr>
+<td>ESP32 GND</td>
+<td>Breadboard - rail</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 V++</td>
+<td>Breadboard + rail (right side)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 VCC</td>
+<td>Breadboard + rail (left side)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 SDA</td>
+<td>Pin set in config.json <code>i2c/sda</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 SCL</td>
+<td>Pin set in config.json <code>i2c/scl</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>PCA9685 GND</td>
+<td>Breadboard - rail</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<br />
+<p>Wiring diagram for ESP32-DevKitC:</p>
+<p>In default config, connect the left arm servo to channel=0, and the right arm servo to channel=1.</p>
+<p><img alt="Hand wiring diagram" src="../../fritzing/png/hand.png" /></p>
+<blockquote>
+<p><strong>Wiring tip</strong></p>
+<p>Route the SG90 cables through the gap at the bottom-right of the smabo back panel to reach the PCA9685.</p>
+</blockquote>
+
+<h2 id="finished">Finished Result<a class="headerlink" href="#finished" title="Permanent link">#</a></h2>
+<p>The completed robot looks like this.</p>
+<p><img alt="smabo with hands" src="../../images/smabo_hand.jpg" /></p>
+
+<h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
+<h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
+<p><a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">Follow the startup procedure here</a>.</p>
+
+<h3 id="servo-settings">Servo Settings<a class="headerlink" href="#servo-settings" title="Permanent link">#</a></h3>
+<p>Servo settings can be changed in the 'Modes/servos' section of the 'Config' tab in smabo-web.</p>
+<p>First, since the left and right hand servos are mounted in opposite directions, enable:</p>
+<ul>
+<li>'inverse' for 'right_hand' only</li>
+</ul>
+<p><img alt="Enable inverse for right_hand" src="../../images/hand_servo_inverse.png" /></p>
+<br />
+<p>Next, enable:</p>
+<ul>
+<li>'left_hand' and 'right_hand'</li>
+</ul>
+<p><img alt="Enable left_hand and right_hand" src="../../images/hand_servo_enable.png" /></p>
+
+<h3 id="manual-control">Manual Control<a class="headerlink" href="#manual-control" title="Permanent link">#</a></h3>
+<p>Steps for manual controller control.</p>
+<p>In the 'Config' tab → 'Modes/servos', for left_hand and right_hand, set:</p>
+<ul>
+<li>'mode' to 'manual'</li>
+</ul>
+<p><img alt="Mode set to manual" src="../../images/hand_mode_manual.png" /></p>
+<br />
+<p>Adjust servo angles in the 'Servo' tab to move both arms.</p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_hand_manual.mp4" type="video/mp4"></video></p>
+
+<h3 id="random-control">Random Control<a class="headerlink" href="#random-control" title="Permanent link">#</a></h3>
+<p>Steps for random motion control.</p>
+<p>In the 'Config' tab → 'Modes/servos', for left_hand and right_hand, set:</p>
+<ul>
+<li>'mode' to 'random'</li>
+<li>'group' to 'hands'</li>
+</ul>
+<p><img alt="Mode set to random" src="../../images/hand_mode_random.png" /></p>
+<blockquote>
+<p><strong>random_group</strong></p>
+<p>Servos assigned to the same random_group will move at the same random time.</p>
+<br />
+<p>If you want the left and right hands to move at independent random times, assign left_hand and right_hand to different random_groups.</p>
+<br />
+<p>New random_groups can be added by clicking the "Add random Group" button.</p>
+<p><img alt="Add random group" src="../../images/hand_add_random_group.png" /></p>
+</blockquote>
+<br />
+<p>After a moment, both hands will move at random intervals.</p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_hand_random.mp4" type="video/mp4"></video></p>
+
+<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">#</a></h2>
+<p>This is a terminal node on the roadmap.</p>
+<br />
+<p>smabo has many other features to explore.</p>
+<p>If you want to explore other features, pick another page from the roadmap.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active=""
+       aria-label="smabo build guide roadmap"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

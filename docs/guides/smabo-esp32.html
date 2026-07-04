@@ -19,7 +19,13 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
-      <nav class="nav__links">        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <span class="lang-switch__item lang-switch__item--active">JP</span>
+          <span class="lang-switch__sep">/</span>
+          <a class="lang-switch__item" href="../en/guides/smabo-esp32.html" onclick="localStorage.setItem('smabo-lang-pref','en')">EN</a>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
     </div>
   </header>
@@ -185,15 +191,15 @@
 
 <h4 id="ソースコードの書き込み">ソースコードの書き込み</h4>
 <p>ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタンをクリックし「MicroPython(ESP32)」を選択します。</p>
-<p><img alt="alt text" src="../images/esp32_thonny_select_interpreter.png" /></p>
+<p><img alt="alt text" src="../images/esp32_thonny_select_interpreter.jpg" /></p>
 <br />
 <p>その後、「smabo-esp32」内のpythonファイルを全て選択した状態で右クリックし、「/にアップロード」を選択すると、esp32に書き込まれます。</p>
-<p><img alt="alt text" src="../images/esp32_thonny_upload_source.png" /></p>
+<p><img alt="alt text" src="../images/esp32_thonny_upload_source.jpg" /></p>
 
 <h4 id="設定ファイルの書き込み">設定ファイルの書き込み</h4>
 <p>次に、設定ファイルを書き込みます。</p>
 <p>configディレクトリからお手持ちのesp32の種類にあったjsonファイルを選択し、「config.json」という名前でコピーを作成します。</p>
-<p><img alt="alt text" src="../images/esp32_config_copy.png" /></p>
+<p><img alt="alt text" src="../images/esp32_config_copy.jpg" /></p>
 <br />
 <p>以下項目を、環境に応じて記載してください。</p>
 <ul>
@@ -215,10 +221,10 @@
 </ul>
 <p>となるため、ここで指定するSSIDは「G」がついている方にしてください。</p>
 </blockquote>
-<p><img alt="alt text" src="../images/esp32_config_wifi_ip.png" /></p>
+<p><img alt="alt text" src="../images/esp32_config_wifi_ip.jpg" /></p>
 <br />
 <p>設定の記入が完了したら、ソースコードの時と同様に、config.jsonをesp32へ書き込みます。</p>
-<p><img alt="alt text" src="../images/esp32_config_upload.png" /></p>
+<p><img alt="alt text" src="../images/esp32_config_upload.jpg" /></p>
 
 <h2 id="パーツの印刷">パーツの印刷<a class="headerlink" href="#パーツの印刷" title="Permanent link">#</a></h2>
 <p>今回、新たに追加されるパーツを3Dプリンタで印刷します。</p>
@@ -272,7 +278,7 @@
 <li>【オプション】smabo-hardware/stl/base/in_base_plate_wire_hole.stl<br />
 <img alt="alt text" src="../images/esp32_print_in_base_plate_wire_hole.png" /><ul>
 <li>本パーツは、「smabo内の仕切り」として使用できます。<br />
-<img alt="alt text" src="../images/esp32_in_base_plate_partition.png" /></li>
+<img alt="alt text" src="../images/esp32_in_base_plate_partition.jpg" /></li>
 </ul>
 </li>
 </ul>
@@ -325,7 +331,7 @@
 </ul>
 </li>
 </ul>
-<p><img alt="alt text" src="../images/esp32_assembly_points.png" /></p>
+<p><img alt="alt text" src="../images/esp32_assembly_points.jpg" /></p>
 </blockquote>
 
 <h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>

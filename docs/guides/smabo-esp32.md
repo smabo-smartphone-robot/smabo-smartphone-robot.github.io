@@ -101,14 +101,14 @@ https://thonny.org/
 
 ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタンをクリックし「MicroPython(ESP32)」を選択します。
 
-![alt text](../images/esp32_thonny_select_interpreter.png)
+![alt text](../images/esp32_thonny_select_interpreter.jpg)
 
 
 <br>
 
 その後、「smabo-esp32」内のpythonファイルを全て選択した状態で右クリックし、「/にアップロード」を選択すると、esp32に書き込まれます。
 
-![alt text](../images/esp32_thonny_upload_source.png)
+![alt text](../images/esp32_thonny_upload_source.jpg)
 
 ### 設定ファイルの書き込み
 
@@ -116,7 +116,7 @@ ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタ
 
 configディレクトリからお手持ちのesp32の種類にあったjsonファイルを選択し、「config.json」という名前でコピーを作成します。
 
-![alt text](../images/esp32_config_copy.png)
+![alt text](../images/esp32_config_copy.jpg)
 
 
 <br>
@@ -144,7 +144,7 @@ configディレクトリからお手持ちのesp32の種類にあったjsonフ�
 
 
 
-![alt text](../images/esp32_config_wifi_ip.png)
+![alt text](../images/esp32_config_wifi_ip.jpg)
 
 
 
@@ -152,7 +152,7 @@ configディレクトリからお手持ちのesp32の種類にあったjsonフ�
 
 設定の記入が完了したら、ソースコードの時と同様に、config.jsonをesp32へ書き込みます。
 
-![alt text](../images/esp32_config_upload.png)
+![alt text](../images/esp32_config_upload.jpg)
 
 # パーツの印刷
 
@@ -205,7 +205,7 @@ configディレクトリからお手持ちのesp32の種類にあったjsonフ�
 - 【オプション】smabo-hardware/stl/base/in_base_plate_wire_hole.stl
     ![alt text](../images/esp32_print_in_base_plate_wire_hole.png)
     - 本パーツは、「smabo内の仕切り」として使用できます。
-    ![alt text](../images/esp32_in_base_plate_partition.png)
+    ![alt text](../images/esp32_in_base_plate_partition.jpg)
 
 
 # ブレッドボードについて
@@ -269,7 +269,7 @@ smaboでは、
     - バッテリーボックスはsmaboの中に配置し、ジャンプワイヤーのみを外側に出して、ブレッドボードに挿す形で配線してください
       - 配線位置については、「配線」の章にて説明します
   
-    ![alt text](../images/esp32_assembly_points.png)
+    ![alt text](../images/esp32_assembly_points.jpg)
 
 
 # 配線

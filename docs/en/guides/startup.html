@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startup Procedure — smabo Guide</title>
+  <meta name="description" content="smabo Guide: Startup and connection procedures for each component (smabo-brain / smabo-web / smabo-app / esp32)." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/startup.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>🚀 Startup Procedure</h1>
+      <p>Startup and connection procedures for each component (smabo-brain / smabo-web / smabo-app / esp32). Referenced from "Operation" sections in individual guides.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li><a href="#smabo-brainの起動">Launch smabo-brain</a></li>
+<li><a href="#smabo-webの起動">Launch smabo-web</a></li>
+<li><a href="#smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-web Connection</a></li>
+<li><a href="#smabo-appの接続">Connect smabo-app</a></li>
+<li><a href="#smabo-brain---esp32の接続">smabo-brain &lt;-&gt; ESP32 Connection</a></li>
+<li><a href="#smabo-web---esp32の接続">smabo-web &lt;-&gt; ESP32 Connection</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">Contents</div><ul>
+<li><a href="#smabo-brainの起動">Launch smabo-brain</a></li>
+<li><a href="#smabo-webの起動">Launch smabo-web</a></li>
+<li><a href="#smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-web Connection</a></li>
+<li><a href="#smabo-appの接続">Connect smabo-app</a></li>
+<li><a href="#smabo-brain---esp32の接続">smabo-brain &lt;-&gt; ESP32 Connection</a></li>
+<li><a href="#smabo-web---esp32の接続">smabo-web &lt;-&gt; ESP32 Connection</a></li>
+</ul></nav>
+
+<p><strong>All devices (smartphone, PC, SBC, ESP32) must be connected to the <strong>same network</strong> before proceeding.</strong></p>
+
+<h2 id="smabo-brainの起動">Launch smabo-brain<a class="headerlink" href="#smabo-brainの起動" title="Permanent link">#</a></h2>
+<p>First, launch smabo-brain from your PC or SBC.</p>
+<pre><code class="language-bash">cd ~/smabo-brain</code></pre>
+<pre><code class="language-bash">python3 -m brain</code></pre>
+
+<h2 id="smabo-webの起動">Launch smabo-web<a class="headerlink" href="#smabo-webの起動" title="Permanent link">#</a></h2>
+<p>Next, launch smabo-web from your PC.</p>
+<pre><code class="language-bash">cd ~/smabo-web</code></pre>
+<pre><code class="language-bash">npm run dev</code></pre>
+<p>Then open your browser and access <code>http://localhost:5173</code>.</p>
+
+<h2 id="smabo-brain---smabo-webの接続">smabo-brain &lt;-&gt; smabo-web Connection<a class="headerlink" href="#smabo-brain---smabo-webの接続" title="Permanent link">#</a></h2>
+<p>When smabo-web loads, "Brain connected" should appear in the bottom-right corner.</p>
+<p><img alt="alt text" src="../../images/web_brain_connected.png" /></p>
+
+<h2 id="smabo-appの接続">Connect smabo-app<a class="headerlink" href="#smabo-appの接続" title="Permanent link">#</a></h2>
+
+<p>Launch smabo-app and wait a moment. When "Brain connected" appears, the connection is established.</p>
+<p><img alt="alt text" src="../../images/app_brain_connected.png" /></p>
+
+<h2 id="smabo-brain---esp32の接続">smabo-brain &lt;-&gt; ESP32 Connection<a class="headerlink" href="#smabo-brain---esp32の接続" title="Permanent link">#</a></h2>
+<p>Click the "Ping" button to the right of "WS (brain &lt;-&gt; ESP32)". If "OK" is displayed, the connection is successful.</p>
+<p><img alt="alt text" src="../../images/esp32_web_ws_ping.png" /></p>
+<blockquote>
+<p><strong>If the connection fails</strong></p>
+<p>If the ping test fails, check the WiFi settings in <code>config.json</code>. If there is an error, correct it and re-flash the firmware to the ESP32.</p>
+</blockquote>
+
+<h2 id="smabo-web---esp32の接続">smabo-web &lt;-&gt; ESP32 Connection<a class="headerlink" href="#smabo-web---esp32の接続" title="Permanent link">#</a></h2>
+<p>In the "Config" tab, click the "Ping" button to the right of "REST (web &lt;-&gt; ESP32)". If "OK" is displayed, the connection is successful.</p>
+<p><img alt="alt text" src="../../images/esp32_web_rest_ping.png" /></p>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+</body>
+</html>

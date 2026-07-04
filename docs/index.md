@@ -9,7 +9,7 @@
 - その他不正確な内容が含まれている場合は、ユーザー側に確認した上で了承が得られたら、markdown,htmlともに修正すること
 -->
 
-![](./images/hero_jp.png)
+![](./images/hero_jp.jpg)
 
 工具不要で組み立て可能な<br>スマホ搭載ロボットです
 
@@ -19,7 +19,7 @@
 初学者向けの<br>
 様々な機能がそろっています
 
-![](./images/smabo_usage.png)
+![](./images/smabo_usage.jpg)
 
 
 # つくりかた

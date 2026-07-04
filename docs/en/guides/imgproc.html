@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Processing — smabo Guide</title>
+  <meta name="description" content="smabo Guide: Use smabo's image processing: object detection (AR, color, face, QR code) and behavior control (eye tracking, servo, drive)." />
+  <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html"><img class="brand__mark" src="../../images/smabo_icon.png" alt="smabo" /> smabo</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <a class="lang-switch__item" href="../../guides/imgproc.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
+          <span class="lang-switch__sep">/</span>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>👁️ Image Processing</h1>
+      <p>Run object detection (AR marker, color, face, QR code) on the phone camera feed via smabo-brain, and control smabo's eyes, servos, and drive based on the results.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+<li class="toc-h3"><a href="#detection-modes">Detection Modes</a></li>
+<li class="toc-h3"><a href="#behaviors">Behaviors</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
+
+<nav class="doc-toc doc-toc--inline"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+<li class="toc-h3"><a href="#detection-modes">Detection Modes</a></li>
+<li class="toc-h3"><a href="#behaviors">Behaviors</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">#</a></h2>
+<p>This page is the guide for the "Image Processing" node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="smabo-brain.html">smabo-brain</a> and <a href="smabo-app.html">smabo-app</a> setup.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="imgproc"
+       aria-label="smabo build guide roadmap (Image Processing highlighted)"></svg>
+</div>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>This page explains the <strong>Image Processing feature</strong> of smabo.</p>
+<p>Specifically, you will:</p>
+<ul>
+<li>Detect objects in the camera feed and visualize results in smabo-web
+<ul>
+<li>Visualize detection results in smabo-web</li>
+<li>Control smabo's eyes based on detection results</li>
+</ul>
+</li>
+</ul>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/img_proc_smabo_web.mp4" type="video/mp4"></video></p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/eye_control_img_proc.mp4" type="video/mp4"></video></p>
+
+<h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
+<h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
+<p>Follow <a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">the startup procedure here</a>.</p>
+
+<h3 id="detection-modes">Detection Modes<a class="headerlink" href="#detection-modes" title="Permanent link">#</a></h3>
+<p>In smabo-web, go to the <strong>Vision</strong> tab and enable <strong>Detection</strong> to activate image processing.</p>
+<p><img alt="" src="../../images/web_vision_detection.png" /></p>
+<br />
+<p>Several detection modes are available. Change the <strong>Mode</strong> to detect different types of objects:</p>
+<ul>
+<li>AR marker</li>
+<li>Color (specified color tracking)</li>
+<li>Face</li>
+<li>QR code</li>
+</ul>
+<p><img alt="" src="../../images/web_vision_mode.png" /></p>
+<br />
+<p>You can also set a <strong>Min size</strong> to define the minimum object size to detect (objects at least this size will be recognized). Enable the preview to see the minimum size frame in the bottom-right corner.</p>
+<p><img alt="" src="../../images/web_vision_min_size.png" /></p>
+
+<h3 id="behaviors">Behaviors<a class="headerlink" href="#behaviors" title="Permanent link">#</a></h3>
+<p>Under <strong>BEHAVIORS</strong> in the Vision tab, you can control smabo based on detection results.</p>
+<p>Behaviors act on the <strong>largest detected object</strong>, using its position and size in the frame.</p>
+<p><img alt="" src="../../images/web_vision_behaviors.png" /></p>
+<br />
+<p>Available behavior types:</p>
+<ul>
+<li><strong>Eye follow</strong> — smabo's eyes track the detected object</li>
+<li><strong>Servo follow</strong> — a servo motor tracks the detected object (for neck movement; horizontal and vertical axes configurable — see <a href="neck.html">Head Tilt</a>)</li>
+<li><strong>Differential drive</strong> — the robot drives toward or away from the detected object to maintain a target size (see <a href="mobile.html">Mobile Robot</a>)</li>
+</ul>
+<br />
+<p>For example, to use <strong>Eye follow</strong>: set smabo-app's face mode to <strong>Follow</strong>.</p>
+<p><img alt="" src="../../images/app_eye_follow_mode.png" /></p>
+<p>Then hold the target object in front of the camera — smabo's eyes will track it.</p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/eye_control_img_proc.mp4" type="video/mp4"></video></p>
+
+<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">#</a></h2>
+<p>This is a terminal node on the roadmap.</p>
+<p>To explore other features, pick another page from the roadmap.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active=""
+       aria-label="smabo build guide roadmap (next)"></svg>
+</div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">© <span id="year">2026</span> smabo-smartphone-robot</div>
+    </div>
+  </footer>
+
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
+</body>
+</html>

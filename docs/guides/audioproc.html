@@ -19,7 +19,13 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="../index.html"><img class="brand__mark" src="../images/smabo_icon.png" alt="smabo" /> smabo</a>
-      <nav class="nav__links">        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
+      <nav class="nav__links">
+        <div class="lang-switch">
+          <span class="lang-switch__item lang-switch__item--active">JP</span>
+          <span class="lang-switch__sep">/</span>
+          <a class="lang-switch__item" href="../en/guides/audioproc.html" onclick="localStorage.setItem('smabo-lang-pref','en')">EN</a>
+        </div>
+        <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
     </div>
   </header>
@@ -69,7 +75,7 @@
 <p><img alt="alt text" src="../images/app_recognized_speech.png" /></p>
 </li>
 <li>smabo-webで指定した文字列を発話
-<p><img alt="alt text" src="../images/app_speech_say.png" /></p>
+<p><img alt="alt text" src="../images/app_speech_say.jpg" /></p>
 </li>
 </ul>
 <div class="sys-wrap" style="max-width:760px;margin-inline:auto">
@@ -111,7 +117,7 @@
 
 <h3 id="音声発話">音声発話<a class="headerlink" href="#音声発話" title="Permanent link">#</a></h3>
 <p>smabo-webの「Face」タブの「SPEECH / SAY」で、任意の文章を入力し、「SAY」ボタンをクリックすると入力された音声がスマホから発話されます（発話する言語は、smabo-appの設定画面から変更できます）。</p>
-<p><img alt="alt text" src="../images/app_speech_say.png" /></p>
+<p><img alt="alt text" src="../images/app_speech_say.jpg" /></p>
 <br />
 <p>なお、「Bubble ON」「Speak ON」ボタンにて発話のON/OFF、吹き出しの有無を設定可能です。</p>
 <p><img alt="alt text" src="../images/app_speech_toggle.png" /></p>
