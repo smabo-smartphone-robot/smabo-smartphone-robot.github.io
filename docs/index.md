@@ -9,6 +9,7 @@
 - その他不正確な内容が含まれている場合は、ユーザー側に確認した上で了承が得られたら、markdown,htmlともに修正すること
 -->
 
+<!--英語版では、hero_en.jpgを埋め込む-->
 ![](./images/hero_jp.jpg)
 
 工具不要で組み立て可能な<br>スマホ搭載ロボットです
@@ -19,8 +20,17 @@
 初学者向けの<br>
 様々な機能がそろっています
 
-![](./images/smabo_usage.jpg)
+## ブロックのように工具不要で組み立て
 
+<!--./docs/video/smabo_assemble.mp4 を埋め込む-->
+
+## スマホをsmaboの顔、センサーに
+
+<!--./docs/video/eye_control_img_proc.mp4 を埋め込む-->
+
+## PC/SBCと連携して高度な制御
+
+## 機能の拡張
 
 # つくりかた
 
