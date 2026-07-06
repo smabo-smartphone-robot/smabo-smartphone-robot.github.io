@@ -151,26 +151,33 @@
 /* back link */
 .doc-back { margin-top: 48px; }
 
-/* index page hero — full-bleed cover image with dark overlay for readability */
+/* index page hero — fixed size from ~600px viewport width upward (phones
+   below that shrink proportionally to fit, everything else stays constant). */
 .doc-hero--cover {
   background: none;
   padding-block: 0;
 }
 .doc-hero--cover img {
   display: block;
-  width: 100%;
+  width: 600px;
+  max-width: 100%;
   height: auto;
+  margin-inline: auto;
 }
 
-/* video/image caption embedded directly on the media, same scrim treatment as the hero */
+/* video/image caption embedded directly on the media, same scrim treatment as the hero.
+   Fixed size from ~600px viewport width upward, like the hero image — phones
+   below that shrink proportionally to fit, everything else stays constant. */
 .media-cover {
   position: relative;
   display: inline-block;
+  width: 600px;
   max-width: 100%;
   line-height: 0;
 }
 .media-cover video {
   display: block;
+  width: 100%;
 }
 .media-cover__overlay {
   position: absolute;
@@ -192,14 +199,13 @@
 }
 
 /* index page CTA button ("Start building smabo") — extra breathing room.
-   Scales gently with viewport width (like the surrounding hero heading's
-   clamp() sizing) so it doesn't look undersized on wide screens, while
-   staying at today's comfortable size on phones. On very narrow screens the
-   label wraps instead of overflowing, so it never clips. */
+   Fixed size at every width, same as the hero image/videos — it never grows
+   or shrinks with the viewport. On very narrow screens the label wraps
+   instead of overflowing, so it never clips. */
 .cta-block { margin-block: 0 28px; }
 .cta-block .btn {
-  font-size: clamp(1rem, 0.85rem + 0.4vw, 1.25rem);
-  padding: clamp(13px, 9px + 0.7vw, 19px) clamp(26px, 18px + 1.8vw, 42px);
+  font-size: 1rem;
+  padding: 13px 26px;
   max-width: calc(100vw - 40px);
   white-space: normal;
   overflow-wrap: break-word;
