@@ -204,15 +204,20 @@
 .rmap-tooltip__close:hover { color: var(--ink); }
 
 @media (max-width: 600px) {
+  /* bottom sheet, not a full-screen cover — leaves the page visible above it */
   .rmap-tooltip--fullscreen {
-    top: 0 !important;
+    top: auto !important;
     left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: 100vh !important;
-    border-radius: 0 !important;
+    height: auto !important;
+    max-height: 78vh;
+    border-radius: 18px 18px 0 0 !important;
     overflow-y: auto;
     touch-action: pan-y;
+    box-shadow: 0 -10px 34px rgba(20, 20, 40, .28);
   }
   .rmap-tooltip--fullscreen .rmap-tooltip__handle {
     display: none;
