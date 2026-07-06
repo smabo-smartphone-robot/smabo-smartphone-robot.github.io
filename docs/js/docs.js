@@ -51,10 +51,11 @@
 // --- Scroll reveal (index pages) -----------------------------------------
 // Top-level content blocks on index.html / en/index.html fade + rise into
 // view as the user scrolls. Selector is scoped to the centered blocks used
-// only by the index pages, so other doc pages are unaffected.
+// only by the index pages, so other doc pages are unaffected. The CTA button
+// (.cta-block) is excluded — it should always be visible immediately.
 (function () {
   const blocks = Array.from(document.querySelectorAll(
-    '.doc-content > div[style*="text-align: center"]'
+    '.doc-content > div[style*="text-align: center"]:not(.cta-block)'
   ));
   if (blocks.length === 0) return;
   for (const b of blocks) b.classList.add('reveal');
