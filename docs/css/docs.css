@@ -191,6 +191,21 @@
   text-shadow: 0 2px 8px rgba(0,0,0,.5);
 }
 
+/* index page CTA button ("Start building smabo") — extra breathing room.
+   Scales gently with viewport width (like the surrounding hero heading's
+   clamp() sizing) so it doesn't look undersized on wide screens, while
+   staying at today's comfortable size on phones. On very narrow screens the
+   label wraps instead of overflowing, so it never clips. */
+.cta-block { margin-block: 0 28px; }
+.cta-block .btn {
+  font-size: clamp(1rem, 0.85rem + 0.4vw, 1.25rem);
+  padding: clamp(13px, 9px + 0.7vw, 19px) clamp(26px, 18px + 1.8vw, 42px);
+  max-width: calc(100vw - 40px);
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
 /* scroll reveal: index page content blocks fade + rise into view (docs.js) */
 .reveal {
   opacity: 0;

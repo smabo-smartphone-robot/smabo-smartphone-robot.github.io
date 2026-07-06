@@ -54,7 +54,7 @@
 // only by the index pages, so other doc pages are unaffected.
 (function () {
   const blocks = Array.from(document.querySelectorAll(
-    '.doc-content > div[style*="text-align: center"], .doc-content > .rmap-wrap, .doc-content > .reveal-group'
+    '.doc-content > div[style*="text-align: center"]'
   ));
   if (blocks.length === 0) return;
   for (const b of blocks) b.classList.add('reveal');

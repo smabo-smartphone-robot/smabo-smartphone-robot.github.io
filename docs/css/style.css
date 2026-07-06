@@ -102,6 +102,15 @@ h1, h2, h3 { line-height: 1.3; font-weight: 800; }
 .btn--ghost { background: #fff; color: var(--indigo); border-color: var(--line); }
 .btn--ghost:hover { border-color: var(--indigo); }
 
+/* index page CTA buttons: outline pill matching the roadmap "Read Guide" style
+   (rmap-tip-btn in roadmap.css) — indigo border, fills solid on hover */
+.btn--outline {
+  background: #fff;
+  color: var(--indigo);
+  border-color: var(--indigo);
+}
+.btn--outline:hover { background: var(--indigo); color: #fff; }
+
 /* =========================================================
    header / nav
    ========================================================= */
