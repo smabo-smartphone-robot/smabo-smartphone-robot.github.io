@@ -448,3 +448,15 @@ a.lang-switch__item:hover { color: var(--indigo); background: var(--bg-tint); }
 
   .nav__toggle { display: none; }
 }
+
+@media (max-width: 480px) {
+  /* header nav (logo + JP/EN switch + GitHub button) is too tight to fit on
+     one row at phone widths with the desktop sizing — shrink everything. */
+  .nav { gap: 8px; }
+  .brand { font-size: 1.05rem; gap: 6px; }
+  .brand__mark { width: 26px; height: 26px; }
+  .nav__links { gap: 8px; }
+  .lang-switch { font-size: 0.72rem; }
+  .lang-switch__item { padding: 3px 5px; }
+  .nav__links a.btn--primary { padding: 7px 12px; font-size: 0.78rem; }
+}
