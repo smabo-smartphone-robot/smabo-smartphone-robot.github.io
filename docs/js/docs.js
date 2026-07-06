@@ -48,6 +48,30 @@
   for (const h of headings) observer.observe(h);
 })();
 
+// --- Scroll reveal (index pages) -----------------------------------------
+// Top-level content blocks on index.html / en/index.html fade + rise into
+// view as the user scrolls. Selector is scoped to the centered blocks used
+// only by the index pages, so other doc pages are unaffected.
+(function () {
+  const blocks = Array.from(document.querySelectorAll(
+    '.doc-content > div[style*="text-align: center"], .doc-content > .rmap-wrap, .doc-content > .reveal-group'
+  ));
+  if (blocks.length === 0) return;
+  for (const b of blocks) b.classList.add('reveal');
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+  );
+  for (const b of blocks) observer.observe(b);
+})();
+
 // --- Startup-procedure popup --------------------------------------------
 // Links to startup.html open the 起動手順 in a modal instead of navigating
 // away. Progressive enhancement: without JS the link is a normal page link.
