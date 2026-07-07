@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>smabo-brain — smabo Guide</title>
-  <meta name="description" content="smabo Guide: Setting up smabo-brain. VSCode and terminal environment setup, cloning, launching, and 3D printing/assembling the SBC (Raspberry Pi) mounting parts." />
+  <meta name="description" content="smabo Guide: Setting up smabo-brain. VSCode and terminal environment setup, cloning, and startup (3D printing/assembling the SBC mounting parts is covered in Creating the Base Parts)." />
   <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -67,12 +67,6 @@
 <li class="toc-h3"><a href="#起動手順">Startup Procedure</a></li>
 </ul>
 </li>
-<li><a href="#sbcラズパイ4-or-5の場合">For Raspberry Pi (4 or 5)</a>
-<ul>
-<li class="toc-h3"><a href="#パーツの印刷">3D Printing Parts</a></li>
-<li class="toc-h3"><a href="#組み立て手順">Assembly</a></li>
-</ul>
-</li>
 <li><a href="#次回">Next</a></li>
 </ul></nav>
         <article class="doc-content">
@@ -101,12 +95,6 @@
 <li><a href="#動作手順">Operation</a>
 <ul>
 <li class="toc-h3"><a href="#起動手順">Startup Procedure</a></li>
-</ul>
-</li>
-<li><a href="#sbcラズパイ4-or-5の場合">For Raspberry Pi (4 or 5)</a>
-<ul>
-<li class="toc-h3"><a href="#パーツの印刷">3D Printing Parts</a></li>
-<li class="toc-h3"><a href="#組み立て手順">Assembly</a></li>
 </ul>
 </li>
 <li><a href="#次回">Next</a></li>
@@ -152,6 +140,7 @@
 <li>3D printing the SBC mounting parts</li>
 <li>Attaching the SBC to smabo</li>
 </ul>
+<p>(Note: the 3D printing steps for the SBC mounting parts are covered in <a href="base.html">Creating the Base Parts</a>.)</p>
 <p>We recommend starting with the External PC option.</p>
 <blockquote>
 <p><strong>Supported SBCs</strong></p>
@@ -162,7 +151,6 @@
 <p>For other SBCs, you will need to design custom mounting parts using CAD software.</p>
 </blockquote>
 <br />
-<p>The following sections cover the common setup steps for both PC and SBC, followed by Raspberry Pi-specific steps.</p>
 
 <h2 id="必要パーツ">Required Parts<a class="headerlink" href="#必要パーツ" title="Permanent link">#</a></h2>
 <p>Parts required to implement this feature:</p>
@@ -261,57 +249,6 @@ git clone https://github.com/smabo-smartphone-robot/smabo-brain</code></pre>
 <p><a href="startup.html" data-steps="smabo-brainの起動">Follow the startup procedure here</a>.</p>
 <br />
 <p>If smabo-brain starts without errors, setup is complete.</p>
-<br />
-<p>Common setup for both PC and SBC is now complete.
-If you used an external PC, you're done with this guide.</p>
-<br />
-<p>The following sections cover attaching the SBC to the smabo body.</p>
-
-<h2 id="sbcラズパイ4-or-5の場合">For Raspberry Pi (4 or 5)<a class="headerlink" href="#sbcラズパイ4-or-5の場合" title="Permanent link">#</a></h2>
-<p>This section explains how to 3D print and attach the mounting parts when using a Raspberry Pi as the SBC.</p>
-
-<h3 id="パーツの印刷">3D Printing Parts<a class="headerlink" href="#パーツの印刷" title="Permanent link">#</a></h3>
-<p>Print the newly required parts with your 3D printer.</p>
-<blockquote>
-<p>Because the slicing software differs by 3D printer model, this guide only covers the key points rather than specific slicer settings.</p>
-</blockquote>
-<br />
-<p>Print the following parts in the orientations shown in the images.</p>
-<blockquote>
-<p><strong>Printing notes</strong></p>
-<ul>
-<li>Print protrusions sideways to prevent them from snapping at the base when attaching/detaching parts</li>
-<li>Always enable support material when printing</li>
-</ul>
-</blockquote>
-<ul>
-<li>smabo-hardware/stl/raspi/raspi_stand.stl<br />
-<img alt="alt text" src="../../images/raspi_print_stand.jpg" /></li>
-</ul>
-<br />
-<ul>
-<li>smabo-hardware/stl/raspi/raspi_stopper1.stl<br />
-<img alt="alt text" src="../../images/raspi_print_stopper1.jpg" /></li>
-</ul>
-<br />
-<ul>
-<li>smabo-hardware/stl/raspi/raspi_stopper2.stl<br />
-<img alt="alt text" src="../../images/raspi_print_stopper2.jpg" /></li>
-</ul>
-
-<h3 id="組み立て手順">Assembly<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h3>
-<p>Assemble the parts as shown in the video below.</p>
-<p>※ The video includes parts printed in previous steps.</p>
-<p>
-  <iframe src="../../assembly_movie/smabo_raspi.html" title="Raspberry Pi mounting parts assembly"
-          loading="lazy" allowfullscreen
-          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
-</p>
-<blockquote>
-<p><strong>Assembly tip</strong></p>
-<p>Fix the Raspberry Pi to raspi_stand using the parts shown below.<br />
-<img alt="" src="../../images/assemble_raspi_stand.jpg" /></p>
-</blockquote>
 
 <h2 id="次回">Next<a class="headerlink" href="#次回" title="Permanent link">#</a></h2>
 <p>Next, follow the guide for:</p>

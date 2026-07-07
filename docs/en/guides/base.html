@@ -59,10 +59,24 @@
 <li class="toc-h3"><a href="#export-parts">Exporting the Parts</a></li>
 </ul>
 </li>
-<li><a href="#printing">3D Printing Parts</a></li>
+<li><a href="#printing">3D Printing Parts</a>
+<ul>
+<li class="toc-h3"><a href="#共通">Common</a></li>
+<li class="toc-h3"><a href="#smabo-brainをsbcにセットアップした場合">If smabo-brain Is Set Up on an SBC</a>
+<ul>
+<li class="toc-h3"><a href="#sbcラズパイ4-or-5の場合">For Raspberry Pi (4 or 5)</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#assembly">Assembly</a>
 <ul>
-<li class="toc-h3"><a href="#attach-parts">Attaching the Parts</a></li>
+<li class="toc-h3"><a href="#共通-1">Common</a></li>
+<li class="toc-h3"><a href="#smabo-brainをsbcにセットアップした場合-1">If smabo-brain Is Set Up on an SBC</a>
+<ul>
+<li class="toc-h3"><a href="#sbcラズパイ4-or-5の場合-1">For Raspberry Pi (4 or 5)</a></li>
+</ul>
+</li>
 <li class="toc-h3"><a href="#attach-phone">Attaching Your Smartphone</a></li>
 </ul>
 </li>
@@ -235,6 +249,8 @@ A caliper is a precision measuring tool that gives more accurate readings than a
 <li>Always enable support material.</li>
 </ul>
 </blockquote>
+
+<h3 id="共通">Common<a class="headerlink" href="#共通" title="Permanent link">#</a></h3>
 <ul>
 <li>smabo-hardware/stl/base/base.stl<br />
 <img alt="base.stl" src="../../images/base_print_base.jpg" /></li>
@@ -268,11 +284,28 @@ A caliper is a precision measuring tool that gives more accurate readings than a
 </li>
 </ul>
 
-<h2 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">#</a></h2>
+<h3 id="smabo-brainをsbcにセットアップした場合">If smabo-brain Is Set Up on an SBC<a class="headerlink" href="#smabo-brainをsbcにセットアップした場合" title="Permanent link">#</a></h3>
+<h4 id="sbcラズパイ4-or-5の場合">For Raspberry Pi (4 or 5)<a class="headerlink" href="#sbcラズパイ4-or-5の場合" title="Permanent link">#</a></h4>
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stand.stl<br />
+<img alt="alt text" src="../../images/raspi_print_stand.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stopper1.stl<br />
+<img alt="alt text" src="../../images/raspi_print_stopper1.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stopper2.stl<br />
+<img alt="alt text" src="../../images/raspi_print_stopper2.jpg" /></li>
+</ul>
 
-<h3 id="attach-parts">Attaching the Parts<a class="headerlink" href="#attach-parts" title="Permanent link">#</a></h3>
+<h2 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">#</a></h2>
 <p>Assemble the required parts as shown in the video below.</p>
 <p>Note: the video also includes parts printed in previous steps.</p>
+
+<h3 id="共通-1">Common<a class="headerlink" href="#共通-1" title="Permanent link">#</a></h3>
 <p>
   <iframe src="../../assembly_movie/base.html" title="Base Parts Assembly"
           loading="lazy" allowfullscreen
@@ -281,6 +314,19 @@ A caliper is a precision measuring tool that gives more accurate readings than a
 <blockquote>
 <p><strong>Assembly tip</strong></p>
 <p>If you plan to remove your phone frequently, you can leave only the bottom part installed and slide the phone in and out from the top. Note that if the robot is inverted the phone will fall out in this configuration.</p>
+</blockquote>
+
+<h3 id="smabo-brainをsbcにセットアップした場合-1">If smabo-brain Is Set Up on an SBC<a class="headerlink" href="#smabo-brainをsbcにセットアップした場合-1" title="Permanent link">#</a></h3>
+<h4 id="sbcラズパイ4-or-5の場合-1">For Raspberry Pi (4 or 5)<a class="headerlink" href="#sbcラズパイ4-or-5の場合-1" title="Permanent link">#</a></h4>
+<p>
+  <iframe src="../../assembly_movie/smabo_raspi.html" title="Raspberry Pi mounting parts assembly"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>Assembly tip</strong></p>
+<p>Fix the Raspberry Pi to raspi_stand using the parts shown below.<br />
+<img alt="" src="../../images/assemble_raspi_stand.jpg" /></p>
 </blockquote>
 
 <h3 id="attach-phone">Attaching Your Smartphone<a class="headerlink" href="#attach-phone" title="Permanent link">#</a></h3>

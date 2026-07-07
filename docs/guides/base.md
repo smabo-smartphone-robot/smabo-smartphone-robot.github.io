@@ -22,8 +22,13 @@
     - [上下固定用パーツ](#上下固定用パーツ)
   - [パーツのエクスポート](#パーツのエクスポート)
 - [パーツの印刷](#パーツの印刷)
+  - [共通](#共通)
+  - [smabo-brainをSBCにセットアップした場合](#smabo-brainをsbcにセットアップした場合)
+    - [SBC=ラズパイ（4 or 5）の場合](#sbcラズパイ4-or-5の場合)
 - [組み立て手順](#組み立て手順)
-  - [各種パーツの取り付け](#各種パーツの取り付け)
+  - [共通](#共通-1)
+  - [smabo-brainをSBCにセットアップした場合](#smabo-brainをsbcにセットアップした場合-1)
+    - [SBC=ラズパイ（4 or 5）の場合](#sbcラズパイ4-or-5の場合-1)
   - [スマホの取り付け](#スマホの取り付け)
 - [完成系](#完成系)
 - [次回](#次回)
@@ -250,6 +255,8 @@ smaboでは、スマートフォンを固定することができますが、ス
     - パーツのつけ外しの際に、根本から折れにくくするため、凸部は横向きにして印刷
     - サポート材は必ずONにした状態で印刷
 
+## 共通
+
 - smabo-hardware/stl/base/base.stl
     ![alt text](../images/base_print_base.jpg)
 
@@ -275,14 +282,33 @@ smaboでは、スマートフォンを固定することができますが、ス
   - 上下で同じパーツを使用するため2つ印刷します
     ![alt text](../images/base_print_smartphone_short.jpg)
 
-# 組み立て手順
 
-## 各種パーツの取り付け
+## smabo-brainをSBCにセットアップした場合
+
+### SBC=ラズパイ（4 or 5）の場合
+
+- smabo-hardware/stl/raspi/raspi_stand.stl
+    ![alt text](../images/raspi_print_stand.jpg)
+
+<br>
+
+- smabo-hardware/stl/raspi/raspi_stopper1.stl
+    ![alt text](../images/raspi_print_stopper1.jpg)
+
+<br>
+
+- smabo-hardware/stl/raspi/raspi_stopper2.stl
+    ![alt text](../images/raspi_print_stopper2.jpg)
+
+
+
+# 組み立て手順
 
 以下動画のように、必要パーツを組み立てます。
 
 ※ 動画には、前回までに印刷したパーツも含まれます
 
+## 共通
 <!--ここに「docs/assembly_movie/base.html」の組み立て動画を埋め込む
 -->
 
@@ -292,6 +318,16 @@ smaboでは、スマートフォンを固定することができますが、ス
     
     ような形にしてもOKです。
     （この場合、もちろん上下逆さまにひっくり返すとスマホが落ちるので注意してください）。
+
+## smabo-brainをSBCにセットアップした場合
+
+### SBC=ラズパイ（4 or 5）の場合
+
+<!--ここに、docs/assembly_movie/smabo_raspi.htmlの組み立て動画を置いてください-->
+
+!!! note 組み立ての際のポイント
+    下図のように、ラズパイを各パーツでraspi_standに固定してください。
+    ![](../images/assemble_raspi_stand.jpg)
 
 ## スマホの取り付け
 

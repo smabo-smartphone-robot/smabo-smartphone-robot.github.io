@@ -94,7 +94,13 @@
 .doc-content h3:hover .headerlink,
 .doc-content h4:hover .headerlink { opacity: 1; }
 
-/* tables — match the site's table.spec look */
+/* tables — match the site's table.spec look.
+   display:block (formerly used to enable horizontal scroll) broke the table's
+   own column-width auto-layout: short tables would render their bordered
+   white box at full width while the actual header/cell backgrounds only
+   spanned the narrower auto-sized columns, leaving a blank strip on the
+   right. Keep display:table (the default) so column sizing/backgrounds
+   behave correctly; overflow-x:auto still scrolls genuinely wide tables. */
 .doc-content table {
   width: 100%;
   border-collapse: collapse;
@@ -103,8 +109,6 @@
   margin: 0 0 20px;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  overflow: hidden;
-  display: block;
   overflow-x: auto;
 }
 .doc-content th, .doc-content td {

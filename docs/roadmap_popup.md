@@ -213,8 +213,6 @@ smabo-esp32は
 
 <!--ここに、「ガイドを読む」ボタン-->
 
-
-
 - **首振りのコントローラー制御**
 <video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_neck_manual.mp4" type="video/mp4"></video>
 
@@ -228,6 +226,8 @@ smabo-esp32は
 # mobile
 
 「移動ロボット機能」について解説します。
+
+<!--ここに、「ガイドを読む」ボタン-->
 
 - **移動ロボットのコントローラー制御**
 <video autoplay loop muted playsinline style="max-width:100%"><source src="./video/tt_motor_manual_control.mp4" type="video/mp4"></video>

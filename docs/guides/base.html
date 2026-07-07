@@ -58,10 +58,24 @@
 <li class="toc-h3"><a href="#パーツのエクスポート">パーツのエクスポート</a></li>
 </ul>
 </li>
-<li><a href="#パーツの印刷">パーツの印刷</a></li>
+<li><a href="#パーツの印刷">パーツの印刷</a>
+<ul>
+<li class="toc-h3"><a href="#共通">共通</a></li>
+<li class="toc-h3"><a href="#smabo-brainをsbcにセットアップした場合">smabo-brainをSBCにセットアップした場合</a>
+<ul>
+<li class="toc-h3"><a href="#sbcラズパイ4-or-5の場合">SBC=ラズパイ（4 or 5）の場合</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#組み立て手順">組み立て手順</a>
 <ul>
-<li class="toc-h3"><a href="#各種パーツの取り付け">各種パーツの取り付け</a></li>
+<li class="toc-h3"><a href="#共通-1">共通</a></li>
+<li class="toc-h3"><a href="#smabo-brainをsbcにセットアップした場合-1">smabo-brainをSBCにセットアップした場合</a>
+<ul>
+<li class="toc-h3"><a href="#sbcラズパイ4-or-5の場合-1">SBC=ラズパイ（4 or 5）の場合</a></li>
+</ul>
+</li>
 <li class="toc-h3"><a href="#スマホの取り付け">スマホの取り付け</a></li>
 </ul>
 </li>
@@ -248,6 +262,8 @@
 <li>サポート材は必ずONにした状態で印刷</li>
 </ul>
 </blockquote>
+
+<h3 id="共通">共通<a class="headerlink" href="#共通" title="Permanent link">#</a></h3>
 <ul>
 <li>smabo-hardware/stl/base/base.stl<br />
 <img alt="alt text" src="../images/base_print_base.jpg" /></li>
@@ -281,11 +297,28 @@
 </li>
 </ul>
 
-<h2 id="組み立て手順">組み立て手順<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h2>
+<h3 id="smabo-brainをsbcにセットアップした場合">smabo-brainをSBCにセットアップした場合<a class="headerlink" href="#smabo-brainをsbcにセットアップした場合" title="Permanent link">#</a></h3>
+<h4 id="sbcラズパイ4-or-5の場合">SBC=ラズパイ（4 or 5）の場合<a class="headerlink" href="#sbcラズパイ4-or-5の場合" title="Permanent link">#</a></h4>
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stand.stl<br />
+<img alt="alt text" src="../images/raspi_print_stand.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stopper1.stl<br />
+<img alt="alt text" src="../images/raspi_print_stopper1.jpg" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-hardware/stl/raspi/raspi_stopper2.stl<br />
+<img alt="alt text" src="../images/raspi_print_stopper2.jpg" /></li>
+</ul>
 
-<h3 id="各種パーツの取り付け">各種パーツの取り付け<a class="headerlink" href="#各種パーツの取り付け" title="Permanent link">#</a></h3>
+<h2 id="組み立て手順">組み立て手順<a class="headerlink" href="#組み立て手順" title="Permanent link">#</a></h2>
 <p>以下動画のように、必要パーツを組み立てます。</p>
 <p>※ 動画には、前回までに印刷したパーツも含まれます</p>
+
+<h3 id="共通-1">共通<a class="headerlink" href="#共通-1" title="Permanent link">#</a></h3>
 <p>
   <iframe src="../assembly_movie/base.html" title="ベースパーツ 組み立て手順"
           loading="lazy" allowfullscreen
@@ -299,6 +332,19 @@
 </ul>
 <p>ような形にしてもOKです。
 （この場合、もちろん上下逆さまにひっくり返すとスマホが落ちるので注意してください）。</p>
+</blockquote>
+
+<h3 id="smabo-brainをsbcにセットアップした場合-1">smabo-brainをSBCにセットアップした場合<a class="headerlink" href="#smabo-brainをsbcにセットアップした場合-1" title="Permanent link">#</a></h3>
+<h4 id="sbcラズパイ4-or-5の場合-1">SBC=ラズパイ（4 or 5）の場合<a class="headerlink" href="#sbcラズパイ4-or-5の場合-1" title="Permanent link">#</a></h4>
+<p>
+  <iframe src="../assembly_movie/smabo_raspi.html" title="ラズパイ 組み立て手順"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>組み立ての際のポイント</strong></p>
+<p>下図のように、ラズパイを各パーツでraspi_standに固定してください。<br />
+<img alt="" src="../images/assemble_raspi_stand.jpg" /></p>
 </blockquote>
 
 <h3 id="スマホの取り付け">スマホの取り付け<a class="headerlink" href="#スマホの取り付け" title="Permanent link">#</a></h3>
