@@ -77,12 +77,6 @@
 .node__sub   { fill: var(--muted); font-size: 11px; font-weight: 600; pointer-events: none; }
 .node__icon  { font-size: 18px; pointer-events: none; }
 
-/* design-doc button (「設計書」 pill, top-left corner) */
-.node__design { cursor: pointer; }
-.node__design-box { fill: #fff; stroke: var(--cyan); stroke-width: 1.6; transition: fill .2s ease; }
-.node__design-label { fill: var(--cyan); font-size: 12px; font-weight: 800; pointer-events: none; }
-.node__design:hover .node__design-box { fill: #e9fbff; }
-
 /* hover relationships */
 .rmap--hovering .node { opacity: 0.32; transition: opacity 0.18s ease, transform 0.15s ease; }
 .rmap--hovering .node.is-hover,
@@ -168,8 +162,6 @@
   transition: background .15s ease, color .15s ease;
 }
 .rmap-tip-btn:hover { background: var(--indigo); color: #fff; }
-.rmap-tip-btn--design { color: var(--cyan); border-color: var(--cyan); }
-.rmap-tip-btn--design:hover { background: var(--cyan); color: #fff; }
 
 .rmap-tip-sysmap {
   display: block;

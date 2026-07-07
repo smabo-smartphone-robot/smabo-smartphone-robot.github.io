@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mobile Robot — smabo Guide</title>
-  <meta name="description" content="smabo Guide: Mobile Robot. Coming soon." />
+  <meta name="description" content="smabo build guide: Mobile Robot feature. Implement controller and image-processing driven mobile robot control using a TT motor and a universal caster." />
   <link rel="icon" type="image/png" href="../../images/smabo_icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/docs.css" />
+  <link rel="stylesheet" href="../../css/roadmap.css" />
+  <link rel="stylesheet" href="../../css/sysmap.css" />
 </head>
 <body>
 
@@ -31,30 +34,366 @@
     <div class="container">
       <span class="eyebrow">Guide</span>
       <h1>🚗 Mobile Robot</h1>
+      <p>Implement controller and image-processing driven mobile robot control using a TT motor and a universal caster.</p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container" style="max-width:760px">
+  <section class="section" style="padding-block:0">
+    <div class="container">
+      <div class="doc-wrap">
+        <nav class="doc-toc"><div class="doc-toc__title">Contents</div><ul>
+<li></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#required-parts">Required Parts</a></li>
+<li><a href="#printing">3D Printing Parts</a></li>
+<li><a href="#assembly">Assembly</a></li>
+<li><a href="#wiring">Wiring</a></li>
+<li><a href="#finished">Finished Result</a></li>
+<li><a href="#operation">Operation</a>
+<ul>
+<li class="toc-h3"><a href="#startup">Startup Procedure</a></li>
+<li class="toc-h3"><a href="#dc-drive-enable">Enabling the DC Motor</a></li>
+<li class="toc-h3"><a href="#manual-control">Controller Control</a></li>
+<li class="toc-h3"><a href="#image-control">Image-Processing Control</a></li>
+</ul>
+</li>
+<li><a href="#next">Next</a></li>
+</ul></nav>
+        <article class="doc-content">
 
-      <div class="callout">
-        <span class="emoji">🚧</span>
-        <span>This guide is under construction. Content will be added soon.</span>
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">#</a></h2>
+<p>This page is the guide for the 'Mobile Robot' node on the roadmap below.</p>
+<p>This guide assumes you have completed the <a href="smabo-esp32.html">smabo-esp32</a> setup.</p>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="mobile"
+       aria-label="smabo build guide roadmap (Mobile Robot highlighted)"></svg>
+</div>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>This page explains how to implement the "Mobile Robot" feature.</p>
+<br />
+<p>Specifically, you will implement:</p>
+<ul>
+<li>Controller control of the mobile robot
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/tt_motor_manual_control.mp4" type="video/mp4"></video></p>
+</li>
+<li>Image-processing based control of the mobile robot
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/tt_motor_img_proc.mp4" type="video/mp4"></video></p>
+</li>
+</ul>
+
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"app","to":"brain","transport":"webrtc","lines":["Image"]},{"from":"brain","to":"esp32","transport":"ws","lines":["Velocity command"]},{"from":"web","to":"brain","transport":"ws","lines":["Velocity command"]},{"from":"brain","to":"web","transport":"webrtc","lines":["Image"]}]'
+       aria-label="smabo system architecture diagram (data flow for the mobile robot highlighted)"></svg>
+</div>
+
+<h2 id="required-parts">Required Parts<a class="headerlink" href="#required-parts" title="Permanent link">#</a></h2>
+<p>The parts required to implement this feature are listed below.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Product URL</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32-DevKitC</td>
+<td><a href="https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-機能マイクロコントローラー-TYPE-C-デュアルコアボード/dp/B0GTY64KDC/ref=asc_df_B0GTY64KDC?mcid=350a4550c70e3d30953041512ffe110a&tag=jpgo-22&linkCode=df0&hvadid=792079627413&hvpos=&hvnetw=g&hvrand=17366440597157412973&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-2484301629565&hvocijid=17366440597157412973-B0GTY64KDC-&hvexpln=0&th=1">link</a></td>
+<td>Compatible boards are fine too</td>
+</tr>
+<tr>
+<td>Smartphone</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Breadboard (SAD101)<br /></td>
+<td><a href="https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1">link</a></td>
+<td>Common breadboards have 5 holes across; this one has 6.<br />You need the 6-hole version — the ESP32 won't fit widthwise on a 5-hole board.</td>
+</tr>
+<tr>
+<td>Jumper wires</td>
+<td><a href="https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL?ref_=Oct_d_obs_d_3332721051_0&pd_rd_w=uPj7Z&content-id=amzn1.sym.017d4a3b-167e-4891-9b01-9ac16ba095fb&pf_rd_p=017d4a3b-167e-4891-9b01-9ac16ba095fb&pf_rd_r=D57C194X1NH6BZACFEPS&pd_rd_wg=FydDx&pd_rd_r=327745d6-16b1-418c-b484-4cea112fb00b&pd_rd_i=B06Y48V9DL">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Battery box (4× AA, with battery snap connector)</td>
+<td><a href="https://www.amazon.co.jp/dp/B011IJQ4DI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3">link</a></td>
+<td>The snap-connector version is easier to work with — recommended.</td>
+</tr>
+<tr>
+<td>Battery snap connector (for the battery box)</td>
+<td><a href="https://www.monotaro.com/p/6866/1105/?cq_med=pla&cq_plt=gp&utm_medium=cpc&utm_source=google&utm_campaign=246-833-4061_23030379799_shopping&utm_content=&utm_term=__x_&utm_id=68661105&gad_source=1&gad_campaignid=23030381413&gbraid=0AAAAADNqOHDvKsE6jsbG6KMsfUBQKF9m5&gclid=Cj0KCQjw2_TQBhCnARIsAF3-XhxFdH-a3GLjp_a8Hy-Uc7kuFklTykWT1kFLZzA1D76_B6tY7Rw4P34aAsPaEALw_wcB">link</a></td>
+<td>The version with connector pins is recommended — easier to plug into a breadboard and less likely to slip out.</td>
+</tr>
+<tr>
+<td>Rechargeable AA batteries × 4</td>
+<td><a href="https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/ref=sr_1_5?qid=1700364346&refinements=p_n_feature_thirteen_browse-bin%3A2314244051&s=electronics&sr=1-5&th=1">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Battery charger</td>
+<td><a href="https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/ref=sr_1_5?keywords=%E9%9B%BB%E6%B1%A0+%E5%85%85%E9%9B%BB%E5%99%A8&qid=1700402201&sr=8-5">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Tires for the toy DC motor</td>
+<td><a href="https://www.amazon.co.jp/EQWQSIXD-2枚スマートカーシャーシおもちゃのホイールTTギアモーターホイールタイヤ/dp/B0GGBJ28H4/ref=sr_1_26?dib=eyJ2IjoiMSJ9.4FTlNQNg2PNhrQWHWCq1VDVSeuya5EkUmhYpxFsDFUfHp1VRahy96A67RIHQH9ibIRlLIzizRUjQypePRfeWYEjC4Xkv__iO89CGUyja83DKpYSqAtFlpw3HK3JZXC8l_7CbgBxyj25WMxgNvs0Vj_mTJEgCx11oV4jH8gcaw_nnoLEoOy27waXHHP1D9GAx5wk3YoJOf7mkinbBhxyengmzAsVi34v89FbE-kC8HFcbjWRNl9fKWyn4gzRqsQEidM-blg7h4gtymWS6XWF3wP_bhkNSn8PJfFi5vSQob90.NxbnVCRKi4zdC1WBt2D3W5p2zgN_rLX3CwbBS3SBa10&dib_tag=se&keywords=TTモーター+タイヤ&qid=1780323553&sr=8-26">link</a></td>
+<td>Compatible tires are fine too.</td>
+</tr>
+<tr>
+<td>TT motor</td>
+<td><a href="https://www.amazon.co.jp/DIANN-Motor-Gearbox-200RPM-Ratio/dp/B0F87YT715/ref=asc_df_B0F87YT715?mcid=9b7fc4990dc0322a82a20101948464a3&tag=jpgo-22&linkCode=df0&hvadid=781176336697&hvpos=&hvnetw=g&hvrand=18345257182238334739&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-2449268817747&psc=1&hvocijid=18345257182238334739-B0F87YT715-&hvexpln=0">link</a></td>
+<td>The version with connector pins is recommended — easier to plug into a breadboard and less likely to slip out.<br /><br /> Many compatible motors exist, but if the dimensions differ significantly from a <a href="https://docs.sunfounder.com/projects/3in1-kit/ja/latest/components/component_tt_motor.html">standard TT motor</a>, it may not mount correctly — please check carefully.</td>
+</tr>
+<tr>
+<td>Universal caster S</td>
+<td><a href="https://www.amazon.co.jp/YAHATA-%E3%81%A9%E3%81%93%E3%81%A7%E3%82%82%E3%82%AD%E3%83%A3%E3%82%B9%E3%82%BF%E3%83%BC-S%E3%83%96%E3%83%AB%E3%83%BC-S/dp/B0091GH8YU">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>TB6612FNG dual motor driver</td>
+<td><a href="https://www.switch-science.com/products/3586">link</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Mini breadboard</td>
+<td><a href="https://www.amazon.co.jp/Rasbee-SYB-170-%E3%83%9F%E3%83%8B%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%881%E5%80%8B-%E4%B8%A6%E8%A1%8C%E8%BC%B8%E5%85%A5%E5%93%81/dp/B01KRAS4NC/ref=asc_df_B01KRAS4NC?mcid=320216956bbd38fd8ecf662666249eee&tag=jpgo-22&linkCode=df0&hvadid=707442675525&hvpos=&hvnetw=g&hvrand=452252090448367071&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-1457964925645&psc=1&hvocijid=452252090448367071-B01KRAS4NC-&hvexpln=0">link</a></td>
+<td>Get the version with an adhesive backing.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="printing">3D Printing Parts<a class="headerlink" href="#printing" title="Permanent link">#</a></h2>
+<p>Print the newly added parts on your 3D printer.</p>
+<blockquote>
+<p>The software used to drive a 3D printer varies by model, so this section only covers the key points rather than exact settings.</p>
+</blockquote>
+<br />
+<p>Print the following parts in the orientation shown.</p>
+<blockquote>
+<p><strong>Printing notes</strong></p>
+<ul>
+<li>Print protruding features sideways so they don't snap off at the base when attaching/detaching parts</li>
+<li>Always print with supports turned ON</li>
+</ul>
+</blockquote>
+<ul>
+<li>smabo-repos/smabo-hardware/stl/mobile_robot/dc_motor_caster.stl<br />
+<img alt="alt text" src="../../images/mobile_print_dc_motor_caster.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_bottom.stl<br />
+<img alt="alt text" src="../../images/mobile_print_tt_motor_bottom.png" /></li>
+</ul>
+<br />
+<ul>
+<li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper1.stl × 2
+<ul>
+<li>Print two — one for each motor (left/right).<br />
+<img alt="alt text" src="../../images/mobile_print_tt_motor_stopper1.png" /></li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2.stl
+<ul>
+<li>Print two — one for each motor (left/right).<br />
+<img alt="alt text" src="../../images/mobile_print_tt_motor_stopper2.png" /></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">#</a></h2>
+<p>Assemble the required parts as shown in the video below.</p>
+<p>※ The video also includes parts printed in earlier guides.</p>
+<p>
+  <iframe src="../../assembly_movie/smabo_tt_motor.html" title="Mobile Robot Assembly"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+<blockquote>
+<p><strong>Assembly tips</strong></p>
+<p>The assembly video doesn't show how to attach the TT motors and the universal caster S, so the steps are described below.</p>
+<br />
+<p>First, attach the universal caster S to "dc_motor_caster.stl" as shown below.<br />
+<img alt="" src="../../images/dc_motor_caster_before.jpg" />
+<img alt="" src="../../images/dc_motor_caster_after.jpg" /></p>
+<br />
+<p>Next, secure the TT motors to "tt_motor_bottom.stl" using "tt_motor_stopper1.stl" and "tt_motor_stopper2.stl".<br />
+<img alt="" src="../../images/tt_motor_assemble.jpg" /></p>
+</blockquote>
+
+<h2 id="wiring">Wiring<a class="headerlink" href="#wiring" title="Permanent link">#</a></h2>
+<p>Wire everything according to the table below.</p>
+<p>※ In the table below, "Connection 1" and "Connection 2" indicate that the two are directly connected electrically.</p>
+<table>
+<thead>
+<tr>
+<th>Connection 1</th>
+<th>Connection 2</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+ terminal of the dry-cell battery box</td>
+<td><strong style="color:#e03131;">Right</strong> + rail of the breadboard</td>
+<td>From here on, the right rail is treated as the 6V supply — take note</td>
+</tr>
+<tr>
+<td>- terminal of the dry-cell battery box</td>
+<td>- rail of the breadboard</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ESP32 5V pin</td>
+<td><strong style="color:#e03131;">Left</strong> + rail of the breadboard</td>
+<td>From here on, the left rail is treated as the 5V supply — take note</td>
+</tr>
+<tr>
+<td>ESP32 GND</td>
+<td>- rail of the breadboard</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pin set as <code>dc/pins/pwma</code> in config.json</td>
+<td>TB6612FNG PWMA pin</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pin set as <code>dc/pins/ain2</code> in config.json</td>
+<td>TB6612FNG AIN2 pin</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pin set as <code>dc/pins/ain1</code> in config.json</td>
+<td>TB6612FNG AIN1 pin</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pin set as <code>dc/pins/stby</code> in config.json</td>
+<td>TB6612FNG STBY pin</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pin set as <code>dc/pins/bin1</code> in config.json</td>
+<td>TB6612FNG BIN1 pin</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pin set as <code>dc/pins/bin2</code> in config.json</td>
+<td>TB6612FNG BIN2 pin</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Pin set as <code>dc/pins/pwmb</code> in config.json</td>
+<td>TB6612FNG PWMB pin</td>
+<td>-</td>
+</tr>
+<tr>
+<td>TB6612FNG VM pin</td>
+<td><strong style="color:#e03131;">Right</strong> + rail of the breadboard</td>
+<td>-</td>
+</tr>
+<tr>
+<td>TB6612FNG VCC pin</td>
+<td><strong style="color:#e03131;">Left</strong> + rail of the breadboard</td>
+<td>-</td>
+</tr>
+<tr>
+<td>TB6612FNG GND pin</td>
+<td>- rail of the breadboard</td>
+<td>TB6612FNG has three GND pins — connect all of them to the breadboard's - rail</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+<p>The wiring diagram for the ESP32-DevKitC case is shown below (the breadboard alone doesn't have enough holes, so the TB6612FNG is wired on a mini breadboard).</p>
+<p><img alt="" src="../../fritzing/png/tt_motor.png" /></p>
+
+<blockquote>
+<p><strong>TB6612FNG wiring tip 1</strong></p>
+<p>The TB6612FNG has each pin's role printed on the back — check it carefully before wiring.</p>
+<p>※ Of course, once plugged into the breadboard the pin positions are mirrored left-right compared to viewing the back side — keep that in mind.<br />
+<img alt="alt text" src="../../images/mobile_tb6612fng_backside.png" /><br />
+<a href="https://www.switch-science.com/products/385?srsltid=AfmBOopaI6nY3Kyny25gDpjTx1m8gO5k-UhwiDTIQxFYU8d_kZrGWxxc">Reference image: TB6612FNG dual motor driver (max 1.2A continuous) (Switch Science)</a></p>
+</blockquote>
+
+<blockquote>
+<p><strong>TB6612FNG wiring tip</strong></p>
+<p>For the TB6612FNG's PWMA–PWMB pins, if you set the corresponding ESP32-side pins to be consecutive, you can</p>
+<ul>
+<li>handle all 7 jumper wires as a single bundle instead of stripping/routing them one by one</li>
+</ul>
+<p>which keeps the wiring much tidier.</p>
+<p><img alt="" src="../../images/TB6612FNG_%20wiring.jpg" /></p>
+</blockquote>
+
+<h2 id="finished">Finished Result<a class="headerlink" href="#finished" title="Permanent link">#</a></h2>
+<p>The finished robot from this guide looks like this:<br />
+<img alt="" src="../../images/smabo_tt_motor.jpg" /></p>
+
+<h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
+<h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
+<p>Follow the steps in <a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">this startup procedure</a>.</p>
+
+<h3 id="dc-drive-enable">Enabling the DC Motor<a class="headerlink" href="#dc-drive-enable" title="Permanent link">#</a></h3>
+<p>In the smabo-web "Config" tab,</p>
+<ul>
+<li>enable "Modes/dc_drive"</li>
+</ul>
+<p>.</p>
+<p><img alt="alt text" src="../../images/mobile_config_dc_drive_enable.png" /></p>
+
+<h3 id="manual-control">Controller Control<a class="headerlink" href="#manual-control" title="Permanent link">#</a></h3>
+<p>This section explains controller-based control.</p>
+<p>You can control smabo's mobile robot using the controller on the "two wheel mobile robot" tab.</p>
+<p><img alt="alt text" src="../../images/mobile_web_drive_tab.png" /></p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/tt_motor_manual_control.mp4" type="video/mp4"></video></p>
+
+<h3 id="image-control">Image-Processing Control<a class="headerlink" href="#image-control" title="Permanent link">#</a></h3>
+<p>This section explains image-processing based control.</p>
+<p>In the "Vision" tab's "Detection" section,</p>
+<ul>
+<li>enable "Enabled", and</li>
+<li>set any recognition mode (here, "color" mode is configured to recognize a blue object)</li>
+</ul>
+<p>.</p>
+<p><img alt="alt text" src="../../images/neck_vision_detection.jpg" /></p>
+<br />
+<p>Next, under "Behaviors",</p>
+<ul>
+<li>enable "Drive follow".</li>
+</ul>
+<p><img alt="alt text" src="../../images/mobile_vision_drive_follow_enable.png" /></p>
+<br />
+<p>In Drive follow mode, the mobile robot moves forward/backward so that the recognized object's apparent size (as seen by the camera) matches the "Target size" (you can check the exact size via the blue box in the preview screen).</p>
+<p><img alt="alt text" src="../../images/mobile_vision_target_size_preview.png" /></p>
+<br />
+<p>Once configured, bring the recognition target in front of the smartphone camera and smabo's mobile robot will move to follow it.</p>
+<p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/tt_motor_img_proc.mp4" type="video/mp4"></video></p>
+
+<h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">#</a></h2>
+<p>Next, we'll cover the following node on the roadmap:</p>
+<ul>
+<li><a href="encmobile.html">Encoder Mobile Robot</a></li>
+</ul>
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="" data-design-dir="../../architecture/" data-active="encmobile"
+       aria-label="smabo build guide roadmap (next: Encoder Mobile Robot highlighted)"></svg>
+</div>
+
+        </article>
       </div>
-
-      <h2 class="subhead">Prerequisites</h2>
-      <ul>
-        <li><a href="smabo-esp32.html">smabo-esp32</a></li>
-      </ul>
-
-      <h2 class="subhead">What this unlocks</h2>
-      <ul>
-        <li><a href="encmobile.html">Encoder Mobile Robot</a></li>
-      </ul>
-
-      <p style="margin-top:36px">
-        <a class="btn btn--ghost" href="../index.html">← Back to Roadmap</a>
-      </p>
     </div>
   </section>
 
@@ -64,6 +403,20 @@
     </div>
   </footer>
 
+  <div id="rmap-tooltip" class="rmap-tooltip" hidden>
+    <div class="rmap-tooltip__handle">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M10 2 L13 6 L11 6 L11 9 L14 9 L14 7 L18 10 L14 13 L14 11 L11 11 L11 14 L13 14 L10 18 L7 14 L9 14 L9 11 L6 11 L6 13 L2 10 L6 7 L6 9 L9 9 L9 6 L7 6 Z"/>
+      </svg>
+    </div>
+    <p class="rmap-tooltip__label">Overview</p>
+    <p class="rmap-tooltip__body"></p>
+    <img class="rmap-tooltip__img" src="" alt="" hidden />
+  </div>
+
   <script src="../../js/main.js"></script>
+  <script src="../../js/docs.js"></script>
+  <script src="../../js/roadmap.js"></script>
+  <script src="../../js/sysmap.js"></script>
 </body>
 </html>

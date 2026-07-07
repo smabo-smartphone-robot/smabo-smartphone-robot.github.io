@@ -7,7 +7,7 @@
 
 smabo-brainのセットアップ手順について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 smabo-brainは   
 - **各コンポーネントを中継するハブ**
@@ -41,7 +41,7 @@ smabo-brainは
 
 smabo-webのセットアップ手順について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 smabo-webは
@@ -71,7 +71,7 @@ smabo-webは
 
 「smabo-app」のセットアップ手順について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 smabo-appは
@@ -99,7 +99,7 @@ smabo-appは
 
 「smaboの顔機能」の使い方について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 
@@ -114,7 +114,7 @@ smabo-appは
 
 「smaboのセンサー」について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 - **スマホのセンサデータ（画像、IMU、GPS）をsmabo-webで可視化**
@@ -126,7 +126,7 @@ smabo-appは
 
 「音声処理機能」について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 
@@ -144,7 +144,7 @@ smabo-appは
 
 「画像処理機能」について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 - **カメラから取得した画像をもとに、対象物体を識別**
@@ -156,7 +156,7 @@ smabo-appは
 
 「ベースパーツの作成」手順について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 - **自分のスマホのサイズに合わせた3Dモデルの修正**
@@ -169,7 +169,7 @@ smabo-appは
 
 「smabo-esp32」のセットアップ手順について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 smabo-esp32は
@@ -197,7 +197,7 @@ smabo-esp32は
 # hand
 「ハンド機能」について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 
@@ -211,16 +211,26 @@ smabo-esp32は
 
 「首振り機能」について解説します。
 
-<!--ここに、「ガイドを読む」「設計書を読む」ボタン-->
+<!--ここに、「ガイドを読む」ボタン-->
 
 
 
-- 首振りのコントローラー制御
+- **首振りのコントローラー制御**
 <video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_neck_manual.mp4" type="video/mp4"></video>
 
 
-- 首振りのランダム制御
+- **首振りのランダム制御**
 <video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_neck_random.mp4" type="video/mp4"></video>
 
-- 画像認識による首振り制御
+- **画像認識による首振り制御**
 <video autoplay loop muted playsinline style="max-width:100%"><source src="./video/smabo_neck_img_proc.mp4" type="video/mp4"></video>
+
+# mobile
+
+「移動ロボット機能」について解説します。
+
+- **移動ロボットのコントローラー制御**
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/tt_motor_manual_control.mp4" type="video/mp4"></video>
+
+- **移動ロボットの画像処理による制御**
+<video autoplay loop muted playsinline style="max-width:100%"><source src="./video/tt_motor_img_proc.mp4" type="video/mp4"></video>

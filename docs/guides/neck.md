@@ -206,6 +206,8 @@ htmlに変換する際、「起動手順」へのリンク（startup.html）は�
 
 「[こちらの起動手順](./startup.md)」の内容を実行してください。
 
+
+
 ## サーボ設定
 
 smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設定を変更可能です。

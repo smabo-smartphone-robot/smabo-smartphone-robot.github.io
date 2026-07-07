@@ -12,14 +12,17 @@
 # 目次 <!-- omit in toc -->
 
 - [ロードマップ](#ロードマップ)
-- [できること](#できること)
-- [構成](#構成)
+- [概要](#概要)
 - [必要パーツ](#必要パーツ)
 - [パーツの印刷](#パーツの印刷)
 - [組み立て手順](#組み立て手順)
 - [配線](#配線)
 - [完成系](#完成系)
 - [動作手順](#動作手順)
+  - [起動手順](#起動手順)
+  - [dcモータの有効化](#dcモータの有効化)
+  - [コントローラー制御](#コントローラー制御)
+  - [画像処理による制御](#画像処理による制御)
 - [次回](#次回)
 
 # ロードマップ
@@ -34,10 +37,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 ![](../images/smabo_roadmap.drawio.svg)
 
-
-
-
-# できること
+# 概要
 
 本ページでは「移動ロボット」機能の実装について解説します。
 
@@ -45,23 +45,21 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 具体的には、以下の内容を実施します。
 
-- 2輪駆動の台車パーツの印刷・組み立て
-- DCモータ2つによる、前後・旋回の走行制御
+- 移動ロボットのコントローラー制御
+<!--tt_motor_manual_control.mp4をループ動画として配置-->
 
-!!! note 制御の仕組み
-    走行は、smabo-webやスマホアプリのジョイスティックから送られる`/cmd_vel`を、smabo-esp32がモータドライバ（TB6612FNG）への指令へ変換することで実現します。
-    走行機能を使う場合は、smabo-esp32の`modes.dc_drive`を有効にします。
-
-# 構成
-
-今回は、下図のようになります。
+- 移動ロボットの画像処理による制御
+<!--tt_motor_img_proc.mp4をループ動画として配置-->
 
 <!-- 以下の、smabo_sysytem_architecture.drawio.svgの代わりに、sysmap.jsをもとに作成したアーキテクチャ図を配置する。-->
 <!-- 以下例のように記述するので、ハイライトするノードと矢印、およびラベルに記述する内容を確認し、アーキテクチャ図を作成してください -->
 <!-- 例）コンポーネント1 -[websocket]-> コンポーネント2：データ種類1, データ種類2 -->
 <!-- 今回の、具体的な構成は以下になります。 -->
+<!-- smabo-app -[webRTC]-> smabo-brain：画像 -->
 <!-- smabo-brain -[websocket]-> smabo-esp32 : 速度指令 -->
-<!-- smabo-esp32 -[websocket]-> smabo-brain : ホイール速度 -->
+<!-- smabo-web -[websocket]-> smabo-brain：速度指令 -->
+<!-- smabo-brain -[webRTC]-> smabo-web：画像-->
+
 
 ![](../images/smabo_sysytem_architecture.drawio.svg)
 
@@ -71,9 +69,20 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 | 部品名 | 商品URL | 備考 |
 | --- | --- | --- |
-| DCモータ（ギヤードモータ） × 2 | link | 左右の車輪用 |
-| モータドライバ TB6612FNG | link | DCモータの駆動に使用します |
-| タイヤ／ホイール × 2 | link | - |
+| ESP32-DevKitC | [link](https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-機能マイクロコントローラー-TYPE-C-デュアルコアボード/dp/B0GTY64KDC/ref=asc_df_B0GTY64KDC?mcid=350a4550c70e3d30953041512ffe110a&tag=jpgo-22&linkCode=df0&hvadid=792079627413&hvpos=&hvnetw=g&hvrand=17366440597157412973&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-2484301629565&hvocijid=17366440597157412973-B0GTY64KDC-&hvexpln=0&th=1)| 互換品でも可 |
+| スマートフォン| - | - |
+| ブレッドボード（SAD101）<br> | [link](https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1)| 一般的なブレッドボードは5穴がです、こちらは6穴になっています。<br>6穴でないとESP32のサイズ的に横幅が足りないので注意してください |
+| ジャンプワイヤー | [link](https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL?ref_=Oct_d_obs_d_3332721051_0&pd_rd_w=uPj7Z&content-id=amzn1.sym.017d4a3b-167e-4891-9b01-9ac16ba095fb&pf_rd_p=017d4a3b-167e-4891-9b01-9ac16ba095fb&pf_rd_r=D57C194X1NH6BZACFEPS&pd_rd_wg=FydDx&pd_rd_r=327745d6-16b1-418c-b484-4cea112fb00b&pd_rd_i=B06Y48V9DL) | - |
+|電池ボックス（単3×4本、電池スナップ対応）|[link](https://www.amazon.co.jp/dp/B011IJQ4DI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3)| 電池スナップ対応の方が、取り回しが良いのでお勧めです。 |
+|電池スナップ（電池ボックス用）|[link](https://www.monotaro.com/p/6866/1105/?cq_med=pla&cq_plt=gp&utm_medium=cpc&utm_source=google&utm_campaign=246-833-4061_23030379799_shopping&utm_content=&utm_term=__x_&utm_id=68661105&gad_source=1&gad_campaignid=23030381413&gbraid=0AAAAADNqOHDvKsE6jsbG6KMsfUBQKF9m5&gclid=Cj0KCQjw2_TQBhCnARIsAF3-XhxFdH-a3GLjp_a8Hy-Uc7kuFklTykWT1kFLZzA1D76_B6tY7Rw4P34aAsPaEALw_wcB)| コネクタピン付きの方が、ブレッドボードに差しやすくて、抜けにくいのでお勧めです。 |
+| 充電式単三電池 × 4 | [link](https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/ref=sr_1_5?qid=1700364346&refinements=p_n_feature_thirteen_browse-bin%3A2314244051&s=electronics&sr=1-5&th=1) | - |
+| 電池充電器 | [link](https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/ref=sr_1_5?keywords=%E9%9B%BB%E6%B1%A0+%E5%85%85%E9%9B%BB%E5%99%A8&qid=1700402201&sr=8-5) | - |
+| トイDCモータ用タイヤ | [link](https://www.amazon.co.jp/EQWQSIXD-2枚スマートカーシャーシおもちゃのホイールTTギアモーターホイールタイヤ/dp/B0GGBJ28H4/ref=sr_1_26?dib=eyJ2IjoiMSJ9.4FTlNQNg2PNhrQWHWCq1VDVSeuya5EkUmhYpxFsDFUfHp1VRahy96A67RIHQH9ibIRlLIzizRUjQypePRfeWYEjC4Xkv__iO89CGUyja83DKpYSqAtFlpw3HK3JZXC8l_7CbgBxyj25WMxgNvs0Vj_mTJEgCx11oV4jH8gcaw_nnoLEoOy27waXHHP1D9GAx5wk3YoJOf7mkinbBhxyengmzAsVi34v89FbE-kC8HFcbjWRNl9fKWyn4gzRqsQEidM-blg7h4gtymWS6XWF3wP_bhkNSn8PJfFi5vSQob90.NxbnVCRKi4zdC1WBt2D3W5p2zgN_rLX3CwbBS3SBa10&dib_tag=se&keywords=TTモーター+タイヤ&qid=1780323553&sr=8-26) | 互換品でも可。 |
+| TTモータ | [link](https://www.amazon.co.jp/DIANN-Motor-Gearbox-200RPM-Ratio/dp/B0F87YT715/ref=asc_df_B0F87YT715?mcid=9b7fc4990dc0322a82a20101948464a3&tag=jpgo-22&linkCode=df0&hvadid=781176336697&hvpos=&hvnetw=g&hvrand=18345257182238334739&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-2449268817747&psc=1&hvocijid=18345257182238334739-B0F87YT715-&hvexpln=0) | コネクタピン付きの方が、ブレッドボードに差しやすくて、抜けにくいのでお勧めです。<br><br> 互換品は多数ありますが、[一般的なTTモーターの寸法](https://docs.sunfounder.com/projects/3in1-kit/ja/latest/components/component_tt_motor.html)と大きく異なる場合は、上手く取り付けることができないので注意してください。 |
+| どこでもキャスターS | [link](https://www.amazon.co.jp/YAHATA-%E3%81%A9%E3%81%93%E3%81%A7%E3%82%82%E3%82%AD%E3%83%A3%E3%82%B9%E3%82%BF%E3%83%BC-S%E3%83%96%E3%83%AB%E3%83%BC-S/dp/B0091GH8YU) | - |
+| TB6612FNG搭載 デュアルモータードライバ | [link](https://www.switch-science.com/products/3586) | - |
+|ミニブレッドボード|[link](https://www.amazon.co.jp/Rasbee-SYB-170-%E3%83%9F%E3%83%8B%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%881%E5%80%8B-%E4%B8%A6%E8%A1%8C%E8%BC%B8%E5%85%A5%E5%93%81/dp/B01KRAS4NC/ref=asc_df_B01KRAS4NC?mcid=320216956bbd38fd8ecf662666249eee&tag=jpgo-22&linkCode=df0&hvadid=707442675525&hvpos=&hvnetw=g&hvrand=452252090448367071&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-1457964925645&psc=1&hvocijid=452252090448367071-B01KRAS4NC-&hvexpln=0)|裏面が粘着テープになっているもの|
+
 
 
 # パーツの印刷
@@ -90,14 +99,25 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
     - パーツのつけ外しの際に、根本から折れにくくするため、凸部は横向きにして印刷
     - サポート材は必ずONにした状態で印刷
 
-- ***.stl
-    ここに画像
+- smabo-repos/smabo-hardware/stl/mobile_robot/dc_motor_caster.stl
+    ![alt text](../images/mobile_print_dc_motor_caster.png)
 
 <br>
 
-- ***.stl
-    ここに画像
+- smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_bottom.stl
+    ![alt text](../images/mobile_print_tt_motor_bottom.png)
 
+<br>
+
+- smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper1.stl × 2
+  - 左右にモータをつけるので2つ印刷します。
+    ![alt text](../images/mobile_print_tt_motor_stopper1.png)
+
+<br>
+
+- smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2.stl
+  - 左右にモータをつけるので2つ印刷します。
+    ![alt text](../images/mobile_print_tt_motor_stopper2.png)
 
 # 組み立て手順
 
@@ -105,53 +125,154 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 ※ 動画には、前回までに印刷したパーツも含まれます
 
-<!--ここに、移動ロボットの組み立て動画を置いてください-->
+<!--ここに、smabo-smartphone-robot.github.io/docs/assembly_movie/smabo_tt_motor.htmlを置いてください-->
 
 !!! note 組み立ての際のポイント
-    oooo
+    組み立て動画では、ttモーター、及びどこでもキャスターSの取り付け手順は分からないため、以下に記載します。
+
+    <br>
+
+    最初に、下図のように「dc_motor_caster.stl」にどこでもキャスターSを貼り付けます。
+    ![](../images/dc_motor_caster_before.jpg)
+    ![](../images/dc_motor_caster_after.jpg)
+
+    <br>
+
+    次に、「tt_motor_bottom.stl」に対して「tt_motor_stopper1.stl」「tt_motor_stopper2.stl」を使ってttモーターを固定します。
+    ![](../images/tt_motor_assemble.jpg)
 
 # 配線
 
-!!! note ブレッドボードの+極について <!--重要なので、このNoteは特に目立つように-->
-    SAD101購入時についていた、**+極のジャンプワイヤーは必ず外してください**。
-    ついたままだと、**ESP32, アクチュエータが破損する**可能性があります。<!--太字を赤字にする-->
-    ![alt text](../images/esp32_breadboard_remove_jumper.png)
-
-<br>
-
-DCモータは、モータドライバ（TB6612FNG）を介してESP32に接続します。
-smabo-esp32のデフォルト設定では、以下のピンが割り当てられています。
+下記表の内容に従って、配線します。
 
 ※ 下記表において、「接続先1」と「接続先2」は、両者が回路的に直接繋がっていることを指します。
 
-| 接続先1 | 接続先2 | 補足 |
-| --- | --- | --- |
-| モータドライバ（TB6612FNG）の`pwma` | ESP32のGPIO 32 | - |
-| モータドライバ（TB6612FNG）の`ain2` | ESP32のGPIO 33 | - |
-| モータドライバ（TB6612FNG）の`ain1` | ESP32のGPIO 25 | - |
-| モータドライバ（TB6612FNG）の`stby` | ESP32のGPIO 26 | - |
-| モータドライバ（TB6612FNG）の`bin1` | ESP32のGPIO 27 | - |
-| モータドライバ（TB6612FNG）の`bin2` | ESP32のGPIO 14 | - |
-| モータドライバ（TB6612FNG）の`pwmb` | ESP32のGPIO 12 | - |
+| 接続先1                       | 接続先2                                                          | 補足                                 |
+| ----------------------------- | ---------------------------------------------------------------- | ------------------------------------ |
+| 乾電池バッテリーボックスの+極 | ブレッドボードの+極の**右側**<!--太字はhtmlにする際は赤色に-->   | 以降、右側を6V電圧として扱うため注意 |
+| 乾電池バッテリーボックスの-極 | ブレッドボードの-極                                              | -                                    |
+| ESP32の5V電源                 | ブレッドボードの+極の**左側**<!--太字はhtmlにする際は赤文字に--> | 以降、左側を5V電圧として扱うため注意 |
+| ESP32のGND                    | ブレッドボードの-極                                              | -                                    |
+|config.jsonの`dc/pins/pwma`に設定したピン|TB6612FNGのpwmaピン|-|
+|config.jsonの`dc/pins/ain2`に設定したピン|TB6612FNGのain2ピン|-|
+|config.jsonの`dc/pins/ain1`に設定したピン|TB6612FNGのain1ピン|-|
+|config.jsonの`dc/pins/stby`に設定したピン|TB6612FNGのstbyピン|-|
+|config.jsonの`dc/pins/bin1`に設定したピン|TB6612FNGのbin1ピン|-|
+|config.jsonの`dc/pins/bin2`に設定したピン|TB6612FNGのbin2ピン|-|
+|config.jsonの`dc/pins/pwmb`に設定したピン|TB6612FNGのpwmbピン|-|
+| TB6612FNGのVMピン | ブレッドボードの+極の**右側**<!--太字はhtmlにする際は赤文字に--> | -|
+| TB6612FNGのVCCピン | ブレッドボードの+極の**左側**<!--太字はhtmlにする際は赤文字に--> | -|
+| TB6612FNGのGNDピン | ブレッドボードの-極 | TB6612FNGには3つGNDピンがありますが、全てブレッドボードの-極に刺してください|-|
+
+
+
 
 <br>
 
-ESP32-DevKitCの場合の、具体的な配線図は、以下になります。
+ESP32-DevKitCの場合の配線図は、以下になります（ブレッドボードだけだと穴が足りないため、TB6612FNGは、ミニブレッドボードにて配線しています）。
 
-!!! note 配線の際のポイント
-    oooo
+![](../fritzing/png/tt_motor.png)
+
+
+!!! note TB6612FNG配線の際のポイント1
+    TB6612FNGは、裏側に各ピンの役割が記載してあるため、配線前によく確認しておきましょう。
+
+    ※ 当然ですが、ブレッドボードに挿すと裏面から見たピン位置と左右逆になるため注意しましょう。
+    ![alt text](../images/mobile_tb6612fng_backside.png)
+    [参考画像：デュアル・モータードライバTB6612FNG(連続最大1.2A)（スイッチサイエンス）](https://www.switch-science.com/products/385?srsltid=AfmBOopaI6nY3Kyny25gDpjTx1m8gO5k-UhwiDTIQxFYU8d_kZrGWxxc)
+
+!!! note TB6612FNG配線の際のポイント
+    TB6612FNGのPWMA〜PWMBピンについてですが、「ESP32側で対応するピン位置を連続になるように設定」しておけば、下図のように
+    - ジャンプワイヤーを一本ずつ剥かず、7本分まとめて扱うことができる
+    
+    ため配線がすっきりします。
+
+    ![](../images/TB6612FNG_%20wiring.jpg)
+
 
 # 完成系
 
 今回作成したロボットの完成系は下図のようになります。
 
+![](../images/smabo_tt_motor.jpg)
 
 # 動作手順
 
-以下手順で、動作の確認を行います。
+## 起動手順
 
-smabo-webの「Config」タブで`dc_drive`を有効にし、「two wheel mobile robot」タブのジョイスティックを操作して、台車が前後・旋回すればOKです。
+<!--
+起動・接続手順は共通ページ「startup.md（startup.html）」に集約しているため、各ページでは直書きせず、必要な手順は html 側のリンクの data-steps 属性で指定する（ページにより項目を増減する）。
+htmlに変換する際、「起動手順」へのリンク（startup.html）はクリックでポップアップ（モーダル）表示される。docs.js が a[href$="startup.html"] を捕捉して startup.html の .doc-content をモーダルに描画する。
+ポップアップでは、リンクの data-steps 属性（startup.html の各 h2 の id をカンマ区切りで列挙）に挙げた手順だけを表示する。表示対象（data-steps）はこのコメントに記載し、html 側のリンクに同じ値を付与すること。例:
+<a href="startup.html" data-steps="smabo-brainの起動,smabo-webの起動">こちらの起動手順</a>
+（JS 無効時は data-steps が無視され、通常のページ遷移になる）
+-->
 
+<!--今回、起動手順に必要なのは以下のステップになるため、そのステップのみを含むようにしてください。-->
+<!-- smabo-brainの起動 -->
+<!-- smabo-webの起動 -->
+<!-- smabo-brain <-> smabo-webの接続 -->
+<!-- smabo-brain <-> esp32の接続 -->
+<!-- smabo-web <-> esp32の接続 -->
+
+「[こちらの起動手順](./startup.md)」の内容を実行してください。
+
+## dcモータの有効化
+
+smabo-webの「Config」タブにて
+
+- 「Modes/dc_drive」を有効化
+
+します。
+
+![alt text](../images/mobile_config_dc_drive_enable.png)
+
+## コントローラー制御
+
+コントローラー制御の手順を説明します。
+
+
+「two wheel mobile robot」タブのコントローラで移動ロボットのsmaboを制御できます。
+
+
+![alt text](../images/mobile_web_drive_tab.png)
+
+<!--smabo-smartphone-robot.github.io/docs/video/tt_motor_manual_control.mp4のループ動画をここに配置-->
+
+## 画像処理による制御
+
+画像処理による制御の手順を説明します。
+
+
+「Vision」タブの「Detection」にて、
+- 「Enabled」を有効化し、
+- 任意の認識モードを設定（ここでは、colorモードで青色の物体を認識するように設定しています）
+
+します。
+
+![alt text](../images/neck_vision_detection.jpg)
+
+
+<br>
+
+次に、「Behaviors」の
+- 「Drive follow」を有効化します。
+
+![alt text](../images/mobile_vision_drive_follow_enable.png)
+
+<br>
+
+なお、Drive followモードでは、カメラから見た認識物体のサイズが「Target size」を維持するように、移動ロボットが前後方向に動きます（具体的なサイズは、preview画面の青枠にて確認可能）。
+
+![alt text](../images/mobile_vision_target_size_preview.png)
+
+
+
+<br>
+
+設定完了後、スマホカメラの前に認識対象の物体を近づけると、物体に追従するように移動ロボットのsmaboが動作します。
+
+<!--smabo-smartphone-robot.github.io/docs/video/tt_motor_img_proc.mp4のループ動画をここに配置-->
 
 # 次回
 
