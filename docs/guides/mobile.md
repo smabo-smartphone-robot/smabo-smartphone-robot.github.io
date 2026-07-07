@@ -59,6 +59,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 <!-- smabo-brain -[websocket]-> smabo-esp32 : 速度指令 -->
 <!-- smabo-web -[websocket]-> smabo-brain：速度指令 -->
 <!-- smabo-brain -[webRTC]-> smabo-web：画像-->
+<!-- smabo-brain -[websocket]-> smabo-web：画像処理結果-->
 
 
 ![](../images/smabo_sysytem_architecture.drawio.svg)
