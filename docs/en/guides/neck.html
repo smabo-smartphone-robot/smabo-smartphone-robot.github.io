@@ -185,22 +185,22 @@
 <ul>
 <li>
 <p>smabo-hardware/stl/pan/mg996r/pan_adapter.stl</p>
-<p><img alt="pan_adapter" src="../../images/neck_print_pan_adapter.png" /></p>
+<p><img loading="lazy" decoding="async" alt="pan_adapter" src="../../images/neck_print_pan_adapter.png" /></p>
 </li>
 <br />
 <li>
 <p>smabo-hardware/stl/pan/mg996r/pan_plate_top.stl</p>
-<p><img alt="pan_plate_top" src="../../images/neck_print_pan_plate_top.png" /></p>
+<p><img loading="lazy" decoding="async" alt="pan_plate_top" src="../../images/neck_print_pan_plate_top.png" /></p>
 </li>
 <br />
 <li>
 <p>smabo-hardware/stl/pan/mg996r/pan_stand_left.stl</p>
-<p><img alt="pan_stand_left" src="../../images/neck_print_pan_stand_left.png" /></p>
+<p><img loading="lazy" decoding="async" alt="pan_stand_left" src="../../images/neck_print_pan_stand_left.png" /></p>
 </li>
 <br />
 <li>
 <p>smabo-hardware/stl/pan/mg996r/pan_stand_right.stl</p>
-<p><img alt="pan_stand_right" src="../../images/neck_print_pan_stand_right.png" /></p>
+<p><img loading="lazy" decoding="async" alt="pan_stand_right" src="../../images/neck_print_pan_stand_right.png" /></p>
 </li>
 </ul>
 
@@ -215,10 +215,10 @@
 <p>The assembly video does not show how to attach the MG996R servo, so the steps are described here.</p>
 <br />
 <p>First, fix the MG996R between pan_stand_left and pan_stand_right as shown below.</p>
-<p><img alt="Neck assembly step 1" src="../../images/neck_create_1.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Neck assembly step 1" src="../../images/neck_create_1.jpg" /></p>
 <br />
 <p>Slide pan_plate_top over from the top and fit the horn in. No tools required, but you may optionally screw the horn to the servo using the included screws.</p>
-<p><img alt="Neck assembly step 2" src="../../images/neck_create_2.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Neck assembly step 2" src="../../images/neck_create_2.jpg" /></p>
 </blockquote>
 
 <h2 id="wiring">Wiring<a class="headerlink" href="#wiring" title="Permanent link">#</a></h2>
@@ -283,11 +283,11 @@
 <br />
 <p>Wiring diagram for ESP32-DevKitC:</p>
 <p>In default config, connect the neck servo to channel=2.</p>
-<p><img alt="Neck wiring diagram" src="../../fritzing/png/neck.png" /></p>
+<p><img loading="lazy" decoding="async" alt="Neck wiring diagram" src="../../fritzing/png/neck.png" /></p>
 
 <h2 id="finished">Finished Result<a class="headerlink" href="#finished" title="Permanent link">#</a></h2>
 <p>The completed robot looks like this.</p>
-<p><img alt="smabo with neck servo" src="../../images/smabo_neck.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="smabo with neck servo" src="../../images/smabo_neck.jpg" /></p>
 
 <h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
 <h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
@@ -299,7 +299,7 @@
 <ul>
 <li>'head_pan'</li>
 </ul>
-<p><img alt="Enable head_pan" src="../../images/neck_config_head_pan_enable.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Enable head_pan" src="../../images/neck_config_head_pan_enable.jpg" /></p>
 
 <h3 id="manual-control">Manual Control<a class="headerlink" href="#manual-control" title="Permanent link">#</a></h3>
 <p>Steps for manual controller control.</p>
@@ -307,7 +307,7 @@
 <ul>
 <li>'mode' to 'manual'</li>
 </ul>
-<p><img alt="Mode set to manual" src="../../images/neck_config_mode_manual.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Mode set to manual" src="../../images/neck_config_mode_manual.jpg" /></p>
 <br />
 <p>Adjust the servo angle in the 'Servo' tab to rotate smabo left and right.</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_neck_manual.mp4" type="video/mp4"></video></p>
@@ -319,13 +319,13 @@
 <li>'mode' to 'random'</li>
 <li>'group' to 'neck'</li>
 </ul>
-<p><img alt="Mode set to random" src="../../images/neck_config_mode_random.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Mode set to random" src="../../images/neck_config_mode_random.jpg" /></p>
 <blockquote>
 <p><strong>random_group</strong></p>
 <p>Servos assigned to the same random_group will move at the same random time.</p>
 <br />
 <p>New random_groups can be added by clicking the "Add random Group" button.</p>
-<p><img alt="Add random group" src="../../images/hand_add_random_group.png" /></p>
+<p><img loading="lazy" decoding="async" alt="Add random group" src="../../images/hand_add_random_group.png" /></p>
 </blockquote>
 <br />
 <p>After a moment, smabo will turn left/right at random intervals.</p>
@@ -337,14 +337,14 @@
 <ul>
 <li>'mode' to 'manual'</li>
 </ul>
-<p><img alt="Mode set to manual for image control" src="../../images/neck_config_mode_manual.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Mode set to manual for image control" src="../../images/neck_config_mode_manual.jpg" /></p>
 <br />
 <p>In the 'Vision' tab → 'Detection':</p>
 <ul>
 <li>Enable 'Enabled', and</li>
 <li>Select your detection mode (e.g., color mode to track a blue object)</li>
 </ul>
-<p><img alt="Vision detection settings" src="../../images/neck_vision_detection.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Vision detection settings" src="../../images/neck_vision_detection.jpg" /></p>
 <br />
 <p>In 'Behaviors':</p>
 <ul>
@@ -352,7 +352,7 @@
 <li>'Pan joint' to 'head_pan'</li>
 <li>'Pan Direction' to 'reversed(-1)'</li>
 </ul>
-<p><img alt="Servo follow settings" src="../../images/neck_vision_servo_follow.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Servo follow settings" src="../../images/neck_vision_servo_follow.jpg" /></p>
 <br />
 <p>After configuring, place the target object in front of the phone camera. smabo will rotate its head to track the object.</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_neck_img_proc.mp4" type="video/mp4"></video></p>

@@ -200,25 +200,25 @@
 <ul>
 <li>smabo-hardware/stl/hand/sg90/sg90_plate_1.stl × 2<br />
 Print 2 (same part used on left and right)<br />
-<img alt="sg90_plate_1" src="../../images/hand_print_sg90_plate_1.png" /></li>
+<img loading="lazy" decoding="async" alt="sg90_plate_1" src="../../images/hand_print_sg90_plate_1.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/hand/sg90/sg90_plate_2.stl × 2<br />
 Print 2 (same part used on left and right)<br />
-<img alt="sg90_plate_2" src="../../images/hand_print_sg90_plate_2.png" /></li>
+<img loading="lazy" decoding="async" alt="sg90_plate_2" src="../../images/hand_print_sg90_plate_2.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/hand/sg90/sg90_base.stl × 2<br />
 Print 2 (same part used on left and right)<br />
-<img alt="sg90_base" src="../../images/hand_print_sg90_base.png" /></li>
+<img loading="lazy" decoding="async" alt="sg90_base" src="../../images/hand_print_sg90_base.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/hand/sg90/arm_hand.stl × 2<br />
 Print 2 (same part used on left and right)<br />
-<img alt="arm_hand" src="../../images/hand_print_arm_hand.png" /></li>
+<img loading="lazy" decoding="async" alt="arm_hand" src="../../images/hand_print_arm_hand.png" /></li>
 </ul>
 
 <h2 id="assembly">Assembly<a class="headerlink" href="#assembly" title="Permanent link">#</a></h2>
@@ -234,11 +234,11 @@ Print 2 (same part used on left and right)<br />
 <p>The assembly video does not show how to attach the SG90 servos, so the steps are described here.</p>
 <br />
 <p>First, fix the SG90 between sg90_plate_1 and sg90_plate_2 as shown, then attach the assembly to the body.</p>
-<p><img alt="Hand assembly step 1" src="../../images/hand_create_1.jpg" /></p>
-<p><img alt="Hand assembly step 2" src="../../images/hand_create_2.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Hand assembly step 1" src="../../images/hand_create_1.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Hand assembly step 2" src="../../images/hand_create_2.jpg" /></p>
 <br />
 <p>Slide sg90_base over from the top and fit the horn in. No tools required, but you may optionally screw the horn to the servo using the included screws.</p>
-<p><img alt="Hand assembly step 3" src="../../images/hand_create_3.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="Hand assembly step 3" src="../../images/hand_create_3.jpg" /></p>
 </blockquote>
 
 <h2 id="wiring">Wiring<a class="headerlink" href="#wiring" title="Permanent link">#</a></h2>
@@ -303,7 +303,7 @@ Print 2 (same part used on left and right)<br />
 <br />
 <p>Wiring diagram for ESP32-DevKitC:</p>
 <p>In default config, connect the left arm servo to channel=0, and the right arm servo to channel=1.</p>
-<p><img alt="Hand wiring diagram" src="../../fritzing/png/hand.png" /></p>
+<p><img loading="lazy" decoding="async" alt="Hand wiring diagram" src="../../fritzing/png/hand.png" /></p>
 <blockquote>
 <p><strong>Wiring tip</strong></p>
 <p>Route the SG90 cables through the gap at the bottom-right of the smabo back panel to reach the PCA9685.</p>
@@ -311,7 +311,7 @@ Print 2 (same part used on left and right)<br />
 
 <h2 id="finished">Finished Result<a class="headerlink" href="#finished" title="Permanent link">#</a></h2>
 <p>The completed robot looks like this.</p>
-<p><img alt="smabo with hands" src="../../images/smabo_hand.jpg" /></p>
+<p><img loading="lazy" decoding="async" alt="smabo with hands" src="../../images/smabo_hand.jpg" /></p>
 
 <h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
 <h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
@@ -323,13 +323,13 @@ Print 2 (same part used on left and right)<br />
 <ul>
 <li>'inverse' for 'right_hand' only</li>
 </ul>
-<p><img alt="Enable inverse for right_hand" src="../../images/hand_servo_inverse.png" /></p>
+<p><img loading="lazy" decoding="async" alt="Enable inverse for right_hand" src="../../images/hand_servo_inverse.png" /></p>
 <br />
 <p>Next, enable:</p>
 <ul>
 <li>'left_hand' and 'right_hand'</li>
 </ul>
-<p><img alt="Enable left_hand and right_hand" src="../../images/hand_servo_enable.png" /></p>
+<p><img loading="lazy" decoding="async" alt="Enable left_hand and right_hand" src="../../images/hand_servo_enable.png" /></p>
 
 <h3 id="manual-control">Manual Control<a class="headerlink" href="#manual-control" title="Permanent link">#</a></h3>
 <p>Steps for manual controller control.</p>
@@ -337,7 +337,7 @@ Print 2 (same part used on left and right)<br />
 <ul>
 <li>'mode' to 'manual'</li>
 </ul>
-<p><img alt="Mode set to manual" src="../../images/hand_mode_manual.png" /></p>
+<p><img loading="lazy" decoding="async" alt="Mode set to manual" src="../../images/hand_mode_manual.png" /></p>
 <br />
 <p>Adjust servo angles in the 'Servo' tab to move both arms.</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/smabo_hand_manual.mp4" type="video/mp4"></video></p>
@@ -349,7 +349,7 @@ Print 2 (same part used on left and right)<br />
 <li>'mode' to 'random'</li>
 <li>'group' to 'hands'</li>
 </ul>
-<p><img alt="Mode set to random" src="../../images/hand_mode_random.png" /></p>
+<p><img loading="lazy" decoding="async" alt="Mode set to random" src="../../images/hand_mode_random.png" /></p>
 <blockquote>
 <p><strong>random_group</strong></p>
 <p>Servos assigned to the same random_group will move at the same random time.</p>
@@ -357,7 +357,7 @@ Print 2 (same part used on left and right)<br />
 <p>If you want the left and right hands to move at independent random times, assign left_hand and right_hand to different random_groups.</p>
 <br />
 <p>New random_groups can be added by clicking the "Add random Group" button.</p>
-<p><img alt="Add random group" src="../../images/hand_add_random_group.png" /></p>
+<p><img loading="lazy" decoding="async" alt="Add random group" src="../../images/hand_add_random_group.png" /></p>
 </blockquote>
 <br />
 <p>After a moment, both hands will move at random intervals.</p>
