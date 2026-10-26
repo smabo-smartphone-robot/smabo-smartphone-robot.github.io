@@ -7,9 +7,3 @@ exclude:
   - architecture/architecture_template.html
   - assembly_movie/assembly-viewer-template.html
 
-# 組み立てビューア（ガイドに iframe で埋め込み）は単体で sitemap に載せない
-defaults:
-  - scope:
-      path: "assembly_movie"
-    values:
-      sitemap: false
