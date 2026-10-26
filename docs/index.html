@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/docs.css" />
   <script>
-    (function(){var p=localStorage.getItem('smabo-lang-pref');if(!p||p==='en'){localStorage.setItem('smabo-lang-pref','en');location.replace('en/index.html');}})();
+    (function(){try{if(localStorage.getItem('smabo-lang-pref')==='en'){location.replace('en/index.html');}}catch(e){}})();
   </script>
 </head>
 <body>

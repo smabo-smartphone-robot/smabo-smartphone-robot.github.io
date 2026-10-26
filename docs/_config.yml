@@ -1,2 +1,8 @@
 plugins:
   - jekyll-sitemap
+
+# 作業用の Markdown・テンプレートは公開しない
+exclude:
+  - "*.md"
+  - architecture/architecture_template.html
+  - assembly_movie/assembly-viewer-template.html
