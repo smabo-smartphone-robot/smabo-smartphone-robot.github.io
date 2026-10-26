@@ -300,6 +300,7 @@
     if (titleEl) titleEl.textContent = (n.icon ? n.icon + ' ' : '') + ((isEn && n.labelEn ? n.labelEn : n.label) || '');
     if (n.tipImg && tipImg) {
       tipImg.src = guideDir + n.tipImg;
+      tipImg.alt = (isEn && n.labelEn ? n.labelEn : n.label) || '';
       tipImg.hidden = false;
     } else if (tipImg) {
       tipImg.hidden = true;

@@ -106,22 +106,22 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
     - サポート材は必ずONにした状態で印刷
 
 - smabo-hardware/stl/pan/mg996r/pan_adapter.stl
-    ![alt text](../images/neck_print_pan_adapter.png)
+    ![3Dプリントした首振り用パーツpan_adapter](../images/neck_print_pan_adapter.png)
 
 <br>
 
 - smabo-hardware/stl/pan/mg996r/pan_plate_top.stl
-    ![alt text](../images/neck_print_pan_plate_top.png)
+    ![3Dプリントした首振り用パーツpan_plate_top](../images/neck_print_pan_plate_top.png)
 
 <br>
 
 - smabo-hardware/stl/pan/mg996r/pan_stand_left.stl
-    ![alt text](../images/neck_print_pan_stand_left.png)
+    ![3Dプリントした首振り用パーツpan_stand_left](../images/neck_print_pan_stand_left.png)
 
 <br>
 
 - smabo-hardware/stl/pan/mg996r/pan_stand_right.stl
-    ![alt text](../images/neck_print_pan_stand_right.png)
+    ![3Dプリントした首振り用パーツpan_stand_right](../images/neck_print_pan_stand_right.png)
 
 
 # 組み立て手順
@@ -138,12 +138,12 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
     <br>
 
     最初に、下図のように「pan_stand_left」と「pan_stand_right」でsg90を固定します。
-    ![](../images/neck_create_1.jpg)
+    ![pan_stand_leftとpan_stand_rightで首振り用サーボを固定](../images/neck_create_1.jpg)
 
     <br>
 
     そして、pan_plate_topを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、MG996Rに付属のネジでホーンとサーボを固定してもOKです）。
-    ![](../images/neck_create_2.jpg)
+    ![pan_plate_topを上からスライドさせてサーボホーンにはめる](../images/neck_create_2.jpg)
 
 
 
@@ -174,7 +174,7 @@ ESP32-DevKitCの場合の配線図は、以下になります。
 
 ※ デフォルト設定の場合、首のサーボをchannel=2に接続してください。
 
-![](../fritzing/png/neck.png)
+![首振り用サーボとPCA9685・ESP32の配線図](../fritzing/png/neck.png)
 
 
 
@@ -182,7 +182,7 @@ ESP32-DevKitCの場合の配線図は、以下になります。
 
 今回作成したロボットの完成系は下図のようになります。
 
-![](../images/smabo_neck.jpg)
+![首振り機構を取り付けたsmaboの完成形](../images/smabo_neck.jpg)
 
 
 # 動作手順
@@ -217,7 +217,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 します。
 
-![alt text](../images/neck_config_head_pan_enable.jpg)
+![smabo-webのConfigでhead_panを有効化](../images/neck_config_head_pan_enable.jpg)
 
 ## コントローラー制御
 
@@ -228,7 +228,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定してください。
 
-![alt text](../images/neck_config_mode_manual.jpg)
+![head_panのmodeをmanualに設定](../images/neck_config_mode_manual.jpg)
 
 <br>
 
@@ -246,7 +246,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定してください。 
 
-![alt text](../images/neck_config_mode_random.jpg)
+![head_panのmodeをrandom、groupをneckに設定](../images/neck_config_mode_random.jpg)
 
 
 !!! note random_group
@@ -256,7 +256,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
     なお、新規のrandom_groupは「Add random Group」をクリックすると、追加できます。
 
-    ![alt text](../images/hand_add_random_group.png)
+    ![smabo-webの「Add random Group」でランダム動作グループを追加](../images/hand_add_random_group.png)
 
 <br>
 
@@ -273,7 +273,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定してください。
 
-![alt text](../images/neck_config_mode_manual.jpg)
+![head_panのmodeをmanualに設定](../images/neck_config_mode_manual.jpg)
 
 <br>
 
@@ -283,7 +283,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 します。
 
-![alt text](../images/neck_vision_detection.jpg)
+![smabo-webで指定した色の物体を認識する設定](../images/neck_vision_detection.jpg)
 
 
 <br>
@@ -295,7 +295,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定します。
 
-![alt text](../images/neck_vision_servo_follow.jpg)
+![BehaviorsでサーボをFollowさせPan Directionをreversedに設定](../images/neck_vision_servo_follow.jpg)
 
 <br>
 

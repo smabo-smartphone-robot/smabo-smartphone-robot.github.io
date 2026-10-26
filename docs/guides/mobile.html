@@ -184,19 +184,19 @@
 </blockquote>
 <ul>
 <li>smabo-repos/smabo-hardware/stl/mobile_robot/dc_motor_caster.stl<br />
-<img alt="alt text" src="../images/mobile_print_dc_motor_caster.png" /></li>
+<img alt="3Dプリントした移動ロボット用パーツdc_motor_caster" src="../images/mobile_print_dc_motor_caster.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_bottom.stl<br />
-<img alt="alt text" src="../images/mobile_print_tt_motor_bottom.png" /></li>
+<img alt="3Dプリントした移動ロボット用パーツtt_motor_bottom" src="../images/mobile_print_tt_motor_bottom.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper1.stl × 2
 <ul>
 <li>左右にモータをつけるので2つ印刷します。<br />
-<img alt="alt text" src="../images/mobile_print_tt_motor_stopper1.png" /></li>
+<img alt="3Dプリントしたttモーター固定パーツtt_motor_stopper1" src="../images/mobile_print_tt_motor_stopper1.png" /></li>
 </ul>
 </li>
 </ul>
@@ -205,7 +205,7 @@
 <li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2.stl
 <ul>
 <li>左右にモータをつけるので2つ印刷します。<br />
-<img alt="alt text" src="../images/mobile_print_tt_motor_stopper2.png" /></li>
+<img alt="3Dプリントしたttモーター固定パーツtt_motor_stopper2" src="../images/mobile_print_tt_motor_stopper2.png" /></li>
 </ul>
 </li>
 </ul>
@@ -223,11 +223,11 @@
 <p>組み立て動画では、ttモーター、及びどこでもキャスターSの取り付け手順は分からないため、以下に記載します。</p>
 <br />
 <p>最初に、下図のように「dc_motor_caster.stl」にどこでもキャスターSを貼り付けます。<br />
-<img alt="" src="../images/dc_motor_caster_before.jpg" />
-<img alt="" src="../images/dc_motor_caster_after.jpg" /></p>
+<img alt="どこでもキャスターSを貼り付ける前のdc_motor_caster" src="../images/dc_motor_caster_before.jpg" />
+<img alt="どこでもキャスターSを貼り付けたdc_motor_caster" src="../images/dc_motor_caster_after.jpg" /></p>
 <br />
 <p>次に、「tt_motor_bottom.stl」に対して「tt_motor_stopper1.stl」「tt_motor_stopper2.stl」を使ってttモーターを固定します。<br />
-<img alt="" src="../images/tt_motor_assemble.jpg" /></p>
+<img alt="tt_motor_stopperでttモーターを固定した状態" src="../images/tt_motor_assemble.jpg" /></p>
 </blockquote>
 
 <h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>
@@ -317,13 +317,13 @@
 
 <br />
 <p>ESP32-DevKitCの場合の配線図は、以下になります（ブレッドボードだけだと穴が足りないため、TB6612FNGは、ミニブレッドボードにて配線しています）。</p>
-<p><img alt="" src="../fritzing/png/tt_motor.png" /></p>
+<p><img alt="ttモーターとモータードライバTB6612FNG・ESP32の配線図" src="../fritzing/png/tt_motor.png" /></p>
 
 <blockquote>
 <p><strong>TB6612FNG配線の際のポイント1</strong></p>
 <p>TB6612FNGは、裏側に各ピンの役割が記載してあるため、配線前によく確認しておきましょう。</p>
 <p>※ 当然ですが、ブレッドボードに挿すと裏面から見たピン位置と左右逆になるため注意しましょう。<br />
-<img alt="alt text" src="../images/mobile_tb6612fng_backside.png" /><br />
+<img alt="TB6612FNGモータードライバ裏面のピン配置" src="../images/mobile_tb6612fng_backside.png" /><br />
 <a href="https://www.switch-science.com/products/385?srsltid=AfmBOopaI6nY3Kyny25gDpjTx1m8gO5k-UhwiDTIQxFYU8d_kZrGWxxc">参考画像：デュアル・モータードライバTB6612FNG(連続最大1.2A)（スイッチサイエンス）</a></p>
 </blockquote>
 
@@ -334,12 +334,12 @@
 <li>ジャンプワイヤーを一本ずつ剥かず、7本分まとめて扱うことができる</li>
 </ul>
 <p>ため配線がすっきりします。</p>
-<p><img alt="" src="../images/TB6612FNG_%20wiring.jpg" /></p>
+<p><img alt="ミニブレッドボード上のTB6612FNGの配線" src="../images/TB6612FNG_%20wiring.jpg" /></p>
 </blockquote>
 
 <h2 id="完成系">完成系<a class="headerlink" href="#完成系" title="Permanent link">#</a></h2>
 <p>今回作成したロボットの完成系は下図のようになります。<br />
-<img alt="" src="../images/smabo_tt_motor.jpg" /></p>
+<img alt="ttモーターで走る移動ロボット版smaboの完成形" src="../images/smabo_tt_motor.jpg" /></p>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
 <h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
@@ -351,12 +351,12 @@
 <li>「Modes/dc_drive」を有効化</li>
 </ul>
 <p>します。</p>
-<p><img alt="alt text" src="../images/mobile_config_dc_drive_enable.png" /></p>
+<p><img alt="smabo-webのConfigでModes/dc_driveを有効化" src="../images/mobile_config_dc_drive_enable.png" /></p>
 
 <h3 id="コントローラー制御">コントローラー制御<a class="headerlink" href="#コントローラー制御" title="Permanent link">#</a></h3>
 <p>コントローラー制御の手順を説明します。</p>
 <p>「two wheel mobile robot」タブのコントローラで移動ロボットのsmaboを制御できます。</p>
-<p><img alt="alt text" src="../images/mobile_web_drive_tab.png" /></p>
+<p><img alt="smabo-webのDriveタブのコントローラ" src="../images/mobile_web_drive_tab.png" /></p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../video/tt_motor_manual_control.mp4" type="video/mp4"></video></p>
 
 <h3 id="画像処理による制御">画像処理による制御<a class="headerlink" href="#画像処理による制御" title="Permanent link">#</a></h3>
@@ -367,16 +367,16 @@
 <li>任意の認識モードを設定（ここでは、colorモードで青色の物体を認識するように設定しています）</li>
 </ul>
 <p>します。</p>
-<p><img alt="alt text" src="../images/neck_vision_detection.jpg" /></p>
+<p><img alt="smabo-webで指定した色の物体を認識する設定" src="../images/neck_vision_detection.jpg" /></p>
 <br />
 <p>次に、「Behaviors」の</p>
 <ul>
 <li>「Drive follow」を有効化します。</li>
 </ul>
-<p><img alt="alt text" src="../images/mobile_vision_drive_follow_enable.png" /></p>
+<p><img alt="BehaviorsのDrive followを有効化" src="../images/mobile_vision_drive_follow_enable.png" /></p>
 <br />
 <p>なお、Drive followモードでは、カメラから見た認識物体のサイズが「Target size」を維持するように、移動ロボットが前後方向に動きます（具体的なサイズは、preview画面の青枠にて確認可能）。</p>
-<p><img alt="alt text" src="../images/mobile_vision_target_size_preview.png" /></p>
+<p><img alt="previewの青枠で目標サイズを確認" src="../images/mobile_vision_target_size_preview.png" /></p>
 <br />
 <p>設定完了後、スマホカメラの前に認識対象の物体を近づけると、物体に追従するように移動ロボットのsmaboが動作します。</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../video/tt_motor_img_proc.mp4" type="video/mp4"></video></p>

@@ -169,22 +169,22 @@
 <ul>
 <li>
 <p>smabo-hardware/stl/pan/mg996r/pan_adapter.stl</p>
-<p><img alt="alt text" src="../images/neck_print_pan_adapter.png" /></p>
+<p><img alt="3Dプリントした首振り用パーツpan_adapter" src="../images/neck_print_pan_adapter.png" /></p>
 </li>
 <br />
 <li>
 <p>smabo-hardware/stl/pan/mg996r/pan_plate_top.stl</p>
-<p><img alt="alt text" src="../images/neck_print_pan_plate_top.png" /></p>
+<p><img alt="3Dプリントした首振り用パーツpan_plate_top" src="../images/neck_print_pan_plate_top.png" /></p>
 </li>
 <br />
 <li>
 <p>smabo-hardware/stl/pan/mg996r/pan_stand_left.stl</p>
-<p><img alt="alt text" src="../images/neck_print_pan_stand_left.png" /></p>
+<p><img alt="3Dプリントした首振り用パーツpan_stand_left" src="../images/neck_print_pan_stand_left.png" /></p>
 </li>
 <br />
 <li>
 <p>smabo-hardware/stl/pan/mg996r/pan_stand_right.stl</p>
-<p><img alt="alt text" src="../images/neck_print_pan_stand_right.png" /></p>
+<p><img alt="3Dプリントした首振り用パーツpan_stand_right" src="../images/neck_print_pan_stand_right.png" /></p>
 </li>
 </ul>
 
@@ -199,10 +199,10 @@
 <p>組み立て動画では、MG996Rの取り付け手順は分からないため、以下に記載します。</p>
 <br />
 <p>最初に、下図のように「pan_stand_left」と「pan_stand_right」でsg90を固定します。</p>
-<p><img alt="" src="../images/neck_create_1.jpg" /></p>
+<p><img alt="pan_stand_leftとpan_stand_rightで首振り用サーボを固定" src="../images/neck_create_1.jpg" /></p>
 <br />
 <p>そして、pan_plate_topを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、MG996Rに付属のネジでホーンとサーボを固定してもOKです）。</p>
-<p><img alt="" src="../images/neck_create_2.jpg" /></p>
+<p><img alt="pan_plate_topを上からスライドさせてサーボホーンにはめる" src="../images/neck_create_2.jpg" /></p>
 </blockquote>
 
 <h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>
@@ -267,11 +267,11 @@
 <br />
 <p>ESP32-DevKitCの場合の配線図は、以下になります。</p>
 <p>※ デフォルト設定の場合、首のサーボをchannel=2に接続してください。</p>
-<p><img alt="" src="../fritzing/png/neck.png" /></p>
+<p><img alt="首振り用サーボとPCA9685・ESP32の配線図" src="../fritzing/png/neck.png" /></p>
 
 <h2 id="完成系">完成系<a class="headerlink" href="#完成系" title="Permanent link">#</a></h2>
 <p>今回作成したロボットの完成系は下図のようになります。</p>
-<p><img alt="" src="../images/smabo_neck.jpg" /></p>
+<p><img alt="首振り機構を取り付けたsmaboの完成形" src="../images/smabo_neck.jpg" /></p>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
 <h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>
@@ -284,7 +284,7 @@
 <li>「head_pan」を有効化</li>
 </ul>
 <p>します。</p>
-<p><img alt="alt text" src="../images/neck_config_head_pan_enable.jpg" /></p>
+<p><img alt="smabo-webのConfigでhead_panを有効化" src="../images/neck_config_head_pan_enable.jpg" /></p>
 
 <h3 id="コントローラー制御">コントローラー制御<a class="headerlink" href="#コントローラー制御" title="Permanent link">#</a></h3>
 <p>コントローラー制御の手順を説明します。</p>
@@ -293,7 +293,7 @@
 <li>「mode」を「manual」</li>
 </ul>
 <p>に設定してください。</p>
-<p><img alt="alt text" src="../images/neck_config_mode_manual.jpg" /></p>
+<p><img alt="head_panのmodeをmanualに設定" src="../images/neck_config_mode_manual.jpg" /></p>
 <br />
 <p>「Servo」タブで各サーボの角度を変更すると、それに合わせてsmaboが左右に動作します。</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_manual.mp4" type="video/mp4"></video></p>
@@ -306,13 +306,13 @@
 <li>「group」を「neck」</li>
 </ul>
 <p>に設定してください。 </p>
-<p><img alt="alt text" src="../images/neck_config_mode_random.jpg" /></p>
+<p><img alt="head_panのmodeをrandom、groupをneckに設定" src="../images/neck_config_mode_random.jpg" /></p>
 <blockquote>
 <p><strong>random_group</strong></p>
 <p>同じrandom_groupに設定されたサーボモーターは、同じタイミングでランダムに動作します。</p>
 <br />
 <p>なお、新規のrandom_groupは「Add random Group」をクリックすると、追加できます。</p>
-<p><img alt="alt text" src="../images/hand_add_random_group.png" /></p>
+<p><img alt="smabo-webの「Add random Group」でランダム動作グループを追加" src="../images/hand_add_random_group.png" /></p>
 </blockquote>
 <br />
 <p>しばらく待つと、ランダムなタイミングでsmaboが左右に動作することが確認できます。</p>
@@ -325,7 +325,7 @@
 <li>「mode」を「manual」</li>
 </ul>
 <p>に設定してください。</p>
-<p><img alt="alt text" src="../images/neck_config_mode_manual.jpg" /></p>
+<p><img alt="head_panのmodeをmanualに設定" src="../images/neck_config_mode_manual.jpg" /></p>
 <br />
 <p>「Vision」タブの「Detection」にて、</p>
 <ul>
@@ -333,7 +333,7 @@
 <li>任意の認識モードを設定（ここでは、colorモードで青色の物体を認識するように設定しています）</li>
 </ul>
 <p>します。</p>
-<p><img alt="alt text" src="../images/neck_vision_detection.jpg" /></p>
+<p><img alt="smabo-webで指定した色の物体を認識する設定" src="../images/neck_vision_detection.jpg" /></p>
 <br />
 <p>次に、「Behaviors」の</p>
 <ul>
@@ -342,7 +342,7 @@
 <li>「Pan Direction」を「reversed(-1)」</li>
 </ul>
 <p>に設定します。</p>
-<p><img alt="alt text" src="../images/neck_vision_servo_follow.jpg" /></p>
+<p><img alt="BehaviorsでサーボをFollowさせPan Directionをreversedに設定" src="../images/neck_vision_servo_follow.jpg" /></p>
 <br />
 <p>設定完了後、スマホカメラの前に認識対象の物体を近づけると、物体に追従するようにsmaboが首振りすることが確認できます。</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../video/smabo_neck_img_proc.mp4" type="video/mp4"></video></p>

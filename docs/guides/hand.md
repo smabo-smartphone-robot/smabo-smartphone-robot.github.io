@@ -87,25 +87,25 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
 
 - smabo-hardware/stl/hand/sg90/sg90_plate_1.stl × 2
     左右で同じパーツを使用するため、2つ印刷します
-    ![alt text](../images/hand_print_sg90_plate_1.png)
+    ![3Dプリントしたハンド用パーツsg90_plate_1](../images/hand_print_sg90_plate_1.png)
 
 <br>
 
 - smabo-hardware/stl/hand/sg90/sg90_plate_2.stl × 2
     左右で同じパーツを使用するため、2つ印刷します
-    ![alt text](../images/hand_print_sg90_plate_2.png)
+    ![3Dプリントしたハンド用パーツsg90_plate_2](../images/hand_print_sg90_plate_2.png)
 
 <br>
 
 - smabo-hardware/stl/hand/sg90/sg90_base.stl × 2
     左右で同じパーツを使用するため、2つ印刷します
-    ![alt text](../images/hand_print_sg90_base.png)
+    ![3Dプリントしたハンド用パーツsg90_base](../images/hand_print_sg90_base.png)
 
 <br>
 
 - smabo-hardware/stl/hand/sg90/arm_hand.stl × 2
     左右で同じパーツを使用するため、2つ印刷します
-    ![alt text](../images/hand_print_arm_hand.png)
+    ![3Dプリントしたハンド用パーツarm_hand](../images/hand_print_arm_hand.png)
 
 # 組み立て手順
 
@@ -120,13 +120,13 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.js
     <br>
 
     最初に、下図のように「sg90_plate_1」と「sg90_plate_2」でsg90を固定し、ボディに取り付けます。
-    ![](../images/hand_create_1.jpg)
-    ![](../images/hand_create_2.jpg)
+    ![sg90_plateでSG90サーボを固定する手順](../images/hand_create_1.jpg)
+    ![SG90サーボを固定したハンドパーツをボディに取り付ける手順](../images/hand_create_2.jpg)
 
     <br>
 
     そして、sg90_baseを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、SG90に付属のネジでホーンとサーボを固定してもOKです）。
-    ![](../images/hand_create_3.jpg)
+    ![sg90_baseを上からスライドさせてサーボホーンにはめる](../images/hand_create_3.jpg)
     
 
 # 配線
@@ -155,7 +155,7 @@ ESP32-DevKitCの場合の配線図は、以下になります。
 
 ※ デフォルト設定の場合、左腕のサーボをchannel=0, 右腕のサーボをchannel=1に接続してください。
 
-![](../fritzing/png/hand.png)
+![ハンド用サーボ2個とPCA9685・ESP32の配線図](../fritzing/png/hand.png)
 
 
 !!! note 配線の際のポイント
@@ -165,7 +165,7 @@ ESP32-DevKitCの場合の配線図は、以下になります。
 
 今回作成したロボットの完成系は下図のようになります。
 
-![](../images/smabo_hand.jpg)
+![ハンドを取り付けたsmaboの完成形](../images/smabo_hand.jpg)
 
 # 動作手順
 
@@ -198,7 +198,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 にします。
 
 
-![alt text](../images/hand_servo_inverse.png)
+![smabo-webのConfigでright_handのinverseを有効化](../images/hand_servo_inverse.png)
 
 
 <br>
@@ -208,7 +208,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 します。
 
-![alt text](../images/hand_servo_enable.png)
+![smabo-webのConfigでleft_handとright_handを有効化](../images/hand_servo_enable.png)
 
 ## コントローラー制御
 
@@ -220,7 +220,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定してください。
 
-![alt text](../images/hand_mode_manual.png)
+![ハンドのサーボのmodeをmanualに設定](../images/hand_mode_manual.png)
 
 <br>
 
@@ -239,7 +239,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 に設定してください。 
 
-![alt text](../images/hand_mode_random.png)
+![ハンドのサーボのmodeをrandom、groupをhandsに設定](../images/hand_mode_random.png)
 
 
 !!! note random_group
@@ -253,7 +253,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
     なお、新規のrandom_groupは「Add random Group」をクリックすると、追加できます。
 
-    ![alt text](../images/hand_add_random_group.png)
+    ![smabo-webの「Add random Group」でランダム動作グループを追加](../images/hand_add_random_group.png)
 
 
 

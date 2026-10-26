@@ -114,7 +114,7 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 !!! note ブレッドボードの+極について <!--重要なので、このNoteは特に目立つように-->
     SAD101購入時についていた、**+極のジャンプワイヤーは必ず外してください**。
     ついたままだと、**ESP32, アクチュエータが破損する**可能性があります。<!--太字を赤字にする-->
-    ![alt text](../images/esp32_breadboard_remove_jumper.png)
+    ![ブレッドボード中央のジャンプワイヤーを外す](../images/esp32_breadboard_remove_jumper.png)
 
 <br>
 

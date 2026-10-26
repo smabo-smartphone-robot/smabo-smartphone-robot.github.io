@@ -39,11 +39,11 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 具体的には、以下の内容を実施します。
 - スマホで取得した音声を、音声認識
   - 認識結果をsmabo-webに表示
-![alt text](../images/app_recognized_speech.png)
+![smabo-webに表示されたsmabo-appの音声認識結果](../images/app_recognized_speech.png)
 
 
 - smabo-webで指定した文字列を発話
-![alt text](../images/app_speech_say.jpg)
+![smabo-webで指定した文字列をsmaboが発話する画面](../images/app_speech_say.jpg)
 
 
 
@@ -95,7 +95,7 @@ smaboに対して「smabo」と話しかけると、smaboの目が虹色に光�
 
 目が虹色の状態で何か言葉を話すと、音声認識が開始されます（認識する言語は、smabo-appの設定画面から変更できます）。
 
-![alt text](../images/app_voice_listening.png)
+![smabo-appが音声を聞き取っている画面](../images/app_voice_listening.png)
 
 
 <br>
@@ -105,7 +105,7 @@ smaboに対して「smabo」と話しかけると、smaboの目が虹色に光�
 目の色が戻った後に、smabo-webの「Face」タブの「Recognized speech」を確認すると、先ほど話した言葉が表示されます。
 
 
-![alt text](../images/app_recognized_speech.png)
+![smabo-webに表示されたsmabo-appの音声認識結果](../images/app_recognized_speech.png)
 
 
 ## 音声発話
@@ -113,14 +113,14 @@ smaboに対して「smabo」と話しかけると、smaboの目が虹色に光�
 smabo-webの「Face」タブの「SPEECH / SAY」で、任意の文章を入力し、「SAY」ボタンをクリックすると入力された音声がスマホから発話されます（発話する言語は、smabo-appの設定画面から変更できます）。
 
 
-![alt text](../images/app_speech_say.jpg)
+![smabo-webで指定した文字列をsmaboが発話する画面](../images/app_speech_say.jpg)
 
 <br>
 
 
 なお、「Bubble ON」「Speak ON」ボタンにて発話のON/OFF、吹き出しの有無を設定可能です。
 
-![alt text](../images/app_speech_toggle.png)
+![smabo-appの発話ON/OFFと吹き出し表示の設定](../images/app_speech_toggle.png)
 
 
 

@@ -57,11 +57,11 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 具体的には、以下の内容を実施します。
 
 - 自分のスマホのサイズに合わせた3Dモデルの修正
-![alt text](../images/base_long_inner_extrude.jpg)
+![Fusionでスマホ長手方向の内側面をExtrudeしてサイズを合わせる](../images/base_long_inner_extrude.jpg)
 
 
 - ベースパーツの3Dプリンタによる印刷
-![alt text](../images/base_print_base.jpg)
+![3Dプリンタで印刷したsmaboのベースパーツ](../images/base_print_base.jpg)
 
 
 # 必要パーツ
@@ -131,17 +131,17 @@ smaboでは、スマートフォンを固定することができますが、ス
 
 !!! note fusion360の場合の具体的な手順
     左側タブの「Upload」をクリックします。
-    ![alt text](../images/base_fusion_upload.jpg)
+    ![Fusionの左側タブの「Upload」ボタン](../images/base_fusion_upload.jpg)
 
     <br>
 
     「Select Files」をクリックします。
-    ![alt text](../images/base_fusion_select_files.jpg)
+    ![Fusionのアップロード画面の「Select Files」](../images/base_fusion_select_files.jpg)
 
     <br>
 
     「smartphone_long_width_75_height_11.step」を選択します。
-    ![alt text](../images/base_fusion_select_long_step.jpg)
+    ![smartphone_long_width_75_height_11.stepを選択する画面](../images/base_fusion_select_long_step.jpg)
 
     <br>
 
@@ -150,22 +150,22 @@ smaboでは、スマートフォンを固定することができますが、ス
     <br>
 
     外側面を選択した状態で「Extrude」をクリックします。
-    ![alt text](../images/base_long_outer_extrude.jpg)
+    ![Fusionでスマホ長手方向の外側面を選択してExtrude](../images/base_long_outer_extrude.jpg)
 
     <br>
 
     長さを「スマホの長手方向/2」 + 3 + 1 に設定します。
-    ![alt text](../images/base_long_outer_length.jpg)
+    ![外側面のExtrude長さを「スマホの長手方向/2 + 3 + 1」に設定](../images/base_long_outer_length.jpg)
 
     <br>
 
     同様に内側面を選択した状態で「Extrude」をクリックします。
-    ![alt text](../images/base_long_inner_extrude.jpg)
+    ![Fusionでスマホ長手方向の内側面をExtrudeしてサイズを合わせる](../images/base_long_inner_extrude.jpg)
 
     <br>
 
     長さを「スマホの長手方向/2」 +  1 に設定します。
-    ![alt text](../images/base_long_inner_length.jpg)
+    ![内側面のExtrude長さを「スマホの長手方向/2 + 1」に設定](../images/base_long_inner_length.jpg)
 
 <br>
 
@@ -178,22 +178,22 @@ smaboでは、スマートフォンを固定することができますが、ス
 
 !!! note fusion360の場合の具体的な手順
     上面を選択し、「Extrude」をクリックします。
-    ![alt text](../images/base_long_top_extrude.jpg)
+    ![Fusionで上面を選択してExtrude](../images/base_long_top_extrude.jpg)
 
     <br>
 
     長さを「スマホの厚さ」+ 1 + 3 に設定します。
-    ![alt text](../images/base_long_top_length.jpg)
+    ![上面のExtrude長さを「スマホの厚さ + 1 + 3」に設定](../images/base_long_top_length.jpg)
 
     <br>
 
     下面を選択し、「Extrude」をクリックします。
-    ![alt text](../images/base_long_bottom_extrude.jpg)
+    ![Fusionで下面を選択してExtrude](../images/base_long_bottom_extrude.jpg)
 
     <br>
 
     長さを「スマホの厚さ」+ 1 に設定します。
-    ![alt text](../images/base_long_bottom_length.jpg)
+    ![下面のExtrude長さを「スマホの厚さ + 1」に設定](../images/base_long_bottom_length.jpg)
 
 ### 上下固定用パーツ
 
@@ -225,7 +225,7 @@ smaboでは、スマートフォンを固定することができますが、ス
 
 !!! note fusion360の場合の具体的な手順
     左上から「File」->「Export」を選択します。
-    ![alt text](../images/base_fusion_export_menu.jpg)
+    ![Fusionの「File」→「Export」メニュー](../images/base_fusion_export_menu.jpg)
 
     <br>
 
@@ -234,7 +234,7 @@ smaboでは、スマートフォンを固定することができますが、ス
     - Type：stl
     - Location：任意の場所
 
-    ![alt text](../images/base_fusion_export_settings.jpg)
+    ![FusionのExport設定（Typeをstlに指定）](../images/base_fusion_export_settings.jpg)
 
 
 
@@ -258,29 +258,29 @@ smaboでは、スマートフォンを固定することができますが、ス
 ## 共通
 
 - smabo-hardware/stl/base/base.stl
-    ![alt text](../images/base_print_base.jpg)
+    ![3Dプリンタで印刷したsmaboのベースパーツ](../images/base_print_base.jpg)
 
 <br>
 
 - smabo-hardware/stl/base/cover_back_bread_board.stl
-    ![alt text](../images/base_print_cover_back_bread_board.jpg)
+    ![3Dプリントしたcover_back_bread_board（背面カバー）](../images/base_print_cover_back_bread_board.jpg)
 
 <br>
 
 - smabo-hardware/stl/smart_phone/cover_smartphone_base.stl
-    ![alt text](../images/base_print_cover_smartphone_base.jpg)
+    ![3Dプリントしたcover_smartphone_base](../images/base_print_cover_smartphone_base.jpg)
 
 <br>
 
 - smabo-hardware/stl/smart_phone/smartphone_long_width_75_height_11.stl（元サイズからお持ちのスマホ用に調整したもの） × 2
   - 左右で同じパーツを使用するため2つ印刷します
-    ![alt text](../images/base_print_smartphone_long.jpg)
+    ![3Dプリントしたsmartphone_long（スマホ固定パーツ・長辺用）](../images/base_print_smartphone_long.jpg)
 
 <br>
 
 - smabo-hardware/stl/smart_phone/smartphone_short_width_37_height_11.stl（元サイズからお持ちのスマホ用に調整したもの）× 2
   - 上下で同じパーツを使用するため2つ印刷します
-    ![alt text](../images/base_print_smartphone_short.jpg)
+    ![3Dプリントしたsmartphone_short（スマホ固定パーツ・短辺用）](../images/base_print_smartphone_short.jpg)
 
 
 ## smabo-brainをSBCにセットアップした場合
@@ -288,17 +288,17 @@ smaboでは、スマートフォンを固定することができますが、ス
 ### SBC=ラズパイ（4 or 5）の場合
 
 - smabo-hardware/stl/raspi/raspi_stand.stl
-    ![alt text](../images/raspi_print_stand.jpg)
+    ![3Dプリントしたラズパイ用スタンド（raspi_stand）](../images/raspi_print_stand.jpg)
 
 <br>
 
 - smabo-hardware/stl/raspi/raspi_stopper1.stl
-    ![alt text](../images/raspi_print_stopper1.jpg)
+    ![3Dプリントしたラズパイ固定用パーツ（raspi_stopper1）](../images/raspi_print_stopper1.jpg)
 
 <br>
 
 - smabo-hardware/stl/raspi/raspi_stopper2.stl
-    ![alt text](../images/raspi_print_stopper2.jpg)
+    ![3Dプリントしたラズパイ固定用パーツ（raspi_stopper2）](../images/raspi_print_stopper2.jpg)
 
 
 
@@ -327,7 +327,7 @@ smaboでは、スマートフォンを固定することができますが、ス
 
 !!! note 組み立ての際のポイント
     下図のように、ラズパイを各パーツでraspi_standに固定してください。
-    ![](../images/assemble_raspi_stand.jpg)
+    ![ラズパイをraspi_standに固定した状態](../images/assemble_raspi_stand.jpg)
 
 ## スマホの取り付け
 
@@ -336,7 +336,7 @@ smaboでは、スマートフォンを固定することができますが、ス
 # 完成系
 
 今回作成したロボットの完成系は下図のようになります。
-![alt text](../images/base_complete.jpg)
+![ベースパーツを組み立てたsmaboの完成形](../images/base_complete.jpg)
 
 # 次回
 

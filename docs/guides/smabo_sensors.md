@@ -88,13 +88,13 @@ htmlに変換する際、「起動手順」へのリンク（startup.html）は�
 
 smaboの各種センサのON/OFFは左下のボタンで設定できます。
 
-![alt text](../images/app_sensor_toggle.png)
+![smabo-app左下のセンサーON/OFFボタン](../images/app_sensor_toggle.png)
 
 <br>
 
 センサをONにした状態で、smabo-webで「Sensors」タブを確認すると、各種センサの情報を可視化できます。
 
-![alt text](../images/app_sensor_web.png)
+![smabo-webで可視化したスマホのセンサー情報](../images/app_sensor_web.png)
 
 
 

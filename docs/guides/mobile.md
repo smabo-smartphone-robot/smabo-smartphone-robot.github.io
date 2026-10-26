@@ -101,24 +101,24 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
     - サポート材は必ずONにした状態で印刷
 
 - smabo-repos/smabo-hardware/stl/mobile_robot/dc_motor_caster.stl
-    ![alt text](../images/mobile_print_dc_motor_caster.png)
+    ![3Dプリントした移動ロボット用パーツdc_motor_caster](../images/mobile_print_dc_motor_caster.png)
 
 <br>
 
 - smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_bottom.stl
-    ![alt text](../images/mobile_print_tt_motor_bottom.png)
+    ![3Dプリントした移動ロボット用パーツtt_motor_bottom](../images/mobile_print_tt_motor_bottom.png)
 
 <br>
 
 - smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper1.stl × 2
   - 左右にモータをつけるので2つ印刷します。
-    ![alt text](../images/mobile_print_tt_motor_stopper1.png)
+    ![3Dプリントしたttモーター固定パーツtt_motor_stopper1](../images/mobile_print_tt_motor_stopper1.png)
 
 <br>
 
 - smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2.stl
   - 左右にモータをつけるので2つ印刷します。
-    ![alt text](../images/mobile_print_tt_motor_stopper2.png)
+    ![3Dプリントしたttモーター固定パーツtt_motor_stopper2](../images/mobile_print_tt_motor_stopper2.png)
 
 # 組み立て手順
 
@@ -134,13 +134,13 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
     <br>
 
     最初に、下図のように「dc_motor_caster.stl」にどこでもキャスターSを貼り付けます。
-    ![](../images/dc_motor_caster_before.jpg)
-    ![](../images/dc_motor_caster_after.jpg)
+    ![どこでもキャスターSを貼り付ける前のdc_motor_caster](../images/dc_motor_caster_before.jpg)
+    ![どこでもキャスターSを貼り付けたdc_motor_caster](../images/dc_motor_caster_after.jpg)
 
     <br>
 
     次に、「tt_motor_bottom.stl」に対して「tt_motor_stopper1.stl」「tt_motor_stopper2.stl」を使ってttモーターを固定します。
-    ![](../images/tt_motor_assemble.jpg)
+    ![tt_motor_stopperでttモーターを固定した状態](../images/tt_motor_assemble.jpg)
 
 # 配線
 
@@ -172,14 +172,14 @@ htmlに変換する際は、以下のsvgファイルの代わりに、roadmap.ht
 
 ESP32-DevKitCの場合の配線図は、以下になります（ブレッドボードだけだと穴が足りないため、TB6612FNGは、ミニブレッドボードにて配線しています）。
 
-![](../fritzing/png/tt_motor.png)
+![ttモーターとモータードライバTB6612FNG・ESP32の配線図](../fritzing/png/tt_motor.png)
 
 
 !!! note TB6612FNG配線の際のポイント1
     TB6612FNGは、裏側に各ピンの役割が記載してあるため、配線前によく確認しておきましょう。
 
     ※ 当然ですが、ブレッドボードに挿すと裏面から見たピン位置と左右逆になるため注意しましょう。
-    ![alt text](../images/mobile_tb6612fng_backside.png)
+    ![TB6612FNGモータードライバ裏面のピン配置](../images/mobile_tb6612fng_backside.png)
     [参考画像：デュアル・モータードライバTB6612FNG(連続最大1.2A)（スイッチサイエンス）](https://www.switch-science.com/products/385?srsltid=AfmBOopaI6nY3Kyny25gDpjTx1m8gO5k-UhwiDTIQxFYU8d_kZrGWxxc)
 
 !!! note TB6612FNG配線の際のポイント
@@ -188,14 +188,14 @@ ESP32-DevKitCの場合の配線図は、以下になります（ブレッドボ�
     
     ため配線がすっきりします。
 
-    ![](../images/TB6612FNG_%20wiring.jpg)
+    ![ミニブレッドボード上のTB6612FNGの配線](../images/TB6612FNG_%20wiring.jpg)
 
 
 # 完成系
 
 今回作成したロボットの完成系は下図のようになります。
 
-![](../images/smabo_tt_motor.jpg)
+![ttモーターで走る移動ロボット版smaboの完成形](../images/smabo_tt_motor.jpg)
 
 # 動作手順
 
@@ -226,7 +226,7 @@ smabo-webの「Config」タブにて
 
 します。
 
-![alt text](../images/mobile_config_dc_drive_enable.png)
+![smabo-webのConfigでModes/dc_driveを有効化](../images/mobile_config_dc_drive_enable.png)
 
 ## コントローラー制御
 
@@ -236,7 +236,7 @@ smabo-webの「Config」タブにて
 「two wheel mobile robot」タブのコントローラで移動ロボットのsmaboを制御できます。
 
 
-![alt text](../images/mobile_web_drive_tab.png)
+![smabo-webのDriveタブのコントローラ](../images/mobile_web_drive_tab.png)
 
 <!--smabo-smartphone-robot.github.io/docs/video/tt_motor_manual_control.mp4のループ動画をここに配置-->
 
@@ -251,7 +251,7 @@ smabo-webの「Config」タブにて
 
 します。
 
-![alt text](../images/neck_vision_detection.jpg)
+![smabo-webで指定した色の物体を認識する設定](../images/neck_vision_detection.jpg)
 
 
 <br>
@@ -259,13 +259,13 @@ smabo-webの「Config」タブにて
 次に、「Behaviors」の
 - 「Drive follow」を有効化します。
 
-![alt text](../images/mobile_vision_drive_follow_enable.png)
+![BehaviorsのDrive followを有効化](../images/mobile_vision_drive_follow_enable.png)
 
 <br>
 
 なお、Drive followモードでは、カメラから見た認識物体のサイズが「Target size」を維持するように、移動ロボットが前後方向に動きます（具体的なサイズは、preview画面の青枠にて確認可能）。
 
-![alt text](../images/mobile_vision_target_size_preview.png)
+![previewの青枠で目標サイズを確認](../images/mobile_vision_target_size_preview.png)
 
 
 

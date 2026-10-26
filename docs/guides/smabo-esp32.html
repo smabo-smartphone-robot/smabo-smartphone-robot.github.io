@@ -191,15 +191,15 @@
 
 <h4 id="ソースコードの書き込み">ソースコードの書き込み</h4>
 <p>ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタンをクリックし「MicroPython(ESP32)」を選択します。</p>
-<p><img alt="alt text" src="../images/esp32_thonny_select_interpreter.jpg" /></p>
+<p><img alt="ThonnyでインタプリタにMicroPython(ESP32)を選択" src="../images/esp32_thonny_select_interpreter.jpg" /></p>
 <br />
 <p>その後、「smabo-esp32」内のpythonファイルを全て選択した状態で右クリックし、「/にアップロード」を選択すると、esp32に書き込まれます。</p>
-<p><img alt="alt text" src="../images/esp32_thonny_upload_source.jpg" /></p>
+<p><img alt="Thonnyでソースコードをesp32にアップロード" src="../images/esp32_thonny_upload_source.jpg" /></p>
 
 <h4 id="設定ファイルの書き込み">設定ファイルの書き込み</h4>
 <p>次に、設定ファイルを書き込みます。</p>
 <p>configディレクトリからお手持ちのesp32の種類にあったjsonファイルを選択し、「config.json」という名前でコピーを作成します。</p>
-<p><img alt="alt text" src="../images/esp32_config_copy.jpg" /></p>
+<p><img alt="設定ファイルをコピーしてconfig.jsonを作成" src="../images/esp32_config_copy.jpg" /></p>
 <br />
 <p>以下項目を、環境に応じて記載してください。</p>
 <ul>
@@ -221,10 +221,10 @@
 </ul>
 <p>となるため、ここで指定するSSIDは「G」がついている方にしてください。</p>
 </blockquote>
-<p><img alt="alt text" src="../images/esp32_config_wifi_ip.jpg" /></p>
+<p><img alt="config.jsonにWi-FiのSSID・パスワード・IPアドレスを設定" src="../images/esp32_config_wifi_ip.jpg" /></p>
 <br />
 <p>設定の記入が完了したら、ソースコードの時と同様に、config.jsonをesp32へ書き込みます。</p>
-<p><img alt="alt text" src="../images/esp32_config_upload.jpg" /></p>
+<p><img alt="Thonnyでconfig.jsonをesp32へ書き込み" src="../images/esp32_config_upload.jpg" /></p>
 
 <h2 id="パーツの印刷">パーツの印刷<a class="headerlink" href="#パーツの印刷" title="Permanent link">#</a></h2>
 <p>今回、新たに追加されるパーツを3Dプリンタで印刷します。</p>
@@ -241,44 +241,44 @@
 </blockquote>
 <ul>
 <li>smabo-hardware/stl/base/bread_board_stopper_bottom_l.stl<br />
-<img alt="alt text" src="../images/esp32_print_bread_board_stopper_bottom_l.png" /></li>
+<img alt="3Dプリントしたブレッドボード固定パーツbread_board_stopper_bottom_l" src="../images/esp32_print_bread_board_stopper_bottom_l.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/base/bread_board_stopper_bottom_r.stl<br />
-<img alt="alt text" src="../images/esp32_print_bread_board_stopper_bottom_r.png" /></li>
+<img alt="3Dプリントしたブレッドボード固定パーツbread_board_stopper_bottom_r" src="../images/esp32_print_bread_board_stopper_bottom_r.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/base/bread_board_stopper.stl<br />
-<img alt="alt text" src="../images/esp32_print_bread_board_stopper.png" /></li>
+<img alt="3Dプリントしたブレッドボード固定パーツbread_board_stopper" src="../images/esp32_print_bread_board_stopper.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/base/mini_bread_boad_stand.stl<br />
-<img alt="alt text" src="../images/esp32_print_mini_bread_board_stand.png" /></li>
+<img alt="3Dプリントしたミニブレッドボード用スタンド" src="../images/esp32_print_mini_bread_board_stand.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/base/pca9685_stopper_l.stl<br />
-<img alt="alt text" src="../images/esp32_print_pca9685_stopper_l.png" /></li>
+<img alt="3Dプリントしたサーボドライバ固定パーツpca9685_stopper_l" src="../images/esp32_print_pca9685_stopper_l.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/base/pca9685_stopper_r_bottom.stl<br />
-<img alt="alt text" src="../images/esp32_print_pca9685_stopper_r_bottom.png" /></li>
+<img alt="3Dプリントしたサーボドライバ固定パーツpca9685_stopper_r_bottom" src="../images/esp32_print_pca9685_stopper_r_bottom.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-hardware/stl/base/pca9685_stopper_r_top.stl<br />
-<img alt="alt text" src="../images/esp32_print_pca9685_stopper_r_top.png" /></li>
+<img alt="3Dプリントしたサーボドライバ固定パーツpca9685_stopper_r_top" src="../images/esp32_print_pca9685_stopper_r_top.png" /></li>
 </ul>
 <br />
 <ul>
 <li>【オプション】smabo-hardware/stl/base/in_base_plate_wire_hole.stl<br />
-<img alt="alt text" src="../images/esp32_print_in_base_plate_wire_hole.png" /><ul>
+<img alt="3Dプリントした仕切りパーツin_base_plate_wire_hole" src="../images/esp32_print_in_base_plate_wire_hole.png" /><ul>
 <li>本パーツは、「smabo内の仕切り」として使用できます。<br />
-<img alt="alt text" src="../images/esp32_in_base_plate_partition.jpg" /></li>
+<img alt="smabo内の仕切りとして取り付けたin_base_plate" src="../images/esp32_in_base_plate_partition.jpg" /></li>
 </ul>
 </li>
 </ul>
@@ -291,18 +291,18 @@
 <li>+極の「<strong>左側</strong>」を5V電源（ESP32からの出力）用</li>
 </ul>
 <p>として使用します。</p>
-<p><img alt="alt text" src="../images/esp32_breadboard_power_rails.png" /></p>
+<p><img alt="ブレッドボードの電源レーン（5V電源用）" src="../images/esp32_breadboard_power_rails.png" /></p>
 <br />
 <p>そのため、真ん中のジャンプワイヤーは外してください。</p>
-<p><img alt="alt text" src="../images/esp32_breadboard_remove_jumper.png" /></p>
+<p><img alt="ブレッドボード中央のジャンプワイヤーを外す" src="../images/esp32_breadboard_remove_jumper.png" /></p>
 <blockquote>
 <p><strong>ブレッドボードの中身について</strong></p>
 <p>ブレッドボードの裏面を見てみると、金属の棒が固定してあることがわかります。</p>
-<p><img src="../images/esp32_breadboard_back.png" width="300" /></p>
+<p><img alt="ブレッドボード裏面の金属の導通部分" src="../images/esp32_breadboard_back.png" width="300" /></p>
 <br />
 <br />
 <p>そのため、「同じ棒と繋がっている穴」に、複数のジャンプワイヤーを刺した場合、それらは回路的に繋がることになります。</p>
-<p><img alt="alt text" src="../images/esp32_breadboard_connection.png" /></p>
+<p><img alt="ブレッドボード上で回路が繋がる穴の並び" src="../images/esp32_breadboard_connection.png" /></p>
 <p>特に、SAD101の場合</p>
 <ul>
 <li>+極のみ真ん中で途切れていて左右に分かれている</li>
@@ -331,7 +331,7 @@
 </ul>
 </li>
 </ul>
-<p><img alt="alt text" src="../images/esp32_assembly_points.jpg" /></p>
+<p><img alt="ESP32・ブレッドボード・サーボドライバの組み立て位置" src="../images/esp32_assembly_points.jpg" /></p>
 </blockquote>
 
 <h2 id="配線">配線<a class="headerlink" href="#配線" title="Permanent link">#</a></h2>
@@ -339,7 +339,7 @@
 <p><strong>ブレッドボードの+極について</strong></p>
 <p>SAD101購入時についていた、<strong style="color:#e03131;">+極のジャンプワイヤーは必ず外してください</strong>。
 ついたままだと、<strong style="color:#e03131;">ESP32, アクチュエータが破損する</strong>可能性があります。</p>
-<p><img alt="alt text" src="../images/esp32_breadboard_remove_jumper.png" /></p>
+<p><img alt="ブレッドボード中央のジャンプワイヤーを外す" src="../images/esp32_breadboard_remove_jumper.png" /></p>
 </blockquote>
 <br />
 <p>今回は、アクチュエータなどは動かさないため、以降の準備として「乾電池バッテリーの配線」のみを行います。</p>
@@ -382,7 +382,7 @@
 <p>ため、配線の際は十分に注意してください。</p>
 <br />
 <p>ESP32-DevKitCの場合の配線図は、以下になります。</p>
-<p><img alt="" src="../fritzing/png/esp32_battery_box.png" /></p>
+<p><img alt="ESP32-DevKitCと電池ボックスの配線図" src="../fritzing/png/esp32_battery_box.png" /></p>
 
 <h2 id="動作手順">動作手順<a class="headerlink" href="#動作手順" title="Permanent link">#</a></h2>
 <h3 id="起動手順">起動手順<a class="headerlink" href="#起動手順" title="Permanent link">#</a></h3>

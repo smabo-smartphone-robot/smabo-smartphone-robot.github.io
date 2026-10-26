@@ -57,7 +57,7 @@ npm run dev
 
 smabo-webアクセス時に、右下に「Brain connected」と表示されればOKです。
 
-![alt text](../images/web_brain_connected.png)
+![smabo-web右下の「Brain connected」表示](../images/web_brain_connected.png)
 
 
 
@@ -65,13 +65,13 @@ smabo-webアクセス時に、右下に「Brain connected」と表示されれ�
 
 smabo-appを起動し、しばらくして「Brain connected」と表示されればOKです。
 
-![alt text](../images/app_brain_connected.png)
+![smabo-appの「Brain connected」表示](../images/app_brain_connected.png)
 
 # smabo-brain <-> esp32の接続
 
 「WS (brain <-> ESP32)」の右側にある「Ping」ボタンをクリックし、OKと表示されれば良いです。
 
-![alt text](../images/esp32_web_ws_ping.png)
+![smabo-webからESP32へのWebSocket疎通確認（OK表示）](../images/esp32_web_ws_ping.png)
 
 !!! note 接続できなかった場合
     上記手順で通信の疎通が失敗した場合は、`config.json`のWiFiの設定を確認してください。もし、間違っている箇所があった場合、修正した後esp32に再書き込みしてください。
@@ -81,5 +81,5 @@ smabo-appを起動し、しばらくして「Brain connected」と表示され�
 
 「Config」タブの「REST(web <-> ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。
 
-![alt text](../images/esp32_web_rest_ping.png)
+![smabo-webからESP32へのREST疎通確認（OK表示）](../images/esp32_web_rest_ping.png)
 

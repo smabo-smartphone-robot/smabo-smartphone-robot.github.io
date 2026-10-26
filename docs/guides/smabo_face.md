@@ -90,13 +90,13 @@ htmlに変換する際、「起動手順」へのリンク（startup.html）は�
 
 smaboの顔は、「Face Settings」から設定を変更できます。
 
-![alt text](../images/app_face_settings_button.png)
+![smabo-appの「Face Settings」ボタン](../images/app_face_settings_button.png)
 
 <br>
 
 設定では「目の大きさ」「目の種類」「背景色の変更」などができます。
 
-![alt text](../images/app_face_settings.png)
+![smabo-appの顔の設定画面（目の種類・背景色など）](../images/app_face_settings.png)
 
 ## smaboの表情の変更
 
@@ -109,7 +109,7 @@ smabo-webの「Face」タブの「Expression」に「Expression ID（smabo-app�
 
 smaboの目はデフォルトでは、ランダムに動きますが、モードを「Follow」に変更すると、外部からの通信により自由に動かすことができます。
 
-![alt text](../images/app_eye_follow_mode.png)
+![smabo-appの顔のモードを「Follow」に設定](../images/app_eye_follow_mode.png)
 
 
 <br>

@@ -79,7 +79,7 @@ htmlに変換する際、「起動手順」へのリンク（startup.html）は�
 
 smabo-webの「Vision」タブにて画像認識に関する設定が可能で、「Detection」の「enabled」を有効化することで、画像認識機能を有効化できます。
 
-![alt text](../images/web_vision_detection.png)
+![smabo-webのVisionタブで画像認識を有効化](../images/web_vision_detection.png)
 
 <br>
 
@@ -89,7 +89,7 @@ smabo-webの「Vision」タブにて画像認識に関する設定が可能で�
 - 顔認識
 - QRコード
 
-![alt text](../images/web_vision_mode.png)
+![画像認識モードの選択（ARマーカー・色・顔・QRコード）](../images/web_vision_mode.png)
 
 <br>
 
@@ -98,7 +98,7 @@ smabo-webの「Vision」タブにて画像認識に関する設定が可能で�
 
 を設定可能です（プレビューを有効化すると、右下に最小サイズの枠が表示されます）。
 
-![alt text](../images/web_vision_min_size.png)
+![画像認識の最小サイズ設定とプレビューの枠](../images/web_vision_min_size.png)
  
 ## 物体認識をもとに制御
 
@@ -110,7 +110,7 @@ smabo-webの「Vision」タブにて画像認識に関する設定が可能で�
 します。
 
 
-![alt text](../images/web_vision_behaviors.png)
+![認識した物体の座標をもとに制御するBehaviors設定](../images/web_vision_behaviors.png)
 
 <br>
 
@@ -131,7 +131,7 @@ smabo-webの「Vision」タブにて画像認識に関する設定が可能で�
 例えば、「目の制御」の場合、
 - smabo-appの顔のモードを「Follow」に
 
-![](../images/app_eye_follow_mode.png)
+![smabo-appの顔のモードを「Follow」に設定](../images/app_eye_follow_mode.png)
 
 設定します。
 

@@ -147,7 +147,7 @@ https://code.visualstudio.com
 
 画面下部の「TREMINAL」というタブがターミナルになります。
 
-![alt text](../images/vscode_terminal.png)
+![VS Code下部のTERMINALタブ](../images/vscode_terminal.png)
 
 
 以降、コマンドの記載がある際は、こちらにのタブにて、コマンドを入力してください。
@@ -188,7 +188,7 @@ WSL2のデフォルト設定では、外部環境との通信ができません�
 WSLのインストールが完了したら、VScodeにて以下の拡張機能をインストールしてください。
 - WSL
 
-![alt text](../images/install_wsl.jpg)
+![VS Codeの拡張機能「WSL」をインストール](../images/install_wsl.jpg)
 
 
 
@@ -199,14 +199,14 @@ WSLのインストールが完了したら、VScodeにて以下の拡張機能�
 1. 「><」マークをクリック
 2. 「Connected to WSL」をクリックしてください。
 
-![alt text](../images/connect_wsl.jpg)
+![VS Codeの「Connected to WSL」を選択してWSLに接続](../images/connect_wsl.jpg)
 
 
 <br>
 
 画面左下に「WSL：Ubuntu」と表示されていればOKです。ここで、画面下部の「TERMINAL」というタブがターミナルになります。
 
-![alt text](../images/wsl_terminal.png)
+![WSLに接続したVS CodeのTERMINALタブ](../images/wsl_terminal.png)
 
 
 以降、コマンドの記載がある際は、こちらにコマンドを入力してください。

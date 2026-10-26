@@ -132,11 +132,11 @@ smabo-appは
 
 - **スマホで取得した音声を、音声認識**
 
-![alt text](../images/app_recognized_speech.png)
+![smabo-webに表示されたsmabo-appの音声認識結果](../images/app_recognized_speech.png)
 
 
 - **smabo-webで指定した文字列を発話**
-![alt text](../images/app_speech_say.jpg)
+![smabo-webで指定した文字列をsmaboが発話する画面](../images/app_speech_say.jpg)
 
 
 # imgproc
@@ -160,10 +160,10 @@ smabo-appは
 
 
 - **自分のスマホのサイズに合わせた3Dモデルの修正**
-![alt text](../images/base_long_inner_extrude.jpg)
+![Fusionでスマホ長手方向の内側面をExtrudeしてサイズを合わせる](../images/base_long_inner_extrude.jpg)
 
 - **ベースパーツの3Dプリンタによる印刷**
-![alt text](../images/base_print_base.jpg)
+![3Dプリンタで印刷したsmaboのベースパーツ](../images/base_print_base.jpg)
 
 # esp32
 

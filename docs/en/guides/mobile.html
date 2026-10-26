@@ -184,19 +184,19 @@
 </blockquote>
 <ul>
 <li>smabo-repos/smabo-hardware/stl/mobile_robot/dc_motor_caster.stl<br />
-<img alt="alt text" src="../../images/mobile_print_dc_motor_caster.png" /></li>
+<img alt="3D-printed mobile robot part dc_motor_caster" src="../../images/mobile_print_dc_motor_caster.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_bottom.stl<br />
-<img alt="alt text" src="../../images/mobile_print_tt_motor_bottom.png" /></li>
+<img alt="3D-printed mobile robot part tt_motor_bottom" src="../../images/mobile_print_tt_motor_bottom.png" /></li>
 </ul>
 <br />
 <ul>
 <li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper1.stl × 2
 <ul>
 <li>Print two — one for each motor (left/right).<br />
-<img alt="alt text" src="../../images/mobile_print_tt_motor_stopper1.png" /></li>
+<img alt="3D-printed TT motor stopper tt_motor_stopper1" src="../../images/mobile_print_tt_motor_stopper1.png" /></li>
 </ul>
 </li>
 </ul>
@@ -205,7 +205,7 @@
 <li>smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2.stl
 <ul>
 <li>Print two — one for each motor (left/right).<br />
-<img alt="alt text" src="../../images/mobile_print_tt_motor_stopper2.png" /></li>
+<img alt="3D-printed TT motor stopper tt_motor_stopper2" src="../../images/mobile_print_tt_motor_stopper2.png" /></li>
 </ul>
 </li>
 </ul>
@@ -223,11 +223,11 @@
 <p>The assembly video doesn't show how to attach the TT motors and the universal caster S, so the steps are described below.</p>
 <br />
 <p>First, attach the universal caster S to "dc_motor_caster.stl" as shown below.<br />
-<img alt="" src="../../images/dc_motor_caster_before.jpg" />
-<img alt="" src="../../images/dc_motor_caster_after.jpg" /></p>
+<img alt="dc_motor_caster before attaching the caster" src="../../images/dc_motor_caster_before.jpg" />
+<img alt="dc_motor_caster with the caster attached" src="../../images/dc_motor_caster_after.jpg" /></p>
 <br />
 <p>Next, secure the TT motors to "tt_motor_bottom.stl" using "tt_motor_stopper1.stl" and "tt_motor_stopper2.stl".<br />
-<img alt="" src="../../images/tt_motor_assemble.jpg" /></p>
+<img alt="TT motors fixed with tt_motor_stopper parts" src="../../images/tt_motor_assemble.jpg" /></p>
 </blockquote>
 
 <h2 id="wiring">Wiring<a class="headerlink" href="#wiring" title="Permanent link">#</a></h2>
@@ -317,13 +317,13 @@
 
 <br />
 <p>The wiring diagram for the ESP32-DevKitC case is shown below (the breadboard alone doesn't have enough holes, so the TB6612FNG is wired on a mini breadboard).</p>
-<p><img alt="" src="../../fritzing/png/tt_motor.png" /></p>
+<p><img alt="Wiring diagram for TT motors with the TB6612FNG driver and ESP32" src="../../fritzing/png/tt_motor.png" /></p>
 
 <blockquote>
 <p><strong>TB6612FNG wiring tip 1</strong></p>
 <p>The TB6612FNG has each pin's role printed on the back — check it carefully before wiring.</p>
 <p>※ Of course, once plugged into the breadboard the pin positions are mirrored left-right compared to viewing the back side — keep that in mind.<br />
-<img alt="alt text" src="../../images/mobile_tb6612fng_backside.png" /><br />
+<img alt="Pin layout on the back of the TB6612FNG motor driver" src="../../images/mobile_tb6612fng_backside.png" /><br />
 <a href="https://www.switch-science.com/products/385?srsltid=AfmBOopaI6nY3Kyny25gDpjTx1m8gO5k-UhwiDTIQxFYU8d_kZrGWxxc">Reference image: TB6612FNG dual motor driver (max 1.2A continuous) (Switch Science)</a></p>
 </blockquote>
 
@@ -334,12 +334,12 @@
 <li>handle all 7 jumper wires as a single bundle instead of stripping/routing them one by one</li>
 </ul>
 <p>which keeps the wiring much tidier.</p>
-<p><img alt="" src="../../images/TB6612FNG_%20wiring.jpg" /></p>
+<p><img alt="TB6612FNG wired on a mini breadboard" src="../../images/TB6612FNG_%20wiring.jpg" /></p>
 </blockquote>
 
 <h2 id="finished">Finished Result<a class="headerlink" href="#finished" title="Permanent link">#</a></h2>
 <p>The finished robot from this guide looks like this:<br />
-<img alt="" src="../../images/smabo_tt_motor.jpg" /></p>
+<img alt="Completed mobile smabo driven by TT motors" src="../../images/smabo_tt_motor.jpg" /></p>
 
 <h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">#</a></h2>
 <h3 id="startup">Startup Procedure<a class="headerlink" href="#startup" title="Permanent link">#</a></h3>
@@ -351,12 +351,12 @@
 <li>enable "Modes/dc_drive"</li>
 </ul>
 <p>.</p>
-<p><img alt="alt text" src="../../images/mobile_config_dc_drive_enable.png" /></p>
+<p><img alt="Enabling Modes/dc_drive in the smabo-web Config tab" src="../../images/mobile_config_dc_drive_enable.png" /></p>
 
 <h3 id="manual-control">Controller Control<a class="headerlink" href="#manual-control" title="Permanent link">#</a></h3>
 <p>This section explains controller-based control.</p>
 <p>You can control smabo's mobile robot using the controller on the "two wheel mobile robot" tab.</p>
-<p><img alt="alt text" src="../../images/mobile_web_drive_tab.png" /></p>
+<p><img alt="Drive controller in the smabo-web Drive tab" src="../../images/mobile_web_drive_tab.png" /></p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/tt_motor_manual_control.mp4" type="video/mp4"></video></p>
 
 <h3 id="image-control">Image-Processing Control<a class="headerlink" href="#image-control" title="Permanent link">#</a></h3>
@@ -367,16 +367,16 @@
 <li>set any recognition mode (here, "color" mode is configured to recognize a blue object)</li>
 </ul>
 <p>.</p>
-<p><img alt="alt text" src="../../images/neck_vision_detection.jpg" /></p>
+<p><img alt="Setting smabo-web to detect an object of a chosen color" src="../../images/neck_vision_detection.jpg" /></p>
 <br />
 <p>Next, under "Behaviors",</p>
 <ul>
 <li>enable "Drive follow".</li>
 </ul>
-<p><img alt="alt text" src="../../images/mobile_vision_drive_follow_enable.png" /></p>
+<p><img alt="Enabling Drive follow in Behaviors" src="../../images/mobile_vision_drive_follow_enable.png" /></p>
 <br />
 <p>In Drive follow mode, the mobile robot moves forward/backward so that the recognized object's apparent size (as seen by the camera) matches the "Target size" (you can check the exact size via the blue box in the preview screen).</p>
-<p><img alt="alt text" src="../../images/mobile_vision_target_size_preview.png" /></p>
+<p><img alt="Checking the target size with the blue frame in preview" src="../../images/mobile_vision_target_size_preview.png" /></p>
 <br />
 <p>Once configured, bring the recognition target in front of the smartphone camera and smabo's mobile robot will move to follow it.</p>
 <p><video autoplay loop muted playsinline style="max-width:100%"><source src="../../video/tt_motor_img_proc.mp4" type="video/mp4"></video></p>

@@ -101,14 +101,14 @@ https://thonny.org/
 
 ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタンをクリックし「MicroPython(ESP32)」を選択します。
 
-![alt text](../images/esp32_thonny_select_interpreter.jpg)
+![ThonnyでインタプリタにMicroPython(ESP32)を選択](../images/esp32_thonny_select_interpreter.jpg)
 
 
 <br>
 
 その後、「smabo-esp32」内のpythonファイルを全て選択した状態で右クリックし、「/にアップロード」を選択すると、esp32に書き込まれます。
 
-![alt text](../images/esp32_thonny_upload_source.jpg)
+![Thonnyでソースコードをesp32にアップロード](../images/esp32_thonny_upload_source.jpg)
 
 ### 設定ファイルの書き込み
 
@@ -116,7 +116,7 @@ ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタ
 
 configディレクトリからお手持ちのesp32の種類にあったjsonファイルを選択し、「config.json」という名前でコピーを作成します。
 
-![alt text](../images/esp32_config_copy.jpg)
+![設定ファイルをコピーしてconfig.jsonを作成](../images/esp32_config_copy.jpg)
 
 
 <br>
@@ -144,7 +144,7 @@ configディレクトリからお手持ちのesp32の種類にあったjsonフ�
 
 
 
-![alt text](../images/esp32_config_wifi_ip.jpg)
+![config.jsonにWi-FiのSSID・パスワード・IPアドレスを設定](../images/esp32_config_wifi_ip.jpg)
 
 
 
@@ -152,7 +152,7 @@ configディレクトリからお手持ちのesp32の種類にあったjsonフ�
 
 設定の記入が完了したら、ソースコードの時と同様に、config.jsonをesp32へ書き込みます。
 
-![alt text](../images/esp32_config_upload.jpg)
+![Thonnyでconfig.jsonをesp32へ書き込み](../images/esp32_config_upload.jpg)
 
 # パーツの印刷
 
@@ -168,44 +168,44 @@ configディレクトリからお手持ちのesp32の種類にあったjsonフ�
     - サポート材は必ずONにした状態で印刷
 
 - smabo-hardware/stl/base/bread_board_stopper_bottom_l.stl
-    ![alt text](../images/esp32_print_bread_board_stopper_bottom_l.png)
+    ![3Dプリントしたブレッドボード固定パーツbread_board_stopper_bottom_l](../images/esp32_print_bread_board_stopper_bottom_l.png)
 
 <br>
 
 - smabo-hardware/stl/base/bread_board_stopper_bottom_r.stl
-    ![alt text](../images/esp32_print_bread_board_stopper_bottom_r.png)
+    ![3Dプリントしたブレッドボード固定パーツbread_board_stopper_bottom_r](../images/esp32_print_bread_board_stopper_bottom_r.png)
 
 <br>
 
 - smabo-hardware/stl/base/bread_board_stopper.stl
-    ![alt text](../images/esp32_print_bread_board_stopper.png)
+    ![3Dプリントしたブレッドボード固定パーツbread_board_stopper](../images/esp32_print_bread_board_stopper.png)
 
 <br>
 
 - smabo-hardware/stl/base/mini_bread_boad_stand.stl
-    ![alt text](../images/esp32_print_mini_bread_board_stand.png)
+    ![3Dプリントしたミニブレッドボード用スタンド](../images/esp32_print_mini_bread_board_stand.png)
 
 <br>
 
 - smabo-hardware/stl/base/pca9685_stopper_l.stl
-    ![alt text](../images/esp32_print_pca9685_stopper_l.png)
+    ![3Dプリントしたサーボドライバ固定パーツpca9685_stopper_l](../images/esp32_print_pca9685_stopper_l.png)
 
 <br>
 
 - smabo-hardware/stl/base/pca9685_stopper_r_bottom.stl
-    ![alt text](../images/esp32_print_pca9685_stopper_r_bottom.png)
+    ![3Dプリントしたサーボドライバ固定パーツpca9685_stopper_r_bottom](../images/esp32_print_pca9685_stopper_r_bottom.png)
 
 <br>
 
 - smabo-hardware/stl/base/pca9685_stopper_r_top.stl
-    ![alt text](../images/esp32_print_pca9685_stopper_r_top.png)
+    ![3Dプリントしたサーボドライバ固定パーツpca9685_stopper_r_top](../images/esp32_print_pca9685_stopper_r_top.png)
 
 <br>
 
 - 【オプション】smabo-hardware/stl/base/in_base_plate_wire_hole.stl
-    ![alt text](../images/esp32_print_in_base_plate_wire_hole.png)
+    ![3Dプリントした仕切りパーツin_base_plate_wire_hole](../images/esp32_print_in_base_plate_wire_hole.png)
     - 本パーツは、「smabo内の仕切り」として使用できます。
-    ![alt text](../images/esp32_in_base_plate_partition.jpg)
+    ![smabo内の仕切りとして取り付けたin_base_plate](../images/esp32_in_base_plate_partition.jpg)
 
 
 # ブレッドボードについて
@@ -218,14 +218,14 @@ smaboでは、
 
 として使用します。
 
-![alt text](../images/esp32_breadboard_power_rails.png)
+![ブレッドボードの電源レーン（5V電源用）](../images/esp32_breadboard_power_rails.png)
 
 <br>
 
 そのため、真ん中のジャンプワイヤーは外してください。
 
 
-![alt text](../images/esp32_breadboard_remove_jumper.png)
+![ブレッドボード中央のジャンプワイヤーを外す](../images/esp32_breadboard_remove_jumper.png)
 
 
 
@@ -239,7 +239,7 @@ smaboでは、
 
     そのため、「同じ棒と繋がっている穴」に、複数のジャンプワイヤーを刺した場合、それらは回路的に繋がることになります。
 
-    ![alt text](../images/esp32_breadboard_connection.png)
+    ![ブレッドボード上で回路が繋がる穴の並び](../images/esp32_breadboard_connection.png)
 
     <br>
 
@@ -269,7 +269,7 @@ smaboでは、
     - バッテリーボックスはsmaboの中に配置し、ジャンプワイヤーのみを外側に出して、ブレッドボードに挿す形で配線してください
       - 配線位置については、「配線」の章にて説明します
   
-    ![alt text](../images/esp32_assembly_points.jpg)
+    ![ESP32・ブレッドボード・サーボドライバの組み立て位置](../images/esp32_assembly_points.jpg)
 
 
 # 配線
@@ -277,7 +277,7 @@ smaboでは、
 !!! note ブレッドボードの+極について <!--重要なので、このNoteは特に目立つように-->
     SAD101購入時についていた、**+極のジャンプワイヤーは必ず外してください**。
     ついたままだと、**ESP32, アクチュエータが破損する**可能性があります。<!--太字を赤字にする-->
-    ![alt text](../images/esp32_breadboard_remove_jumper.png)
+    ![ブレッドボード中央のジャンプワイヤーを外す](../images/esp32_breadboard_remove_jumper.png)
 
 <br>
 
@@ -301,7 +301,7 @@ smaboでは、
 
 ESP32-DevKitCの場合の配線図は、以下になります。
 
-![](../fritzing/png/esp32_battery_box.png)
+![ESP32-DevKitCと電池ボックスの配線図](../fritzing/png/esp32_battery_box.png)
 
 
 
