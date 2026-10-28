@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="LUX9NyWTg4WhdFdIDHpMdgfZo5dcw49qeZiwvSGfwuY" />
-  <title>smabo — 手のひらサイズのスマホロボット</title>
-  <meta name="description" content="smaboは、手のひらサイズのスマホロボット（スマートフォンロボット）です。手持ちのスマホが顔とセンサーになり、工具なしでブロックのように組み立てられます。3Dプリント・組み立て・配線・制御の製作ガイドと設計書を公開しています。" />
+  <title>smabo — A Palm-Sized Smartphone Robot</title>
+  <meta name="description" content="smabo is a palm-sized smartphone robot: your phone becomes its face and sensors, and it snaps together with no tools. Build guides and design docs." />
   <!-- seo -->
   <link rel="canonical" href="https://smabo-smartphone-robot.github.io/" />
-  <link rel="alternate" hreflang="ja" href="https://smabo-smartphone-robot.github.io/" />
-  <link rel="alternate" hreflang="en" href="https://smabo-smartphone-robot.github.io/en/" />
+  <link rel="alternate" hreflang="ja" href="https://smabo-smartphone-robot.github.io/ja/" />
+  <link rel="alternate" hreflang="en" href="https://smabo-smartphone-robot.github.io/" />
   <link rel="alternate" hreflang="x-default" href="https://smabo-smartphone-robot.github.io/" />
   <meta property="og:site_name" content="smabo" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="smabo — 手のひらサイズのスマホロボット" />
-  <meta property="og:description" content="smaboは、手のひらサイズのスマホロボット（スマートフォンロボット）です。手持ちのスマホが顔とセンサーになり、工具なしでブロックのように組み立てられます。3Dプリント・組み立て・配線・制御の製作ガイドと設計書を公開しています。" />
+  <meta property="og:title" content="smabo — A Palm-Sized Smartphone Robot" />
+  <meta property="og:description" content="smabo is a palm-sized smartphone robot: your phone becomes its face and sensors, and it snaps together with no tools. Build guides and design docs." />
   <meta property="og:url" content="https://smabo-smartphone-robot.github.io/" />
-  <meta property="og:image" content="https://smabo-smartphone-robot.github.io/images/hero_jp.jpg" />
-  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="https://smabo-smartphone-robot.github.io/images/hero_en.jpg" />
+  <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "smabo", "url": "https://smabo-smartphone-robot.github.io/", "inLanguage": "ja", "alternateName": "smabo-smartphone-robot", "description": "smaboは、手のひらサイズのスマホロボット（スマートフォンロボット）です。手持ちのスマホが顔とセンサーになり、工具なしでブロックのように組み立てられます。3Dプリント・組み立て・配線・制御の製作ガイドと設計書を公開しています。"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "smabo", "url": "https://smabo-smartphone-robot.github.io/", "inLanguage": "en", "alternateName": "smabo-smartphone-robot", "description": "smabo is a palm-sized smartphone robot: your phone becomes its face and sensors, and it snaps together with no tools. Build guides and design docs."}</script>
   <!-- /seo -->
   <link rel="icon" type="image/png" href="images/smabo_icon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/docs.css" />
   <script>
-    (function(){try{if(localStorage.getItem('smabo-lang-pref')==='en'){location.replace('en/index.html');}}catch(e){}})();
+    (function(){try{if(localStorage.getItem('smabo-lang-pref')==='ja'){location.replace('ja/index.html');}}catch(e){}})();
   </script>
 </head>
 <body>
@@ -39,9 +39,9 @@
       <a class="brand" href="index.html"><img class="brand__mark" src="images/smabo_icon.png" alt="smabo" /> smabo</a>
       <nav class="nav__links">
         <div class="lang-switch">
-          <span class="lang-switch__item lang-switch__item--active">JP</span>
+          <a class="lang-switch__item" href="ja/index.html" onclick="localStorage.setItem('smabo-lang-pref','ja')">JP</a>
           <span class="lang-switch__sep">/</span>
-          <a class="lang-switch__item" href="en/index.html" onclick="localStorage.setItem('smabo-lang-pref','en')">EN</a>
+          <span class="lang-switch__item lang-switch__item--active">EN</span>
         </div>
         <a class="btn btn--primary" href="https://github.com/smabo-smartphone-robot">GitHub</a>
       </nav>
@@ -49,8 +49,8 @@
   </header>
 
   <section class="doc-hero doc-hero--cover">
-    <h1 class="visually-hidden">smabo — 手のひらサイズのスマホロボット</h1>
-    <img src="images/hero_jp.jpg" alt="手のひらサイズのスマホロボット smabo" />
+    <h1 class="visually-hidden">smabo — A Palm-Sized Smartphone Robot</h1>
+    <img src="images/hero_en.jpg" alt="smabo, a palm-sized smartphone robot" />
   </section>
 
   <section class="section" style="padding-block:0;padding-top:28px">
@@ -58,45 +58,45 @@
         <article class="doc-content" style="max-width:none">
 
 <div class="cta-block" style="text-align: center;">
-  <a class="btn btn--outline" href="guides/smabo-brain.html">smaboの作成をはじめる</a>
+  <a class="btn btn--outline" href="en/guides/smabo-brain.html">Start building smabo</a>
 </div>
 
 <div style="text-align: center;">
-  <h2>工具不要で組み立て</h2>
+  <h2>No tools needed to assemble</h2>
   <div class="media-cover">
     <video autoplay loop muted playsinline style="max-width:100%">
       <source src="video/smabo_assemble.mp4" type="video/mp4">
     </video>
     <div class="media-cover__overlay">
-      <p>各パーツをブロックのように組み立て可能</p>
+      <p>Assemble each part like building blocks</p>
     </div>
   </div>
 </div>
 
 <div style="text-align: center;">
-  <h2>スマホが顔、センサーに</h2>
+  <h2>Your smartphone becomes the face and sensors</h2>
   <div class="media-cover">
     <video autoplay loop muted playsinline style="max-width:100%">
       <source src="video/eye_control_img_proc.mp4" type="video/mp4">
     </video>
     <div class="media-cover__overlay">
-      <p>あなたのスマホがsmaboに早変わり</p>
+      <p>Turn your smartphone into smabo's face</p>
     </div>
   </div>
 </div>
 
 <div style="text-align: center;">
-  <h2>機能拡張</h2>
-  移動ロボットやロボットアーム、様々な機能を追加可能
+  <h2>Functionality</h2>
+  Add mobile robots, robot arms, and many other features
 </div>
 
 <div style="text-align: center;">
-  <h2>高度な制御</h2>
-  ナビゲーションやモーションプランなどの高度な制御も（ROS対応）
+  <h2>Advanced control</h2>
+  Advanced control like navigation and motion planning too (ROS-compatible)
 </div>
 
 <div class="cta-block" style="text-align: center;">
-  <a class="btn btn--outline" href="guides/smabo-brain.html">smaboの作成をはじめる</a>
+  <a class="btn btn--outline" href="en/guides/smabo-brain.html">Start building smabo</a>
 </div>
 
         </article>
