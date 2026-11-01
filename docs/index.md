@@ -10,7 +10,7 @@
 -->
 
 <!--英語版では、hero_en.jpgを埋め込む-->
-![手のひらサイズのスマホロボット smabo](./images/hero_jp.jpg)
+![手のひらサイズのスマホロボット smabo（スマボ）](./images/hero_jp.jpg)
 
 
 <!--「smaboの作成をはじめる」ボタンをここに置く（smabo-brainのページに飛ぶ）-->
