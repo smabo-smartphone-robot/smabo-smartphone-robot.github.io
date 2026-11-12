@@ -1,0 +1,260 @@
+---
+title: "首振り"
+description: "MG996Rサーボを使った首振り機能。コントローラー・ランダム・画像処理による首振り制御を実装します。"
+---
+
+## ロードマップ
+
+本ページは、以下ロードマップ「首振り」のガイドページです。
+
+また、本ページは「[smabo-esp32](/guides/smabo-esp32/)」のガイドを実施している前提で話を進めます。
+
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="/guides/" data-design-dir="/architecture/" data-active="neck"
+       aria-label="smabo 製作ガイドのロードマップ図（首振り をハイライト）"></svg>
+</div>
+
+## 概要
+
+本ページでは「首振り機能」について解説します。
+
+<br>
+
+具体的には、以下の内容を実施します。
+
+- 首振りのコントローラー制御
+<video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_neck_manual.mp4" type="video/mp4"></video>
+
+- 首振りのランダム制御
+<video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_neck_random.mp4" type="video/mp4"></video>
+
+- 画像認識による首振り制御
+<video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_neck_img_proc.mp4" type="video/mp4"></video>
+
+<br>
+
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"web","to":"brain","transport":"ws","lines":["サーボ制御値"]},{"from":"brain","to":"esp32","transport":"ws","lines":["サーボ制御値"]},{"from":"web","to":"esp32","transport":"rest","lines":["esp32設定変更"]},{"from":"app","to":"brain","transport":"webrtc","lines":["画像"]},{"from":"brain","to":"web","transport":"webrtc","lines":["画像"]},{"from":"brain","to":"web","transport":"ws","lines":["画像処理結果"]}]' data-active="web,brain,esp32,app"
+       aria-label="smabo システム構成図（首振り をハイライト）"></svg>
+</div>
+
+## 必要パーツ
+
+本機能の実装に必要なパーツを以下に記載します。
+
+| 部品名 | 商品URL | 備考 |
+| --- | --- | --- |
+| ESP32-DevKitC | [link](https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-機能マイクロコントローラー-TYPE-C-デュアルコアボード/dp/B0GTY64KDC/ref=asc_df_B0GTY64KDC?mcid=350a4550c70e3d30953041512ffe110a&tag=jpgo-22&linkCode=df0&hvadid=792079627413&hvpos=&hvnetw=g&hvrand=17366440597157412973&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-2484301629565&hvocijid=17366440597157412973-B0GTY64KDC-&hvexpln=0&th=1) | 互換品でも可 |
+| ブレッドボード（SAD101）<br> | [link](https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1) | 一般的なブレッドボードは5穴ですが、こちらは6穴になっています。<br>6穴でないとESP32のサイズ的に横幅が足りないので注意してください |
+| ジャンプワイヤー | [link](https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL?ref_=Oct_d_obs_d_3332721051_0&pd_rd_w=uPj7Z&content-id=amzn1.sym.017d4a3b-167e-4891-9b01-9ac16ba095fb&pf_rd_p=017d4a3b-167e-4891-9b01-9ac16ba095fb&pf_rd_r=D57C194X1NH6BZACFEPS&pd_rd_wg=FydDx&pd_rd_r=327745d6-16b1-418c-b484-4cea112fb00b&pd_rd_i=B06Y48V9DL) | - |
+| 電池ボックス（単3×4本、電池スナップ対応） | [link](https://www.amazon.co.jp/dp/B011IJQ4DI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3) | 電池スナップ対応の方が、取り回しが良いのでお勧めです。 |
+| 電池スナップ（電池ボックス用） | [link](https://www.monotaro.com/p/6866/1105/?cq_med=pla&cq_plt=gp&utm_medium=cpc&utm_source=google&utm_campaign=246-833-4061_23030379799_shopping&utm_content=&utm_term=__x_&utm_id=68661105&gad_source=1&gad_campaignid=23030381413&gbraid=0AAAAADNqOHDvKsE6jsbG6KMsfUBQKF9m5&gclid=Cj0KCQjw2_TQBhCnARIsAF3-XhxFdH-a3GLjp_a8Hy-Uc7kuFklTykWT1kFLZzA1D76_B6tY7Rw4P34aAsPaEALw_wcB) | コネクタピン付きの方が、ブレッドボードに差しやすくて、抜けにくいのでお勧めです。 |
+| 充電式単三電池 × 4 | [link](https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/ref=sr_1_5?qid=1700364346&refinements=p_n_feature_thirteen_browse-bin%3A2314244051&s=electronics&sr=1-5&th=1) | 充電式の方がおすすめです。 |
+| 電池充電器 | [link](https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/ref=sr_1_5?keywords=%E9%9B%BB%E6%B1%A0+%E5%85%85%E9%9B%BB%E5%99%A8&qid=1700402201&sr=8-5) | - |
+| サーボモータドライバ PCA9685 | [link](https://www.amazon.co.jp/HiLetgo-PCA9685-16%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB-12-%E3%83%93%E3%83%83%E3%83%88-Arduino%E3%81%AB%E5%AF%BE%E5%BF%9C/dp/B01D1D0CX2/ref=asc_df_B01D1D0CX2/?tag=jpgo-22&linkCode=df0&hvadid=218134682078&hvpos=&hvnetw=g&hvrand=18016470498878566809&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1009487&hvtargid=pla-439629573722&psc=1&mcid=d238c727398c34ec915ad739f9f6f977) | 互換品でも可 |
+| MG996R | [link](https://akizukidenshi.com/catalog/g/g112534/) | 互換品でも良いですが、ホーンのサイズが純正と異なる場合は、パーツにうまくはまりません。<br>そのため、ホーンを削るか、3Dモデルの修正が発生する可能性があります。 |
+
+## パーツの印刷
+
+今回、新たに追加されるパーツを3Dプリンタで印刷します。
+
+> 3Dプリンタは機種によって「印刷する際に使用するソフト」が異なるため、ここでは具体的な設定手順ではなく、ポイントのみを記載します。
+
+<br>
+
+以下のパーツを図の向きに設定して、印刷してください。
+
+:::note[印刷の際の注意点]
+- パーツのつけ外しの際に、根本から折れにくくするため、凸部は横向きにして印刷
+- サポート材は必ずONにした状態で印刷
+:::
+
+- smabo-hardware/stl/pan/mg996r/pan_adapter.stl
+    ![3Dプリントした首振り用パーツpan_adapter](/images/neck_print_pan_adapter.png)
+
+<br>
+
+- smabo-hardware/stl/pan/mg996r/pan_plate_top.stl
+    ![3Dプリントした首振り用パーツpan_plate_top](/images/neck_print_pan_plate_top.png)
+
+<br>
+
+- smabo-hardware/stl/pan/mg996r/pan_stand_left.stl
+    ![3Dプリントした首振り用パーツpan_stand_left](/images/neck_print_pan_stand_left.png)
+
+<br>
+
+- smabo-hardware/stl/pan/mg996r/pan_stand_right.stl
+    ![3Dプリントした首振り用パーツpan_stand_right](/images/neck_print_pan_stand_right.png)
+
+## 組み立て手順
+
+以下動画のように、必要パーツを組み立てます。
+
+※ 動画には、前回までに印刷したパーツも含まれます
+
+<div style="width:100%;aspect-ratio:16/9;margin-block:1em">
+  <iframe src="/assembly_movie/neck.html" style="width:100%;height:100%;border:none;border-radius:12px" title="首振り 組み立て動画" loading="lazy"></iframe>
+</div>
+
+:::note[組み立ての際のポイント]
+組み立て動画では、MG996Rの取り付け手順は分からないため、以下に記載します。
+
+<br>
+
+最初に、下図のように「pan_stand_left」と「pan_stand_right」でsg90を固定します。
+![pan_stand_leftとpan_stand_rightで首振り用サーボを固定](/images/neck_create_1.jpg)
+
+<br>
+
+そして、pan_plate_topを上から被せてホーンをはめ込みます（工具不要でも組み立て可能ですが、MG996Rに付属のネジでホーンとサーボを固定してもOKです）。
+![pan_plate_topを上からスライドさせてサーボホーンにはめる](/images/neck_create_2.jpg)
+:::
+
+## 配線
+
+下記表の内容に従って、配線します。
+
+※ 下記表において、「接続先1」と「接続先2」は、両者が回路的に直接繋がっていることを指します。
+
+| 接続先1 | 接続先2 | 補足 |
+| --- | --- | --- |
+| 乾電池バッテリーボックスの+極 | ブレッドボードの+極の<strong class="red">右側</strong> | 以降、右側を6V電圧として扱うため注意 |
+| 乾電池バッテリーボックスの-極 | ブレッドボードの-極 | - |
+| ESP32の5V電源 | ブレッドボードの+極の<strong class="red">左側</strong> | 以降、左側を5V電圧として扱うため注意 |
+| ESP32のGND | ブレッドボードの-極 | - |
+| PCA9685のV++ | ブレッドボードの＋極の**右側** | - |
+| PCA9685のVCC | ブレッドボードの＋極の**左側** | - |
+| PCA9685のSDA | config.jsonの`i2c/sda`に設定されているピン | - |
+| PCA9685のSCL | config.jsonの`i2c/scl`に設定されているピン | - |
+| PCA9685のGND | ブレッドボードの-極 | - |
+
+<br>
+
+ESP32-DevKitCの場合の配線図は、以下になります。
+
+※ デフォルト設定の場合、首のサーボをchannel=2に接続してください。
+
+![首振り用サーボとPCA9685・ESP32の配線図](/fritzing/png/neck.png)
+
+## 完成系
+
+今回作成したロボットの完成系は下図のようになります。
+
+![首振り機構を取り付けたsmaboの完成形](/images/smabo_neck.jpg)
+
+## 動作手順
+
+### 起動手順
+
+「<a href="/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">こちらの起動手順</a>」の内容を実行してください。
+
+その後、smabo-webのテンプレート一覧から、テンプレート「首振り」を選択してください（選択方法は「[テンプレートの選択](/guides/smabo-web/#テンプレートの選択)」を参照）。
+
+### サーボ設定
+
+smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの設定を変更可能です。
+
+ここでは、
+- 「head_pan」を有効化
+
+します。
+
+![smabo-webのConfigでhead_panを有効化](/images/neck_config_head_pan_enable.jpg)
+
+### コントローラー制御
+
+コントローラー制御の手順を説明します。
+
+「Config」パネルの「Modes/servos」にて、head_panの
+- 「mode」を「manual」
+
+に設定してください。
+
+![head_panのmodeをmanualに設定](/images/neck_config_mode_manual.jpg)
+
+<br>
+
+「Servo」パネルで各サーボの角度を変更すると、それに合わせてsmaboが左右に動作します。
+
+<video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_neck_manual.mp4" type="video/mp4"></video>
+
+### ランダム制御
+
+ランダム制御の手順を説明します。
+
+「Config」パネルの「Modes/servos」にて、head_panの
+- 「mode」を「random」
+- 「group」を「neck」
+
+に設定してください。 
+
+![head_panのmodeをrandom、groupをneckに設定](/images/neck_config_mode_random.jpg)
+
+:::note[random_group]
+同じrandom_groupに設定されたサーボモーターは、同じタイミングでランダムに動作します。
+
+<br>
+
+なお、新規のrandom_groupは「Add random Group」をクリックすると、追加できます。
+
+![smabo-webの「Add random Group」でランダム動作グループを追加](/images/hand_add_random_group.png)
+:::
+
+<br>
+
+しばらく待つと、ランダムなタイミングでsmaboが左右に動作することが確認できます。
+
+<video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_neck_random.mp4" type="video/mp4"></video>
+
+### 画像処理による制御
+
+画像処理による制御の手順を説明します。
+
+「Config」パネルの「Modes/servos」にて、head_panの
+- 「mode」を「manual」
+
+に設定してください。
+
+![head_panのmodeをmanualに設定](/images/neck_config_mode_manual.jpg)
+
+<br>
+
+「Vision」パネルの「Detection」にて、
+- 「Enabled」を有効化し、
+- 任意の認識モードを設定（ここでは、colorモードで青色の物体を認識するように設定しています）
+
+します。
+
+![smabo-webで指定した色の物体を認識する設定](/images/neck_vision_detection.jpg)
+
+<br>
+
+次に、「Behaviors」の
+- 「Servo follow」を有効化し、
+- 「Pan joint」を「head_pan」
+- 「Pan Direction」を「reversed(-1)」
+
+に設定します。
+
+![BehaviorsでサーボをFollowさせPan Directionをreversedに設定](/images/neck_vision_servo_follow.jpg)
+
+<br>
+
+設定完了後、スマホカメラの前に認識対象の物体を近づけると、物体に追従するようにsmaboが首振りすることが確認できます。
+
+<video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_neck_img_proc.mp4" type="video/mp4"></video>
+
+## 次回
+
+本ページはロードマップ上の終着点のひとつです。
+
+他の機能も実装する場合は、ロードマップから次のページへ進んでください。
+
+<div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
+  <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
+       data-guide-dir="/guides/" data-design-dir="/architecture/" data-active="neck"
+       aria-label="smabo 製作ガイドのロードマップ図（首振り をハイライト）"></svg>
+</div>

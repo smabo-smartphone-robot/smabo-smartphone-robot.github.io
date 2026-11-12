@@ -1,0 +1,205 @@
+/* smabo look on top of Starlight's theme.
+   Accent: the blue of smabo's eyes. Type: Noto Sans JP (ja), Pretendard
+   (en), IBM Plex Mono for code — the same as the current site. */
+
+:root {
+	--sl-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+		system-ui, -apple-system, "Segoe UI", Meiryo, sans-serif;
+	--sl-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono",
+		Menlo, Consolas, monospace;
+}
+:root[lang^="en"] {
+	--sl-font: "Pretendard Variable", "Noto Sans JP", system-ui, -apple-system,
+		"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* accent (Starlight derives links, current page and buttons from these) */
+:root {
+	--sl-color-accent-low: #1b2b47;
+	--sl-color-accent: #5b8fe6;
+	--sl-color-accent-high: #cfe0fb;
+}
+:root[data-theme="light"] {
+	--sl-color-accent-low: #dbe7fb;
+	--sl-color-accent: #2f6fd6;
+	--sl-color-accent-high: #1f4fa3;
+}
+
+/* Tokens the roadmap / system diagram styles expect (from style.css).
+   The diagrams are drawn for a light page, so they sit on a white card
+   in both themes. */
+:root {
+	--indigo: #2f6fd6;
+	--indigo-dark: #1f4fa3;
+	--cyan: #06b6d4;
+	--ink: #1d2129;
+	--ink-soft: #474e5c;
+	--muted: #737a89;
+	--bg-tint: #eaf1fc;
+	--line: #a8a8a8;
+	--card: #ffffff;
+	--font: var(--sl-font);
+}
+.sl-markdown-content .rmap-wrap,
+.sl-markdown-content .sys-wrap {
+	background: #fff;
+	border-radius: 12px;
+	padding: 12px;
+	color: var(--ink);
+}
+
+/* guide body: a little larger and airier, like the current site */
+.sl-markdown-content {
+	font-size: 1.0625rem;
+	line-height: 1.95;
+}
+.sl-markdown-content :is(h2, h3) {
+	text-wrap: balance;
+}
+.sl-markdown-content h2 {
+	padding-bottom: 0.4em;
+	border-bottom: 1px solid var(--sl-color-hairline);
+}
+.sl-markdown-content video,
+.sl-markdown-content img {
+	border-radius: 8px;
+}
+
+/* bold the md marks as important: shown in red, as on the current site */
+.sl-markdown-content strong.red { color: #e03131; }
+:root:not([data-theme="light"]) .sl-markdown-content strong.red { color: #ff6b6b; }
+
+/* untitled notes stay blockquotes (no "Note" label added): style them
+   like a quiet aside */
+.sl-markdown-content blockquote {
+	border-inline-start: 4px solid var(--sl-color-accent);
+	background: var(--sl-color-accent-low);
+	padding: 0.75rem 1rem;
+	border-radius: 0 8px 8px 0;
+}
+
+/* assembly-video iframes: rounded like the other media */
+.sl-markdown-content iframe { border-radius: 12px; }
+
+/* ---- 起動手順 popup (site.js) ---- */
+.startup-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 6vh 16px;
+	overflow-y: auto;
+}
+.startup-modal__dialog {
+	position: relative;
+	width: 100%;
+	max-width: 760px;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-text);
+	border-radius: 14px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+	padding: 28px 28px 32px;
+}
+.startup-modal__close {
+	position: absolute;
+	top: 8px;
+	right: 12px;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	font-size: 28px;
+	line-height: 1;
+	color: var(--sl-color-gray-3);
+}
+.startup-modal__close:hover { color: var(--sl-color-white); }
+.startup-modal__loading { color: var(--sl-color-gray-3); }
+
+/* ---- top page (splash) ---- */
+/* the hero image carries the title, as on the current site */
+.hero { padding-block: 1rem 0; grid-template-columns: 1fr !important; }
+.hero > .stack {                    /* the h1: for screen readers and search only */
+	position: absolute; width: 1px; height: 1px; overflow: hidden;
+	clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.hero > .hero-html { justify-content: center; width: min(100%, 600px) !important; }
+.hero .hero-html img { width: 600px; max-width: 100%; height: auto; display: block; border-radius: 12px; }
+.media-cover {
+	position: relative;
+	display: inline-block;
+	width: 600px;
+	max-width: 100%;
+	line-height: 0;
+	border-radius: 12px;
+	overflow: hidden;
+}
+.media-cover video { display: block; width: 100%; }
+.media-cover__overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	text-align: center;
+	padding: 16px 16px 6%;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 55%);
+}
+.sl-markdown-content .media-cover__overlay p {
+	margin: 0;
+	color: #fff;
+	font-weight: 700;
+	font-size: clamp(0.85rem, 0.7rem + 0.6vw, 1.05rem);
+	line-height: 1.5;
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+.cta-block { margin-block: 0 28px; }
+.sl-markdown-content .btn {
+	display: inline-flex;
+	align-items: center;
+	font-weight: 700;
+	font-size: 1rem;
+	padding: 13px 26px;
+	border-radius: 999px;
+	border: 2px solid var(--sl-color-accent);
+	color: var(--sl-color-accent);
+	text-decoration: none;
+	max-width: calc(100vw - 40px);
+	transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.sl-markdown-content .btn:hover {
+	background: var(--sl-color-accent);
+	color: var(--sl-color-black);
+	transform: translateY(-2px);
+}
+:root[data-theme="light"] .sl-markdown-content .btn:hover { color: #fff; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+	.reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Starlight lists the page top as the first contents entry, labelled
+   概要 / Overview; the guides have their own 概要 section, so it is hidden
+   to avoid two 概要 entries. */
+starlight-toc nav > ul > li:first-child,
+mobile-starlight-toc nav > ul > li:first-child { display: none; }
+
+/* Top page on phones: Starlight has no menu there, so keep the language
+   switch in the header (the current site has JP / EN in its header). */
+@media (max-width: 50rem) {
+	:root:not([data-has-sidebar]) header .right-group { display: flex; gap: 0.5rem; }
+	:root:not([data-has-sidebar]) header .right-group > :not(starlight-lang-select) { display: none; }
+}
+
+/* Mermaid diagrams (design doc): drawn for a light page, on a white card */
+.sl-markdown-content pre.mermaid {
+	background: #fff;
+	color: #1d2129;
+	border-radius: 12px;
+	padding: 12px;
+	text-align: center;
+	white-space: pre;
+	font-family: var(--sl-font);
+}

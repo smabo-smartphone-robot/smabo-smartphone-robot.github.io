@@ -1,0 +1,18 @@
+---
+// Page title plus the guide's one-line summary under it (the current site
+// shows the summary in the page header).
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+const { description } = Astro.locals.starlightRoute.entry.data;
+---
+
+<Default />
+{description && <p class="smabo-lede">{description}</p>}
+
+<style>
+	.smabo-lede {
+		margin-top: 0.75rem;
+		color: var(--sl-color-gray-2);
+		font-size: var(--sl-text-lg);
+		line-height: 1.7;
+	}
+</style>
