@@ -68,6 +68,32 @@
 :root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-legend__title { fill: #aab1bf; }
 :root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-legend__label { fill: var(--sl-color-white); }
 
+/* dark mode: roadmap popup (appended to <body>, outside .sl-markdown-content) */
+:root:not([data-theme="light"]) .rmap-tooltip {
+	--ink: var(--sl-color-white);
+	--ink-soft: #aab1bf;
+	--muted: #8a92a3;
+	--line: var(--sl-color-gray-5);
+	--indigo: var(--sl-color-accent);
+	background: var(--sl-color-gray-6);
+	color: var(--ink);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, .45);
+}
+:root:not([data-theme="light"]) .rmap-tooltip .rmap-tip-btn:hover { color: var(--sl-color-black); }
+:root:not([data-theme="light"]) .rmap-tooltip .sys-svg {
+	--ws: #8fb3e6;
+	--webrtc: #f2b84b;
+	--rest: #9fd082;
+}
+:root:not([data-theme="light"]) .rmap-tooltip .sys-flabel:not(.sys-flabel--in) text { stroke: var(--sl-color-gray-6); }
+:root:not([data-theme="light"]) .rmap-tooltip .sys-flabel:not(.sys-flabel--in) .sys-flabel__item { fill: #aab1bf; }
+:root:not([data-theme="light"]) .rmap-tooltip .sys-flabel:not(.sys-flabel--in).is-on .sys-flabel__item { fill: #d3d8e1; }
+:root:not([data-theme="light"]) .rmap-tooltip .sys-flabel:not(.sys-flabel--in).is-on.sys-flabel--ws .sys-flabel__item { fill: var(--ws); }
+:root:not([data-theme="light"]) .rmap-tooltip .sys-flabel:not(.sys-flabel--in).is-on.sys-flabel--webrtc .sys-flabel__item { fill: var(--webrtc); }
+:root:not([data-theme="light"]) .rmap-tooltip .sys-flabel:not(.sys-flabel--in).is-on.sys-flabel--rest .sys-flabel__item { fill: var(--rest); }
+:root:not([data-theme="light"]) .rmap-tooltip .sys-legend__title { fill: #aab1bf; }
+:root:not([data-theme="light"]) .rmap-tooltip .sys-legend__label { fill: var(--sl-color-white); }
+
 /* guide body: a little larger and airier, like the current site */
 .sl-markdown-content {
 	font-size: 1.0625rem;

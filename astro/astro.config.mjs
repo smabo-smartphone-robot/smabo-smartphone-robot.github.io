@@ -89,7 +89,7 @@ export default defineConfig({
 						{ label: '🤏 ハンド', translations: { en: "🤏 Hand" }, slug: 'guides/hand' },
 						{ label: '🔄 首振り', translations: { en: "🔄 Head Rotation" }, slug: 'guides/neck' },
 						{ label: '🚗 移動ロボット', translations: { en: "🚗 Mobile Robot" }, slug: 'guides/mobile' },
-						{ label: '🦾 ロボットアーム', translations: { en: "🦾 Robot Arm" }, slug: 'guides/arm', badge: { text: { ja: '準備中', en: 'Coming soon' }, variant: 'note' } },
+						{ label: '🦾 ロボットアーム', translations: { en: "🦾 Robot Arm" }, slug: 'guides/arm' },
 						{ label: '⚙️ エンコーダ付', translations: { en: "⚙️ w/ Encoder" }, slug: 'guides/encmobile', badge: { text: { ja: '準備中', en: 'Coming soon' }, variant: 'note' } },
 					],
 				},
