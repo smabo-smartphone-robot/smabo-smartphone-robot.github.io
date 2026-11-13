@@ -1,5 +1,6 @@
 ---
-title: "brain-ros"
+title: "brain-ros (Setup & Overview)"
+description: "Required setup: smabo-app + smabo-esp32 + smabo-brain-ros"
 ---
 
 :::note[🚧]

@@ -1,6 +1,6 @@
 ---
 title: "Audio Processing"
-description: "Say \"smabo\" to activate listening mode, let smabo-brain recognize your speech, and make smabo speak any text you enter in smabo-web."
+description: "Wake smabo with a wake word and talk to it — smabo-brain recognizes your speech, and smabo-web makes smabo say any text."
 ---
 
 ## Roadmap
@@ -21,9 +21,9 @@ This page explains the **Audio Processing feature** of smabo.
 
 Specifically, you will:
 
-- Recognize speech captured by the phone's microphone
+- Recognize speech captured by the phone
 
-    - Display the recognized text in smabo-web
+    - Display the recognition result in smabo-web
 
     ![Speech recognition result from smabo-app shown in smabo-web](/images/app_recognized_speech.png)
 
@@ -31,46 +31,62 @@ Specifically, you will:
 
     ![smabo speaking text entered in smabo-web](/images/app_speech_say.jpg)
 
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"app","to":"brain","transport":"ws","lines":["Audio"]},{"from":"brain","to":"web","transport":"ws","lines":["Speech recognition result"]},{"from":"web","to":"brain","transport":"ws","lines":["Text to speak"]},{"from":"brain","to":"app","transport":"ws","lines":["Text to speak"]}]'
+       aria-label="smabo system diagram (Audio Processing highlighted)"></svg>
+</div>
+
+## Required Parts
+
+The following parts are required to implement this feature.
+
+| Part | Product URL | Notes |
+| --- | --- | --- |
+| Smartphone | \- | A smartphone with smabo-app installed |
+
 ## Operation
 
 ### Startup Procedure
 
 Follow <a href="/en/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">the startup procedure here</a>.
 
-### Wake Word
-
-Say **"smabo"** near the phone to activate listening mode — smabo's eyes will light up in rainbow colors (the wake word can be changed in smabo-app Settings).
-
-Once the eyes are rainbow-colored, speak any phrase to start speech recognition (the recognition language can also be changed in smabo-app Settings).
-
-![smabo-app listening for voice input](/images/app_voice_listening.png)
+Then open the **Face** tab in smabo-web.
 
 ### Speech Recognition
 
-After smabo's eyes return to normal, check the **Recognized speech** field in the **Face** tab of smabo-web — it will display what you said.
+Say **"smabo"** to smabo and its eyes light up in rainbow colors (the wake word can be changed in smabo-app's settings screen).
+
+While the eyes are rainbow-colored, say something and speech recognition starts (the recognition language can be changed in smabo-app's settings screen).
+
+![smabo-app listening for voice input](/images/app_voice_listening.png)
+
+<br />
+
+After the eye color returns to normal, check **Recognized speech** in the **Face** tab of smabo-web — it shows what you just said.
 
 ![Speech recognition result from smabo-app shown in smabo-web](/images/app_recognized_speech.png)
 
-### Text-to-Speech
+### Speech Output
 
-In the **SPEECH / SAY** section of the **Face** tab in smabo-web, enter any text and click the **SAY** button — the phone's speaker will read it aloud (the language can be changed in smabo-app Settings).
+In **Speech / Say** in the **Face** tab of smabo-web, enter any text and click the **Say** button — the phone speaks the text (the speech language can be changed in smabo-app's settings screen).
 
 ![smabo speaking text entered in smabo-web](/images/app_speech_say.jpg)
 
 <br />
 
-Use the **Bubble ON** and **Speak ON** buttons to toggle the speech bubble and audio output independently.
+The **Bubble ON** and **Speak ON** buttons turn the speech output and the speech bubble on or off.
 
 ![smabo-app toggles for speech output and speech bubble](/images/app_speech_toggle.png)
 
 ## Next
 
-This is a terminal node on the roadmap.
+Next, the following node on the roadmap is explained:
 
-To explore other features, pick another page from the roadmap.
+- [Base Parts](/en/guides/base/)
 
 <div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
   <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
-       data-guide-dir="/en/guides/" data-design-dir="/architecture/" data-active=""
-       aria-label="smabo build guide roadmap (next)"></svg>
+       data-guide-dir="/en/guides/" data-design-dir="/architecture/" data-active="baseparts"
+       aria-label="smabo build guide roadmap (next: Base Parts highlighted)"></svg>
 </div>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  INTERACTIVE JOINT-RANGE VIEWER — smabo arm (SG90)
+
+  Shows how far each arm joint (arm_joint_1..4) can turn: move a joint with its
+  slider and its range is drawn as a fan around the joint.
+
+  Model: models/smabo_arm.glb (the same GLB as smabo_arm.html; mm, Z up). Its
+  frame is base_link turned 180° about Z and moved: x_glb = 50 − x, y_glb = 50 − y,
+  z_glb = z (mm). The joints follow smabo_description/urdf/smabo_arm.xacro:
+    arm_joint_1  pivot (40, 50, 105)       axis +Z   yaw
+    arm_joint_2  pivot (40, 50, 141.5)     axis −Y   pitch (+ = toward the front)
+    arm_joint_3  pivot (40, 50, 193)       axis −Y   pitch (+ = toward the front)
+    arm_joint_4  pivot (27.5, 54.8, 236.45) axis −X  gripper (−90 = closed, +90 = open)
+  Every joint is −90..+90 deg (smabo-esp32 config / URDF limits).
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Arm Joint Range</title>
+<meta name="robots" content="noindex, indexifembedded" />
+<style>
+  :root{
+    --bg:#0a0e16; --panel:rgba(18,24,36,.72); --panel-border:rgba(120,140,180,.14);
+    --txt:#e6ecf5; --muted:#7c8aa3; --accent:#39d0d8;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);
+    font-family:"Helvetica Neue",Arial,sans-serif}
+  #app{position:fixed;inset:0}
+  canvas{display:block}
+
+  #title{position:fixed;top:22px;left:26px;z-index:5;pointer-events:none}
+  #title .kicker{font-size:11px;letter-spacing:.32em;color:var(--muted);margin-bottom:4px}
+  #title h1{margin:0;font-size:26px;font-weight:700;letter-spacing:.01em}
+  #title .sub{margin-top:5px;font-size:12px;color:var(--muted)}
+
+  #joints{position:fixed;top:118px;left:26px;width:min(300px,calc(100vw - 40px));z-index:5;
+    background:var(--panel);border:1px solid var(--panel-border);border-radius:14px;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden}
+  #joints .head{display:flex;justify-content:space-between;align-items:center;padding:9px 12px 9px 16px}
+  #joints .head .t{font-size:12px;letter-spacing:.16em;color:var(--muted)}
+  #reset{border:1px solid var(--panel-border);background:rgba(120,140,180,.08);color:var(--txt);
+    font-size:12px;padding:5px 10px;border-radius:8px;cursor:pointer;transition:background .15s}
+  #reset:hover{background:rgba(120,140,180,.16)}
+  #joints .list{padding:6px;border-top:1px solid var(--panel-border)}
+  .jt{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:9px;cursor:pointer;transition:background .15s;font-size:12px}
+  .jt:hover{background:rgba(120,140,180,.08)}
+  .jt.active{background:rgba(57,208,216,.12);box-shadow:inset 0 0 0 1px rgba(57,208,216,.25)}
+  .jt .sw{width:11px;height:11px;border-radius:3px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset}
+  .jt .nm{flex:0 0 auto;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.25}
+  .jt .ax{display:block;color:var(--muted);font-size:10px;font-family:"Helvetica Neue",Arial,sans-serif}
+  .jt .val{flex:0 0 40px;text-align:right;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600}
+  .jt input{-webkit-appearance:none;appearance:none;flex:1;min-width:0;height:4px;border-radius:4px;
+    background:rgba(120,140,180,.22);outline:none;margin:0 2px}
+  .jt input::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+    background:#fff;cursor:pointer;box-shadow:0 0 0 4px rgba(57,208,216,.22)}
+  .jt input::-moz-range-thumb{width:14px;height:14px;border:none;border-radius:50%;background:#fff;cursor:pointer}
+
+  #hint{position:fixed;left:26px;bottom:18px;z-index:5;font-size:11px;color:var(--muted);
+    letter-spacing:.05em;pointer-events:none}
+
+
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    z-index:9;color:var(--muted);font-size:13px;letter-spacing:.1em;background:var(--bg)}
+  @media (max-width:899px), (max-height:479px){ #hint{display:none} }
+  /* phones: the panel goes to the bottom, full width */
+  @media (max-width:599px){
+    #title{top:16px;left:16px}
+    #title h1{font-size:20px}
+    #joints{top:auto;bottom:12px;left:12px;right:12px;width:auto}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<div id="title">
+  <div class="kicker">JOINT RANGE</div>
+  <h1>Arm (SG90)</h1>
+  <div class="sub">arm_joint_1 – 4 · each −90° to +90°</div>
+</div>
+
+<div id="joints">
+  <div class="head"><span class="t">JOINTS</span><button id="reset" title="Set every joint to 0°">↺ 0°</button></div>
+  <div class="list" id="jList"></div>
+</div>
+
+<div id="hint">Drag to rotate　·　Scroll / pinch to zoom　·　Move a slider to turn a joint</div>
+
+
+<div id="loading">Loading model…</div>
+
+<script type="importmap">
+{ "imports": {
+  "three":"https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const MODEL_URL = 'models/smabo_arm.glb';
+const FIT_SIZE = 185;
+const DEG = Math.PI / 180;
+
+// Parts that never move (base + arm mount).
+const STATIC_KEYS = [
+  'base__1', 'cover_smartphone_base__1', 'cover_back_bread_board__1',
+  'smartphone_long_width_75_height_11__1', 'smartphone_long_width_75_height_11__2',
+  'smartphone_short_width_37_height_11__1', 'smartphone_short_width_37_height_11__2',
+  'sg90_1_L__1', 'sg90_1_R__1', 'pca9685_stopper_l__1',
+  'pca9685_stopper_r_bottom__1', 'pca9685_stopper_r_bottom__2',
+];
+
+// Joints in chain order. pivot/axis in GLB coordinates (mm, Z up).
+// ref: the direction (⊥ axis) the fan starts from; the fan covers
+// rotation `offset + min .. offset + max` about `axis` from `ref`.
+const JOINTS = [
+  { name:'arm_joint_1', kind:'yaw',     color:0x39d0d8, pivot:[40, 50, 105],        axis:[0, 0, 1],
+    ref:[-1, 0, 0], offset:0,  radius:46, keys:['sg90_2__1', 'sg90_3_concave__1', 'sg90_3_convex__1'] },
+  { name:'arm_joint_2', kind:'pitch',   color:0xf5c542, pivot:[40, 50, 141.5],      axis:[0, -1, 0],
+    ref:[0, 0, 1],  offset:0,  radius:42, keys:['sg90_4_concave__1', 'sg90_4_convex__1'] },
+  { name:'arm_joint_3', kind:'pitch',   color:0xa855f7, pivot:[40, 50, 193],        axis:[0, -1, 0],
+    ref:[0, 0, 1],  offset:0,  radius:42, keys:['sg90_5_convex__1', 'sg90_5_concave__1'] },
+  // the finger is modelled closed (q = −90), so the GLB pose is rotated by q + 90
+  { name:'arm_joint_4', kind:'gripper', color:0xff4d8d, pivot:[27.5, 54.8, 236.45], axis:[-1, 0, 0],
+    ref:[0, 0, 1],  offset:90, radius:28, keys:['sg90_5_hand__1'] },
+];
+JOINTS.forEach(j => { j.min = -90; j.max = 90; j.q = 0; });
+const N = JOINTS.length;
+
+// ---- three.js setup -------------------------------------------------------
+const app = document.getElementById('app');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0e16);
+scene.fog = new THREE.Fog(0x0a0e16, 480, 1100);
+
+const camera = new THREE.PerspectiveCamera(36, innerWidth/innerHeight, 1, 5000);
+const renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+app.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.dampingFactor = 0.08;
+controls.minDistance = 150; controls.maxDistance = 1200;
+
+scene.add(new THREE.HemisphereLight(0xbcd2ff, 0x10131c, 0.9));
+const keyL  = new THREE.DirectionalLight(0xffffff, 2.0); keyL.position.set(120,180,90); scene.add(keyL);
+const fillL = new THREE.DirectionalLight(0x88a4ff, 0.7); fillL.position.set(-140,60,-90); scene.add(fillL);
+const rimL  = new THREE.DirectionalLight(0xffffff, 0.6); rimL.position.set(0,-120,-140); scene.add(rimL);
+
+const turn = new THREE.Group();          // smabo's front (GLB −X, the phone side) toward the camera
+turn.rotation.y = Math.PI/2;
+scene.add(turn);
+const root = new THREE.Group();          // Z up → Y up
+root.rotation.x = -Math.PI/2;
+turn.add(root);
+const model = new THREE.Group();         // GLB coordinates, scaled and centred
+root.add(model);
+
+const V = a => new THREE.Vector3(...a);
+
+// A flat fan from rotation a0 to a1 (radians) about `axis`, starting at `ref`.
+function fanGeometry(axis, ref, radius, a0, a1){
+  const u = V(ref).normalize(), w = V(axis).normalize().cross(u.clone());
+  const seg = 48, pos = [0,0,0];
+  for(let i=0;i<=seg;i++){
+    const t = a0 + (a1-a0)*i/seg;
+    const p = u.clone().multiplyScalar(Math.cos(t)).addScaledVector(w, Math.sin(t)).multiplyScalar(radius);
+    pos.push(p.x,p.y,p.z);
+  }
+  const idx = [];
+  for(let i=1;i<=seg;i++) idx.push(0, i, i+1);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos,3));
+  g.setIndex(idx);
+  return g;
+}
+function arcLine(axis, ref, radius, a0, a1, color){
+  const g = fanGeometry(axis, ref, radius, a0, a1);
+  const p = g.getAttribute('position').array.slice(3);   // drop the centre
+  const lg = new THREE.BufferGeometry();
+  lg.setAttribute('position', new THREE.Float32BufferAttribute([0,0,0, ...p, 0,0,0], 3));
+  return new THREE.Line(lg, new THREE.LineBasicMaterial({ color, transparent:true, opacity:.9, depthTest:false }));
+}
+
+function onModelLoaded(gltf){
+  const src = gltf.scene; src.updateMatrixWorld(true);
+  const geomOf = key => {
+    let found=null;
+    src.traverse(o=>{ if(o.isMesh && !found && o.name.startsWith(key)) found=o; });
+    if(!found){ console.warn('missing mesh:', key); return null; }
+    const g = found.geometry.clone(); g.applyMatrix4(found.matrixWorld); g.computeVertexNormals();
+    return g;
+  };
+
+  // fit + centre on the whole assembly (as smabo_arm.html does)
+  const box = new THREE.Box3();
+  src.traverse(o=>{ if(o.isMesh){ o.geometry.computeBoundingBox(); box.union(o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld)); } });
+  const c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+  const s = FIT_SIZE / Math.max(size.x, size.y, size.z);
+  model.scale.setScalar(s);
+  model.position.copy(c).multiplyScalar(-s);
+
+  const staticMat = shade => new THREE.MeshStandardMaterial({ color:shade, metalness:0.25, roughness:0.55 });
+  STATIC_KEYS.forEach((k,i)=>{
+    const g = geomOf(k); if(!g) return;
+    model.add(new THREE.Mesh(g, staticMat(i < 7 ? 0x4a5366 : 0x6b7488)));
+  });
+
+  // the chain: each joint group sits at its pivot inside its parent's group
+  let parent = model, parentPivot = V([0,0,0]);
+  JOINTS.forEach(j=>{
+    const pivot = V(j.pivot);
+    const local = pivot.clone().sub(parentPivot);
+
+    // the fan of the range (fixed to the parent, so it shows where the joint can go)
+    const a0 = (j.offset + j.min)*DEG, a1 = (j.offset + j.max)*DEG;
+    const fan = new THREE.Mesh(fanGeometry(j.axis, j.ref, j.radius, a0, a1),
+      new THREE.MeshBasicMaterial({ color:j.color, transparent:true, opacity:.16, side:THREE.DoubleSide, depthWrite:false, depthTest:false }));
+    const edge = arcLine(j.axis, j.ref, j.radius, a0, a1, j.color);
+    const fanGroup = new THREE.Group(); fanGroup.position.copy(local);
+    fanGroup.add(fan, edge); fanGroup.renderOrder = 10; fan.renderOrder = 10; edge.renderOrder = 11;
+    parent.add(fanGroup);
+
+    const grp = new THREE.Group(); grp.position.copy(local); parent.add(grp);
+    j.mat = new THREE.MeshStandardMaterial({ color:j.color, metalness:0.25, roughness:0.5, emissive:j.color, emissiveIntensity:0 });
+    j.keys.forEach(k=>{
+      const g = geomOf(k); if(!g) return;
+      g.translate(-pivot.x, -pivot.y, -pivot.z);
+      grp.add(new THREE.Mesh(g, j.mat));
+    });
+    // needle: the current angle, turning with the joint
+    const u = V(j.ref).normalize().applyAxisAngle(V(j.axis).normalize(), j.offset*DEG).multiplyScalar(j.radius + 4);
+    const ng = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), u]);
+    const needle = new THREE.Line(ng, new THREE.LineBasicMaterial({ color:0xffffff, depthTest:false, transparent:true }));
+    needle.renderOrder = 12; grp.add(needle);
+
+    j.group = grp; j.fan = fanGroup; j.needle = needle; j.axisV = V(j.axis).normalize();
+    parent = grp; parentPivot = pivot;
+  });
+
+  const grid = new THREE.GridHelper(900, 45, 0x2a3550, 0x161d2c);
+  grid.position.y = -95;
+  grid.material.transparent = true; grid.material.opacity = 0.5;
+  scene.add(grid);
+
+  controls.target.set(0,-12,0);
+  camera.position.set(250, 183, 320);
+  controls.update();
+
+  document.getElementById('loading').style.display='none';
+  buildPanel();
+  layout();
+  applyPose(); updateUI();
+}
+
+fetch(MODEL_URL)
+  .then(r=>{ if(!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+  .then(buf=> new GLTFLoader().parse(buf, '', onModelLoaded, e=>console.error(e)))
+  .catch(e=>{ document.getElementById('loading').textContent = 'Could not load the model ('+e.message+')'; });
+
+// ---- pose -----------------------------------------------------------------
+let active = -1;                                     // joint shown (fan highlighted)
+function applyPose(){
+  JOINTS.forEach((j,i)=>{
+    if(!j.group) return;
+    j.group.quaternion.setFromAxisAngle(j.axisV, (j.q + j.offset)*DEG);
+    const on = (active === -1 || active === i);
+    j.fan.visible = on;
+    j.needle.visible = on;
+    j.mat.emissiveIntensity = (active === i) ? 0.28 : 0;
+  });
+}
+
+
+// ---- UI -------------------------------------------------------------------
+const hex = c => '#' + c.toString(16).padStart(6,'0');
+const fmt = q => (q > 0.5 ? '+' : '') + Math.round(q) + '°';
+
+function buildPanel(){
+  const list = document.getElementById('jList'); list.innerHTML = '';
+  JOINTS.forEach((j,i)=>{
+    const d = document.createElement('div'); d.className = 'jt';
+    d.innerHTML = `<span class="sw" style="background:${hex(j.color)}"></span>`+
+      `<span class="nm">${j.name}<span class="ax">${j.kind} · ${j.min}° to +${j.max}°</span></span>`+
+      `<input type="range" min="${j.min}" max="${j.max}" step="1" value="0" aria-label="${j.name}">`+
+      `<span class="val">0°</span>`;
+    const inp = d.querySelector('input');
+    inp.oninput = ()=>{ j.q = +inp.value; active = i; applyPose(); updateUI(); };
+    d.onpointerdown = ()=>{ active = i; applyPose(); updateUI(); };
+    j.el = d; j.inp = inp; j.val = d.querySelector('.val');
+    list.appendChild(d);
+  });
+}
+
+
+function updateUI(){
+  JOINTS.forEach((j,i)=>{
+    if(!j.el) return;
+    j.el.classList.toggle('active', i === active);
+    if(document.activeElement !== j.inp) j.inp.value = Math.round(j.q);
+    j.val.textContent = fmt(j.q);
+  });
+}
+
+document.getElementById('reset').onclick = ()=>{ JOINTS.forEach(j=>j.q=0); active = -1; applyPose(); updateUI(); };
+
+// ---- loop -----------------------------------------------------------------
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+// keep the model in the free space beside (or, on phones, above) the joints panel
+function layout(){
+  const W = innerWidth, H = innerHeight;
+  const pr = document.getElementById('joints').getBoundingClientRect();
+  const tb = document.getElementById('title').getBoundingClientRect().bottom;
+  const below = pr.left < W * 0.2 && pr.right > W * 0.8;      // full-width panel at the bottom
+  const [l, r, t, b] = below ? [0, W, tb, pr.top] : [pr.right, W, 0, H];
+  const dx = (l + r)/2 - W/2, dy = (t + b)/2 - H/2;
+  camera.aspect = W/H;
+  camera.zoom = Math.min(1, Math.max(0.55, Math.min((r - l)/W * 1.6, (b - t)/H * 1.25)));   // the arm is tall: height matters most
+  camera.setViewOffset(W, H, -dx, -dy, W, H);
+  camera.updateProjectionMatrix();
+  renderer.setSize(W, H);
+}
+addEventListener('resize', layout);
+layout();
+</script>
+</body>
+</html>

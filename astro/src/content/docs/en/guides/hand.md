@@ -1,6 +1,6 @@
 ---
 title: "Hand"
-description: "Assemble and control smabo's hand servo mechanism — supports manual controller input and random motion."
+description: "Implement controller control and random control of the hand."
 ---
 
 ## Roadmap

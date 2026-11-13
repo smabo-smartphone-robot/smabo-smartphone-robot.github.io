@@ -1,6 +1,6 @@
 ---
 title: "smabo — A Palm-Sized Smartphone Robot"
-description: "smabo is a palm-sized smartphone robot: your phone becomes its face and sensors, and it snaps together with no tools. Build guides and design docs."
+description: "smabo is a palm-sized smartphone robot: your phone becomes its face and sensors, and it snaps together like blocks with no tools. Build guides for 3D printing, assembly, wiring and control, plus design docs, are published here."
 template: splash
 hero:
   title: "smabo — A Palm-Sized Smartphone Robot"

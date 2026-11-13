@@ -1,6 +1,6 @@
 ---
 title: "smabo-esp32"
-description: "Set up smabo-esp32 — the firmware that controls sensors and actuators connected to the ESP32."
+description: "Set up smabo-esp32, which controls the actuators and reads the sensors, then print the required parts, wire them and check that everything works."
 ---
 
 ## Roadmap
@@ -202,7 +202,7 @@ Therefore, remove the factory-installed jumper wire in the center of the + rail.
 :::note[Inside the breadboard]
 Looking at the back of the breadboard, you can see metal strips running along each row.
 
-![Metal strips on the back of the breadboard](/images/esp32_breadboard_back.png)
+<img src="/images/esp32_breadboard_back.png" alt="Metal strips on the back of the breadboard" width="300">
 
 <br />
 

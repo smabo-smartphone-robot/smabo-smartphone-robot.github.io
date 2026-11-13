@@ -1,6 +1,6 @@
 ---
 title: "smabo-app"
-description: "Set up smabo-app — the smartphone app that serves as smabo's face and sensor hub."
+description: "Install smabo-app — smabo's face and sensors — on your phone, then check the connection, face settings, sensor visualization, speech recognition, speech output and gaze control."
 ---
 
 ## Roadmap

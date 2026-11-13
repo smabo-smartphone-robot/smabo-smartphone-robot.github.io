@@ -1,6 +1,6 @@
 ---
 title: "Smartphone Sensors"
-description: "Visualize camera, IMU, and GPS sensor data from the smabo-app in the smabo-web Sensors tab."
+description: "Use the phone's microphone, camera, IMU and GPS as smabo's sensors and visualize them in smabo-web."
 ---
 
 ## Roadmap
@@ -17,13 +17,27 @@ This guide assumes you have completed the [smabo-app](/en/guides/smabo-app/) set
 
 ## Overview
 
-This page explains how to visualize smartphone sensor data in smabo.
+This page explains smabo's sensors.
 
 Specifically, you will:
 
-- Visualize phone sensor data (camera image, IMU, GPS) in smabo-web
+- Visualize the phone's sensor data (image, IMU, GPS) in smabo-web
 
     <video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo-web-sensor.mp4" type="video/mp4"></video>
+
+<div class="sys-wrap" style="max-width:760px;margin-inline:auto">
+  <svg class="sys-svg" viewBox="0 0 1200 520" role="img"
+       data-flows='[{"from":"app","to":"brain","transport":"webrtc","lines":["Image"]},{"from":"app","to":"brain","transport":"ws","lines":["IMU","GPS"]},{"from":"brain","to":"web","transport":"webrtc","lines":["Image"]},{"from":"brain","to":"web","transport":"ws","lines":["IMU","GPS"]}]'
+       aria-label="smabo system diagram (Smartphone Sensors highlighted)"></svg>
+</div>
+
+## Required Parts
+
+The following parts are required to implement this feature.
+
+| Part | Product URL | Notes |
+| --- | --- | --- |
+| Smartphone | \- | A smartphone with smabo-app installed |
 
 ## Operation
 
@@ -31,30 +45,28 @@ Specifically, you will:
 
 Follow <a href="/en/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">the startup procedure here</a>.
 
-### Enabling Sensors
+Then open the **Sensors** tab in smabo-web.
 
-Use the button in the bottom-left of smabo-app to toggle each sensor on or off.
+### Visualizing the Sensors
+
+Each of smabo's sensors can be turned on or off with the buttons at the bottom left.
 
 ![Sensor on/off buttons at the bottom left of smabo-app](/images/app_sensor_toggle.png)
 
-### Viewing Sensor Data
+<br />
 
-With sensors enabled, open the **Sensors** tab in smabo-web to view real-time data:
-
-- Camera image (from the phone's camera)
-- IMU data (accelerometer, gyroscope)
-- GPS data
+With the sensors turned on, open the **Sensors** tab in smabo-web to see each sensor's data.
 
 ![Smartphone sensor data visualized in smabo-web](/images/app_sensor_web.png)
 
 ## Next
 
-This is a terminal node on the roadmap.
+Next, the following node on the roadmap is explained:
 
-To explore other features, pick another page from the roadmap.
+- [Base Parts](/en/guides/base/)
 
 <div class="rmap-wrap" style="max-width:520px;margin-inline:auto">
   <svg id="rmap-svg-next" class="rmap-svg" viewBox="220 -28 920 1150" role="img"
-       data-guide-dir="/en/guides/" data-design-dir="/architecture/" data-active=""
-       aria-label="smabo build guide roadmap (next)"></svg>
+       data-guide-dir="/en/guides/" data-design-dir="/architecture/" data-active="baseparts"
+       aria-label="smabo build guide roadmap (next: Base Parts highlighted)"></svg>
 </div>
