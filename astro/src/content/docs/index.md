@@ -5,7 +5,7 @@ template: splash
 hero:
   title: "smabo（スマボ）— 手のひらサイズのスマホロボット"
   image:
-    html: "<img src=\"/images/hero_jp.jpg\" alt=\"手のひらサイズのスマホロボット smabo（スマボ）\" width=\"600\" />"
+    html: "<img src=\"/images/hero_jp.webp\" alt=\"手のひらサイズのスマホロボット smabo（スマボ）\" width=\"600\" />"
 ---
 
 <div class="cta-block" style="text-align: center;">

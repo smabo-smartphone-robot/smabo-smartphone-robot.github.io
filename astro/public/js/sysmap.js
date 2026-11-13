@@ -250,7 +250,11 @@
 
   function flowLabel(f) {
     var x = f.label[0], ry = f.label[1], anchor = f.label[2];
-    var g = el("g", { class: "sys-flabel sys-flabel--" + f.transport + " is-on" });
+    /* labels inside a container sit on its fill, not on the page */
+    var inside = CONTAINERS.some(function (c) {
+      return x > c.x && x < c.x + c.w && ry > c.y && ry < c.y + c.h;
+    });
+    var g = el("g", { class: "sys-flabel sys-flabel--" + f.transport + " is-on" + (inside ? " sys-flabel--in" : "") });
 
     if (f.label.length > 3) {
       /* vertical arrow: stack the items (wrapped) beside the arrow */

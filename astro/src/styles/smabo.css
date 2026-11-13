@@ -26,8 +26,9 @@
 }
 
 /* Tokens the roadmap / system diagram styles expect (from style.css).
-   The diagrams are drawn for a light page, so they sit on a white card
-   in both themes. */
+   The diagrams sit straight on the page (transparent background); the
+   boxes stay light cards, and what is drawn on the page itself (band
+   labels, arrow labels, legend) switches colour in dark mode below. */
 :root {
 	--indigo: #2f6fd6;
 	--indigo-dark: #1f4fa3;
@@ -42,11 +43,30 @@
 }
 .sl-markdown-content .rmap-wrap,
 .sl-markdown-content .sys-wrap {
-	background: #fff;
-	border-radius: 12px;
+	background: transparent;
 	padding: 12px;
 	color: var(--ink);
 }
+/* gaps at line crossings and halos behind arrow labels take the page colour */
+.sl-markdown-content .rmap-wrap .edge-gap { stroke: var(--sl-color-bg); }
+.sl-markdown-content .sys-wrap .sys-flabel:not(.sys-flabel--in) text { stroke: var(--sl-color-bg); }
+
+/* dark mode: text drawn directly on the page */
+:root:not([data-theme="light"]) .sl-markdown-content .rmap-wrap :is(.band-label, .band-label .req) {
+	fill: var(--sl-color-white);
+}
+:root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-svg {
+	--ws: #8fb3e6;
+	--webrtc: #f2b84b;
+	--rest: #9fd082;
+}
+:root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-flabel:not(.sys-flabel--in) .sys-flabel__item { fill: #aab1bf; }
+:root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-flabel:not(.sys-flabel--in).is-on .sys-flabel__item { fill: #d3d8e1; }
+:root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-flabel:not(.sys-flabel--in).is-on.sys-flabel--ws .sys-flabel__item { fill: var(--ws); }
+:root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-flabel:not(.sys-flabel--in).is-on.sys-flabel--webrtc .sys-flabel__item { fill: var(--webrtc); }
+:root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-flabel:not(.sys-flabel--in).is-on.sys-flabel--rest .sys-flabel__item { fill: var(--rest); }
+:root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-legend__title { fill: #aab1bf; }
+:root:not([data-theme="light"]) .sl-markdown-content .sys-wrap .sys-legend__label { fill: var(--sl-color-white); }
 
 /* guide body: a little larger and airier, like the current site */
 .sl-markdown-content {
