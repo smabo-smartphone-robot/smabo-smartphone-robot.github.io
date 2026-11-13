@@ -1,5 +1,6 @@
 ---
 title: "Encoder Mobile Robot"
+description: "Required setup: smabo-app + smabo-esp32"
 ---
 
 :::note[🚧]

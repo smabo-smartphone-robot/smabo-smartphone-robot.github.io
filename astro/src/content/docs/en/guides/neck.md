@@ -1,6 +1,6 @@
 ---
 title: "Head Rotation (Neck)"
-description: "Assemble and control smabo's neck servo — supports manual, random, and image-recognition-based head rotation."
+description: "Head rotation with an MG996R servo. Implement head rotation driven by a controller, by random motion, and by image processing."
 ---
 
 ## Roadmap
