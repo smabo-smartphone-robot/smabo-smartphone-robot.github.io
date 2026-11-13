@@ -179,12 +179,12 @@
       // horizontal white mask: erases the "over" line gap so endpoints meet the arc cleanly
       gJumps.appendChild(el("path", {
         d: "M " + (mx + r) + " " + my + " L " + (mx - r) + " " + my,
-        fill: "none", stroke: "#fff", "stroke-width": 10,
+        class: "edge-gap", fill: "none", stroke: "#fff", "stroke-width": 10,
       }));
       // vertical white mask: erases the "under" line(s) at the crossing
       gJumps.appendChild(el("path", {
         d: "M " + mx + " " + (my - r - 1) + " L " + mx + " " + (my + r + 1),
-        fill: "none", stroke: "#fff", "stroke-width": 10,
+        class: "edge-gap", fill: "none", stroke: "#fff", "stroke-width": 10,
       }));
       // colored arc bridging the gap
       var arc = el("path", { class: "edge",

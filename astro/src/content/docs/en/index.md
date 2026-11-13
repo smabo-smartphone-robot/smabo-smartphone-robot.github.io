@@ -5,7 +5,7 @@ template: splash
 hero:
   title: "smabo — A Palm-Sized Smartphone Robot"
   image:
-    html: "<img src=\"/images/hero_en.jpg\" alt=\"smabo, a palm-sized smartphone robot\" width=\"600\" />"
+    html: "<img src=\"/images/hero_en.webp\" alt=\"smabo, a palm-sized smartphone robot\" width=\"600\" />"
 ---
 
 <div class="cta-block" style="text-align: center;">

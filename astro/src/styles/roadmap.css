@@ -28,10 +28,10 @@
 
 /* phase bands */
 .band { stroke: none; }
-.band--app      { fill: rgb(255, 255, 255); }
-.band--esp32    { fill: rgb(255, 255, 255); }
-.band--brain    { fill: rgb(255, 255, 255); }
-.band--brainros { fill: rgba(255, 255, 255); }
+.band--app,
+.band--esp32,
+.band--brain,
+.band--brainros { fill: transparent; }
 .band-sep { stroke: var(--line); stroke-width: 2; stroke-dasharray: 6 7; }
 .band-label {
   fill: var(--muted); font-weight: 700;
