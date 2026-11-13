@@ -12,13 +12,13 @@
  * data-flows keys: from/to = node id (app|brain|esp32|web), transport = ws|webrtc|rest
  *
  * REST (settings) goes through the brain: smabo-web sends it to the brain's
- * /devices/esp32/… or /devices/app/… with its Bearer token, and the brain
- * passes it on to the device with the relay key (X-Smabo-Relay-Key). A paired
- * device refuses REST from anyone else. So a page's
+ * /devices/esp32/… or /devices/app/…, and the brain passes it on to the
+ * device (with --pairing, the web adds its Bearer token and the brain the
+ * relay key, X-Smabo-Relay-Key; a paired device refuses REST from anyone
+ * else). So a page's
  *   {"from":"web","to":"esp32","transport":"rest", ...}
  * is drawn as web → brain → esp32 (and web → app likewise), with the label on
- * both legs. (Only a brain started with --no-auth lets the web
- * talk to the devices directly; the diagram shows the normal, paired setup.)
+ * both legs.
  */
 (function () {
   "use strict";

@@ -47,7 +47,7 @@ description: "スマホ画面に表示される smabo の顔をカスタマイ�
 
 「<a href="/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">こちらの起動手順</a>」の内容を実行してください。
 
-その後、smabo-webのテンプレート一覧から、テンプレート「smaboの顔」を選択してください（選択方法は「[テンプレートの選択](/guides/smabo-web/#テンプレートの選択)」を参照）。
+その後、smabo-webの「Face」タブを開いてください。
 
 ### smaboの顔のカスタマイズ
 
@@ -63,7 +63,7 @@ smaboの顔は、「Face Settings」から設定を変更できます。
 
 ### smaboの表情の変更
 
-smabo-webの「Expression」パネルで表情の名前（smabo-appのFace settingsで付けた名前）を入力して「Set」をクリックするか、表情名のボタンをクリックすると、smaboの目の種類が変化します。名前の大文字・小文字は区別しません。
+smabo-webの「Face」タブの「Expression」で表情の名前（smabo-appのFace settingsで付けた名前）を入力して「Set」をクリックするか、表情名のボタンをクリックすると、smaboの目の種類が変化します。名前の大文字・小文字は区別しません。
 
 <video autoplay loop muted playsinline style="max-width:100%"><source src="/video/eye_change.mp4" type="video/mp4"></video>
 
@@ -75,7 +75,7 @@ smaboの目はデフォルトでは、ランダムに動きますが、モード
 
 <br>
 
-例えば、smabo-webの「Gaze control」パネルでコントローラを操作すると、それに合わせて目が動くことが確認できます。
+例えば、smabo-webの「Face」タブの「Gaze control」でコントローラを操作すると、それに合わせて目が動くことが確認できます。
 
 <video autoplay loop muted playsinline style="max-width:100%"><source src="/video/eye_control_manual.mp4" type="video/mp4"></video>
 

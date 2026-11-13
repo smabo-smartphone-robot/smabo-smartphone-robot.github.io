@@ -175,11 +175,11 @@ TB6612FNGのPWMA〜PWMBピンについてですが、「ESP32側で対応する�
 
 「<a href="/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">こちらの起動手順</a>」の内容を実行してください。
 
-その後、smabo-webのテンプレート一覧から、テンプレート「移動ロボット」を選択してください（選択方法は「[テンプレートの選択](/guides/smabo-web/#テンプレートの選択)」を参照）。
+その後、smabo-webの「Config」タブを開いてください。
 
 ### dcモータの有効化
 
-smabo-webの「Config」パネルにて
+smabo-webの「Config」タブにて
 
 - 「Modes/dc_drive」を有効化
 
@@ -191,9 +191,9 @@ smabo-webの「Config」パネルにて
 
 コントローラー制御の手順を説明します。
 
-「Drive」パネルのコントローラで移動ロボットのsmaboを制御できます。
+「Drive」タブのコントローラで移動ロボットのsmaboを制御できます。
 
-![smabo-webのDriveパネルのコントローラ](/images/mobile_web_drive_tab.png)
+![smabo-webのDriveタブのコントローラ](/images/mobile_web_drive_tab.png)
 
 <video autoplay loop muted playsinline style="max-width:100%"><source src="/video/tt_motor_manual_control.mp4" type="video/mp4"></video>
 
@@ -201,7 +201,7 @@ smabo-webの「Config」パネルにて
 
 画像処理による制御の手順を説明します。
 
-「Vision」パネルの「Detection」にて、
+「Vision」タブの「Detection」にて、
 - 「Enabled」を有効化し、
 - 任意の認識モードを設定（ここでは、colorモードで青色の物体を認識するように設定しています）
 

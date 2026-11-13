@@ -47,7 +47,7 @@ description: "ウェイクワードで起動して話しかけると smabo-brain
 
 「<a href="/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">こちらの起動手順</a>」の内容を実行してください。
 
-その後、smabo-webのテンプレート一覧から、テンプレート「音声処理」を選択してください（選択方法は「[テンプレートの選択](/guides/smabo-web/#テンプレートの選択)」を参照）。
+その後、smabo-webの「Face」タブを開いてください。
 
 ### 音声認識
 
@@ -59,13 +59,13 @@ smaboに対して「smabo」と話しかけると、smaboの目が虹色に光�
 
 <br>
 
-目の色が戻った後に、smabo-webの「Recognized speech」パネルを確認すると、先ほど話した言葉が表示されます。
+目の色が戻った後に、smabo-webの「Face」タブの「Recognized speech」を確認すると、先ほど話した言葉が表示されます。
 
 ![smabo-webに表示されたsmabo-appの音声認識結果](/images/app_recognized_speech.png)
 
 ### 音声発話
 
-smabo-webの「Speech / Say」パネルで、任意の文章を入力し、「Say」ボタンをクリックすると入力された音声がスマホから発話されます（発話する言語は、smabo-appの設定画面から変更できます）。
+smabo-webの「Face」タブの「Speech / Say」で、任意の文章を入力し、「Say」ボタンをクリックすると入力された音声がスマホから発話されます（発話する言語は、smabo-appの設定画面から変更できます）。
 
 ![smabo-webで指定した文字列をsmaboが発話する画面](/images/app_speech_say.jpg)
 

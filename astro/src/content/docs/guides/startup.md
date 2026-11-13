@@ -44,7 +44,7 @@ smabo-appを起動し、しばらくして「Brain connected」と表示され�
 
 ## smabo-brain <-> esp32の接続
 
-smabo-webの「Config」パネルにて、「WS (brain <-> ESP32)」の右側にある「Ping」ボタンをクリックし、OKと表示されれば良いです。
+smabo-webの「Config」タブにて、「WS (brain <-> ESP32)」の右側にある「Ping」ボタンをクリックし、OKと表示されれば良いです。
 
 ![smabo-webからESP32へのWebSocket疎通確認（OK表示）](/images/esp32_web_ws_ping.png)
 
@@ -54,6 +54,6 @@ smabo-webの「Config」パネルにて、「WS (brain <-> ESP32)」の右側に
 
 ## smabo-web <-> esp32の接続
 
-「Config」パネルの「REST(web <-> ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。
+「Config」タブの「REST(web <-> ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。
 
 ![smabo-webからESP32へのREST疎通確認（OK表示）](/images/esp32_web_rest_ping.png)
