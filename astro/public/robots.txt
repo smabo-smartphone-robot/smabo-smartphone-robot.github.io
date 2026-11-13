@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smabo-smartphone-robot.github.io/sitemap-index.xml
