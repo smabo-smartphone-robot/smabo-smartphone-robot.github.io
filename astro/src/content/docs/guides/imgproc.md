@@ -38,13 +38,13 @@ description: "スマホのカメラ映像を smabo-brain で画像認識（ARマ
 
 「<a href="/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">こちらの起動手順</a>」の内容を実行してください。
 
-その後、smabo-webのテンプレート一覧から、テンプレート「画像処理」を選択してください（選択方法は「[テンプレートの選択](/guides/smabo-web/#テンプレートの選択)」を参照）。
+その後、smabo-webの「Vision」タブを開いてください。
 
 ### 画像認識
 
-smabo-webの「Vision」パネルにて画像認識に関する設定が可能で、「Detection」の「enabled」を有効化することで、画像認識機能を有効化できます。
+smabo-webの「Vision」タブにて画像認識に関する設定が可能で、「Detection」の「enabled」を有効化することで、画像認識機能を有効化できます。
 
-![smabo-webのVisionパネルで画像認識を有効化](/images/web_vision_detection.png)
+![smabo-webのVisionタブで画像認識を有効化](/images/web_vision_detection.png)
 
 <br>
 

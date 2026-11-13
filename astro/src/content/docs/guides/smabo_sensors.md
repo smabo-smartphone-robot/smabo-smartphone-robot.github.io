@@ -43,7 +43,7 @@ description: "スマホのマイク・カメラ・IMU・GPS を smabo のセン�
 
 「<a href="/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-appの接続">こちらの起動手順</a>」の内容を実行してください。
 
-その後、smabo-webのテンプレート一覧から、テンプレート「スマホのセンサー」を選択してください（選択方法は「[テンプレートの選択](/guides/smabo-web/#テンプレートの選択)」を参照）。
+その後、smabo-webの「Sensors」タブを開いてください。
 
 ### 各種センサーの状態を可視化
 
@@ -53,7 +53,7 @@ smaboの各種センサのON/OFFは左下のボタンで設定できます。
 
 <br>
 
-センサをONにした状態で、smabo-webの「Camera」「IMU」「GPS」パネルを確認すると、各種センサの情報を可視化できます。
+センサをONにした状態で、smabo-webの「Sensors」タブを確認すると、各種センサの情報を可視化できます。
 
 ![smabo-webで可視化したスマホのセンサー情報](/images/app_sensor_web.png)
 

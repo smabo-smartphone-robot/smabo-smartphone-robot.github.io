@@ -202,7 +202,7 @@ In the smabo-web "Config" tab,
 
 This section explains controller-based control.
 
-You can control smabo's mobile robot using the controller on the "two wheel mobile robot" tab.
+You can control smabo's mobile robot using the controller on the "Drive" tab.
 
 ![Drive controller in the smabo-web Drive tab](/images/mobile_web_drive_tab.png)
 

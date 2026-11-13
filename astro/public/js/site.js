@@ -14,6 +14,19 @@
       mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'loose', fontFamily: 'inherit' });
       return mermaid.run({ querySelector: 'pre.mermaid' });
     })
+    .then(() => {
+      // Mermaid sometimes sizes a flowchart's viewBox from a layout that
+      // differs from the drawn one, cutting off its bottom. Fit the viewBox
+      // to what was actually drawn.
+      const PAD = 8;
+      document.querySelectorAll('pre.mermaid svg').forEach((svg) => {
+        const b = svg.getBBox();
+        if (!b.width || !b.height) return;
+        const w = b.width + PAD * 2;
+        svg.setAttribute('viewBox', `${b.x - PAD} ${b.y - PAD} ${w} ${b.height + PAD * 2}`);
+        svg.style.maxWidth = `${w}px`;
+      });
+    })
     .catch((e) => console.error('Mermaid failed to load:', e));
 })();
 

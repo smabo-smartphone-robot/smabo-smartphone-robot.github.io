@@ -153,11 +153,11 @@ SG90のケーブルは、smabo背面右下の隙間から通す形でPCA9685に�
 
 「<a href="/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">こちらの起動手順</a>」の内容を実行してください。
 
-その後、smabo-webのテンプレート一覧から、テンプレート「ハンド」を選択してください（選択方法は「[テンプレートの選択](/guides/smabo-web/#テンプレートの選択)」を参照）。
+その後、smabo-webの「Config」タブを開いてください。
 
 ### サーボ設定
 
-smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの設定を変更可能です。
+smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設定を変更可能です。
 
 最初に、「ハンドの左右のサーボモータは反対方向についている」ため、回転方向を合わせるために、
 - 「right_hand」のみ「inverse」を有効
@@ -179,7 +179,7 @@ smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの�
 
 コントローラー制御の手順を説明します。
 
-「Config」パネルの「Modes/servos」にて、left_han, right_handの
+「Config」タブの「Modes/servos」にて、left_han, right_handの
 
 - 「mode」を「manual」
 
@@ -189,7 +189,7 @@ smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの�
 
 <br>
 
-「Servo」パネルで各サーボの角度を変更すると、それに合わせて左右の腕が動作します。
+「Servo」タブで各サーボの角度を変更すると、それに合わせて左右の腕が動作します。
 
 <video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_hand_manual.mp4" type="video/mp4"></video>
 
@@ -197,7 +197,7 @@ smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの�
 
 ランダム制御の手順を説明します。
 
-「Config」パネルの「Modes/servos」にて、left_han, right_handの
+「Config」タブの「Modes/servos」にて、left_han, right_handの
 
 - 「mode」を「random」
 - 「group」を「hands」

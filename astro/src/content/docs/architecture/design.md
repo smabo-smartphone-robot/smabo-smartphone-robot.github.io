@@ -5,8 +5,9 @@ description: "smabo（スマホロボット）システム全体の構成と、s
 
 - **対象**: smabo（スマホロボット）システム全体（smabo-app / smabo-web / smabo-brain / smabo-esp32 / smabo-brain-ros）
 - **通信プロトコル**: rosbridge v2.0 互換 WebSocket JSON。中継サーバ **smabo-brain** を中心としたハブ&スポーク構成
-- **設定系**: config / mode は smabo-web ↔ smabo-esp32 の REST 直通（smabo-brain を経由しない）
-- **更新日**: 2026-06-25
+- **設定系**: config / mode は smabo-web → smabo-brain → smabo-esp32 / smabo-app の REST（smabo-brain が中継）
+- **認証**: 既定はなし（LAN 内利用前提）。smabo-brain を `--pairing` で起動したときだけペアリングを使う
+- **更新日**: 2026-11-13
 
 > 本ドキュメントは、smabo システム全体の構成（[システム全体構成](#システム全体構成) / [コンポーネント概要](#コンポーネント概要)）と、
 > 各コンポーネントのうち最も実装詳細の多い **smabo-esp32（ファームウェア）の詳細**（§1〜§8）をまとめます。
@@ -17,14 +18,14 @@ description: "smabo（スマホロボット）システム全体の構成と、s
 
 smabo は、中継サーバ **smabo-brain** を中心に各コンポーネントが WebSocket クライアントとして
 ぶら下がる**ハブ&スポーク構成**です。各コンポーネントは smabo-brain の宛先だけを知っていればよく、
-相互の直接接続は持ちません（設定系の REST 直通を除く）。
+相互の直接接続は持ちません（設定系の REST も smabo-brain が中継します）。
 
 ### コンポーネント構成
 
 | コンポーネント | 役割 | 実装 | smabo-brain への接続 |
 |---|---|---|---|
 | smabo-app | smabo の「顔（目）」とスマホセンサ（IMU / GPS / カメラ / ウェイクワード検出＋音声録音） | Flutter（スマートフォン） | WS `/` |
-| smabo-web | 制御 UI・テレメトリ可視化・設定 | React / TypeScript（ブラウザ） | WS `/ui`（＋ ESP32 へ設定を REST 直） |
+| smabo-web | 制御 UI・テレメトリ可視化・設定 | React / TypeScript（ブラウザ） | WS `/ui`（＋ 設定の REST を smabo-brain の `/devices/…` へ） |
 | smabo-brain | 中継ハブ＋マイコンでできない上位処理（オドメトリ積分等） | Python / aiohttp（PC / SBC） | **サーバ**（待受 `:9090`） |
 | smabo-esp32 | アクチュエータ制御・センサ取得 | MicroPython（ESP32 系） | WS `/esp32` |
 | smabo-brain-ros | ROS 2 連携（rosbridge_suite / Nav2 / MoveIt2） | ROS 2（SBC） | rosbridge（WS `:9090`） |
@@ -42,7 +43,9 @@ graph TB
     app &lt;--&gt; |"WS /（/app prefix）"| brain
     web &lt;--&gt; |"WS /ui（/web prefix）"| brain
     esp32 &lt;--&gt; |"WS /esp32 prefix"| brain
-    web -.-&gt; |"REST /config /mode（直通）"| esp32
+    web -.-&gt; |"REST /devices/esp32/… /devices/app/…"| brain
+    brain -.-&gt; |"REST /config /mode（中継）"| esp32
+    brain -.-&gt; |"REST /config（中継）"| app
     brain &lt;--&gt; |"rosbridge で ROS2 連携"| ros
 </pre>
 
@@ -52,9 +55,37 @@ graph TB
 |---|---|
 | プロトコル | RFC 6455 WebSocket、UTF-8 JSON（rosbridge v2.0 互換）、1 メッセージ = 1 フレーム |
 | 待受 | smabo-brain が `:9090` でサーバ。接続元ごとにパスを分ける（app=`/`、web=`/ui`、esp32=`/esp32`） |
-| 設定系 | config / mode は smabo-web ↔ smabo-esp32 の **REST 直通**（smabo-brain を経由しない） |
+| 設定系 | config / mode は smabo-web が smabo-brain の `/devices/esp32/…`・`/devices/app/…` へ送り、smabo-brain が各機器の **REST**（ESP32 `:80`、スマホ `:8081`）へ**中継** |
 | ROS 2 連携 | smabo-brain-ros 構成では rosbridge_server（`:9090`）が WS ↔ ROS 2 を相互変換 |
-| 認証 | なし（信頼済み LAN 内利用前提） |
+| 認証 | 既定はなし（信頼済み LAN 内利用前提）。smabo-brain を `--pairing` で起動したときだけペアリングを使う（[設定の中継とペアリング](#設定の中継とペアリング)） |
+
+### 設定の中継とペアリング
+
+**設定の中継**: smabo-web は ESP32・スマホの設定（config / mode）を smabo-brain の
+`/devices/esp32/…`・`/devices/app/…` へ送り、smabo-brain が各機器の REST API
+（ESP32 `:80`、スマホ `:8081`）へ転送します（`brain.gateway`）。転送先は、その機器が
+smabo-brain につないでいる WebSocket の相手のアドレスです。
+
+| 項目 | 内容 |
+|---|---|
+| 目印 | smabo-brain は `/brain/info` に `relay: true` を付ける。smabo-web はこれを見て中継を使う（smabo-brain-ros は付けないので、機器へ直接送る） |
+| 機器が未接続 | 機器が smabo-brain につながっていないときは `504 device_offline`（直接送る予備の経路はない） |
+| 例外 | ペアリング前の機器への招待コードと、Bluetooth の Wi-Fi 設定（Improv）は、smabo-web が機器へ直接送る |
+
+**ペアリング**: 既定ではなし（教育用途で、教室や家庭の LAN 内で使う前提）。smabo-brain を
+`--pairing`（または `SMABO_PAIRING=1`）で起動したときだけ有効になります。
+
+| 項目 | 既定（ペアリングなし） | `--pairing` |
+|---|---|---|
+| 接続 | 誰でもつながる。最初のフレームの `{"op":"auth"}` には `{"auth":false,"reason":"no_auth"}` で即答 | ペアリングで受け取った token を最初のフレームで見せる。最初のブラウザは smabo-brain のログに出るコード、2 台目以降は smabo-web が出す招待コード（5 分間・1 回だけ有効）でペアリング |
+| 役割の判別 | 最初に届いたフレームの送信元 prefix | token の控えに記録された役割（違う prefix のトピックは捨てる） |
+| 設定の中継 | 鍵なしで転送 | smabo-web は Bearer token を付け、smabo-brain は機器の中継用の鍵（`X-Smabo-Relay-Key`）を付けて転送 |
+| 機器の REST | 誰からでも受け付ける | ペアリング済みの機器は、中継用の鍵のない要求を 401 で断る |
+| 控え | ― | token の SHA-256 だけを `~/.smabo/brain/pairings.json` に保存 |
+
+ペアリング済みの機器（ESP32・スマホ・smabo-sim）がペアリングなしの smabo-brain につながったときは、
+token と鍵のハッシュを持ったまま REST を誰からでも受け付けます。`--pairing` の smabo-brain に
+つなぐと、元どおり smabo-brain 以外を断ります。
 
 ### 送信元 prefix 規約
 
@@ -116,7 +147,7 @@ smabo-brain は接続元ごとにパスを分けてサーバ（`:9090`）とし�
 |---|---|---|
 | 送信 | `/cmd_vel`・`/servo/command`・`/ping`・（Nav2 用 `/initialpose`・`/goal_pose`） | → smabo-esp32 |
 | 送信 | `/look_at`・`/expression`・`/speech/say` | → smabo-app |
-| 送信（非 publish op） | `get_config`・`set_config`・`set_mode` | → smabo-esp32（※設定は通常 REST 直通を使用） |
+| 送信（非 publish op） | `get_config`・`set_config`・`set_mode` | → smabo-esp32（※設定は通常 smabo-brain 中継の REST を使用） |
 | 送信（WebRTC プレビュー） | `/webrtc/preview`（ON/OFF）・`/webrtc/web_answer`・`/webrtc/web_ice` | → smabo-brain |
 | 受信（app 由来） | `/imu/data`・`/gps/fix` | ← smabo-app |
 | 受信（brain 由来） | `/speech/recognized`（brain が STT した文字列） | ← smabo-brain |
@@ -321,7 +352,7 @@ smabo の「顔（目）」を表示し、スマートフォンの IMU / GPS / �
 
 ブラウザ上の制御 UI（React / TypeScript）。Face / Sensors / Drive / Servo / Config / Log タブに加え、
 ROS 2 連携時は Navigation / Motion Plan タブ（roslib + 3D ビューア）で Nav2 / MoveIt2 を操作します。
-WS `/ui` で smabo-brain に接続（`/web` prefix）。config / mode は ESP32 へ **REST 直通**で設定します。
+WS `/ui` で smabo-brain に接続（`/web` prefix）。ESP32・スマホの config / mode は、smabo-brain の `/devices/…` を通して各機器の **REST** へ送ります（smabo-brain-ros では機器へ直接）。
 
 ### smabo-brain
 
@@ -331,6 +362,8 @@ WS `/ui` で smabo-brain に接続（`/web` prefix）。config / mode は ESP32 
 既定 vosk、`--stt-engine whisper` で faster-whisper も選択できます（`brain.stt`、未導入なら無効）。
 純ロジック（`brain.odometry`・`brain.topics`）は transport から分離されており、
 smabo-brain-ros が import して再利用します。
+smabo-web の設定（REST）を ESP32・スマホへ転送する中継（`brain.gateway`、`/devices/…`）と、
+`--pairing` で有効にするペアリング（`brain.pairing`）も持ちます。
 
 ### smabo-brain-ros
 
@@ -743,6 +776,8 @@ sequenceDiagram
         WSClient-&gt;&gt;Brain: TCP connect → HTTP GET /esp32 (Upgrade: websocket)
         WSClient-&gt;&gt;WSClient: ランダム Sec-WebSocket-Key を生成
         Brain--&gt;&gt;WSClient: HTTP 101 Switching Protocols
+        WSClient-&gt;&gt;Brain: {"op":"auth","token":…}（ペアリング済みのとき）
+        Brain--&gt;&gt;WSClient: {"op":"auth","auth":false,"reason":"no_auth"}（既定）／{"op":"auth","ok":true,…}（--pairing）
         Note over WSClient,Brain: 以降 RFC 6455 フレームで双方向通信\n（client→server フレームはマスク必須）
         WSClient-&gt;&gt;WSClient: _read_loop() でフレーム受信
     end
@@ -1039,7 +1074,7 @@ sequenceDiagram
 | 接続形態 | ESP32 が **クライアント**として smabo-brain へ接続 |
 | 接続先 | `ws://<brain-host>:<port>/esp32`（`config.brain.host` / `config.brain.port`、既定 `9090`） |
 | フォーマット | UTF-8 JSON、1 メッセージ = 1 フレーム |
-| 認証 | なし（信頼済み LAN 内利用前提） |
+| 認証 | 既定はなし（信頼済み LAN 内利用前提）。smabo-brain が `--pairing` のときは、接続直後の最初のフレームで token を見せる（[設定の中継とペアリング](#設定の中継とペアリング)） |
 
 > 以下「クライアント → ESP32」「ESP32 → クライアント」は、いずれも smabo-brain を介した
 > 論理的な送受信です（物理的な接続先は常に smabo-brain）。

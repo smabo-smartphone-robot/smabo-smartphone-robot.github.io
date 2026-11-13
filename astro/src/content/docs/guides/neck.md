@@ -151,11 +151,11 @@ ESP32-DevKitCの場合の配線図は、以下になります。
 
 「<a href="/guides/startup/" data-steps="smabo-brainの起動,smabo-webの起動,smabo-brain---smabo-webの接続,smabo-brain---esp32の接続,smabo-web---esp32の接続">こちらの起動手順</a>」の内容を実行してください。
 
-その後、smabo-webのテンプレート一覧から、テンプレート「首振り」を選択してください（選択方法は「[テンプレートの選択](/guides/smabo-web/#テンプレートの選択)」を参照）。
+その後、smabo-webの「Config」タブを開いてください。
 
 ### サーボ設定
 
-smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの設定を変更可能です。
+smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設定を変更可能です。
 
 ここでは、
 - 「head_pan」を有効化
@@ -168,7 +168,7 @@ smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの�
 
 コントローラー制御の手順を説明します。
 
-「Config」パネルの「Modes/servos」にて、head_panの
+「Config」タブの「Modes/servos」にて、head_panの
 - 「mode」を「manual」
 
 に設定してください。
@@ -177,7 +177,7 @@ smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの�
 
 <br>
 
-「Servo」パネルで各サーボの角度を変更すると、それに合わせてsmaboが左右に動作します。
+「Servo」タブで各サーボの角度を変更すると、それに合わせてsmaboが左右に動作します。
 
 <video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_neck_manual.mp4" type="video/mp4"></video>
 
@@ -185,7 +185,7 @@ smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの�
 
 ランダム制御の手順を説明します。
 
-「Config」パネルの「Modes/servos」にて、head_panの
+「Config」タブの「Modes/servos」にて、head_panの
 - 「mode」を「random」
 - 「group」を「neck」
 
@@ -213,7 +213,7 @@ smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの�
 
 画像処理による制御の手順を説明します。
 
-「Config」パネルの「Modes/servos」にて、head_panの
+「Config」タブの「Modes/servos」にて、head_panの
 - 「mode」を「manual」
 
 に設定してください。
@@ -222,7 +222,7 @@ smabo-webの「Config」パネルの「Modes/servos」にて、各サーボの�
 
 <br>
 
-「Vision」パネルの「Detection」にて、
+「Vision」タブの「Detection」にて、
 - 「Enabled」を有効化し、
 - 任意の認識モードを設定（ここでは、colorモードで青色の物体を認識するように設定しています）
 
