@@ -38,7 +38,14 @@ hero:
 
 <div style="text-align: center;">
   <h2>Functionality</h2>
-  Add mobile robots, robot arms, and many other features
+  <div class="media-cover">
+    <video autoplay loop muted playsinline style="max-width:100%">
+      <source src="/video/feature_extensions.mp4" type="video/mp4">
+    </video>
+    <div class="media-cover__overlay">
+      <p>Add mobile robots, robot arms, and many other features</p>
+    </div>
+  </div>
 </div>
 
 <div style="text-align: center;">

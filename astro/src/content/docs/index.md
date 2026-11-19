@@ -38,7 +38,14 @@ hero:
 
 <div style="text-align: center;">
   <h2>機能拡張</h2>
-  移動ロボットやロボットアーム、様々な機能を追加可能
+  <div class="media-cover">
+    <video autoplay loop muted playsinline style="max-width:100%">
+      <source src="/video/feature_extensions.mp4" type="video/mp4">
+    </video>
+    <div class="media-cover__overlay">
+      <p>移動ロボットやロボットアーム、様々な機能を追加可能</p>
+    </div>
+  </div>
 </div>
 
 <div style="text-align: center;">
