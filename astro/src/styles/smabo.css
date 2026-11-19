@@ -201,6 +201,11 @@
 	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 .cta-block { margin-block: 0 28px; }
+/* top page: space the sections (h2 + video) apart so each reads as its own item */
+:root[data-has-hero] .sl-markdown-content > div:has(> h2),
+:root[data-has-hero] .sl-markdown-content > div:has(> h2) + .cta-block {
+	margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+}
 .sl-markdown-content .btn {
 	display: inline-flex;
 	align-items: center;
