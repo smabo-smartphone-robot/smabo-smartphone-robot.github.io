@@ -231,7 +231,6 @@ sitemap: false
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
 
 /* ╔══════════════════════════════════════════════════════════════════════════╗
    ║  CONFIG — edit this block for a new assembly                              ║
@@ -324,10 +323,7 @@ function buildFromGeoms(items){
 
   items.forEach(({def, geom}, i)=>{
     geom.translate(-gcenter.x,-gcenter.y,-gcenter.z); // center the whole assembly
-    // Smooth only across gentle bends (curved faces); keep sharp CAD edges crisp.
-    // Plain computeVertexNormals() on the shared-vertex STL meshes smeared the
-    // shading across corners, so small blocky parts looked glossy.
-    geom = toCreasedNormals(geom, Math.PI / 6);
+    geom.computeVertexNormals();
 
     const mat = new THREE.MeshStandardMaterial({ color:def.color, metalness:0.25, roughness:0.5 });
     const mesh = new THREE.Mesh(geom, mat);

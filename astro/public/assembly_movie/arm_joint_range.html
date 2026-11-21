@@ -103,7 +103,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
 
 const MODEL_URL = 'models/smabo_arm.glb';
 const FIT_SIZE = 185;
@@ -200,7 +199,7 @@ function onModelLoaded(gltf){
     let found=null;
     src.traverse(o=>{ if(o.isMesh && !found && o.name.startsWith(key)) found=o; });
     if(!found){ console.warn('missing mesh:', key); return null; }
-    let g = found.geometry.clone(); g.applyMatrix4(found.matrixWorld); g = toCreasedNormals(g, Math.PI / 6); // crisp CAD edges
+    const g = found.geometry.clone(); g.applyMatrix4(found.matrixWorld); g.computeVertexNormals();
     return g;
   };
 

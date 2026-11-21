@@ -21,11 +21,7 @@ export default defineConfig({
 			plugins: [starlightLinksValidator()],
 			favicon: '/favicon.ico',
 			// Page title with the guide's one-line summary under it.
-			components: {
-				PageTitle: './src/components/PageTitle.astro',
-				// Keeps the language switch and GitHub link in the header on phones too.
-				Header: './src/components/Header.astro',
-			},
+			components: { PageTitle: './src/components/PageTitle.astro' },
 			// Code blocks as plain frames (no terminal-window title added).
 			expressiveCode: { defaultProps: { frame: 'code' } },
 			logo: { src: './src/assets/smabo_icon.png', alt: 'smabo' },
