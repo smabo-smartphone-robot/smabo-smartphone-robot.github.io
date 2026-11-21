@@ -17,6 +17,26 @@ cd ~/smabo-brain
 python3 -m brain
 ```
 
+## smabo-brain-rosの起動
+
+ROSを使うガイド（ナビゲーション・動作計画）では、smabo-brainの代わりに、PC/SBCからsmabo-brain-rosを起動します（smabo-brainとsmabo-brain-rosは、同じポートを使うため同時には起動できません）。
+
+初回、またはsmabo-brain-rosを更新した後は、先にイメージを作成してください。
+
+```bash
+cd ~/smabo-brain-ros
+```
+
+```bash
+docker compose build
+```
+
+その後、以下のコマンドで起動します。
+
+```bash
+docker compose up
+```
+
 ## smabo-webの起動
 
 次に、PCからsmabo-webを起動します。
@@ -35,6 +55,10 @@ npm run dev
 smabo-webアクセス時に、右下に「Brain connected」と表示されればOKです。
 
 ![smabo-web右下の「Brain connected」表示](/images/web_brain_connected.png)
+
+## smabo-brain-ros <-> smabo-webの接続
+
+smabo-webで、ROSの機能を使うタブ（「Navigation」タブなど）の「Connect ROS」ボタンをクリックし、ボタンの表示が「Disconnect ROS」に変われば接続できています。
 
 ## smabo-appの接続
 
