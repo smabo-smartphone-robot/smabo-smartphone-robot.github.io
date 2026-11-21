@@ -37,24 +37,13 @@ description: "TTモータとどこでもキャスターSを使い、コントロ
 
 ## 必要パーツ
 
-本機能の実装に必要なパーツを以下に記載します。
+「[smabo-esp32](/guides/smabo-esp32/)」のパーツに加えて、以下のパーツが必要です。
 
 | 部品名 | 商品URL | 備考 |
 | --- | --- | --- |
-| ESP32-DevKitC | [link](https://www.amazon.co.jp/ESP32-DevKitC-Bluetooth-機能マイクロコントローラー-TYPE-C-デュアルコアボード/dp/B0GTY64KDC/ref=asc_df_B0GTY64KDC?mcid=350a4550c70e3d30953041512ffe110a&tag=jpgo-22&linkCode=df0&hvadid=792079627413&hvpos=&hvnetw=g&hvrand=17366440597157412973&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-2484301629565&hvocijid=17366440597157412973-B0GTY64KDC-&hvexpln=0&th=1) | 互換品でも可 |
-| スマートフォン | - | - |
-| ブレッドボード（SAD101）<br> | [link](https://www.amazon.co.jp/サンハヤト-ニューブレッドボード-SAD-101/dp/B00DSKCS68?th=1) | 一般的なブレッドボードは5穴がです、こちらは6穴になっています。<br>6穴でないとESP32のサイズ的に横幅が足りないので注意してください |
-| ジャンプワイヤー | [link](https://www.amazon.co.jp/ELEGOO-120pcs%E5%A4%9A%E8%89%B2%E3%83%87%E3%83%A5%E3%83%9D%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%80%81arduino%E7%94%A8%E3%83%AF%E3%82%A4%E3%83%A4%E2%80%94%E3%82%B2%E2%80%94%E3%82%B828AWG-%E3%82%AA%E3%82%B9-%E3%83%A1%E3%82%B9-%E3%82%AA%E3%82%B9-%E3%82%AA%E3%82%B9-%E2%80%93%E3%83%A1%E3%82%B9-%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC/dp/B06Y48V9DL?ref_=Oct_d_obs_d_3332721051_0&pd_rd_w=uPj7Z&content-id=amzn1.sym.017d4a3b-167e-4891-9b01-9ac16ba095fb&pf_rd_p=017d4a3b-167e-4891-9b01-9ac16ba095fb&pf_rd_r=D57C194X1NH6BZACFEPS&pd_rd_wg=FydDx&pd_rd_r=327745d6-16b1-418c-b484-4cea112fb00b&pd_rd_i=B06Y48V9DL) | - |
-| 電池ボックス（単3×4本、電池スナップ対応） | [link](https://www.amazon.co.jp/dp/B011IJQ4DI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3) | 電池スナップ対応の方が、取り回しが良いのでお勧めです。 |
-| 電池スナップ（電池ボックス用） | [link](https://www.monotaro.com/p/6866/1105/?cq_med=pla&cq_plt=gp&utm_medium=cpc&utm_source=google&utm_campaign=246-833-4061_23030379799_shopping&utm_content=&utm_term=__x_&utm_id=68661105&gad_source=1&gad_campaignid=23030381413&gbraid=0AAAAADNqOHDvKsE6jsbG6KMsfUBQKF9m5&gclid=Cj0KCQjw2_TQBhCnARIsAF3-XhxFdH-a3GLjp_a8Hy-Uc7kuFklTykWT1kFLZzA1D76_B6tY7Rw4P34aAsPaEALw_wcB) | コネクタピン付きの方が、ブレッドボードに差しやすくて、抜けにくいのでお勧めです。 |
-| 充電式単三電池 × 4 | [link](https://www.amazon.co.jp/Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF-AmazonBasics-HR-3UTG-AMZN-%E5%85%85%E9%9B%BB%E5%BC%8F%E3%83%8B%E3%83%83%E3%82%B1%E3%83%AB%E6%B0%B4%E7%B4%A0%E9%9B%BB%E6%B1%A0-%E6%9C%80%E5%B0%8F%E5%AE%B9%E9%87%8F1900mAh%E3%80%81%E7%B4%841000%E5%9B%9E%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD/dp/B00CWNMV4G/ref=sr_1_5?qid=1700364346&refinements=p_n_feature_thirteen_browse-bin%3A2314244051&s=electronics&sr=1-5&th=1) | - |
-| 電池充電器 | [link](https://www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF-%E6%80%A5%E9%80%9F%E5%85%85%E9%9B%BB%E5%99%A8-%E5%8D%983%E5%BD%A2%E3%83%BB%E5%8D%984%E5%BD%A2-%E9%BB%92-BQ-CC73AM-K/dp/B07FQJJ58Z/ref=sr_1_5?keywords=%E9%9B%BB%E6%B1%A0+%E5%85%85%E9%9B%BB%E5%99%A8&qid=1700402201&sr=8-5) | - |
 | トイDCモータ用タイヤ | [link](https://www.amazon.co.jp/EQWQSIXD-2枚スマートカーシャーシおもちゃのホイールTTギアモーターホイールタイヤ/dp/B0GGBJ28H4/ref=sr_1_26?dib=eyJ2IjoiMSJ9.4FTlNQNg2PNhrQWHWCq1VDVSeuya5EkUmhYpxFsDFUfHp1VRahy96A67RIHQH9ibIRlLIzizRUjQypePRfeWYEjC4Xkv__iO89CGUyja83DKpYSqAtFlpw3HK3JZXC8l_7CbgBxyj25WMxgNvs0Vj_mTJEgCx11oV4jH8gcaw_nnoLEoOy27waXHHP1D9GAx5wk3YoJOf7mkinbBhxyengmzAsVi34v89FbE-kC8HFcbjWRNl9fKWyn4gzRqsQEidM-blg7h4gtymWS6XWF3wP_bhkNSn8PJfFi5vSQob90.NxbnVCRKi4zdC1WBt2D3W5p2zgN_rLX3CwbBS3SBa10&dib_tag=se&keywords=TTモーター+タイヤ&qid=1780323553&sr=8-26) | 互換品でも可。 |
 | TTモータ | [link](https://www.amazon.co.jp/DIANN-Motor-Gearbox-200RPM-Ratio/dp/B0F87YT715/ref=asc_df_B0F87YT715?mcid=9b7fc4990dc0322a82a20101948464a3&tag=jpgo-22&linkCode=df0&hvadid=781176336697&hvpos=&hvnetw=g&hvrand=18345257182238334739&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-2449268817747&psc=1&hvocijid=18345257182238334739-B0F87YT715-&hvexpln=0) | コネクタピン付きの方が、ブレッドボードに差しやすくて、抜けにくいのでお勧めです。<br><br> 互換品は多数ありますが、[一般的なTTモーターの寸法](https://docs.sunfounder.com/projects/3in1-kit/ja/latest/components/component_tt_motor.html)と大きく異なる場合は、上手く取り付けることができないので注意してください。 |
 | どこでもキャスターS | [link](https://www.amazon.co.jp/YAHATA-%E3%81%A9%E3%81%93%E3%81%A7%E3%82%82%E3%82%AD%E3%83%A3%E3%82%B9%E3%82%BF%E3%83%BC-S%E3%83%96%E3%83%AB%E3%83%BC-S/dp/B0091GH8YU) | - |
-| TB6612FNG搭載 デュアルモータードライバ | [link](https://www.switch-science.com/products/3586) | - |
-| ミニブレッドボード | [link](https://www.amazon.co.jp/Rasbee-SYB-170-%E3%83%9F%E3%83%8B%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%881%E5%80%8B-%E4%B8%A6%E8%A1%8C%E8%BC%B8%E5%85%A5%E5%93%81/dp/B01KRAS4NC/ref=asc_df_B01KRAS4NC?mcid=320216956bbd38fd8ecf662666249eee&tag=jpgo-22&linkCode=df0&hvadid=707442675525&hvpos=&hvnetw=g&hvrand=452252090448367071&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-1457964925645&psc=1&hvocijid=452252090448367071-B01KRAS4NC-&hvexpln=0) | 裏面が粘着テープになっているもの |
-
 ## パーツの印刷
 
 今回、新たに追加されるパーツを3Dプリンタで印刷します。
@@ -86,9 +75,9 @@ description: "TTモータとどこでもキャスターSを使い、コントロ
 
 <br>
 
-- smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2.stl
-  - 左右にモータをつけるので2つ印刷します。
-    ![3Dプリントしたttモーター固定パーツtt_motor_stopper2](/images/mobile_print_tt_motor_stopper2.png)
+- smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2_LR.stl
+  - 左右のモーター用のパーツがつながっているので、1つ印刷します。
+    ![3Dプリントしたttモーター固定パーツtt_motor_stopper2_LR](/images/mobile_print_tt_motor_stopper2_LR.png)
 
 ## 組み立て手順
 
@@ -113,7 +102,7 @@ description: "TTモータとどこでもキャスターSを使い、コントロ
 
 <br>
 
-次に、「tt_motor_bottom.stl」に対して「tt_motor_stopper1.stl」「tt_motor_stopper2.stl」を使ってttモーターを固定します。
+次に、「tt_motor_bottom.stl」に対して「tt_motor_stopper1.stl」「tt_motor_stopper2_LR.stl」を使ってttモーターを固定します。
 ![tt_motor_stopperでttモーターを固定した状態](/images/tt_motor_assemble.jpg)
 :::
 
@@ -123,26 +112,52 @@ description: "TTモータとどこでもキャスターSを使い、コントロ
 
 ※ 下記表において、「接続先1」と「接続先2」は、両者が回路的に直接繋がっていることを指します。
 
+### 乾電池
+
 | 接続先1 | 接続先2 | 補足 |
 | --- | --- | --- |
 | 乾電池バッテリーボックスの+極 | ブレッドボードの+極の<strong class="red">右側</strong> | 以降、右側を6V電圧として扱うため注意 |
 | 乾電池バッテリーボックスの-極 | ブレッドボードの-極 | - |
-| ESP32の5V電源 | ブレッドボードの+極の<strong class="red">左側</strong> | 以降、左側を5V電圧として扱うため注意 |
+
+### ESP32
+
+| 接続先1 | 接続先2 | 補足 |
+| --- | --- | --- |
+| ESP32の5V | ブレッドボードの+極の<strong class="red">左側</strong> | 以降、左側を5V電圧として扱うため注意 |
 | ESP32のGND | ブレッドボードの-極 | - |
-| config.jsonの`dc/pins/pwma`に設定したピン | TB6612FNGのpwmaピン | - |
-| config.jsonの`dc/pins/ain2`に設定したピン | TB6612FNGのain2ピン | - |
-| config.jsonの`dc/pins/ain1`に設定したピン | TB6612FNGのain1ピン | - |
-| config.jsonの`dc/pins/stby`に設定したピン | TB6612FNGのstbyピン | - |
-| config.jsonの`dc/pins/bin1`に設定したピン | TB6612FNGのbin1ピン | - |
-| config.jsonの`dc/pins/bin2`に設定したピン | TB6612FNGのbin2ピン | - |
-| config.jsonの`dc/pins/pwmb`に設定したピン | TB6612FNGのpwmbピン | - |
-| TB6612FNGのVMピン | ブレッドボードの+極の<strong class="red">右側</strong> | - |
-| TB6612FNGのVCCピン | ブレッドボードの+極の<strong class="red">左側</strong> | - |
-| TB6612FNGのGNDピン | ブレッドボードの-極 | TB6612FNGには3つGNDピンがありますが、全てブレッドボードの-極に刺してください | - |
+
+### TB6612FNG
+
+| 接続先1 | 接続先2 | 補足 |
+| --- | --- | --- |
+| TB6612FNGのPWMA | config.jsonの`dc/pins/pwma`に設定したESP32のピン | それぞれのデフォルトピンは以下<br>- config.esp32-classic.json：GPIO 32<br>- config.esp32s3-devkitc1.json：GPIO 4 |
+| TB6612FNGのAIN2 | config.jsonの`dc/pins/ain2`に設定したESP32のピン | それぞれのデフォルトピンは以下<br>- config.esp32-classic.json：GPIO 33<br>- config.esp32s3-devkitc1.json：GPIO 5 |
+| TB6612FNGのAIN1 | config.jsonの`dc/pins/ain1`に設定したESP32のピン | それぞれのデフォルトピンは以下<br>- config.esp32-classic.json：GPIO 25<br>- config.esp32s3-devkitc1.json：GPIO 6 |
+| TB6612FNGのSTBY | config.jsonの`dc/pins/stby`に設定したESP32のピン | それぞれのデフォルトピンは以下<br>- config.esp32-classic.json：GPIO 26<br>- config.esp32s3-devkitc1.json：GPIO 7 |
+| TB6612FNGのBIN1 | config.jsonの`dc/pins/bin1`に設定したESP32のピン | それぞれのデフォルトピンは以下<br>- config.esp32-classic.json：GPIO 27<br>- config.esp32s3-devkitc1.json：GPIO 15 |
+| TB6612FNGのBIN2 | config.jsonの`dc/pins/bin2`に設定したESP32のピン | それぞれのデフォルトピンは以下<br>- config.esp32-classic.json：GPIO 14<br>- config.esp32s3-devkitc1.json：GPIO 16 |
+| TB6612FNGのPWMB | config.jsonの`dc/pins/pwmb`に設定したESP32のピン | それぞれのデフォルトピンは以下<br>- config.esp32-classic.json：GPIO 12<br>- config.esp32s3-devkitc1.json：GPIO 17 |
+| TB6612FNGのVM | ブレッドボードの+極の<strong class="red">右側</strong> | モーターの電源（6V） |
+| TB6612FNGのVCC | ブレッドボードの+極の<strong class="red">左側</strong> | - |
+| TB6612FNGのGND | ブレッドボードの-極 | TB6612FNGには3つGNDピンがありますが、全てブレッドボードの-極に挿してください |
+
+### TTモーター（左車輪）
+
+| 接続先1 | 接続先2 | 補足 |
+| --- | --- | --- |
+| TTモーター（左車輪）の端子1 | TB6612FNGのA01 | - |
+| TTモーター（左車輪）の端子2 | TB6612FNGのA02 | 前後が逆に回るときは、端子1と端子2を入れ替える |
+
+### TTモーター（右車輪）
+
+| 接続先1 | 接続先2 | 補足 |
+| --- | --- | --- |
+| TTモーター（右車輪）の端子1 | TB6612FNGのB02 | - |
+| TTモーター（右車輪）の端子2 | TB6612FNGのB01 | 前後が逆に回るときは、端子1と端子2を入れ替える |
 
 <br>
 
-ESP32-DevKitCの場合の配線図は、以下になります（ブレッドボードだけだと穴が足りないため、TB6612FNGは、ミニブレッドボードにて配線しています）。
+ESP32-DevKitC（config.esp32-classic.jsonに記載のデフォルト設定の場合）の配線図は、以下になります（ブレッドボードだけだと穴が足りないため、TB6612FNGは、ミニブレッドボードにて配線しています）。
 
 ![ttモーターとモータードライバTB6612FNG・ESP32の配線図](/fritzing/png/tt_motor.png)
 

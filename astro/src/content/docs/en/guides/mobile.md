@@ -97,12 +97,12 @@ Print the following parts in the orientation shown.
 
 <br />
 
-- smabo-repos/smabo-hardware/stl/mobile\_robot/tt\_motor/tt\_motor\_stopper2.stl
-    - Print two — one for each motor (left/right).
+- smabo-repos/smabo-hardware/stl/mobile\_robot/tt\_motor/tt\_motor\_stopper2\_LR.stl
+    - Print one — the left and right stoppers are joined into a single part.
 
         <br />
 
-        ![3D-printed TT motor stopper tt_motor_stopper2](/images/mobile_print_tt_motor_stopper2.png)
+        ![3D-printed TT motor stopper tt_motor_stopper2_LR](/images/mobile_print_tt_motor_stopper2_LR.png)
 
 ## Assembly
 
@@ -126,7 +126,7 @@ First, attach the universal caster S to "dc\_motor\_caster.stl" as shown below.<
 
 <br />
 
-Next, secure the TT motors to "tt\_motor\_bottom.stl" using "tt\_motor\_stopper1.stl" and "tt\_motor\_stopper2.stl".<br />
+Next, secure the TT motors to "tt\_motor\_bottom.stl" using "tt\_motor\_stopper1.stl" and "tt\_motor\_stopper2\_LR.stl".<br />
 ![TT motors fixed with tt_motor_stopper parts](/images/tt_motor_assemble.jpg)
 :::
 
