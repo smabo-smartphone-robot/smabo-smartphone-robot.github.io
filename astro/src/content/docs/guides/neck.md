@@ -86,9 +86,11 @@ description: "MG996Rサーボを使った首振り機能。コントローラー
 
 ※ 動画には、前回までに印刷したパーツも含まれます
 
-<div style="width:100%;aspect-ratio:16/9;margin-block:1em">
-  <iframe src="/assembly_movie/neck.html" style="width:100%;height:100%;border:none;border-radius:12px" title="首振り 組み立て動画" loading="lazy"></iframe>
-</div>
+<p>
+  <iframe src="/assembly_movie/neck.html" title="首振り 組み立て動画"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
 
 :::note[組み立ての際のポイント]
 組み立て動画では、MG996Rの取り付け手順は分からないため、以下に記載します。

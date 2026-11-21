@@ -102,9 +102,11 @@ Assemble the required parts as shown in the video below.
 
 Note: the video also includes parts printed in previous steps.
 
-<div style="width:100%;aspect-ratio:16/9;margin-block:1em">
-  <iframe src="/assembly_movie/neck.html" style="width:100%;height:100%;border:none;border-radius:12px" title="Neck Assembly" loading="lazy"></iframe>
-</div>
+<p>
+  <iframe src="/assembly_movie/neck.html" title="Neck Assembly"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
 
 :::note[Assembly tips]
 The assembly video does not show how to attach the MG996R servo, so the steps are described here.
