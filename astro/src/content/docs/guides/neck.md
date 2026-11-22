@@ -47,6 +47,7 @@ description: "MG996Rサーボを使った首振り機能。コントローラー
 | 部品名 | 商品URL | 備考 |
 | --- | --- | --- |
 | MG996R | [link](https://akizukidenshi.com/catalog/g/g112534/) | 互換品でも良いですが、ホーンのサイズが純正と異なる場合は、パーツにうまくはまりません。<br>そのため、ホーンを削るか、3Dモデルの修正が発生する可能性があります。 |
+
 ## パーツの印刷
 
 今回、新たに追加されるパーツを3Dプリンタで印刷します。
@@ -95,9 +96,16 @@ description: "MG996Rサーボを使った首振り機能。コントローラー
 :::note[組み立ての際のポイント]
 組み立て動画では、MG996Rの取り付け手順は分からないため、以下に記載します。
 
+なお、首振りの可動範囲は下動画のようになるため、参考にしながら組み立ててください。
+<p>
+  <iframe src="/assembly_movie/neck_joint_range.html" title="首振り 可動範囲"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+
 <br>
 
-最初に、下図のように「pan_stand_left」と「pan_stand_right」でsg90を固定します。
+最初に、下図のように「pan_stand_left」と「pan_stand_right」でMG996Rを固定します。
 ![pan_stand_leftとpan_stand_rightで首振り用サーボを固定](/images/neck_create_1.jpg)
 
 <br>
@@ -136,11 +144,11 @@ description: "MG996Rサーボを使った首振り機能。コントローラー
 | PCA9685のSCL | config.jsonの`i2c/scl`に設定したESP32のピン | それぞれのデフォルトピンは以下<br>- config.esp32-classic.json：GPIO 5<br>- config.esp32s3-devkitc1.json：GPIO 10 |
 | PCA9685のGND | ブレッドボードの-極 | - |
 
-### SG90（首）
+### MG996R（首）
 
 | 接続先1 | 接続先2 | 補足 |
 | --- | --- | --- |
-| SG90（首）のコネクタ | PCA9685のchannel 2 | 茶色の線（GND）がPCA9685のGND側になる向きで挿す |
+| MG996R（首）のコネクタ | PCA9685のchannel 2 | 茶色の線（GND）がPCA9685のGND側になる向きで挿す |
 
 <br>
 
@@ -150,9 +158,9 @@ ESP32-DevKitC（config.esp32-classic.jsonに記載のデフォルト設定の場
 
 ![首振り用サーボとPCA9685・ESP32の配線図](/fritzing/png/neck.png)
 
-## 完成系
+## 完成形
 
-今回作成したロボットの完成系は下図のようになります。
+今回作成したロボットの完成形は下図のようになります。
 
 ![首振り機構を取り付けたsmaboの完成形](/images/smabo_neck.jpg)
 
@@ -200,7 +208,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 - 「mode」を「random」
 - 「group」を「neck」
 
-に設定してください。 
+に設定してください。
 
 ![head_panのmodeをrandom、groupをneckに設定](/images/neck_config_mode_random.jpg)
 
@@ -209,9 +217,9 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 <br>
 
-なお、新規のrandom_groupは「Add random Group」をクリックすると、追加できます。
+なお、新規のrandom_groupは「Add Random group」をクリックすると、追加できます。
 
-![smabo-webの「Add random Group」でランダム動作グループを追加](/images/hand_add_random_group.png)
+![smabo-webの「Add Random group」でランダム動作グループを追加](/images/hand_add_random_group.png)
 :::
 
 <br>
@@ -246,7 +254,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 次に、「Behaviors」の
 - 「Servo follow」を有効化し、
 - 「Pan joint」を「head_pan」
-- 「Pan Direction」を「reversed(-1)」
+- 「Pan direction」を「reversed (−1)」
 
 に設定します。
 

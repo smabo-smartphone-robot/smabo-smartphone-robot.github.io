@@ -78,6 +78,6 @@ smabo-webの「Config」タブにて、「WS (brain <-> ESP32)」の右側にあ
 
 ## smabo-web <-> esp32の接続
 
-「Config」タブの「REST(web <-> ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。
+「Config」タブの「REST (web <-> ESP32)」の右の「Ping」ボタンをクリックし、OKと表示されれば良いです。
 
 ![smabo-webからESP32へのREST疎通確認（OK表示）](/images/esp32_web_rest_ping.png)

@@ -30,6 +30,7 @@ description: "必要な構成：smabo-app + smabo-esp32"
 | 部品名 | 商品URL | 備考 |
 | --- | --- | --- |
 | SG90 × 4 | [link](https://akizukidenshi.com/catalog/g/gM-08761/) | 互換品でも良いですが、ホーンのサイズが純正と異なる場合は、パーツにうまくはまりません。<br>そのため、ホーンを削るか、3Dモデルの修正が発生する可能性があります。 |
+
 ## パーツの印刷
 
 今回、新たに追加されるパーツを3Dプリンタで印刷します。
@@ -96,14 +97,14 @@ description: "必要な構成：smabo-app + smabo-esp32"
 <br>
 
 - smabo-hardware/stl/base/pca9685_stopper_l.stl
-  背面でpca9895を固定していた時と同じパーツを使用します。
+  - 背面でpca9685を固定していた時と同じパーツを使用します。
     ![](/images/esp32_print_pca9685_stopper_l.png)
 
 <br>
 
 - smabo-hardware/stl/base/pca9685_stopper_r_top.stl × 2
-    背面でpca9895を固定していた時と同じパーツを使用します。
-    また、左右で同じパーツを使用するため、2つ印刷します
+  - 背面でpca9685を固定していた時と同じパーツを使用します。
+  - 左右で同じパーツを使用するため、2つ印刷します
     ![](/images/esp32_print_pca9685_stopper_r_top.png)
 
 ## 組み立て手順
@@ -155,7 +156,7 @@ smaboの背面に設置されていたpca9685のサーボモータドライバ�
 
 
 
-アームの本体部分を組み立てます。　
+アームの本体部分を組み立てます。
 「sg90_3_concave」と「sg90_3_convex」、「sg90_4_concave」と「sg90_4_convex」、「sg90_5_concave」と「sg90_5_convex」をそれぞれ組み合わせて、アームの本体部分を作ります。
 
 
@@ -243,9 +244,9 @@ ESP32-DevKitC（config.esp32-classic.jsonに記載のデフォルト設定の場
 
 ![アーム用サーボ4個とPCA9685・ESP32の配線図](/fritzing/png/arm.png)
 
-## 完成系
+## 完成形
 
-今回作成したロボットの完成系は下図のようになります。
+今回作成したロボットの完成形は下図のようになります。
 
 ![alt text](/images/arm_complete.webp)
 
@@ -290,7 +291,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 次回は、以下ロードマップの
 
-- [動作計画（準備中）]()
+- [動作計画（準備中）](/guides/plan/)
 
 について解説します。
 

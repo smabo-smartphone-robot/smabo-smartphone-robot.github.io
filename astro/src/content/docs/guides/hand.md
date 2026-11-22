@@ -39,6 +39,7 @@ description: "ハンドのコントローラー制御とランダム制御を実
 | 部品名 | 商品URL | 備考 |
 | --- | --- | --- |
 | SG90 × 2 | [link](https://akizukidenshi.com/catalog/g/gM-08761/) | 互換品でも良いですが、ホーンのサイズが純正と異なる場合は、パーツにうまくはまりません。<br>そのため、ホーンを削るか、3Dモデルの修正が発生する可能性があります。 |
+
 ## パーツの印刷
 
 今回、新たに追加されるパーツを3Dプリンタで印刷します。
@@ -90,6 +91,14 @@ description: "ハンドのコントローラー制御とランダム制御を実
 
 :::note[組み立ての際のポイント]
 組み立て動画では、SG90の取り付け手順は分からないため、以下に記載します。
+
+なお、各ハンドの可動範囲は下動画のようになるため、参考にしながら組み立ててください。
+<p>
+  <iframe src="/assembly_movie/hand_joint_range.html" title="ハンド 可動範囲"
+          loading="lazy" allowfullscreen
+          style="width:100%; height:520px; max-height:80vh; border:1px solid var(--line); border-radius:var(--radius-sm); background:#0a0e16;"></iframe>
+</p>
+
 <br>
 
 最初に、下図のように「sg90_plate_1」と「sg90_plate_2」でsg90を固定し、ボディに取り付けます。
@@ -153,12 +162,12 @@ ESP32-DevKitC（config.esp32-classic.jsonに記載のデフォルト設定の場
 ![ハンド用サーボ2個とPCA9685・ESP32の配線図](/fritzing/png/hand.png)
 
 :::note[配線の際のポイント]
-SG90のケーブルは、smabo背面右下の隙間から通す形でPCA9685に接続してください
+SG90のケーブルは、smabo背面右下の隙間から通す形でPCA9685に接続してください。
 :::
 
-## 完成系
+## 完成形
 
-今回作成したロボットの完成系は下図のようになります。
+今回作成したロボットの完成形は下図のようになります。
 
 ![ハンドを取り付けたsmaboの完成形](/images/smabo_hand.jpg)
 
@@ -194,7 +203,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 コントローラー制御の手順を説明します。
 
-「Config」タブの「Modes/servos」にて、left_han, right_handの
+「Config」タブの「Modes/servos」にて、left_hand, right_handの
 
 - 「mode」を「manual」
 
@@ -212,12 +221,12 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 ランダム制御の手順を説明します。
 
-「Config」タブの「Modes/servos」にて、left_han, right_handの
+「Config」タブの「Modes/servos」にて、left_hand, right_handの
 
 - 「mode」を「random」
 - 「group」を「hands」
 
-に設定してください。 
+に設定してください。
 
 ![ハンドのサーボのmodeをrandom、groupをhandsに設定](/images/hand_mode_random.png)
 
@@ -230,9 +239,9 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 <br>
 
-なお、新規のrandom_groupは「Add random Group」をクリックすると、追加できます。
+なお、新規のrandom_groupは「Add Random group」をクリックすると、追加できます。
 
-![smabo-webの「Add random Group」でランダム動作グループを追加](/images/hand_add_random_group.png)
+![smabo-webの「Add Random group」でランダム動作グループを追加](/images/hand_add_random_group.png)
 :::
 
 <br>
@@ -247,7 +256,7 @@ smabo-webの「Config」タブの「Modes/servos」にて、各サーボの設�
 
 <br>
 
-smaboには、他にも様々な機能があります。  
+smaboには、他にも様々な機能があります。
 
 他にも試したい機能がある場合は、ロードマップからお好きなページをご覧ください。
 

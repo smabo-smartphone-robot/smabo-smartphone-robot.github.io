@@ -42,7 +42,7 @@ description: "スマホのカメラ映像を smabo-brain で画像認識（ARマ
 
 ### 画像認識
 
-smabo-webの「Vision」タブにて画像認識に関する設定が可能で、「Detection」の「enabled」を有効化することで、画像認識機能を有効化できます。
+smabo-webの「Vision」タブにて画像認識に関する設定が可能で、「Detection」の「Enabled」を有効化することで、画像認識機能を有効化できます。
 
 ![smabo-webのVisionタブで画像認識を有効化](/images/web_vision_detection.png)
 

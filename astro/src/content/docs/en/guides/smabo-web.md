@@ -29,6 +29,8 @@ smabo-web serves as:
        aria-label="smabo system diagram (smabo-web highlighted)"></svg>
 </div>
 
+## Setting Up smabo-web
+
 ### Cloning smabo-web
 
 Clone the smabo-web repository with the following commands.

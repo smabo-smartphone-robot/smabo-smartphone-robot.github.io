@@ -139,7 +139,7 @@ Print the following parts oriented as shown in the images.
 
 <br />
 
-- smabo-hardware/stl/base/mini\_bread\_boad\_stand.stl
+- smabo-hardware/stl/base/mini\_bread\_board\_stand.stl
 
     <br />
 
@@ -252,13 +252,20 @@ Always remove the + rail jumper wire that came with the SAD101. Leaving it in ma
 
 For this step we are not yet driving any actuators, so only the battery wiring is needed as preparation for later steps.
 
-In the table below, "Point A" and "Point B" are directly connected in the circuit.
+In the tables below, "Point A" and "Point B" are directly connected in the circuit.
+
+### Battery
 
 | Point A | Point B | Notes |
 | --- | --- | --- |
-| Battery box (+) | Breadboard + rail (<strong class="red">right</strong> side) | Right rail = 6 V; do not mix with 5 V side |
+| Battery box (+) | Breadboard + rail (<strong class="red">right</strong> side) | From here on, the right side is the 6 V rail |
 | Battery box (-) | Breadboard - rail | \- |
-| ESP32 5 V pin | Breadboard + rail (<strong class="red">left</strong> side) | Left rail = 5 V; do not mix with 6 V side |
+
+### ESP32
+
+| Point A | Point B | Notes |
+| --- | --- | --- |
+| ESP32 5V | Breadboard + rail (<strong class="red">left</strong> side) | From here on, the left side is the 5 V rail |
 | ESP32 GND | Breadboard - rail | \- |
 
 As noted above, the left and right sides of the + rail carry different voltages.
@@ -269,7 +276,7 @@ Please wire carefully.
 
 <br />
 
-Wiring diagram for ESP32-DevKitC:
+The wiring diagram for the ESP32-DevKitC (with the defaults in config.esp32-classic.json) is shown below.
 
 ![Wiring diagram](/fritzing/png/esp32_battery_box.png)
 

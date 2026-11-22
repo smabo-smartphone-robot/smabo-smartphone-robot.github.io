@@ -38,6 +38,8 @@ Parts required to implement this feature:
 | --- | --- | --- |
 | Smartphone | \- | Your own smartphone |
 
+## Setting Up smabo-app
+
 ### Installing smabo-app
 
 Install smabo-app on your smartphone.

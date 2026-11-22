@@ -44,7 +44,7 @@ smabo-brain自体のセットアップ手順は同じですが、SBCの場合は
 - SBC取り付け用パーツの印刷
 - SBCのsmaboへの取り付け
 
-が追加で必要になります（なお、SBCに必要なパーツの印刷手順は[ベースパーツの作成](/guides/base/)にて解説します。）
+が追加で必要になります（なお、SBCに必要なパーツの印刷手順は[ベースパーツの作成](/guides/base/)にて解説します）
 
 そのため、最初は「外部PCへのセットアップ」をおすすめします。
 
@@ -97,11 +97,11 @@ https://code.visualstudio.com
 
 ### ターミナルの使い方（Linux, macの場合）
 
-画面下部の「TREMINAL」というタブがターミナルになります。
+画面下部の「TERMINAL」というタブがターミナルになります。
 
 ![VS Code下部のTERMINALタブ](/images/vscode_terminal.png)
 
-以降、コマンドの記載がある際は、こちらにのタブにて、コマンドを入力してください。
+以降、コマンドの記載がある際は、こちらのタブにて、コマンドを入力してください。
 
 ### ターミナルの使い方（Windows）
 
@@ -109,7 +109,7 @@ Windows PCを使用する場合は、WSLをインストールしてください�
 
 <br>
 
-WSL(Windows for Linux)は、
+WSL（Windows Subsystem for Linux）は、
 - WindowsでLinuxの環境を使用できるシステム
 
 です。
@@ -134,7 +134,7 @@ WSL2のデフォルト設定では、外部環境との通信ができません�
 
 #### 拡張機能のインストール
 
-WSLのインストールが完了したら、VScodeにて以下の拡張機能をインストールしてください。
+WSLのインストールが完了したら、VSCodeにて以下の拡張機能をインストールしてください。
 - WSL
 
 ![VS Codeの拡張機能「WSL」をインストール](/images/install_wsl.jpg)
@@ -144,9 +144,9 @@ WSLのインストールが完了したら、VScodeにて以下の拡張機能�
 拡張機能のインストールが完了したら、
 
 1. 「><」マークをクリック
-2. 「Connected to WSL」をクリックしてください。
+2. 「Connect to WSL」をクリックしてください。
 
-![VS Codeの「Connected to WSL」を選択してWSLに接続](/images/connect_wsl.jpg)
+![VS Codeの「Connect to WSL」を選択してWSLに接続](/images/connect_wsl.jpg)
 
 <br>
 
@@ -162,7 +162,7 @@ WSLのインストールが完了したら、VScodeにて以下の拡張機能�
 
 ```bash
 # ホームディレクトリへ移動
-cd ~ 
+cd ~
 ```
 
 ```bash

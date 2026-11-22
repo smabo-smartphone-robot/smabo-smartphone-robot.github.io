@@ -44,6 +44,7 @@ description: "TTモータとどこでもキャスターSを使い、コントロ
 | トイDCモータ用タイヤ | [link](https://www.amazon.co.jp/EQWQSIXD-2枚スマートカーシャーシおもちゃのホイールTTギアモーターホイールタイヤ/dp/B0GGBJ28H4/ref=sr_1_26?dib=eyJ2IjoiMSJ9.4FTlNQNg2PNhrQWHWCq1VDVSeuya5EkUmhYpxFsDFUfHp1VRahy96A67RIHQH9ibIRlLIzizRUjQypePRfeWYEjC4Xkv__iO89CGUyja83DKpYSqAtFlpw3HK3JZXC8l_7CbgBxyj25WMxgNvs0Vj_mTJEgCx11oV4jH8gcaw_nnoLEoOy27waXHHP1D9GAx5wk3YoJOf7mkinbBhxyengmzAsVi34v89FbE-kC8HFcbjWRNl9fKWyn4gzRqsQEidM-blg7h4gtymWS6XWF3wP_bhkNSn8PJfFi5vSQob90.NxbnVCRKi4zdC1WBt2D3W5p2zgN_rLX3CwbBS3SBa10&dib_tag=se&keywords=TTモーター+タイヤ&qid=1780323553&sr=8-26) | 互換品でも可。 |
 | TTモータ | [link](https://www.amazon.co.jp/DIANN-Motor-Gearbox-200RPM-Ratio/dp/B0F87YT715/ref=asc_df_B0F87YT715?mcid=9b7fc4990dc0322a82a20101948464a3&tag=jpgo-22&linkCode=df0&hvadid=781176336697&hvpos=&hvnetw=g&hvrand=18345257182238334739&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-2449268817747&psc=1&hvocijid=18345257182238334739-B0F87YT715-&hvexpln=0) | コネクタピン付きの方が、ブレッドボードに差しやすくて、抜けにくいのでお勧めです。<br><br> 互換品は多数ありますが、[一般的なTTモーターの寸法](https://docs.sunfounder.com/projects/3in1-kit/ja/latest/components/component_tt_motor.html)と大きく異なる場合は、上手く取り付けることができないので注意してください。 |
 | どこでもキャスターS | [link](https://www.amazon.co.jp/YAHATA-%E3%81%A9%E3%81%93%E3%81%A7%E3%82%82%E3%82%AD%E3%83%A3%E3%82%B9%E3%82%BF%E3%83%BC-S%E3%83%96%E3%83%AB%E3%83%BC-S/dp/B0091GH8YU) | - |
+
 ## パーツの印刷
 
 今回、新たに追加されるパーツを3Dプリンタで印刷します。
@@ -59,23 +60,23 @@ description: "TTモータとどこでもキャスターSを使い、コントロ
 - サポート材は必ずONにした状態で印刷
 :::
 
-- smabo-repos/smabo-hardware/stl/mobile_robot/dc_motor_caster.stl
+- smabo-hardware/stl/mobile_robot/dc_motor_caster.stl
     ![3Dプリントした移動ロボット用パーツdc_motor_caster](/images/mobile_print_dc_motor_caster.png)
 
 <br>
 
-- smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_bottom.stl
+- smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_bottom.stl
     ![3Dプリントした移動ロボット用パーツtt_motor_bottom](/images/mobile_print_tt_motor_bottom.png)
 
 <br>
 
-- smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper1.stl × 2
+- smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper1.stl × 2
   - 左右にモータをつけるので2つ印刷します。
     ![3Dプリントしたttモーター固定パーツtt_motor_stopper1](/images/mobile_print_tt_motor_stopper1.png)
 
 <br>
 
-- smabo-repos/smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2_LR.stl
+- smabo-hardware/stl/mobile_robot/tt_motor/tt_motor_stopper2_LR.stl
   - 左右のモーター用のパーツがつながっているので、1つ印刷します。
     ![3Dプリントしたttモーター固定パーツtt_motor_stopper2_LR](/images/mobile_print_tt_motor_stopper2_LR.png)
 
@@ -178,9 +179,9 @@ TB6612FNGのPWMA〜PWMBピンについてですが、「ESP32側で対応する�
 ![ミニブレッドボード上のTB6612FNGの配線](/images/TB6612FNG_%20wiring.jpg)
 :::
 
-## 完成系
+## 完成形
 
-今回作成したロボットの完成系は下図のようになります。
+今回作成したロボットの完成形は下図のようになります。
 
 ![ttモーターで走る移動ロボット版smaboの完成形](/images/smabo_tt_motor.jpg)
 

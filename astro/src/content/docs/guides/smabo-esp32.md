@@ -95,7 +95,7 @@ WiFiの周波数には2.4GHzと、5GHzの2種類がありますが、
 <br>
 
 一般に、
-- Buffalo-F-ooooのようにSSIDに「G」がついている場合は、2.4GHz
+- Buffalo-G-ooooのようにSSIDに「G」がついている場合は、2.4GHz
 - Buffalo-A-ooooのようにSSIDに「A」がついている場合は、5GHz
 
 となるため、ここで指定するSSIDは「G」がついている方にしてください。
@@ -137,7 +137,7 @@ WiFiの周波数には2.4GHzと、5GHzの2種類がありますが、
 
 <br>
 
-- smabo-hardware/stl/base/mini_bread_boad_stand.stl
+- smabo-hardware/stl/base/mini_bread_board_stand.stl
     ![3Dプリントしたミニブレッドボード用スタンド](/images/esp32_print_mini_bread_board_stand.png)
 
 <br>

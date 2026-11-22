@@ -40,15 +40,17 @@ smabo-appはsmaboの中で
 | --- | --- | --- |
 | スマートフォン | - | お手持ちのスマートフォン |
 
+## smabo-appのセットアップ
+
 ### smabo-appのインストール
 
 スマホにsmabo-appをインストールします。
 
 なお、ここではandroidの手順のみを記載します。
 
-> IOSの場合、flutterのインストールなどが必要になり、少し手順が多くなるため、詳しくは[smabo-appのリポジトリ](https://github.com/smabo-smartphone-robot/smabo-app)のREADMEを確認してください。
+> iOSの場合、flutterのインストールなどが必要になり、少し手順が多くなるため、詳しくは[smabo-appのリポジトリ](https://github.com/smabo-smartphone-robot/smabo-app)のREADMEを確認してください。
 >
-> また、IOSの場合、アプリのインストールに、mac OSのPCが必要です。
+> また、iOSの場合、アプリのインストールに、macOSのPCが必要です。
 
 スマホから[smabo-appのReleaseページ](https://github.com/smabo-smartphone-robot/smabo-app/releases)にアクセスします。
 

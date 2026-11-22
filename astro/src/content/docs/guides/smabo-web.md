@@ -31,6 +31,8 @@ smabo-webはsmaboの中で
        aria-label="smabo システム構成図（smabo-web をハイライト）"></svg>
 </div>
 
+## smabo-webのセットアップ
+
 ### smabo-webのクローン
 
 以下コマンドでsmabo-webリポジトリをクローンします。
@@ -41,7 +43,7 @@ cd ~
 ```
 
 ```bash
-# smabo-brainリポジトリのクローン
+# smabo-webリポジトリのクローン
 git clone https://github.com/smabo-smartphone-robot/smabo-web
 ```
 
