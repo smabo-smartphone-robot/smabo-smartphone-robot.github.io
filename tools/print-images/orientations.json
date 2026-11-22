@@ -1,0 +1,902 @@
+{
+ "arm_print_sg90_1_l.png": {
+  "step": "arm/g90/sg90_1_L.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "arm_print_sg90_1_r.png": {
+  "step": "arm/g90/sg90_1_R.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "arm_print_sg90_2.png": {
+  "step": "arm/g90/sg90_2.step",
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "arm_print_sg90_3_concave.png": {
+  "step": "arm/g90/sg90_3_concave.step",
+  "R": [
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    1,
+    0,
+    0
+   ]
+  ]
+ },
+ "arm_print_sg90_3_convex.png": {
+  "step": "arm/g90/sg90_3_convex.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "arm_print_sg90_4_concave.png": {
+  "step": "arm/g90/sg90_4_concave.step",
+  "R": [
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    1,
+    0,
+    0
+   ]
+  ]
+ },
+ "arm_print_sg90_4_convex.png": {
+  "step": "arm/g90/sg90_4_convex.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "arm_print_sg90_5_concave.png": {
+  "step": "arm/g90/sg90_5_concave.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "arm_print_sg90_5_convex.png": {
+  "step": "arm/g90/sg90_5_convex.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "arm_print_sg90_5_hand.png": {
+  "step": "arm/g90/sg90_5_hand.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "esp32_print_pca9685_stopper_l.png": {
+  "step": "base/pca9685_stopper_l.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    1,
+    0,
+    0
+   ]
+  ]
+ },
+ "esp32_print_pca9685_stopper_r_top.png": {
+  "step": "base/pca9685_stopper_r_top.step",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    1,
+    0,
+    0
+   ]
+  ]
+ },
+ "base_print_base.jpg": {
+  "step": "base/base.step",
+  "R": [
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "base_print_cover_back_bread_board.jpg": {
+  "step": "base/cover_back_bread_board.step",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ]
+  ]
+ },
+ "base_print_cover_smartphone_base.jpg": {
+  "step": "smart_phone/cover_smartphone_base.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "base_print_smartphone_long.jpg": {
+  "step": "smart_phone/smartphone_long_width_75_height_11.step",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    -1,
+    0
+   ]
+  ]
+ },
+ "base_print_smartphone_short.jpg": {
+  "step": "smart_phone/smartphone_short_width_37_height_11.step",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    -1,
+    0
+   ]
+  ]
+ },
+ "raspi_print_stand.jpg": {
+  "step": "raspi/raspi_stand.step",
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    0,
+    1,
+    0
+   ]
+  ]
+ },
+ "raspi_print_stopper1.jpg": {
+  "step": "raspi/raspi_stopper1.step",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ]
+  ]
+ },
+ "raspi_print_stopper2.jpg": {
+  "step": "raspi/raspi_stopper2.step",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    -1,
+    0
+   ]
+  ]
+ },
+ "encmobile_print_DG1D-E_bottom.png": {
+  "step": "mobile_robot/DG01D-E/DG1D-E_bottom.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "encmobile_print_DG01D-E_stopper1_L.png": {
+  "step": "mobile_robot/DG01D-E/DG01D-E_stopper1_L.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "encmobile_print_DG01D-E_stopper1_R.png": {
+  "step": "mobile_robot/DG01D-E/DG01D-E_stopper1_R.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "encmobile_print_DG01D-E_stopper2_LR.png": {
+  "step": "mobile_robot/DG01D-E/DG01D-E_stopper2_LR.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "hand_print_sg90_plate_1.png": {
+  "step": "hand/sg90/sg90_plate_1.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "hand_print_sg90_plate_2.png": {
+  "step": "hand/sg90/sg90_plate_2.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "hand_print_sg90_base.png": {
+  "step": "hand/sg90/sg90_base.step",
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "hand_print_arm_hand.png": {
+  "step": "hand/sg90/arm_hand.step",
+  "R": [
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "mobile_print_dc_motor_caster.png": {
+  "step": "mobile_robot/dc_motor_caster.step",
+  "R": [
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    -1,
+    0
+   ]
+  ]
+ },
+ "mobile_print_tt_motor_bottom.png": {
+  "step": "mobile_robot/tt_motor/tt_motor_bottom.step",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ]
+  ]
+ },
+ "mobile_print_tt_motor_stopper1.png": {
+  "step": "mobile_robot/tt_motor/tt_motor_stopper1.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "mobile_print_tt_motor_stopper2_LR.png": {
+  "step": "mobile_robot/tt_motor/tt_motor_stopper2_LR.step",
+  "R": [
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "nav_print_ld19_base.png": {
+  "step": "lidar/ld19/ld19_base.step",
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    0,
+    -1,
+    0
+   ]
+  ]
+ },
+ "nav_print_ld19_stopper1.png": {
+  "step": "lidar/ld19/ld19_stopper1.step",
+  "R": [
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    1,
+    0,
+    0
+   ]
+  ]
+ },
+ "nav_print_ld19_stopper2.png": {
+  "step": "lidar/ld19/ld19_stopper2.step",
+  "R": [
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    0,
+    -1,
+    0
+   ]
+  ]
+ },
+ "neck_print_pan_adapter.png": {
+  "step": "pan/mg996r/pan_adapter.step",
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    0,
+    1,
+    0
+   ]
+  ]
+ },
+ "neck_print_pan_plate_top.png": {
+  "step": "pan/mg996r/pan_plate_top.step",
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "neck_print_pan_stand_left.png": {
+  "step": "pan/mg996r/pan_stand_left.step",
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "neck_print_pan_stand_right.png": {
+  "step": "pan/mg996r/pan_stand_right.step",
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ },
+ "esp32_print_bread_board_stopper_bottom_l.png": {
+  "step": "base/bread_board_stopper_bottom_l.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "esp32_print_bread_board_stopper_bottom_r.png": {
+  "step": "base/bread_board_stopper_bottom_r.step",
+  "R": [
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    1,
+    0,
+    0
+   ]
+  ]
+ },
+ "esp32_print_bread_board_stopper.png": {
+  "step": "base/bread_board_stopper.step",
+  "R": [
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    1,
+    0,
+    0
+   ]
+  ]
+ },
+ "esp32_print_mini_bread_board_stand.png": {
+  "step": "base/mini_bread_board_stand.step",
+  "R": [
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0
+   ]
+  ]
+ },
+ "esp32_print_pca9685_stopper_r_bottom.png": {
+  "step": "base/pca9685_stopper_r_bottom.step",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    -1,
+    0
+   ]
+  ]
+ },
+ "esp32_print_in_base_plate_wire_hole.png": {
+  "step": "base/in_base_plate_wire_hole.step",
+  "R": [
+   [
+    0,
+    -1,
+    0
+   ],
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ]
+  ]
+ }
+}

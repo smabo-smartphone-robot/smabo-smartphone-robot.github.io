@@ -1,0 +1,6 @@
+# Python 3.11 で動作確認済み
+cadquery-ocp==7.8.1.1.post1
+vtk==9.3.1
+numpy==2.4.6
+trimesh==4.12.2
+pillow==12.2.0
