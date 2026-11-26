@@ -235,7 +235,7 @@ After a moment, smabo will turn left/right at random intervals.
 
 <video autoplay loop muted playsinline style="max-width:100%"><source src="/video/smabo_neck_random.mp4" type="video/mp4"></video>
 
-### Image-Recognition Control
+### Image-Processing Control
 
 Steps for image-recognition-based control.
 

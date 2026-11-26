@@ -101,9 +101,9 @@ export default defineConfig({
 					label: 'ROS',
 					translations: { en: 'ROS' },
 					items: [
-						{ label: '🤖 brain-ros', translations: { en: "🤖 brain-ros" }, slug: 'guides/brainros', badge: { text: { ja: '準備中', en: 'Coming soon' }, variant: 'note' } },
+						{ label: '🤖 brain-ros', translations: { en: "🤖 brain-ros" }, slug: 'guides/brainros' },
 						{ label: '🗺️ ナビゲーション', translations: { en: "🗺️ Navigation" }, slug: 'guides/nav', badge: { text: { ja: '準備中', en: 'Coming soon' }, variant: 'note' } },
-						{ label: '📐 動作計画', translations: { en: "📐 Motion Planning" }, slug: 'guides/plan', badge: { text: { ja: '準備中', en: 'Coming soon' }, variant: 'note' } },
+						{ label: '📐 動作計画', translations: { en: "📐 Motion Planning" }, slug: 'guides/plan' },
 					],
 				},
 			],

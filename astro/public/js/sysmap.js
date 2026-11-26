@@ -136,7 +136,9 @@
   /* ---- main build -------------------------------------------------------- */
   function build(svg) {
     var isEn = window.location.pathname.indexOf('/en/') !== -1;
+    var variant = svg.getAttribute("data-variant") || "";
     while (svg.firstChild) svg.removeChild(svg.firstChild);
+    if (variant === "brainros-detail") { brainRosDetail(svg, isEn); return; }
 
     /* parse data-flows */
     var activeFlows = [];
@@ -209,14 +211,116 @@
       var on = hi[n.id], cx = n.x + n.w / 2, cy = n.y + n.h / 2;
       var g = el("g", { class: "sys-node" + (anyActive ? (on ? " is-active" : " is-dim") : "") });
       g.appendChild(el("rect", { class: "sys-node__box", x: n.x, y: n.y, width: n.w, height: n.h, rx: 14, ry: 14 }));
-      g.appendChild(text(cx, cy - 6,  n.icon + "  " + n.label, "sys-node__label", "middle"));
-      g.appendChild(text(cx, cy + 16, (isEn && n.subEn ? n.subEn : n.sub), "sys-node__sub", "middle"));
+      if (variant === "brainros" && n.id === "brain") {
+        brainRosInside(g, n, isEn);
+      } else {
+        g.appendChild(text(cx, cy - 6,  n.icon + "  " + n.label, "sys-node__label", "middle"));
+        g.appendChild(text(cx, cy + 16, (isEn && n.subEn ? n.subEn : n.sub), "sys-node__sub", "middle"));
+      }
       gN.appendChild(g);
     });
     svg.appendChild(gN);
     svg.appendChild(gL);
 
     svg.appendChild(legend(isEn));
+  }
+
+  /* ---- data-variant="brainros": the brain box is smabo-brain-ros ----------
+   * Drawn like smabo-brain (same place, size and arrows), with one note line:
+   * inside, the WebSocket messages and the WebRTC video become ROS 2 topics. */
+  function brainRosInside(g, n, isEn) {
+    var cx = n.x + n.w / 2, cy = n.y + n.h / 2;
+    g.appendChild(text(cx, cy - 14, "🤖  smabo-brain-ros", "sys-node__label", "middle"));
+    g.appendChild(text(cx, cy + 8, (isEn && n.subEn ? n.subEn : n.sub), "sys-node__sub", "middle"));
+    g.appendChild(text(cx, cy + 32,
+      isEn ? "※ WebSocket / WebRTC become ROS 2 topics inside" : "※ 内部で WebSocket・WebRTC を ROS 2 トピックに変換",
+      "sys-node__note", "middle"));
+  }
+
+  /* ---- data-variant="brainros-detail": smabo-brain and smabo-brain-ros side by side
+   * (viewBox 0 0 1200 540). Rows line up across the two, so the difference
+   * shows: the same devices and the same calculation, but smabo-brain talks
+   * WebSocket / WebRTC directly, while smabo-brain-ros converts them into
+   * ROS 2 topics first and runs the calculation as ROS 2 nodes, next to
+   * Nav2 / MoveIt2.                                                        */
+  function brainRosDetail(svg, isEn) {
+    var J = !isEn;
+    var defs = el("defs");
+    ["ws", "webrtc", "ros"].forEach(function (k) {
+      defs.appendChild(arrowMarker("sys-arrow-" + k, "sys-arrow sys-arrow--" + k));
+    });
+    svg.appendChild(defs);
+
+    function box(x, y, w, h, title, sub, cls) {
+      var g = el("g", { class: "sys-node" + (cls ? " " + cls : "") });
+      g.appendChild(el("rect", { class: "sys-node__box", x: x, y: y, width: w, height: h, rx: 12, ry: 12 }));
+      g.appendChild(text(x + w / 2, y + h / 2 - (sub ? 4 : -5), title, "sys-dt__title", "middle"));
+      if (sub) g.appendChild(text(x + w / 2, y + h / 2 + 16, sub, "sys-node__sub", "middle"));
+      svg.appendChild(g);
+    }
+    function group(x, y, w, h, label, cls, note) {
+      svg.appendChild(el("rect", { class: "sys-dt__group " + (cls || ""), x: x, y: y, width: w, height: h, rx: 14, ry: 14 }));
+      if (label) svg.appendChild(text(x + 14, y + 22, label, "sys-dt__group-label", "start"));
+      if (note)  svg.appendChild(text(x + 14, y + 40, note,  "sys-dt__group-note",  "start"));
+    }
+    /* a two-way vertical link; its label (one line or a list) to the right,
+     * centred on labelY (default: the middle of the link) */
+    function vlink(x, y1, y2, kind, label, labelY) {
+      svg.appendChild(el("path", { class: "sys-dt__link sys-dt__link--" + kind, d: "M " + x + " " + y1 + " L " + x + " " + y2,
+        "marker-start": "url(#sys-arrow-" + kind + ")", "marker-end": "url(#sys-arrow-" + kind + ")" }));
+      if (!label) return;
+      /* inside a frame (y >= 150) the label sits on the frame's fill, not on the page */
+      var mid = labelY || (y1 + y2) / 2, rows = [].concat(label);
+      var g = el("g", { class: "sys-flabel sys-flabel--" + kind + " is-on" + (mid >= 150 ? " sys-flabel--in" : "") });
+      var top = mid + 4.5 - (rows.length - 1) * LINE_H / 2;
+      rows.forEach(function (r, i) { g.appendChild(text(x + 10, top + i * LINE_H, r, "sys-flabel__item", "start")); });
+      svg.appendChild(g);
+    }
+    function frame(x, w, title) {
+      svg.appendChild(el("rect", { class: "sys-dt__frame", x: x, y: 150, width: w, height: 340, rx: 18, ry: 18 }));
+      svg.appendChild(text(x + 20, 182, title, "sys-node__label sys-dt__frame-label", "start"));
+      svg.appendChild(text(x + w - 18, 182, "SBC or PC", "sys-node__sub", "end"));
+    }
+    function devices(x, w) {
+      group(x, 16, w, 60, null, "sys-dt__group--ext");
+      svg.appendChild(text(x + w / 2, 51, "🖥️ smabo-web ・ 📱 smabo-app ・ 🔌 smabo-esp32", "sys-dt__title", "middle"));
+    }
+    var vals = J ? ["センサ値", "制御値"] : ["Sensor values", "Control values"];
+    var img  = J ? "画像" : "Camera feed";
+    var calc = [J ? "オドメトリ" : "Odometry", J ? "画像処理" : "Vision", J ? "音声認識" : "Speech"];
+
+    /* ---- left: smabo-brain — WebSocket / WebRTC straight into the calculation ---- */
+    devices(12, 440);
+    frame(12, 440, "🧠  smabo-brain");
+    vlink(220, 76, 290, "ws", vals, 120);
+    vlink(320, 76, 290, "webrtc", img, 120);
+    group(26, 290, 412, 180, J ? "Pythonモジュール" : "Python modules", "sys-dt__group--brain",
+      J ? "WebSocket・WebRTCで直接通信" : "Talks WebSocket / WebRTC directly");
+    [36, 170, 304].forEach(function (x, i) { box(x, 346, 124, 108, calc[i], null, "sys-dt__calc"); });
+
+    /* ---- right: smabo-brain-ros — converted into ROS 2 topics first ---- */
+    devices(476, 712);
+    frame(476, 712, "🤖  smabo-brain-ros");
+    vlink(780,  76, 196, "ws", vals, 120);
+    vlink(1008, 76, 196, "webrtc", img, 120);
+    box(490, 196, 684, 44, J ? "ROS 2 変換（WebSocket・WebRTC ⇄ ROS 2 トピック）" : "ROS 2 conversion (WebSocket / WebRTC ⇄ ROS 2 topics)", null, "sys-dt__conv");
+    vlink(700,  240, 290, "ros");
+    vlink(1049, 240, 290, "ros");
+    group(490, 290, 420, 180, J ? "ROS2ノード" : "ROS 2 nodes", "sys-dt__group--brain",
+      J ? "計算部分はsmabo-brainと共通。通信部分をROS2通信にラップ" : "Calculation shared with smabo-brain, wrapped in ROS 2 messaging");
+    [501, 637, 773].forEach(function (x, i) { box(x, 346, 126, 108, calc[i], null, "sys-dt__calc"); });
+    group(924, 290, 250, 180, J ? "ROS 2 のツール" : "ROS 2 tools", "sys-dt__group--tools");
+    box(938,  346, 111, 108, "Nav2",    J ? "ナビゲーション" : "Navigation");
+    box(1059, 346, 111, 108, "MoveIt2", J ? "動作計画" : "Motion plan");
+
+    /* legend (bottom) */
+    var g = el("g", { class: "sys-legend" });
+    [["ws", "WebSocket"], ["webrtc", "WebRTC"], ["ros", J ? "ROS 2 トピック" : "ROS 2 topics"]].forEach(function (row, i) {
+      var lx = 40 + i * 200, ly = 520;
+      g.appendChild(el("line", { class: "sys-legend__line sys-legend__line--" + row[0], x1: lx, y1: ly, x2: lx + 32, y2: ly }));
+      g.appendChild(text(lx + 42, ly + 4, row[1], "sys-legend__label", "start"));
+    });
+    svg.appendChild(g);
   }
 
   /* ---- label on active arrow -------------------------------------------- */
@@ -278,11 +382,12 @@
     var g  = el("g", { class: "sys-legend" });
     var x0 = 1050, y0 = 28;
     g.appendChild(text(x0, y0 - 16, isEn ? "Legend (Transport)" : "凡例（通信方式）", "sys-legend__title", "start"));
-    [
+    var rows = [
       ["ws",     "WebSocket"],
       ["webrtc", "WebRTC"],
       ["rest",   "REST API"],
-    ].forEach(function (row, i) {
+    ];
+    rows.forEach(function (row, i) {
       var ly = y0 + i * 24;
       g.appendChild(el("line", { class: "sys-legend__line sys-legend__line--" + row[0],
         x1: x0, y1: ly, x2: x0 + 32, y2: ly }));

@@ -68,6 +68,22 @@ Parts required to implement this feature:
 | --- | --- | --- |
 | \[Optional\] Raspberry Pi 4 or 5 | \- | Required only for SBC setup |
 
+## 3D Printing Parts
+
+There are no parts to print this time.
+
+## Assembly
+
+There is no assembly this time.
+
+## Wiring
+
+There is no wiring this time.
+
+## Finished Result
+
+The finished robot does not change this time.
+
 ## Setting Up smabo-brain
 
 The following explains the setup steps for smabo-brain.

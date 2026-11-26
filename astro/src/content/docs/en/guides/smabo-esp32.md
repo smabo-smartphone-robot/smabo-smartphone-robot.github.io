@@ -46,62 +46,6 @@ The following parts are required to implement this feature.
 | Mini breadboard | [link](https://www.amazon.co.jp/Rasbee-SYB-170-%E3%83%9F%E3%83%8B%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%881%E5%80%8B-%E4%B8%A6%E8%A1%8C%E8%BC%B8%E5%85%A5%E5%93%81/dp/B01KRAS4NC/) | Choose one with an adhesive backing. |
 | TB6612FNG dual motor driver | [link](https://www.amazon.co.jp/TB6612FNG%E6%90%AD%E8%BC%89-%E3%83%87%E3%83%A5%E3%82%A2%E3%83%AB%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90-%E3%83%94%E3%83%B3%E3%83%98%E3%83%83%E3%83%80%E4%BB%98%E3%81%8D-%E5%AE%9F%E8%A3%85%E6%B8%88%E3%81%A7%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%81%BE%E3%81%99-1-2A%C3%972%E5%87%BA%E5%8A%9B/dp/B09C5MSYCC/) | Compatible alternatives OK (though a version without pre-soldered pin headers will require soldering yourself).<br><br>Only needed if implementing Mobile Robot / Encoder Mobile Robot features. |
 
-## Setting Up smabo-esp32
-
-### Installing Thonny (Flash Tool)
-
-Download and install Thonny for your OS from:
-
-[https://thonny.org/](https://thonny.org/)
-
-<br />
-
-Once installation is complete, launch Thonny.
-
-#### Flashing the Source Code
-
-Connect the ESP32 to your PC via USB, then click the bottom-right button and select 'MicroPython (ESP32)'.
-
-![Thonny — select interpreter](/images/esp32_thonny_select_interpreter.jpg)
-
-<br />
-
-Select all Python files inside 'smabo-esp32', right-click and choose 'Upload to /' to flash them to the ESP32.
-
-![Thonny — upload source](/images/esp32_thonny_upload_source.jpg)
-
-#### Flashing the Config File
-
-Next, flash the config file.
-
-From the config directory, select the JSON file matching your ESP32 model and copy it as 'config.json'.
-
-![Copy config file](/images/esp32_config_copy.jpg)
-
-<br />
-
-Fill in the following fields for your environment:
-
-- `wifi/ssid` — SSID of the network to connect to
-- `wifi/password` — password of that network
-
-:::note[WiFi frequency note]
-ESP32 only supports 2.4 GHz WiFi.
-
-- SSIDs ending in 'G' (e.g., Buffalo-G-xxxx) are 2.4 GHz
-- SSIDs ending in 'A' (e.g., Buffalo-A-xxxx) are 5 GHz
-
-Use the 'G' SSID here.
-:::
-
-![Config WiFi and IP settings](/images/esp32_config_wifi_ip.jpg)
-
-<br />
-
-Once you have filled in the settings, flash config.json to the ESP32 the same way you flashed the source code.
-
-![Upload config to ESP32](/images/esp32_config_upload.jpg)
-
 ## 3D Printing Parts
 
 Print the newly added parts on your 3D printer.
@@ -279,6 +223,68 @@ Please wire carefully.
 The wiring diagram for the ESP32-DevKitC (with the defaults in config.esp32-classic.json) is shown below.
 
 ![Wiring diagram](/fritzing/png/esp32_battery_box.png)
+
+## Finished Result
+
+The completed robot looks like this.
+
+\<Image of the finished robot goes here\>
+
+## Setting Up smabo-esp32
+
+### Installing Thonny (Flash Tool)
+
+Download and install Thonny for your OS from:
+
+[https://thonny.org/](https://thonny.org/)
+
+<br />
+
+Once installation is complete, launch Thonny.
+
+#### Flashing the Source Code
+
+Connect the ESP32 to your PC via USB, then click the bottom-right button and select 'MicroPython (ESP32)'.
+
+![Thonny — select interpreter](/images/esp32_thonny_select_interpreter.jpg)
+
+<br />
+
+Select all Python files inside 'smabo-esp32', right-click and choose 'Upload to /' to flash them to the ESP32.
+
+![Thonny — upload source](/images/esp32_thonny_upload_source.jpg)
+
+#### Flashing the Config File
+
+Next, flash the config file.
+
+From the configs directory, select the JSON file matching your ESP32 model and copy it as 'config.json'.
+
+![Copy config file](/images/esp32_config_copy.jpg)
+
+<br />
+
+Fill in the following fields for your environment:
+
+- `wifi/ssid` — SSID of the network to connect to
+- `wifi/password` — password of that network
+
+:::note[WiFi frequency note]
+ESP32 only supports 2.4 GHz WiFi.
+
+- SSIDs ending in 'G' (e.g., Buffalo-G-xxxx) are 2.4 GHz
+- SSIDs ending in 'A' (e.g., Buffalo-A-xxxx) are 5 GHz
+
+Use the 'G' SSID here.
+:::
+
+![Config WiFi and IP settings](/images/esp32_config_wifi_ip.jpg)
+
+<br />
+
+Once you have filled in the settings, flash config.json to the ESP32 the same way you flashed the source code.
+
+![Upload config to ESP32](/images/esp32_config_upload.jpg)
 
 ## Operation
 
