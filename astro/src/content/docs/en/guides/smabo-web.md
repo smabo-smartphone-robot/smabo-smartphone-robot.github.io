@@ -29,6 +29,26 @@ smabo-web serves as:
        aria-label="smabo system diagram (smabo-web highlighted)"></svg>
 </div>
 
+## Required Parts
+
+No parts are needed this time.
+
+## 3D Printing Parts
+
+There are no parts to print this time.
+
+## Assembly
+
+There is no assembly this time.
+
+## Wiring
+
+There is no wiring this time.
+
+## Finished Result
+
+The finished robot does not change this time.
+
 ## Setting Up smabo-web
 
 ### Cloning smabo-web

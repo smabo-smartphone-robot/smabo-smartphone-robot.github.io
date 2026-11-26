@@ -38,6 +38,22 @@ Parts required to implement this feature:
 | --- | --- | --- |
 | Smartphone | \- | Your own smartphone |
 
+## 3D Printing Parts
+
+There are no parts to print this time.
+
+## Assembly
+
+There is no assembly this time.
+
+## Wiring
+
+There is no wiring this time.
+
+## Finished Result
+
+The finished robot does not change this time.
+
 ## Setting Up smabo-app
 
 ### Installing smabo-app

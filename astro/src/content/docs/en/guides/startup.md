@@ -19,19 +19,11 @@ python3 -m brain
 
 ## Launch smabo-brain-ros
 
-Guides that use ROS (Navigation, Motion Planning) run smabo-brain-ros on the PC/SBC instead of smabo-brain (the two use the same port, so only one can run at a time).
-
-The first time, or after updating smabo-brain-ros, build the image first.
+First, launch smabo-brain-ros from your PC/SBC.
 
 ```bash
 cd ~/smabo-brain-ros
 ```
-
-```bash
-docker compose build
-```
-
-Then start it:
 
 ```bash
 docker compose up
@@ -59,7 +51,9 @@ When smabo-web loads, "Brain connected" should appear in the bottom-right corner
 
 ## smabo-brain-ros <-> smabo-web Connection
 
-In smabo-web, click "Connect ROS" on a tab that uses ROS (such as the "Navigation" tab). Once the button changes to "Disconnect ROS", the connection is up.
+smabo-web connects to smabo-brain-ros automatically when you press "Start SLAM" or "Start Navigation" on the "Navigation" tab, or "Start Motion Plan" on the "Motion Plan" tab. You're set once the indicator turns green.
+
+![The green indicator after smabo-web's Navigation tab has connected to smabo-brain-ros](/images/web_ros_connected.png)
 
 ## Connect smabo-app
 

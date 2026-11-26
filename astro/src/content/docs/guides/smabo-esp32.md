@@ -47,68 +47,6 @@ smabo-esp32は
 | ミニブレッドボード | [link](https://www.amazon.co.jp/Rasbee-SYB-170-%E3%83%9F%E3%83%8B%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%83%9C%E3%83%BC%E3%83%89-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%881%E5%80%8B-%E4%B8%A6%E8%A1%8C%E8%BC%B8%E5%85%A5%E5%93%81/dp/B01KRAS4NC/ref=asc_df_B01KRAS4NC?mcid=320216956bbd38fd8ecf662666249eee&tag=jpgo-22&linkCode=df0&hvadid=707442675525&hvpos=&hvnetw=g&hvrand=452252090448367071&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-1457964925645&psc=1&hvocijid=452252090448367071-B01KRAS4NC-&hvexpln=0) | 裏面が粘着テープになっているもの |
 | TB6612FNG搭載 デュアルモータードライバ | [link](https://www.amazon.co.jp/TB6612FNG%E6%90%AD%E8%BC%89-%E3%83%87%E3%83%A5%E3%82%A2%E3%83%AB%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90-%E3%83%94%E3%83%B3%E3%83%98%E3%83%83%E3%83%80%E4%BB%98%E3%81%8D-%E5%AE%9F%E8%A3%85%E6%B8%88%E3%81%A7%E3%81%99%E3%81%90%E4%BD%BF%E3%81%88%E3%81%BE%E3%81%99-1-2A%C3%972%E5%87%BA%E5%8A%9B/dp/B09C5MSYCC/ref=asc_df_B09C5MSYCC?mcid=de7a458999ca33708a5f7f016232bffc&tag=jpgo-22&linkCode=df0&hvadid=707474905432&hvpos=&hvnetw=g&hvrand=18243089933930576889&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9199153&hvtargid=pla-1422675660387&psc=1&hvocijid=18243089933930576889-B09C5MSYCC-&hvexpln=0) | 互換品でも可（ただし、ピンヘッダ付きでないものは自分ではんだ付けする必要があります）<br><br>「移動ロボット」「エンコーダ付き移動ロボット」のページの内容を実装する際に必要です。<br>これらの内容を実施しない場合は不要 |
 
-## smabo-esp32のセットアップ
-
-### Thonny（書き込みソフト）のインストール
-
-以下サイトから、PCのOSにあったThonnyのインストーラーのDL、インストールを行います。
-
-https://thonny.org/
-
-<br>
-
-インストールが完了したら、Thonnyを起動してください。
-
-#### ソースコードの書き込み
-
-ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタンをクリックし「MicroPython(ESP32)」を選択します。
-
-![ThonnyでインタプリタにMicroPython(ESP32)を選択](/images/esp32_thonny_select_interpreter.jpg)
-
-<br>
-
-その後、「smabo-esp32」内のpythonファイルを全て選択した状態で右クリックし、「/にアップロード」を選択すると、esp32に書き込まれます。
-
-![Thonnyでソースコードをesp32にアップロード](/images/esp32_thonny_upload_source.jpg)
-
-#### 設定ファイルの書き込み
-
-次に、設定ファイルを書き込みます。
-
-configディレクトリからお手持ちのesp32の種類にあったjsonファイルを選択し、「config.json」という名前でコピーを作成します。
-
-![設定ファイルをコピーしてconfig.jsonを作成](/images/esp32_config_copy.jpg)
-
-<br>
-
-以下項目を、環境に応じて記載してください。
-- `wifi/ssid`：接続ネットワークのSSID
-- `wifi/password`：接続ネットワークのpassword
-
-:::note[接続先WiFiの周波数について]
-
-WiFiの周波数には2.4GHzと、5GHzの2種類がありますが、
-- esp32は、2.4GHzにしか対応していない
-
-ため注意してください。
-
-<br>
-
-一般に、
-- Buffalo-G-ooooのようにSSIDに「G」がついている場合は、2.4GHz
-- Buffalo-A-ooooのようにSSIDに「A」がついている場合は、5GHz
-
-となるため、ここで指定するSSIDは「G」がついている方にしてください。
-:::
-
-![config.jsonにWi-FiのSSID・パスワード・IPアドレスを設定](/images/esp32_config_wifi_ip.jpg)
-
-<br>
-
-設定の記入が完了したら、ソースコードの時と同様に、config.jsonをesp32へ書き込みます。
-
-![Thonnyでconfig.jsonをesp32へ書き込み](/images/esp32_config_upload.jpg)
-
 ## パーツの印刷
 
 今回、新たに追加されるパーツを3Dプリンタで印刷します。
@@ -264,6 +202,74 @@ SAD101購入時についていた、<strong class="red">+極のジャンプワ�
 ESP32-DevKitC（config.esp32-classic.jsonに記載のデフォルト設定の場合）の配線図は、以下になります。
 
 ![ESP32-DevKitCと電池ボックスの配線図](/fritzing/png/esp32_battery_box.png)
+
+<!-- ## 完成形
+
+今回作成したロボットの完成形は下図のようになります。
+
+＜ここに完成形の画像を入れる＞ -->
+
+## smabo-esp32のセットアップ
+
+### Thonny（書き込みソフト）のインストール
+
+以下サイトから、PCのOSにあったThonnyのインストーラーのDL、インストールを行います。
+
+https://thonny.org/
+
+<br>
+
+インストールが完了したら、Thonnyを起動してください。
+
+#### ソースコードの書き込み
+
+ESP32とパソコンをUSBケーブルで接続した状態で、右下のボタンをクリックし「MicroPython(ESP32)」を選択します。
+
+![ThonnyでインタプリタにMicroPython(ESP32)を選択](/images/esp32_thonny_select_interpreter.jpg)
+
+<br>
+
+その後、「smabo-esp32」内のpythonファイルを全て選択した状態で右クリックし、「/にアップロード」を選択すると、esp32に書き込まれます。
+
+![Thonnyでソースコードをesp32にアップロード](/images/esp32_thonny_upload_source.jpg)
+
+#### 設定ファイルの書き込み
+
+次に、設定ファイルを書き込みます。
+
+configsディレクトリからお手持ちのesp32の種類にあったjsonファイルを選択し、「config.json」という名前でコピーを作成します。
+
+![設定ファイルをコピーしてconfig.jsonを作成](/images/esp32_config_copy.jpg)
+
+<br>
+
+以下項目を、環境に応じて記載してください。
+- `wifi/ssid`：接続ネットワークのSSID
+- `wifi/password`：接続ネットワークのpassword
+
+:::note[接続先WiFiの周波数について]
+
+WiFiの周波数には2.4GHzと、5GHzの2種類がありますが、
+- esp32は、2.4GHzにしか対応していない
+
+ため注意してください。
+
+<br>
+
+一般に、
+- Buffalo-G-ooooのようにSSIDに「G」がついている場合は、2.4GHz
+- Buffalo-A-ooooのようにSSIDに「A」がついている場合は、5GHz
+
+となるため、ここで指定するSSIDは「G」がついている方にしてください。
+:::
+
+![config.jsonにWi-FiのSSID・パスワード・IPアドレスを設定](/images/esp32_config_wifi_ip.jpg)
+
+<br>
+
+設定の記入が完了したら、ソースコードの時と同様に、config.jsonをesp32へ書き込みます。
+
+![Thonnyでconfig.jsonをesp32へ書き込み](/images/esp32_config_upload.jpg)
 
 ## 動作手順
 

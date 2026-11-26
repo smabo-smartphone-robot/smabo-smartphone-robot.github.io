@@ -214,7 +214,7 @@ In the smabo-web "Config" tab, enable:
 
 ![Enabling Modes/dc_drive in the smabo-web Config tab](/images/mobile_config_dc_drive_enable.png)
 
-### Controller Control
+### Manual Control
 
 This section explains controller-based control.
 

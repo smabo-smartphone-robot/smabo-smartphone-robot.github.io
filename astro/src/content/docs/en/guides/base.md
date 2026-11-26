@@ -286,10 +286,18 @@ Fix the Raspberry Pi to raspi\_stand using the parts shown below.<br />
 
 Verify that your smartphone fits securely.
 
+## Wiring
+
+There is no wiring this time.
+
 ## Finished Result
 
 The completed base looks like this:<br />
 ![Completed base](/images/base_complete.jpg)
+
+## Operation
+
+There is no operation this time.
 
 ## Next
 

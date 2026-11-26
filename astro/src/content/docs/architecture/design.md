@@ -509,13 +509,13 @@ flowchart TB
 flowchart LR
     ui["利用者の操作&lt;br/&gt;（入力・選択・開閉）"] --&gt;|"usePersistentState"| ls[("localStorage&lt;br/&gt;smabo-ui:*")]
     ls --&gt;|"読み込み時に型を確認して復元&lt;br/&gt;（壊れた値は既定値）"| ui
-    ros["Connect ROS"] --&gt;|"smabo-ros-connected"| ls2[("localStorage")]
-    ls2 --&gt;|"Disconnect ROS まで&lt;br/&gt;リロード後に再接続"| ros
+    ros["Start ボタン&lt;br/&gt;（Start SLAM など）"] --&gt;|"smabo-ros-connected"| ls2[("localStorage")]
+    ls2 --&gt;|"リロード後に再接続"| ros
 </pre>
 
 | 保存するもの | キー |
 |---|---|
-| ROS の接続（Connect ROS を押してから Disconnect ROS まで） | `smabo-ros-connected` |
+| ROS の接続（Start ボタンで一度接続したら、そのブラウザで保持） | `smabo-ros-connected` |
 | brain・ESP32・スマホの接続先 | `smabo-brain-host`・`smabo-esp32-host`・`smabo-phone-host` |
 | Navigation のサブタブ・2D / 3D・非表示レイヤー・選んだ地図 | `smabo-ui:nav.*` |
 | Drive の速度上限、Motion Plan の group・関節の目標・計画パラメータ | `smabo-ui:drive.*`・`smabo-ui:plan.*` |

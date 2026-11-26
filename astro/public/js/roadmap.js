@@ -51,14 +51,14 @@
       tip: "（仮）エンコーダにより精度の高い直進・旋回ができます。",
       tipEn: "(Coming soon) High-precision straight-line driving and turning via encoder feedback." },
     { id: "brainros",  icon: "🤖", label: "brain-ros",                                  x: 995, y: 790, w: 140, h: 70, phase: "brainros",
-      tip: "（仮）ROSを使ってセンサーとアクチュエータを統合制御できます。",
-      tipEn: "(Coming soon) Integrate sensor and actuator control using ROS." },
+      tip: "「smabo-brain-ros」のセットアップ手順について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><br>smabo-brain-rosは<br>・<strong>smaboのセンサ値や制御値をROS2通信として扱う</strong><br>の役割を担います。",
+      tipEn: "Set up smabo-brain-ros — it handles smabo's sensor and control values as ROS 2 messages.<br><a class='rmap-tip-btn' data-guide-btn>Read Guide</a><br>smabo-brain-ros is responsible for:<br>・<strong>Handling smabo's sensor values and control values as ROS 2 messages</strong>" },
     { id: "nav",       icon: "🗺️", label: "ナビゲーション", labelEn: "Navigation",      x: 695, y: 1050, w: 140, h: 70, phase: "brainros",
       tip: "（仮）地図を生成して自律的に目的地へ移動できます。",
       tipEn: "(Coming soon) Generate a map and navigate autonomously to a target location." },
     { id: "plan",      icon: "📐", label: "動作計画",       labelEn: "Motion Planning", x: 845, y: 1050, w: 140, h: 70, phase: "brainros",
-      tip: "（仮）障害物を回避しながらアームや機体を自律動作させられます。",
-      tipEn: "(Coming soon) Autonomously move the arm and chassis while avoiding obstacles." }
+      tip: "「動作計画機能」について解説します。<br><a class='rmap-tip-btn' data-guide-btn>ガイドを読む</a><br>・<strong>ロボットアームの動作計画と実行</strong><br><video autoplay loop muted playsinline style=\"max-width:100%\"><source src=\"/video/plan_real.mp4\" type=\"video/mp4\"></video>",
+      tipEn: "Learn about the Motion Planning feature.<br><a class='rmap-tip-btn' data-guide-btn>Read Guide</a><br>・<strong>Planning and executing robot arm motions</strong><br><video autoplay loop muted playsinline style=\"max-width:100%\"><source data-vsrc=\"/video/plan_real.mp4\" type=\"video/mp4\"></video>" }
   ];
 
   // node centers (cx = x + w/2):

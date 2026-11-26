@@ -49,10 +49,23 @@
   }
   function onKey(e) { if (e.key === 'Escape') close(); }
 
+  const EN_STEP_IDS = {
+    'smabo-brainの起動': 'launch-smabo-brain',
+    'smabo-brain-rosの起動': 'launch-smabo-brain-ros',
+    'smabo-webの起動': 'launch-smabo-web',
+    'smabo-brain---smabo-webの接続': 'smabo-brain---smabo-web-connection',
+    'smabo-brain-ros---smabo-webの接続': 'smabo-brain-ros---smabo-web-connection',
+    'smabo-appの接続': 'connect-smabo-app',
+    'smabo-brain---esp32の接続': 'smabo-brain---esp32-connection',
+    'smabo-web---esp32の接続': 'smabo-web---esp32-connection',
+  };
+
   // Starlight wraps each heading in .sl-heading-wrapper; keep a section
   // (h2 + what follows) only when its id is listed.
   function filterSteps(content, steps) {
     const keep = new Set(steps.split(',').map((s) => s.trim()).filter(Boolean));
+    // The English startup page has English heading ids; guides list the Japanese ones.
+    for (const id of Array.from(keep)) if (EN_STEP_IDS[id]) keep.add(EN_STEP_IDS[id]);
     if (keep.size === 0) return;
     let keeping = false;
     for (const el of Array.from(content.children)) {
